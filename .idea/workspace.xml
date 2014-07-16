@@ -49,149 +49,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.numix.calculator" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5630ae38-e614-4cf7-b905-af1d1857ced5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CleanCalculator.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable/round_button.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$10.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$11.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$12.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$13.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$14.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$15.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$16.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$17.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$18.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$19.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$20.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$21.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$22.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$23.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$24.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$25.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$26.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$27.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$5.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$6.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$7.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$8.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$9.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$ExpressionException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$Function.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$Operator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression$Tokenizer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/udojava/evalex/Expression.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/About.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/BuildConfig.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/Main$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/Main$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/Main$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/Main$4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/Main$5.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/Main$6.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/Main$7.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/Main$8.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/Main$9.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/Main.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/Preferences.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/R$array.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/R$attr.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/R$color.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/R$dimen.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/R$drawable.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/R$id.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/R$layout.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/R$menu.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/R$string.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/R$style.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/R$xml.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/home/jmstudios/calc/R.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/home/jmstudios/calc/BuildConfig.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/home/jmstudios/calc/R.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/android-support-v4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/adv_button_bg_blue.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/adv_button_bg_orange.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/adv_button_bg_purple.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/adv_button_bg_red.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/adv_button_text_blue.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/adv_button_text_orange.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/adv_button_text_purple.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/adv_button_text_red.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/handle.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/handle_blue.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/handle_orange.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/handle_purple.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/handle_red.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/normal_button_text_blue.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/normal_button_text_orange.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/normal_button_text_purple.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/color/normal_button_text_red.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-hdpi/balkpressedpurple.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-hdpi/logo_blue.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-hdpi/logo_default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-hdpi/logo_orange.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-hdpi/logo_purple.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-hdpi/logo_red.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-hdpi/textfield_darkblue.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-ldpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-ldpi/logo_blue.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-ldpi/logo_default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-ldpi/logo_orange.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-ldpi/logo_purple.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-ldpi/logo_red.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-mdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-mdpi/logo_blue.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-mdpi/logo_default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-mdpi/logo_orange.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-mdpi/logo_purple.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-mdpi/logo_red.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-mdpi/textfield_darkblue.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/logo_blue.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/logo_default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/logo_orange.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/logo_purple.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/logo_red.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/textfield_darkblue.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xxhdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xxhdpi/logo_blue.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xxhdpi/logo_default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xxhdpi/logo_orange.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xxhdpi/logo_purple.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xxhdpi/logo_red.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-xxxhdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/layout-land/mainblue.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/layout-land/mainorange.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/layout-land/mainpurple.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/layout-land/mainred.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/layout/activity_about.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/layout/mainblue.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/layout/mainorange.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/layout/mainpurple.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/layout/mainred.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/menu/activity_about.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/values-fr/strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/home/jmstudios/calc/About.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/home/jmstudios/calc/Main.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/home/jmstudios/calc/Preferences.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/logo_big.png" afterPath="$PROJECT_DIR$/res/drawable/logo_big.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/udojava/evalex/Expression.java" afterPath="$PROJECT_DIR$/src/com/udojava/evalex/Expression.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/colors.xml" afterPath="$PROJECT_DIR$/res/values/colors.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main.xml" afterPath="$PROJECT_DIR$/res/layout/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout-land/main.xml" afterPath="$PROJECT_DIR$/res/layout-land/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/menu.xml" afterPath="$PROJECT_DIR$/res/menu/menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/xml/preferences.xml" afterPath="$PROJECT_DIR$/res/xml/preferences.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.properties" afterPath="$PROJECT_DIR$/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/styles.xml" afterPath="$PROJECT_DIR$/res/values/styles.xml" />
-    </list>
+    <list default="true" id="5630ae38-e614-4cf7-b905-af1d1857ced5" name="Default" comment="" />
     <ignored path="CleanCalculator.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -213,11 +71,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="styles.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
+      <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/numix/calculator/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.07737226" vertical-offset="503" max-vertical-offset="1188">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state vertical-scroll-proportion="-2.7950695" vertical-offset="8852" max-vertical-offset="16056">
+              <caret line="450" column="8" selection-start-line="450" selection-start-column="8" selection-end-line="450" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
+              <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="117.333336" vertical-offset="4770" max-vertical-offset="9720">
+              <caret line="89" column="49" selection-start-line="89" selection-start-column="49" selection-end-line="89" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Expression.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/udojava/evalex/Expression.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="7420" max-vertical-offset="17496">
+              <caret line="479" column="35" selection-start-line="479" selection-start-column="35" selection-end-line="479" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -1672,14 +1563,14 @@
         <option value="$PROJECT_DIR$/src/com/numix/calculator/FontFitTextView.java" />
         <option value="$PROJECT_DIR$/src/com/numix/calculator/AutoResizeTextView.java" />
         <option value="$PROJECT_DIR$/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/src/com/udojava/evalex/Expression.java" />
         <option value="$PROJECT_DIR$/res/layout-land/main.xml" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/settings.gradle" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/com/numix/calculator/Main.java" />
         <option value="$PROJECT_DIR$/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/src/com/udojava/evalex/Expression.java" />
+        <option value="$PROJECT_DIR$/res/layout/main.xml" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/com/numix/calculator/Main.java" />
       </list>
     </option>
   </component>
@@ -1716,6 +1607,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1723,10 +1615,6 @@
               <option name="myItemId" value="CleanCalculator" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -1748,7 +1636,15 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="evalex" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1762,31 +1658,20 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="color" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CleanCalculator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CleanCalculator" />
+              <option name="myItemId" value="com" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
+              <option name="myItemId" value="calculator" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2020,20 +1905,21 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22417465" sideWeight="0.15708275" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22417465" sideWeight="0.15886524" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21389195" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22271223" sideWeight="0.23482428" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.0015991471" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22228146" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21389195" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22271223" sideWeight="0.7651757" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22417465" sideWeight="0.84291726" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22417465" sideWeight="0.8411347" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2043,7 +1929,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2098,6 +1983,22 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1188">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="503" max-vertical-offset="1188">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="8406">
@@ -2282,27 +2183,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CleanCalculator.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1314">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-20/android.jar!/android/app/Activity.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7966102" vertical-offset="7479" max-vertical-offset="8010">
-          <caret line="440" column="0" selection-start-line="440" selection-start-column="0" selection-end-line="440" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/udojava/evalex/Expression.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.285715" vertical-offset="15032" max-vertical-offset="18126">
-          <caret line="894" column="49" selection-start-line="894" selection-start-column="46" selection-end-line="894" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout-land/main.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="6549" max-vertical-offset="9684">
@@ -2318,7 +2198,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="126">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2330,30 +2209,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="123" max-vertical-offset="792">
-          <caret line="19" column="23" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-58.666668" vertical-offset="0" max-vertical-offset="9702">
-          <caret line="88" column="30" selection-start-line="88" selection-start-column="30" selection-end-line="88" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/numix/calculator/SquareButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2361,18 +2220,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1206">
           <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/numix/calculator/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2741" max-vertical-offset="12564">
-          <caret line="174" column="23" selection-start-line="174" selection-start-column="23" selection-end-line="174" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#onClickListenerEqual#0;class#Main#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2412,7 +2259,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2420,7 +2266,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="198">
           <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2438,7 +2283,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="685">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2446,7 +2290,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="685">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2454,7 +2297,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="685">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2462,7 +2304,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="685">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2470,7 +2311,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13138686" vertical-offset="0" max-vertical-offset="685">
           <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2493,7 +2333,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="162">
           <caret line="0" column="38" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2501,6 +2340,49 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.07737226" vertical-offset="503" max-vertical-offset="1188">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-20/android.jar!/android/app/Activity.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8373494" vertical-offset="7364" max-vertical-offset="8028">
+          <caret line="440" column="0" selection-start-line="440" selection-start-column="0" selection-end-line="440" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/udojava/evalex/Expression.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7420" max-vertical-offset="17496">
+          <caret line="479" column="35" selection-start-line="479" selection-start-column="35" selection-end-line="479" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="117.333336" vertical-offset="4770" max-vertical-offset="9720">
+          <caret line="89" column="49" selection-start-line="89" selection-start-column="49" selection-end-line="89" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
+          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/numix/calculator/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.7950695" vertical-offset="8852" max-vertical-offset="16056">
+          <caret line="450" column="8" selection-start-line="450" selection-start-column="8" selection-end-line="450" selection-end-column="8" />
           <folding />
         </state>
       </provider>

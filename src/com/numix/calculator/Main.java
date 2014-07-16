@@ -7,6 +7,8 @@ import java.math.MathContext;
 import java.util.List;
 import java.util.Map;
 
+import android.view.View;
+import android.os.Vibrator;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -40,6 +42,7 @@ import android.support.v4.widget.SlidingPaneLayout;
 import android.text.Editable;
 import android.util.Log;
 
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.WindowManager;
@@ -104,6 +107,11 @@ public class Main extends SherlockActivity {
 
 	int sdk = android.os.Build.VERSION.SDK_INT;
 
+    // Add Haptic Feedback
+        private View myView;
+        private Vibrator myVib;
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -143,6 +151,8 @@ public class Main extends SherlockActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        myVib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(Main.this);
         theme_settings = prefs.getString("theme", "a");
@@ -204,34 +214,29 @@ public class Main extends SherlockActivity {
             button2 = (Button) findViewById(R.id.button2);
             button3 = (Button) findViewById(R.id.button3);
             button4 = (Button) findViewById(R.id.button4);
-
             button5 = (Button) findViewById(R.id.button5);
             button6 = (Button) findViewById(R.id.button6);
             button7 = (Button) findViewById(R.id.button7);
             button8 = (Button) findViewById(R.id.button8);
             button9 = (Button) findViewById(R.id.button9);
-
             buttonPlus = (Button) findViewById(R.id.buttonPlus);
             buttonMinus = (Button) findViewById(R.id.buttonMinus);
             buttonMultiply = (Button) findViewById(R.id.buttonMultiply);
             buttonDivide = (Button) findViewById(R.id.buttonDivide);
             buttonPoint = (Button) findViewById(R.id.buttonPoint);
-
             buttonEqual = (Button) findViewById(R.id.buttonEqual);
-
             button_sin = (Button) findViewById(R.id.button_sin);
             button_cos = (Button) findViewById(R.id.button_cos);
             button_tan = (Button) findViewById(R.id.button_tan);
             button_root = (Button) findViewById(R.id.button_root);
 		/*
 		 * button_squared_2 = (Button) findViewById(R.id.button_squared_2);
-		 * 
+		 *
 		 * button_del = (Button) findViewById(R.id.button_del); button_dec =
 		 * (Button) findViewById(R.id.button_dec); button_bin = (Button)
 		 * findViewById(R.id.button_bin);
 		 */
             buttonReset = (Button) findViewById(R.id.buttonReset);
-
             button_del = (Button) findViewById(R.id.button_del);
             button_openpar = (Button) findViewById(id.button_openpar);
             button_closepar = (Button) findViewById(id.button_closepar);
@@ -419,17 +424,19 @@ public class Main extends SherlockActivity {
     public void onClickListenerPane(View v) {
         mSlidingLayout = (SlidingPaneLayout) findViewById(R.id.slidinglayout);
         mSlidingLayout.openPane();
+        myVib.vibrate(25);
     }
 
     public void onClickListenerSettings(View v) {
         Intent preferencesintent = (Intent) new Intent(this,
                 Preferences.class);
         startActivity(preferencesintent);
+        myVib.vibrate(25);
     }
 
 	public void onClickListener0(View v) {
 		if (b) {
-
+            myVib.vibrate(25);
 		}
 
 		/*if (press == '=') {
@@ -438,11 +445,10 @@ public class Main extends SherlockActivity {
 		}*/
 
 		addText("0", false, false);
-
-	}
+    }
 
 	public void onClickListener1(View v) {
-
+        myVib.vibrate(25);
 		/*if (press == '=') {
 		onClickListenerReset(buttonReset);
 		calc = "";
@@ -451,7 +457,7 @@ public class Main extends SherlockActivity {
 	}
 
 	public void onClickListener2(View v) {
-
+        myVib.vibrate(25);
 		/*if (press == '=') {
 		onClickListenerReset(buttonReset);
 		calc = "";
@@ -460,7 +466,7 @@ public class Main extends SherlockActivity {
 	}
 
 	public void onClickListener3(View v) {
-
+        myVib.vibrate(25);
 		/*if (press == '=') {
 		onClickListenerReset(buttonReset);
 		calc = "";
@@ -469,7 +475,7 @@ public class Main extends SherlockActivity {
 	}
 
 	public void onClickListener4(View v) {
-
+        myVib.vibrate(25);
 		/*if (press == '=') {
 		onClickListenerReset(buttonReset);
 		calc = "";
@@ -478,7 +484,7 @@ public class Main extends SherlockActivity {
 	}
 
 	public void onClickListener5(View v) {
-
+        myVib.vibrate(25);
 		/*if (press == '=') {
 		onClickListenerReset(buttonReset);
 		calc = "";
@@ -487,7 +493,7 @@ public class Main extends SherlockActivity {
 	}
 
 	public void onClickListener6(View v) {
-
+        myVib.vibrate(25);
 		/*if (press == '=') {
 		onClickListenerReset(buttonReset);
 		calc = "";
@@ -496,7 +502,7 @@ public class Main extends SherlockActivity {
 	}
 
 	public void onClickListener7(View v) {
-
+        myVib.vibrate(25);
 		/*if (press == '=') {
 		onClickListenerReset(buttonReset);
 		calc = "";
@@ -505,7 +511,7 @@ public class Main extends SherlockActivity {
 	}
 
 	public void onClickListener8(View v) {
-
+        myVib.vibrate(25);
 		/*if (press == '=') {
 		onClickListenerReset(buttonReset);
 		calc = "";
@@ -514,7 +520,7 @@ public class Main extends SherlockActivity {
 	}
 
 	public void onClickListener9(View v) {
-
+        myVib.vibrate(25);
 		/*if (press == '=') {
 		onClickListenerReset(buttonReset);
 		calc = "";
@@ -525,25 +531,29 @@ public class Main extends SherlockActivity {
 	public void onClickListenerPlus(View v) {
 		press = '+';
 		addText("+", false, true);
+        myVib.vibrate(25);
 	}
 
 	public void onClickListenerMinus(View v) {
-		press = '-';
-		addText("-", false, true);
+		press = '–';
+		addText("–", false, true);
+        myVib.vibrate(25);
 	}
 
 	public void onClickListenerMultiply(View v) {
 		press = '*';
-		addText("*", false, true);
+		addText("×", false, true);
+        myVib.vibrate(25);
 	}
 
 	public void onClickListenerDivide(View v) {
 		press = '/';
-		addText("/", false, true);
+		addText("÷", false, true);
+        myVib.vibrate(25);
 	}
 
 	public void onClickListenerPoint(View v) {
-
+        myVib.vibrate(25);
 		int error = 0;
 
 		if (sum != null) {
@@ -572,13 +582,14 @@ public class Main extends SherlockActivity {
 	}
 
     public void onClickListenerEqual(View v) {
+        myVib.vibrate(25);
         calc = editText.getText().toString();
         try {
             Expression e = new Expression(calc);
 
             e = e.setPrecision(0);
 
-            e.addOperator(e.new Operator("/", 30, true) {
+            e.addOperator(e.new Operator("÷", 30, true) {
                 @Override
                 public BigDecimal eval(BigDecimal v1, BigDecimal v2) {
                     MathContext mc = new MathContext(precision);
@@ -755,54 +766,67 @@ public class Main extends SherlockActivity {
     }
 
 	public void onClickListener_sin(View v) {
+        myVib.vibrate(25);
 		addText("sin(", true, false);
 	}
 
 	public void onClickListener_cos(View v) {
+        myVib.vibrate(25);
 		addText("cos(", true, false);
 	}
 
 	public void onClickListener_tan(View v) {
+        myVib.vibrate(25);
 		addText("tan(", true, false);
 	}
 
 	public void onClickListener_asin(View v) {
+        myVib.vibrate(25);
 		addText("asin(", true, false);
 	}
 
 	public void onClickListener_acos(View v) {
+        myVib.vibrate(25);
 		addText("acos(", true, false);
 	}
 
 	public void onClickListener_atan(View v) {
+        myVib.vibrate(25);
 		addText("atan(", true, false);
 	}
 
 	public void onClickListener_squared_2(View v) {
+        myVib.vibrate(25);
 		addText("^2", false, true);
 	}
 
 	public void onClickListener_exp(View v) {
+        myVib.vibrate(25);
 		addText("^", false, true);
 	}
 
 	public void onClickListener_root(View v) {
+        myVib.vibrate(25);
 		addText("sqrt(", true, false);
 	}
 
 	public void onClickListener_openpar(View v) {
+        myVib.vibrate(25);
 		addText("(", false, false);
 	}
 
 	public void onClickListener_closepar(View v) {
+        myVib.vibrate(25);
 		addText(")", false, false);
 	}
 
 	public void onClickListener_mod(View v) {
+        myVib.vibrate(25);
 		addText("%", false, true);
 	}
 
 	public void onClickListener_pi(View v) {
+        myVib.vibrate(25);
 		/*if (press == '=') {
 		onClickListenerReset(buttonReset);
 		calc = "";
@@ -811,10 +835,12 @@ public class Main extends SherlockActivity {
 	}
 
     public void onClickListener_e(View v) {
+        myVib.vibrate(25);
         addText("e", false,false);
     }
 
 	public void onClickListener_del(View v) {
+        myVib.vibrate(25);
 
 		/*
 		 * if (sum != "") { StringBuilder stringBuilder = new StringBuilder(80);
@@ -860,6 +886,7 @@ public class Main extends SherlockActivity {
 	}
 
 	public void onClickListenerReset(View v) {
+        myVib.vibrate(25);
 		sum = "";
 		countOne = 0;
 
@@ -876,18 +903,22 @@ public class Main extends SherlockActivity {
 	}
 
 	public void onClickListener_dec(View v) {
+        myVib.vibrate(25);
 		addText("dec(", true, false);
 	}
 
 	public void onClickListener_bin(View v) {
+        myVib.vibrate(25);
 		addText("bin(", true, false);
 	}
 
 	public void onClickListener_hex(View v) {
+        myVib.vibrate(25);
 		addText("hex(", true, false);
 	}
 
 	public void onClickListener_oct(View v) {
+        myVib.vibrate(25);
 		addText("oct(", true, false);
 	}
 
@@ -905,6 +936,7 @@ public class Main extends SherlockActivity {
 	 */
 
 	public void onClickListener_input(View v) {
+        myVib.vibrate(25);
 		InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		mgr.hideSoftInputFromWindow(editText.getWindowToken(), 0);
 	}

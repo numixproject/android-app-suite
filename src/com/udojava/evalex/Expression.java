@@ -477,13 +477,13 @@ public class Expression {
 				return v1.add(v2, mc);
 			}
 		});
-		addOperator(new Operator("-", 20, true) {
+		addOperator(new Operator("–", 20, true) {
 			@Override
 			public BigDecimal eval(BigDecimal v1, BigDecimal v2) {
 				return v1.subtract(v2, mc);
 			}
 		});
-		addOperator(new Operator("*", 30, true) {
+		addOperator(new Operator("×", 30, true) {
 			@Override
 			public BigDecimal eval(BigDecimal v1, BigDecimal v2) {
 				return v1.multiply(v2, mc);
