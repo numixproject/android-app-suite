@@ -1,7 +1,7 @@
 Numix Calculator for Android
 ==============
 
-![Calc Preview](https://www.dropbox.com/s/aw1zpvu8b78ddmh/Screenshot_2014-07-15-16-04-39.png)
+![Calc Preview](https://lh5.ggpht.com/5bnXu1fWhCW_PH81wdiFHBZjnkTLDKOic8XUYEW_3ES8DvVM2PE4wbjn6LMMBHUhgds0=h900)
 
 ### CALCULATE WITH STYLE
 Numix Calculator is yet another calculator app, only more stylish then the rest. The design of the app follows the new material design guidelines, which results in a modern day looking colourful interface.
