@@ -423,7 +423,11 @@ public class Main extends SherlockActivity {
     private SlidingPaneLayout mSlidingLayout;
     public void onClickListenerPane(View v) {
         mSlidingLayout = (SlidingPaneLayout) findViewById(R.id.slidinglayout);
-        mSlidingLayout.openPane();
+	if(mSlidingLayout.isOpen()){
+		mSlidingLayout.closePanel();
+	} else {
+		mSlidingLayout.openPane();
+	}
         myVib.vibrate(25);
     }
 
