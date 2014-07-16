@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="library-5.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/build/intermediates/exploded-aar/com.github.amlcurran.showcaseview/library/5.0.0-SNAPSHOT/res" />
+      <root url="jar://$PROJECT_DIR$/build/intermediates/exploded-aar/com.github.amlcurran.showcaseview/library/5.0.0-SNAPSHOT/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

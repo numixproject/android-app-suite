@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <resources>
+   <string-array name="themeOptions">
+     <item>Light theme with turquoise (default)</item>
+     <item>Light theme with ics-blue</item>
+     <item>Light theme with orange</item>
+     <item>Light theme with purple</item>
+     <item>Light theme with red</item>
+   </string-array>
+ 
+   <string-array name="themeValues">
+     <item>a</item>
+     <item>b</item>
+     <item>c</item>
+     <item>d</item>
+     <item>e</item>
+   </string-array>
+   
+   
+   <string-array name="angleOptions">
+     <item>Degrees</item>
+     <item>Radians</item>
+   </string-array>
+ 
+   <string-array name="angleValues">
+     <item>a</item>
+     <item>b</item>
+   </string-array>
+   
+ </resources>
