@@ -1,0 +1,4 @@
+com.numix.calculator
+====================
+
+CALCULATE WITH STYLE Numix Calculator is yet another calculator app, only more stylish then the rest. The design of the app follows the new material design guidelines, which results in a modern day looking colourful interface. Swipe from the left to get the advanced functions pane or use the three dots button below the sliders in the top left of the input box to do the same. Use the slider button top left of input box to open the Preferences.  FUNCTIONS: The calculator support all the basic functions (+, -, * and /), but it also has advanced pane that allows thing like trigonometric functions and more advanced functions.  PLEASE NOTE: This is just the first version of the application, so don't expect it to be pixel perfect. Version 2 is coming as soon as it's ready at it will bring a Pro version with it that will support history and application theming.
