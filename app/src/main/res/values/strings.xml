@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <!-- Application name -->
+    <string name="app_name">Numix Calculator</string>
+    <!-- If there is a syntax error in the user entered calculation, an error dialog will appear.  This is the title. -->
+    <string name="error">Error :(</string>
+    <!-- Displayed numbers for the digit buttons -->
+    <string name="digit0">0</string>
+    <!-- Displayed numbers for the digit buttons -->
+    <string name="digit1">1</string>
+    <!-- Displayed numbers for the digit buttons -->
+    <string name="digit2">2</string>
+    <!-- Displayed numbers for the digit buttons -->
+    <string name="digit3">3</string>
+    <!-- Displayed numbers for the digit buttons -->
+    <string name="digit4">4</string>
+    <!-- Displayed numbers for the digit buttons -->
+    <string name="digit5">5</string>
+    <!-- Displayed numbers for the digit buttons -->
+    <string name="digit6">6</string>
+    <!-- Displayed numbers for the digit buttons -->
+    <string name="digit7">7</string>
+    <!-- Displayed numbers for the digit buttons -->
+    <string name="digit8">8</string>
+    <!-- Displayed numbers for the digit buttons -->
+    <string name="digit9">9</string>
+    <!-- Button name on screen to delete the last entered digit or operator -->
+    <string name="del">DELETE</string>
+    <!-- Button name on screen to clear the entire calculation field. [CHAR LIMIT=6] -->
+    <string name="clear">CLR</string>
+    <!-- Do not translate. Unicode division sign; don't translate. Displayed as button on screen. -->
+    <string name="div">\u00f7</string>
+    <!-- Do not translate. Unicode multiplication sign; don't translate. Displayed as button on screen. -->
+    <string name="mul">\u00d7</string>
+    <!-- Do not translate. Plus sign, displayed as button on screen -->
+    <string name="plus">+</string>
+    <!-- Do not translate. Unicode minus sign; don't translate. Displayed as button on screen. -->
+    <string name="minus">\u2212</string>
+    <!-- Do not translate. Equal sign; don't translate. Displayed as button on screen. -->
+    <string name="equal">=</string>
+    <!-- Do not translate. Down arrow; don't translate. Displayed as button on screen. -->
+    <string name="enter">\u2193</string>
+    <!-- Displayed on buttons on screen for the sin function. -->
+    <string name="sin">sin</string>
+    <!-- Do not translate. What we replace translated SIN with for calculating sin.-->
+
+    <!-- Displayed on buttons on screen for the cos function. -->
+    <string name="cos">cos</string>
+    <!-- Do not translate. What we replace translated COS with for calculating cos. -->
+
+    <!-- Displayed on buttons on screen for the tan function. -->
+    <string name="tan">tan</string>
+    <!-- Do not translate. What we replace translated TAN with for calculating tan. -->
+
+    <!-- Do not translate. Unicode pi sign; don't translate. Displayed as button on screen. -->
+    <string name="pi">\u03c0</string>
+    <!-- Displayed on buttons on screen for the e function. -->
+    <string name="e">e</string>
+    <!-- Do not translate. What we replace translated e with for calculating e. -->
+
+    <!-- Displayed on buttons on screen for the ln function. -->
+    <string name="ln">ln</string>
+    <!-- Do not translate. What we replace translated ln with for calculating ln. -->
+
+    <!-- Displayed on buttons on screen for the log function. -->
+    <string name="lg">log</string>
+    <!-- Do not translate. What we replace translated lg with for calculating lg. -->
+
+    <!-- Displayed on buttons on screen for a left parenthesis. -->
+    <string name="leftParen">(</string>
+    <!-- Displayed on buttons on screen for a right parenthesis. -->
+    <string name="rightParen">)</string>
+    <!-- Do not translate. Unicode square root sign; don't translate. Displayed on button on screen. -->
+    <string name="sqrt">\u221a</string>
+    <!-- Do not translate. Displayed on buttons on screen. -->
+    <string name="power">^</string>
+    <!-- Do not translate. -->
+    <string name="factorial">!</string>
+    <!-- Menu item text to take user to the screen with the basic digits and operators. -->
+    <string name="basic">Basic panel</string>
+    <!-- Menu item text to take user to the screen with the advanced functions, such as sin, cos, ln, log, etc. -->
+    <string name="advanced">Advanced panel</string>
+    <!-- Menu item text to clear the calculation history. -->
+    <string name="clear_history">Clear history</string>
+    <!-- Toast shown when text is copied to the clipboard. -->
+    <string name="text_copied_toast">Text copied.</string>
+
+    // new
+
+    <!--Content descriptions for accessibility. These strings will be read aloud to users who are using the calculator with
+    accessibility features enabled and should reflect the mathematical concept instead of a direct representation of what is shown
+    on the button-->
+    <string name="leftParenDesc">left parenthesis</string>
+    <string name="rightParenDesc">right parenthesis</string>
+    <string name="factorialDesc">factorial</string>
+    <string name="lnDesc">natural logarithm</string>
+    <string name="lgDesc">logarithm</string>
+    <string name="sqrtDesc">square root</string>
+    <string name="divDesc">divide</string>
+    <string name="mulDesc">multiply</string>
+    <string name="plusDesc">plus</string>
+    <string name="minusDesc">minus</string>
+    <string name="dotDesc">point</string>
+    <string name="powerDesc">power</string>
+    <string name="delDesc">delete</string>
+    <string name="clearDesc">clear</string>
+    <string name="tanDesc">tangent</string>
+    <string name="sinDesc">sine</string>
+    <string name="cosDesc">cosine</string>
+    <string name="eDesc">Euler\'s number</string>
+    <string name="piDesc">pi</string>
+    <string name="equalDesc">equals</string>
+
+    <!--Content descriptions for accessibility used as keys when determining which mathematical
+    concept description to speak when accessibility features are enabled. Order of the array is
+    important. -->
+    <string-array name="operators" translatable="false">
+        <item>(</item>
+        <item>)</item>
+        <item>!</item>
+        <item>ln</item>
+        <item>log</item>
+        <item>\u221a</item>
+        <item>\u00f7</item>
+        <item>\u00d7</item>
+        <item>+</item>
+        <item>\u2212</item>
+        <item>.</item>
+        <item>^</item>
+        <item>tan</item>
+        <item>sin</item>
+        <item>cos</item>
+        <item>\u03c0</item>
+        <item>=</item>
+    </string-array>
+
+    <!--Content descriptions for accessibility. These strings will be read aloud to users who
+     are using the calculator with accessibility features enabled and hover over the edit text
+     field. These should reflect the mathematical concept instead of a direct representation of
+     what is shown in the text field. Order of the array is important.-->
+    <string-array name="operatorDescs">
+        <!-- Description for mathematical ( [CHAR LIMIT=200]-->
+        <item>left parenthesis</item>
+        <!-- Description for mathematical ) [CHAR LIMIT=200]-->
+        <item>right parenthesis</item>
+        <!-- Description for mathematical ! (factorial) function [CHAR LIMIT=200]-->
+        <item>factorial</item>
+        <!-- Description for mathematical ln [CHAR LIMIT=200]-->
+        <item>natural logarithm</item>
+        <!-- Description for mathematical log [CHAR LIMIT=200]-->
+        <item>logarithm</item>
+        <!-- Description for mathematical square root [CHAR LIMIT=200]-->
+        <item>square root</item>
+        <!-- Description for mathematical / [CHAR LIMIT=200]-->
+        <item>divided by</item>
+        <!-- Description for mathematical x [CHAR LIMIT=200]-->
+        <item>multiplied by</item>
+        <!-- Description for mathematical + [CHAR LIMIT=200]-->
+        <item>plus</item>
+        <!-- Description for mathematical - [CHAR LIMIT=200]-->
+        <item>minus</item>
+        <!-- Description for mathematical . [CHAR LIMIT=200]-->
+        <item>&#160;point&#160;</item>
+        <!-- Description for mathematical ^ [CHAR LIMIT=200]-->
+        <item>power</item>
+        <!-- Description for mathematical TAN [CHAR LIMIT=200]-->
+        <item>tangent</item>
+        <!-- Description for mathematical SIN [CHAR LIMIT=200]-->
+        <item>sine</item>
+        <!-- Description for mathematical COS [CHAR LIMIT=200]-->
+        <item>cosine</item>
+        <!-- Description for mathematical PI [CHAR LIMIT=200]-->
+        <item>pi</item>
+        <!-- Description for mathematical = [CHAR LIMIT=200]-->
+        <item>equals</item>
+    </string-array>
+
+    //new
+
+
+    <string name="square_root_symbol">"√¯¯"</string>
+    <string name="delete_numbers">"\u21D0"</string>
+    <string name="exp">"^"</string>
+
+    <string name="menu_about">"About"</string>
+    <string name="menu_settings">"Settings"</string>
+
+    <string name="title_activity_settings">"Settings"</string>
+    <string name="theme_category_summary">"Change the looks of the calculator"</string>
+    <string name="theme_summary">"Choose a theme"</string>
+    <string name="history">"History is only available in PRO version. Sorry!"</string>
+    <string name="theme_title">"Theme"</string>
+    <string name="function_category_summary">"Change the functionality of the calculator"</string>
+    <string name="function_category_title">"Function"</string>
+    <string name="precision_summary">"Choose the length of the result to be displayed (WARNING: if you set this to a number above 500, performance might suffer!)"</string>
+    <string name="precision_title">"Precision"</string>
+    <string name="angle_summary">"Choose whether to calculate with degrees or radians"</string>
+    <string name="angle_title">"Degrees/radians"</string>
+
+    <string name="title_activity_about">"About"</string>
+    <string name="clean">"Clean"</string>
+    <string name="or">"OR"</string>
+    <string name="playstore">"<u>Rate this app! It helps us a lot to keep the updates coming.</u>"</string>
+    <string name="playstoredon">"<u>Please download the donation version of this app in the playstore if you can spare a buck.</u>"</string>
+    <string name="mail">"<u>Mail us your feedback or suggestions.</u>"</string>
+</resources>
