@@ -1,11 +1,11 @@
 Numix Calculator for Android
 ==============
 
-![Calc Preview](https://lh5.ggpht.com/5bnXu1fWhCW_PH81wdiFHBZjnkTLDKOic8XUYEW_3ES8DvVM2PE4wbjn6LMMBHUhgds0=h900)
+![Calc Preview](https://lh3.googleusercontent.com/-wpNAF4Ek3gM/U99i-pVKwCI/AAAAAAAANns/t2pKTWIMn0E/w958-h543-no/teaser2.png)
 
 ### CALCULATE WITH STYLE
-Numix Calculator is yet another calculator app, only more stylish then the rest. The design of the app follows the new material design guidelines, which results in a modern day looking colourful interface.
-Swipe from the left to get the advanced functions pane or use the three dots button below the sliders in the top left of the input box to do the same. Use the slider button top left of input box to open the Preferences.
+Numix Calculator is yet another calculator app, only more stylish then the rest. The design of the app follows the new material design guidelines as much as possible, which results in a modern day looking colourful interface.
+Swipe from the left and right to get advanced functions panes or use the three dots button below the sliders in the top left of the input box to do the same. Use the buttons on the left of the input box to open advanced functions panes and preferences.
 
 ### FUNCTIONS:
 The calculator support all the basic functions (+, -, * and /), but it also has advanced pane that allows thing like trigonometric functions and more advanced functions.
