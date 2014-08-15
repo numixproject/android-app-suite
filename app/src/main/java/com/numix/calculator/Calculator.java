@@ -411,11 +411,7 @@ public class Calculator extends Activity implements Logic.Listener, OnClickListe
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent keyEvent) {
-        if(keyCode == KeyEvent.KEYCODE_BACK && mPulldown.isSliderOpen() && !clingActive) {
-            mPulldown.animateSliderClosed();
-            return true;
-        }
-        else if(keyCode == KeyEvent.KEYCODE_BACK && mPager != null && !getBasicVisibility() && CalculatorSettings.basicPanel(getContext()) && !clingActive) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && mPager != null && !getBasicVisibility() && CalculatorSettings.basicPanel(getContext()) && !clingActive) {
             mPager.setCurrentItem(Panel.BASIC.getOrder());
             return true;
         }
