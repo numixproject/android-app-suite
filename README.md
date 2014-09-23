@@ -6,7 +6,7 @@ Simple WebApp template to run HTML5 apps on Android.
 ### How to use
 - **Import** the project on Android Studio;
 - **Put** your HTML5 app index in `/src/main/assets/www/index.html`;
-- Enjoy!
+- **Enjoy!**
 
 ### What the template do
 - On start, it shows a splash screen until the WebView is ready. Then it just **open and show your index.html**.
