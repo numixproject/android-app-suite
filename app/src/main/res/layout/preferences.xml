@@ -1,45 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <PreferenceCategory
-        android:title="@string/pref_panels" >
-
-        <Preference
-            android:title="Graph"
-            android:summary="Graph is only available on PRO version" />
-<!--   <CheckBoxPreference
-            android:title="@string/function"
-            android:key="FUNCTION"
-            android:defaultValue="@bool/FUNCTION" /> -->
-        <CheckBoxPreference
-            android:title="@string/hexPanel"
-            android:key="HEX"
-            android:defaultValue="@bool/HEX" />
-        <CheckBoxPreference
-            android:title="@string/basic"
-            android:key="BASIC"
-            android:defaultValue="@bool/BASIC" />
-        <CheckBoxPreference
-            android:title="@string/advanced"
-            android:key="ADVANCED"
-            android:defaultValue="@bool/ADVANCED" />
-        <Preference
-            android:title="Matrix"
-            android:summary="Matrix is only available on PRO version" />
-    </PreferenceCategory>
-    <PreferenceCategory
         android:title="@string/pref_actions" >
         <CheckBoxPreference
             android:title="@string/returnToBasic"
             android:key="RETURN_TO_BASIC"
             android:defaultValue="@bool/RETURN_TO_BASIC" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:title="@string/digitGrouping"
             android:key="DIGIT_GROUPING"
             android:defaultValue="false" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/pref_units" >
-        <SwitchPreference
+        <CheckBoxPreference
             android:title="@string/trigUnits"
             android:key="USE_RADIANS"
             android:switchTextOn="@string/radians"

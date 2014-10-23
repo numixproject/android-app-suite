@@ -166,7 +166,7 @@
                 android:id="@+id/equal"
                 android:text="@string/equal"
                 android:textColor="#ffffff"
-                android:background="@color/transparent"
+                android:background="@drawable/btn_equal_light"
                 style="?digit_button_style" />
 
 

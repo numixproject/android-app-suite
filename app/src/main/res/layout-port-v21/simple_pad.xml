@@ -164,9 +164,7 @@
 
             <com.numix.calculator.view.ColorButton
                 android:id="@+id/equal"
-                android:text="@string/equal"
-                android:textColor="#ffffff"
-                android:background="@drawable/btn_equal_light"
+                android:background="@drawable/btn_digit_adv_light"
                 style="?digit_button_style" />
 
 

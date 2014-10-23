@@ -122,13 +122,13 @@
     <string name="pref_units">Units</string>
     <string name="pref_theme">Theme</string>
     <string name="pref_about">About</string>
-    <string name="returnToBasic">Return to the basic panel</string>
+    <string name="returnToBasic">Automatically return to basic panel</string>
     <string name="clickToOpenHistory">Click to open history</string>
     <string name="digitGrouping">Digit grouping</string>
-    <string name="trigUnits">Trig units</string>
+    <string name="trigUnits">Use radians instead of degrees</string>
     <string name="radians">RAD</string>
     <string name="degrees">DEG</string>
-    <string name="holo">THEMING IS ONLY AVAILABLE IN PRO VERSION.</string>
+    <string name="holo">Theming is only available in PRO version.</string>
     <string name="holo_light">Light</string>
     <string name="holo_dark">Dark</string>
 

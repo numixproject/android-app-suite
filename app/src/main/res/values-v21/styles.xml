@@ -130,10 +130,14 @@
         <item name="calc_clear_symbol">@drawable/calc_clear_symbol_light</item>
     </style>
     
-    <style name="Theme.Settings.Calculator" parent="android:Theme.Holo">
+    <style name="Theme.Settings.Calculator" parent="android:Theme.Material">
+        <item name="android:colorPrimaryDark">#263238</item>
+        <item name="android:colorPrimary">#37474F</item>
     </style>
     
     <style name="Theme.Settings.Calculator.Light" parent="android:Theme.Material">
+        <item name="android:colorPrimaryDark">#263238</item>
+        <item name="android:colorPrimary">#37474F</item>
     </style>
     
     <style name="Theme.Calculator.ButtonStyle" >
