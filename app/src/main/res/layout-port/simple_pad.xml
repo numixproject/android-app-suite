@@ -175,7 +175,7 @@
                 android:clickable="false"
                 android:src="@drawable/circle"
                 android:focusable="true"
-                android:background="#00000000"
+                android:background="@color/transparent"
                 android:scaleType="centerInside" />
 
             <TextView
@@ -183,10 +183,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:clickable="false"
-                android:textColor="#ffffff"
-                android:textSize="40sp"
-                android:fontFamily="sans-serif-thin"
-                android:text="@string/equal" >
+                android:textColor="#ffffff" >
             </TextView>
         </FrameLayout>
     </LinearLayout>

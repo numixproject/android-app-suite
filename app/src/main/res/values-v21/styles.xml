@@ -74,6 +74,7 @@
 
     <style name="Theme.Calculator" parent="android:Theme.Material.NoActionBar">
         <item name="android:colorPrimaryDark">@color/graph_color</item>
+        <item name="android:navigationBarColor">#222222</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="button_style">@style/Theme.Calculator.ButtonStyle</item>
         <item name="digit_button_style">@style/Theme.Calculator.ButtonStyle.Digit</item>
@@ -101,6 +102,7 @@
     </style>
     
     <style name="Theme.Calculator.Light" parent="android:Theme.Material.NoActionBar">
+        <item name="android:navigationBarColor">#333333</item>
         <item name="android:colorPrimaryDark">@color/graph_color</item>
         <item name="android:windowBackground">@color/background_light</item>
         <item name="button_style">@style/Theme.Calculator.ButtonStyle.Light</item>

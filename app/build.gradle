@@ -26,6 +26,10 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     compile 'com.intellij:annotations:+@jar'
     compile 'com.android.support:support-v4:18.0.0'

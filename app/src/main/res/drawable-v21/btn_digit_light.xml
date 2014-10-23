@@ -16,5 +16,5 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_enabled="false" android:drawable="@android:color/transparent" />
-    <item android:drawable="@drawable/ripple_digit_light" />
+    <item android:drawable="@drawable/ripple_digit_light"  />
 </selector>
