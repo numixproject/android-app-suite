@@ -21,6 +21,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.ActivityOptions;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -74,6 +75,8 @@ public class Calculator extends Activity implements Logic.Listener, OnClickListe
     private Slider mPulldown;
     private Graph mGraph;
     EventListener  cls2= new EventListener();
+
+    int currentapiVersion = android.os.Build.VERSION.SDK_INT;
 
 
     private boolean clingActive = false;
@@ -319,7 +322,12 @@ public class Calculator extends Activity implements Logic.Listener, OnClickListe
     public void onClickListenerSettings(View v) {
         Intent preferencesintent = (Intent) new Intent(this,
                 Preferences.class);
-        startActivity(preferencesintent);
+        if (currentapiVersion >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            startActivity(preferencesintent,
+                    ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        } else{
+            startActivity(preferencesintent);
+        }
     }
 
     public void onClickListenerDel(View v) {

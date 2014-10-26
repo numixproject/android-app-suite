@@ -73,9 +73,22 @@
     </style>
 
     <style name="Theme.Calculator" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/graph_color</item>
+
+        <!-- enable window content transitions -->
+        <item name="android:windowContentTransitions">true</item>
+
+        <!-- specify enter and exit transitions -->
+        <item name="android:windowEnterTransition">@transition/fade</item>
+        <item name="android:windowExitTransition">@transition/fade</item>
+
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/change_image_transform</item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/change_image_transform</item>
         <item name="android:colorPrimaryDark">@color/graph_color</item>
         <item name="android:navigationBarColor">#222222</item>
-        <item name="android:windowBackground">@color/background</item>
         <item name="button_style">@style/Theme.Calculator.ButtonStyle</item>
         <item name="digit_button_style">@style/Theme.Calculator.ButtonStyle.Digit</item>
         <item name="digit_button_style_adv">@style/Theme.Calculator.ButtonStyle.Adv</item>
@@ -102,9 +115,21 @@
     </style>
     
     <style name="Theme.Calculator.Light" parent="android:Theme.Material.NoActionBar">
+        <!-- enable window content transitions -->
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowBackground">@color/graph_color</item>
+
+        <!-- specify enter and exit transitions -->
+        <item name="android:windowEnterTransition">@transition/fade</item>
+        <item name="android:windowExitTransition">@transition/fade</item>
+
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/change_image_transform</item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/change_image_transform</item>
         <item name="android:navigationBarColor">#333333</item>
         <item name="android:colorPrimaryDark">@color/graph_color</item>
-        <item name="android:windowBackground">@color/background_light</item>
         <item name="button_style">@style/Theme.Calculator.ButtonStyle.Light</item>
         <item name="digit_button_style">@style/Theme.Calculator.ButtonStyle.Light.Digit</item>
         <item name="digit_button_style_adv">@style/Theme.Calculator.ButtonStyle.Adv.Light</item>
@@ -131,6 +156,18 @@
     </style>
     
     <style name="Theme.Settings.Calculator" parent="android:Theme.Material">
+        <!-- enable window content transitions -->
+        <item name="android:windowContentTransitions">true</item>
+
+        <!-- specify enter and exit transitions -->
+        <item name="android:windowEnterTransition">@transition/fade</item>
+        <item name="android:windowExitTransition">@transition/fade</item>
+
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/change_image_transform</item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/change_image_transform</item>
         <item name="android:colorPrimaryDark">#263238</item>
         <item name="android:colorPrimary">#37474F</item>
     </style>

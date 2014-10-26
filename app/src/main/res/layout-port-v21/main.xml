@@ -5,7 +5,6 @@
     android:background="#0010B286"
     android:orientation="vertical"
     >
-
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -38,7 +37,8 @@
                             android:src="@drawable/ic_action_history"
                             android:onClick="onClickListenerHistory"
                             android:scaleType="centerInside"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:elevation="5dp"/>
 
                         <ImageButton
                             android:id="@+id/settings"
