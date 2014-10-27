@@ -1,0 +1,37 @@
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        applicationId "com.numix.calculator_pro"
+
+        testApplicationId "com.numix.calculator_pro_pro.pro.tests"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:18.0.0'
+    compile files('libs/achartengine.jar')
+    compile files('libs/ejml-0.21.jar')
+    compile files('libs/arity-2.1.6.jar')
+    compile files('libs/slider.jar')
+    compile files('libs/acra-4.5.0-sources.jar')
+    compile files('libs/acra-4.5.0-javadoc.jar')
+}

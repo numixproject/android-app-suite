@@ -1,0 +1,8 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <dimen name="norm_button_text">40sp</dimen>
+    <dimen name="adv_button_text">20sp</dimen>
+    <dimen name="adv_button_padding">0dp</dimen>
+    <dimen name="panel_height">200dp</dimen>
+
+</resources>

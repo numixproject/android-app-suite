@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/home/paolo/studio/Numix Calculator1/app/build/intermediates/pre-dexed/debug/support-v4-18.0.0-12d4b102988f383e262aa108ea4ac3def9d3a139.jar"
+        jar="/usr/share/android-studio/data/sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="44ec51e9d395a47aab135e5e1b556c0007442156"/>
+    <item
+        dex="/home/paolo/studio/Numix Calculator1/app/build/intermediates/pre-dexed/debug/acra-4.5.0-javadoc-b73446c2a88b5eca3d14be7a93e5a6f76ee47cfa.jar"
+        jar="/home/paolo/studio/Numix Calculator1/app/libs/acra-4.5.0-javadoc.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="2f8d2b7b01bfa41300e53acc9f103f14e0d26bd4"/>
+    <item
+        dex="/home/paolo/studio/Numix Calculator1/app/build/intermediates/pre-dexed/debug/achartengine-beaad8c7e169eea96607118a148077de4cc9e9ea.jar"
+        jar="/home/paolo/studio/Numix Calculator1/app/libs/achartengine.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="1ca77b77fdd7e37c9f30cf71b6149eda409779bb"/>
+    <item
+        dex="/home/paolo/studio/Numix Calculator1/app/build/intermediates/pre-dexed/debug/ejml-0.21-d8b4e342987d7f0f28158165e856b8a5363eb7f6.jar"
+        jar="/home/paolo/studio/Numix Calculator1/app/libs/ejml-0.21.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="3b0ea552892ad6e68c1c7df5b8222661db8467ba"/>
+    <item
+        dex="/home/paolo/studio/Numix Calculator1/app/build/intermediates/pre-dexed/debug/slider-ba56741cd869c275e8712ffd2497a1a130d5a027.jar"
+        jar="/home/paolo/studio/Numix Calculator1/app/libs/slider.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="d257a32129c6f19d8bd17c29cae69f49fd0509e5"/>
+    <item
+        dex="/home/paolo/studio/Numix Calculator1/app/build/intermediates/pre-dexed/debug/acra-4.5.0-sources-6d60b632a0eab264e24c83a49ddd4a154c7e0d08.jar"
+        jar="/home/paolo/studio/Numix Calculator1/app/libs/acra-4.5.0-sources.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="503db72ba6ce28ef01be5e6ad0b73685bb8d6a27"/>
+    <item
+        dex="/home/paolo/studio/Numix Calculator1/app/build/intermediates/pre-dexed/debug/arity-2.1.6-f54c54d8e8fadf05666a739bf3247d93e661ed5c.jar"
+        jar="/home/paolo/studio/Numix Calculator1/app/libs/arity-2.1.6.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="f5fcb42171ddf897aa295ee5f50356abc2a688c8"/>
+
+</pre-dex-items>

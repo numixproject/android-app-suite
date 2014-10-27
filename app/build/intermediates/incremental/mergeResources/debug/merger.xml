@@ -1,0 +1,2653 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="2" >
+
+    <dataSet config="main" >
+        <source path="/home/paolo/studio/Numix Calculator1/app/src/main/res" >
+            <file
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/values/strings.xml"
+                qualifiers="" >
+                <string name="pi" >\u03c0
+                </string>
+                <string name="clearDesc" >clear
+                </string>
+                <string name="leftParen" >(
+                </string>
+                <string name="error" >Error :(
+                </string>
+                <string name="cosDesc" >cosine
+                </string>
+                <string name="precision_summary" >"Choose the length of the result to be displayed (WARNING: if you set this to a number above 500, performance might suffer!)"
+                </string>
+                <string name="clear_history" >Clear history
+                </string>
+                <string name="theme_category_summary" >"Change the looks of the calculator"
+                </string>
+                <string name="plus" >+
+                </string>
+                <string name="sqrt" >\u221a
+                </string>
+                <string name="tanDesc" >tangent
+                </string>
+                <string name="factorial" >!
+                </string>
+                <string name="delDesc" >delete
+                </string>
+                <string name="title_activity_settings" >"Settings"
+                </string>
+                <string name="minus" >\u2212
+                </string>
+                <string name="lg" >log
+                </string>
+                <string name="tan" >tan
+                </string>
+                <string name="sinDesc" >sine
+                </string>
+                <string name="theme_title" >"Theme"
+                </string>
+                <string name="or" >"OR"
+                </string>
+                <string name="equalDesc" >equals
+                </string>
+                <string name="rightParenDesc" >right parenthesis
+                </string>
+                <string name="powerDesc" >power
+                </string>
+                <string name="e" >e
+                </string>
+                <string name="text_copied_toast" >Text copied.
+                </string>
+
+                <string-array name="operatorDescs" >
+
+                    <!-- Description for mathematical ( [CHAR LIMIT=200] -->
+                    <item>
+left parenthesis
+                    </item>
+                    <!-- Description for mathematical ) [CHAR LIMIT=200] -->
+                    <item>
+right parenthesis
+                    </item>
+                    <!-- Description for mathematical ! (factorial) function [CHAR LIMIT=200] -->
+                    <item>
+factorial
+                    </item>
+                    <!-- Description for mathematical ln [CHAR LIMIT=200] -->
+                    <item>
+natural logarithm
+                    </item>
+                    <!-- Description for mathematical log [CHAR LIMIT=200] -->
+                    <item>
+logarithm
+                    </item>
+                    <!-- Description for mathematical square root [CHAR LIMIT=200] -->
+                    <item>
+square root
+                    </item>
+                    <!-- Description for mathematical / [CHAR LIMIT=200] -->
+                    <item>
+divided by
+                    </item>
+                    <!-- Description for mathematical x [CHAR LIMIT=200] -->
+                    <item>
+multiplied by
+                    </item>
+                    <!-- Description for mathematical + [CHAR LIMIT=200] -->
+                    <item>
+plus
+                    </item>
+                    <!-- Description for mathematical - [CHAR LIMIT=200] -->
+                    <item>
+minus
+                    </item>
+                    <!-- Description for mathematical . [CHAR LIMIT=200] -->
+                    <item>
+ point 
+                    </item>
+                    <!-- Description for mathematical ^ [CHAR LIMIT=200] -->
+                    <item>
+power
+                    </item>
+                    <!-- Description for mathematical TAN [CHAR LIMIT=200] -->
+                    <item>
+tangent
+                    </item>
+                    <!-- Description for mathematical SIN [CHAR LIMIT=200] -->
+                    <item>
+sine
+                    </item>
+                    <!-- Description for mathematical COS [CHAR LIMIT=200] -->
+                    <item>
+cosine
+                    </item>
+                    <!-- Description for mathematical PI [CHAR LIMIT=200] -->
+                    <item>
+pi
+                    </item>
+                    <!-- Description for mathematical = [CHAR LIMIT=200] -->
+                    <item>
+equals
+                    </item>
+                </string-array>
+
+                <string name="cos" >cos
+                </string>
+                <string name="delete_numbers" >"\u21D0"
+                </string>
+                <string name="theme_summary" >"Choose a theme"
+                </string>
+                <string name="del" >DELETE
+                </string>
+
+                <string-array
+                    name="operators"
+                    translatable="false" >
+                    <item>
+(
+                    </item>
+                    <item>
+)
+                    </item>
+                    <item>
+!
+                    </item>
+                    <item>
+ln
+                    </item>
+                    <item>
+log
+                    </item>
+                    <item>
+\u221a
+                    </item>
+                    <item>
+\u00f7
+                    </item>
+                    <item>
+\u00d7
+                    </item>
+                    <item>
++
+                    </item>
+                    <item>
+\u2212
+                    </item>
+                    <item>
+.
+                    </item>
+                    <item>
+^
+                    </item>
+                    <item>
+tan
+                    </item>
+                    <item>
+sin
+                    </item>
+                    <item>
+cos
+                    </item>
+                    <item>
+\u03c0
+                    </item>
+                    <item>
+=
+                    </item>
+                </string-array>
+
+                <string name="square_root_symbol" >"√¯¯"
+                </string>
+                <string name="mail" >"
+<u>
+Mail us your feedback or suggestions.
+                    </u>"
+                </string>
+                <string name="power" >^
+                </string>
+                <string name="advanced" >Advanced panel
+                </string>
+                <string name="precision_title" >"Precision"
+                </string>
+                <string name="factorialDesc" >factorial
+                </string>
+                <string name="exp" >"^"
+                </string>
+                <string name="angle_title" >"Degrees/radians"
+                </string>
+                <string name="div" >\u00f7
+                </string>
+                <string name="equal" >=
+                </string>
+                <string name="angle_summary" >"Choose whether to calculate with degrees or radians"
+                </string>
+                <string name="clean" >"Clean"
+                </string>
+                <string name="clear" >CLR
+                </string>
+                <string name="function_category_summary" >"Change the functionality of the calculator"
+                </string>
+                <string name="lgDesc" >logarithm
+                </string>
+                <string name="leftParenDesc" >left parenthesis
+                </string>
+                <string name="dotDesc" >point
+                </string>
+                <string name="rightParen" >)
+                </string>
+                <string name="digit3" >3
+                </string>
+                <string name="digit4" >4
+                </string>
+                <string name="menu_settings" >"Settings"
+                </string>
+                <string name="digit5" >5
+                </string>
+                <string name="digit6" >6
+                </string>
+                <string name="menu_about" >"About"
+                </string>
+                <string name="enter" >\u2193
+                </string>
+                <string name="digit0" >0
+                </string>
+                <string name="playstore" >"
+<u>
+Rate this app! It helps us a lot to keep the updates coming.
+                    </u>"
+                </string>
+                <string name="digit1" >1
+                </string>
+                <string name="digit2" >2
+                </string>
+                <string name="divDesc" >divide
+                </string>
+                <string name="digit7" >7
+                </string>
+                <string name="digit8" >8
+                </string>
+                <string name="playstoredon" >"
+<u>
+Please download the donation version of this app in the playstore if you can spare a buck.
+                    </u>"
+                </string>
+                <string name="digit9" >9
+                </string>
+                <string name="lnDesc" >natural logarithm
+                </string>
+                <string name="plusDesc" >plus
+                </string>
+                <string name="eDesc" >Euler\'s number
+                </string>
+                <string name="app_name" >Numix Calculator Pro
+                </string>
+                <string name="mul" >\u00d7
+                </string>
+                <string name="basic" >Basic panel
+                </string>
+                <string name="mulDesc" >multiply
+                </string>
+                <string name="minusDesc" >minus
+                </string>
+                <string name="function_category_title" >"Function"
+                </string>
+                <string name="sqrtDesc" >square root
+                </string>
+                <string name="sin" >sin
+                </string>
+                <string name="piDesc" >pi
+                </string>
+                <string name="ln" >ln
+                </string>
+                <string name="title_activity_about" >"About"
+                </string>
+            </file>
+            <file
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/values/constants.xml"
+                qualifiers="" >
+                <item
+                    name="MATRIX"
+                    type="bool">
+true
+                </item>
+                <item
+                    name="DIGIT_GROUPING"
+                    type="bool">
+false
+                </item>
+                <item
+                    name="ADVANCED"
+                    type="bool">
+true
+                </item>
+                <item
+                    name="GRAPH"
+                    type="bool">
+true
+                </item>
+                <item
+                    name="CLICK_TO_OPEN_HISTORY"
+                    type="bool">
+false
+                </item>
+                <item
+                    name="USE_RADIANS"
+                    type="bool">
+true
+                </item>
+                <item
+                    name="FUNCTION"
+                    type="bool">
+false
+                </item>
+                <item
+                    name="RETURN_TO_BASIC"
+                    type="bool">
+false
+                </item>
+                <item
+                    name="BASIC"
+                    type="bool">
+true
+                </item>
+
+                <integer name="max_digits" >
+14
+                </integer>
+
+                <item
+                    name="HEX"
+                    type="bool">
+true
+                </item>
+            </file>
+            <file
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/values/colors.xml"
+                qualifiers="" >
+                <color name="history_input" >#99ffffff
+                </color>
+                <color name="almost_tra" >#22ffffff
+                </color>
+                <color name="button_disabled_text_color_light" >#883a3a3a
+                </color>
+                <color name="background" >#212121
+                </color>
+                <color name="button_pressed" >#e5e5e5
+                </color>
+                <color name="background_light" >#FFFFFF
+                </color>
+                <color name="button_text_light" >#2e2e2e
+                </color>
+                <color name="button_pressed_text_light" >#2e2e2e
+                </color>
+                <color name="button_text" >#FFFFFFFF
+                </color>
+                <color name="pressed_color_light" >#42A8DB
+                </color>
+                <color name="graph_color" >#d64937
+                </color>
+                <color name="pressed_color" >#07547B
+                </color>
+                <color name="history_result_light" >#ffffff
+                </color>
+                <color name="pressed_adv" >#0d3f69
+                </color>
+                <color name="disabled_adv" >#78A3C7
+                </color>
+                <color name="dark_selected" >#111111
+                </color>
+                <color name="dark_disabled" >#55111111
+                </color>
+                <color name="magic_flame" >#00FFFFFF
+                </color>
+                <color name="button_disabled_text_color" >#3a3a3a
+                </color>
+                <color name="action_pressed" >#bf3827
+                </color>
+                <color name="transparent" >#00ffffff
+                </color>
+                <color name="button_hint_text" >#474747
+                </color>
+                <color name="history_result" >#ffffff
+                </color>
+                <color name="history_input_light" >#99ffffff
+                </color>
+            </file>
+            <file
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/values/cm_strings.xml"
+                qualifiers="" >
+                <string name="decDesc" >Decimal
+                </string>
+                <string name="matrix_separator" >,
+                </string>
+                <string name="hex_separator" >\u0020
+                </string>
+                <string name="plus_row" >+Row
+                </string>
+                <string name="pref_about" >About
+                </string>
+                <string name="cling_hex_msg" >Switch between decimal (dec), binary (bin), and hexadecimal (hex).\n\nWarning: If you believe you\'re getting bad results, you\'re probably in the wrong base. The default is decimal.
+                </string>
+
+                <item
+                    name="bin_separator_distance"
+                    type="integer">
+4
+                </item>
+
+                <string
+                    name="application_version"
+                    translatable="false" >2.0
+                </string>
+                <string name="trigUnits" >Trig units
+                </string>
+                <string name="solve" >Solve
+                </string>
+                <string name="arcsin" >asin
+                </string>
+                <string
+                    name="i"
+                    translatable="false" >i
+                </string>
+                <string name="dec_separator" >,
+                </string>
+                <string name="application_copyright" >Based on Calculator by The CyanogenMod Project
+                </string>
+                <string name="arccos" >\nacos
+                </string>
+                <string name="showHistory" >Show history
+                </string>
+                <string name="cling_graph_title" >Graph
+                </string>
+                <string name="bin" >Bin
+                </string>
+                <string name="digitGrouping" >Digit grouping
+                </string>
+                <string name="pref_panels" >Panels
+                </string>
+                <string name="cling_matrix_msg" >Tap here to start building and solving matrices.
+                </string>
+                <string name="bin_separator" >\u0020
+                </string>
+                <string name="Y" >Y
+                </string>
+                <string name="dotProduct" >Dot
+                </string>
+                <string name="X" >X
+                </string>
+                <string name="degrees" >DEG
+                </string>
+                <string name="remove_from_history" >Remove from history
+                </string>
+                <string
+                    name="sign"
+                    translatable="false" >+/\u2212
+                </string>
+                <string name="mod" >mod
+                </string>
+                <string name="dec" >Dec
+                </string>
+                <string name="eigenvalue" >Eigen
+                </string>
+
+                <item
+                    name="dec_separator_distance"
+                    type="integer">
+3
+                </item>
+
+                <string
+                    name="F"
+                    translatable="false" >F
+                </string>
+                <string name="hexPanel" >Hex panel
+                </string>
+                <string name="hex" >Hex
+                </string>
+                <string
+                    name="C"
+                    translatable="false" >C
+                </string>
+                <string name="eigenvalueDesc" >Eigenvalues
+                </string>
+                <string
+                    name="B"
+                    translatable="false" >B
+                </string>
+                <string name="cling_simple_title" >Welcome
+                </string>
+                <string
+                    name="E"
+                    translatable="false" >E
+                </string>
+                <string name="hexDesc" >Hexadecimal
+                </string>
+                <string name="cling_matrix_title" >Matrices
+                </string>
+                <string
+                    name="D"
+                    translatable="false" >D
+                </string>
+                <string name="lock" >Lock page
+                </string>
+                <string name="determinantDesc" >det
+                </string>
+                <string
+                    name="percentage"
+                    translatable="false" >%
+                </string>
+                <string
+                    name="A"
+                    translatable="false" >A
+                </string>
+                <string name="det" >det
+                </string>
+                <string name="solveForX" >Solve for X
+                </string>
+                <string
+                    name="matrix_inverse"
+                    translatable="false" >-1
+                </string>
+                <string name="solveForY" >Solve for Y
+                </string>
+                <string
+                    name="integral"
+                    translatable="false" >\u222B
+                </string>
+                <string name="cling_dismiss" >OK
+                </string>
+                <string name="settings" >Settings
+                </string>
+                <string
+                    name="parentheses"
+                    translatable="false" >( )
+                </string>
+                <string name="minus_row" >-Row
+                </string>
+                <string name="pref_actions" >Actions
+                </string>
+                <string name="pref_units" >Units
+                </string>
+                <string name="matrix_transpose" >T
+                </string>
+                <string name="holo" >Holo
+                </string>
+                <string name="matrix" >Matrix panel
+                </string>
+                <string name="clickToOpenHistory" >Click to open history
+                </string>
+                <string name="cling_graph_msg" >Graphs will automatically show up here. Go to the advanced panel and build a function using X and Y.
+                </string>
+                <string name="hideHistory" >Hide history
+                </string>
+                <string name="arctan" >atan
+                </string>
+                <string name="pref_theme" >Theme
+                </string>
+                <string name="function" >Function panel
+                </string>
+                <string name="holo_dark" >Dark
+                </string>
+                <string name="dot" >.
+                </string>
+                <string name="radians" >RAD
+                </string>
+
+                <item
+                    name="hex_separator_distance"
+                    type="integer">
+2
+                </item>
+
+                <string name="next" >Next
+                </string>
+                <string name="dy" >dY
+                </string>
+                <string name="dx" >dX
+                </string>
+                <string name="cling_simple_msg" >Slide left and right to access more content. Unnecessary pages can be disabled in Settings.
+                </string>
+                <string name="easter_egg" >Always take a banana to a party; Rose: bananas are good!
+                </string>
+                <string name="binDesc" >Binary
+                </string>
+                <string name="plus_col" >+Col
+                </string>
+                <string name="minus_col" >-Col
+                </string>
+                <string
+                    name="matrix_new"
+                    translatable="false" >[ ]
+                </string>
+                <string
+                    name="coma"
+                    translatable="false" >,
+                </string>
+                <string name="crossProduct" >Cross
+                </string>
+                <string name="holo_light" >Light
+                </string>
+                <string name="cling_hex_title" >Change bases
+                </string>
+                <string name="graph" >Graph panel
+                </string>
+                <string name="unlock" >Unlock page
+                </string>
+                <string name="copy" >Copy \'%s\'
+                </string>
+                <string name="returnToBasic" >Return to the basic panel
+                </string>
+            </file>
+            <file
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/values/attrs.xml"
+                qualifiers="" >
+                <declare-styleable name="ScrollableDisplay" >
+
+                    <!-- Used to limit the height of Scrollable Display -->
+                    <attr
+                        name="btn_clear"
+                        format="reference" />
+                    <attr
+                        name="btn_delete"
+                        format="reference" />
+                    <attr
+                        name="max_height"
+                        format="dimension" />
+                    <attr
+                        name="button_style"
+                        format="reference" />
+                    <attr
+                        name="background_style"
+                        format="reference" />
+                    <attr
+                        name="delete_style"
+                        format="reference" />
+                    <attr
+                        name="clear_style"
+                        format="reference" />
+                    <attr
+                        name="digit_button_style"
+                        format="reference" />
+                    <attr
+                        name="digit_button_style_adv"
+                        format="reference" />
+                    <attr
+                        name="action_button_style"
+                        format="reference" />
+                    <attr
+                        name="button_small_style"
+                        format="reference" />
+                    <attr
+                        name="button_half_style"
+                        format="reference" />
+                    <attr
+                        name="equal_button_style"
+                        format="reference" />
+                    <attr
+                        name="btn_digit_cell_style"
+                        format="reference" />
+                    <attr
+                        name="btn_function_cell_style"
+                        format="reference" />
+                    <attr
+                        name="btn_row_style"
+                        format="reference" />
+                    <attr
+                        name="btn_operation_cell_style"
+                        format="reference" />
+                    <attr
+                        name="equal_btn_operation_cell_style"
+                        format="reference" />
+                    <attr
+                        name="slider_style"
+                        format="reference" />
+                    <attr
+                        name="button_del_style"
+                        format="reference" />
+                    <attr
+                        name="ic_menu_overflow"
+                        format="reference" />
+                    <attr
+                        name="display_style"
+                        format="reference" />
+                    <attr
+                        name="history_input"
+                        format="reference" />
+                    <attr
+                        name="history_result"
+                        format="reference" />
+                    <attr
+                        name="egg"
+                        format="reference" />
+                    <attr
+                        name="graph_minus"
+                        format="reference" />
+                    <attr
+                        name="graph_plus"
+                        format="reference" />
+                    <attr
+                        name="graph_standard"
+                        format="reference" />
+                    <attr
+                        name="menu_bg"
+                        format="reference" />
+                    <attr
+                        name="calc_clear_symbol"
+                        format="reference" />
+                </declare-styleable>
+            </file>
+            <file
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/values/styles.xml"
+                qualifiers="" >
+                <dimen name="app_defaultsize_w" >632.0dip
+                </dimen>
+
+                <style name="Theme.Calculator.ButtonStyle.Light.Digit" >
+                    <item name="android:background">
+@drawable/btn_digit_light
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                </style>
+
+                <dimen name="cling_text_block_offset_y" >0dp
+                </dimen>
+                <dimen name="cling_text_block_offset_x" >0dp
+                </dimen>
+
+                <style name="Theme.Calculator.ButtonStyle.Light.Equal" >
+                    <item name="android:background">
+@drawable/btn_equal_light
+                    </item>
+                    <item name="android:textColor">
+@color/text_color
+                    </item>
+                    <item name="android:src">
+@drawable/circle
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonStyle.Action" >
+                    <item name="android:background">
+@drawable/btn_action
+                    </item>
+                    <item name="android:textColor">
+@color/text_color
+                    </item>
+                </style>
+
+                <dimen name="max_display_height" >200dp
+                </dimen>
+                <dimen name="btn_digit_text_size" >40sp
+                </dimen>
+
+                <style name="Theme.Calculator.ButtonStyle" >
+                    <item name="android:textSize">
+40sp
+                    </item>
+                    <item name="android:layout_width">
+match_parent
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:focusable">
+true
+                    </item>
+                    <item name="android:background">
+@drawable/btn_function
+                    </item>
+                    <item name="android:layout_marginLeft">
+0dp
+                    </item>
+                    <item name="android:textColor">
+@color/text_color
+                    </item>
+                    <item name="android:textColorHint">
+@color/button_hint_text
+                    </item>
+                    <item name="android:gravity">
+center
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonStyle.Adv.Light" >
+                    <item name="android:background">
+@drawable/btn_digit_adv_light
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                </style>
+
+                <dimen name="small_display_text_size" >20sp
+                </dimen>
+                <dimen name="app_defaultsize_h" >598.0dip
+                </dimen>
+
+                <style name="Theme.Calculator.Background" >
+                    <item name="android:background">
+@drawable/btn_slider_holo
+                    </item>
+                    <item name="android:src">
+@drawable/ic_action_dummy_dark
+                    </item>
+                </style>
+
+                <style
+                    name="ActionBar"
+                    parent="@android:style/Widget.Holo.Light.ActionBar" >
+                    <item name="android:background">
+#59cbb2
+                    </item>
+                    <item name="android:titleTextStyle">
+@style/TitleText
+                    </item>
+                    <item name="android:textColor">
+#35444f
+                    </item>
+                    <item name="android:displayOptions"/>
+                </style>
+
+                <style name="Theme.Calculator.ButtonStyle.Small" >
+                    <item name="android:textSize">
+30sp
+                    </item>
+                </style>
+
+                <style name="button_style" >
+                    <item name="android:textSize">
+40dp
+                    </item>
+                    <item name="android:layout_width">
+match_parent
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-light
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:focusable">
+true
+                    </item>
+                    <item name="android:background">
+@drawable/btn_function
+                    </item>
+                    <item name="android:layout_marginLeft">
+0dp
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonStyle.Light.Small" >
+                    <item name="android:textSize">
+30sp
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.Delete" >
+                    <item name="android:background">
+@drawable/btn_digit
+                    </item>
+                    <item name="android:src">
+@drawable/backspace_dark
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonStyle.Light.Del" >
+                    <item name="android:background">
+@drawable/btn_slider_light
+                    </item>
+                    <item name="android:textColor">
+@color/text_color
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.Display.Light" >
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:textColor">
+#ffffff
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonStyle.Adv" >
+                    <item name="android:background">
+@drawable/btn_digit_adv
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonStyle.Equal" >
+                    <item name="android:background">
+@drawable/btn_equal_light
+                    </item>
+                    <item name="android:textColor">
+@color/text_color
+                    </item>
+                    <item name="android:src">
+@drawable/circle_dark
+                    </item>
+                </style>
+
+                <dimen name="display_text_size" >40sp
+                </dimen>
+
+                <style name="ClingText" >
+                    <item name="android:textSize">
+15sp
+                    </item>
+                    <item name="android:textColor">
+#FFFFFF
+                    </item>
+                    <item name="android:shadowColor">
+#000000
+                    </item>
+                    <item name="android:shadowDy">
+2
+                    </item>
+                    <item name="android:shadowRadius">
+2.0
+                    </item>
+                    <item name="android:lineSpacingMultiplier">
+1.1
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.Clear" >
+                    <item name="android:background">
+@drawable/btn_digit
+                    </item>
+                    <item name="android:src">
+@drawable/clear_dark
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.Slider.Light" >
+                    <item name="android:scrollbarThumbHorizontal">
+@drawable/btn_slider_light
+                    </item>
+                    <item name="android:background">
+@color/background_light
+                    </item>
+                </style>
+
+                <style
+                    name="button_small_style"
+                    parent="button_style" >
+                    <item name="android:fontFamily">
+sans-serif-light
+                    </item>
+                    <item name="android:background">
+#29A048
+                    </item>
+                    <item name="android:textSize">
+30dp
+                    </item>
+                </style>
+
+                <dimen name="folderClingMarginTop" >20dp
+                </dimen>
+
+                <style
+                    name="AppTheme"
+                    parent="android:Theme.Holo.Light" >
+                    <item name="android:buttonStyle">
+@style/Theme.AppTheme.Widget.Button
+                    </item>
+                    <item name="android:windowBackground">
+@color/history_result
+                    </item>
+                    <item name="android:background">
+#00F2F2EC
+                    </item>
+                    <item name="android:actionBarStyle">
+@style/ActionBar
+                    </item>
+                    <item name="android:windowContentOverlay">
+@null
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:windowActionBar">
+false
+                    </item>
+                    <item name="android:windowNoTitle">
+true
+                    </item>
+                </style>
+
+                <dimen name="app_minimumsize_h" >300dp
+                </dimen>
+
+                <style name="Theme.Calculator.ButtonStyle.Digit" >
+                    <item name="android:background">
+@drawable/btn_digit
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                </style>
+
+                <dimen name="history_bar_height" >25dp
+                </dimen>
+
+                <style name="Theme.Calculator.ButtonDigitCellStyle.Light" >
+                    <item name="android:background">
+@drawable/btn_digit_light
+                    </item>
+                    <item name="android:textColor">
+@color/text_color_light
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonRowStyle" >
+                    <item name="android:layout_width">
+match_parent
+                    </item>
+                    <item name="android:layout_height">
+0dip
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:orientation">
+horizontal
+                    </item>
+                </style>
+
+                <style name="btn_row_style" >
+                    <item name="android:layout_width">
+match_parent
+                    </item>
+                    <item name="android:layout_height">
+0dip
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:orientation">
+horizontal
+                    </item>
+                </style>
+
+                <style name="btn_function_cell_style" >
+                    <item name="android:layout_width">
+0dip
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                    <item name="android:background">
+#ffffff
+                    </item>
+                    <item name="android:textColor">
+#111111
+                    </item>
+                    <item name="android:textSize">
+@dimen/btn_function_text_size
+                    </item>
+                </style>
+
+                <dimen name="min_display_height" >100dp
+                </dimen>
+                <dimen name="app_minimumsize_w" >300dp
+                </dimen>
+
+                <style
+                    name="Theme.Settings.Calculator"
+                    parent="android:Theme.Holo" >
+                </style>
+
+                <style name="display_style" >
+                    <item name="android:textSize">
+@dimen/display_text_size
+                    </item>
+                    <item name="android:inputType">
+text|textNoSuggestions
+                    </item>
+                    <item name="android:gravity">
+right|center_vertical
+                    </item>
+                    <item name="android:textColor">
+#ffffff
+                    </item>
+                    <item name="android:maxLines">
+1
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:scrollbars">
+none
+                    </item>
+                    <item name="android:scrollHorizontally">
+true
+                    </item>
+                    <item name="android:layout_width">
+match_parent
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                    <item name="android:paddingTop">
+8dp
+                    </item>
+                    <item name="android:paddingLeft">
+8dp
+                    </item>
+                    <item name="android:paddingRight">
+8dp
+                    </item>
+                    <item name="android:paddingBottom">
+0dp
+                    </item>
+                    <item name="android:background">
+#de7f7f
+                    </item>
+                </style>
+
+                <style
+                    name="norm_buttons"
+                    parent="Theme.AppTheme.Widget.Button" />
+
+                <style
+                    name="Theme.Calculator"
+                    parent="android:Theme.Holo.NoActionBar" >
+                    <item name="android:windowBackground">
+@color/background
+                    </item>
+                    <item name="background_style">
+@style/Theme.Calculator.Background
+                    </item>
+                    <item name="button_style">
+@style/Theme.Calculator.ButtonStyle
+                    </item>
+                    <item name="delete_style">
+@style/Theme.Calculator.Delete
+                    </item>
+                    <item name="clear_style">
+@style/Theme.Calculator.Clear
+                    </item>
+                    <item name="digit_button_style">
+@style/Theme.Calculator.ButtonStyle.Digit
+                    </item>
+                    <item name="digit_button_style_adv">
+@style/Theme.Calculator.ButtonStyle.Adv.Light
+                    </item>
+                    <item name="button_small_style">
+@style/Theme.Calculator.ButtonStyle.Small
+                    </item>
+                    <item name="button_half_style">
+@style/Theme.Calculator.ButtonStyle.Light.Half
+                    </item>
+                    <item name="action_button_style">
+@style/Theme.Calculator.ButtonStyle.Action
+                    </item>
+                    <item name="equal_button_style">
+@style/Theme.Calculator.ButtonStyle.Equal
+                    </item>
+                    <item name="button_del_style">
+@style/Theme.Calculator.ButtonStyle.Del
+                    </item>
+                    <item name="slider_style">
+@style/Theme.Calculator.Slider
+                    </item>
+                    <item name="ic_menu_overflow">
+@drawable/ic_menu_overflow
+                    </item>
+                    <item name="history_input">
+@color/history_input
+                    </item>
+                    <item name="history_result">
+@color/history_result
+                    </item>
+                    <item name="egg">
+@drawable/egg
+                    </item>
+                    <item name="graph_minus">
+@drawable/graph_minus
+                    </item>
+                    <item name="graph_plus">
+@drawable/graph_plus
+                    </item>
+                    <item name="graph_standard">
+@drawable/graph_standard
+                    </item>
+                    <item name="btn_digit_cell_style">
+@style/Theme.Calculator.ButtonDigitCellStyle
+                    </item>
+                    <item name="btn_function_cell_style">
+@style/Theme.Calculator.ButtonFunctionCellStyle
+                    </item>
+                    <item name="btn_row_style">
+@style/Theme.Calculator.ButtonRowStyle
+                    </item>
+                    <item name="btn_operation_cell_style">
+@style/Theme.Calculator.ButtonOperationCellStyle
+                    </item>
+                    <item name="equal_btn_operation_cell_style">
+@style/Theme.Calculator.ButtonOperationCellStyle
+                    </item>
+                    <item name="display_style">
+@style/Theme.Calculator.Display
+                    </item>
+                    <item name="menu_bg">
+@drawable/menu_bg
+                    </item>
+                    <item name="calc_clear_symbol">
+@drawable/calc_clear_symbol
+                    </item>
+                </style>
+
+                <dimen name="btn_function_text_size" >30sp
+                </dimen>
+
+                <style name="Theme.Calculator.ButtonStyle.Half" >
+                    <item name="android:textSize">
+25sp
+                    </item>
+                    <item name="android:background">
+@drawable/btn_digit_adv
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonOperationCellStyle" >
+                    <item name="android:layout_width">
+0dip
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                    <item name="android:gravity">
+center
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:background">
+@drawable/btn_function
+                    </item>
+                    <item name="android:textSize">
+@dimen/btn_operation_text_size
+                    </item>
+                    <item name="android:textColor">
+@color/text_color
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonStyle.Del" >
+                    <item name="android:background">
+@drawable/btn_function
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                </style>
+
+                <style
+                    name="AdvBut"
+                    parent="android:style/Widget.Button" >
+                    <item name="android:textSize">
+@dimen/adv_button_text
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:padding">
+@dimen/adv_button_padding
+                    </item>
+                    <item name="android:minHeight">
+48dp
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.Slider" >
+                    <item name="android:scrollbarThumbHorizontal">
+@drawable/btn_slider_holo
+                    </item>
+                    <item name="android:background">
+@color/button_hint_text
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonStyle.Light.Half" >
+                    <item name="android:textSize">
+25sp
+                    </item>
+                    <item name="android:textColor">
+#ffffff
+                    </item>
+                    <item name="android:background">
+@drawable/btn_digit_adv_light
+                    </item>
+                </style>
+
+                <dimen name="btn_clear_text_size" >30sp
+                </dimen>
+
+                <style
+                    name="Theme.Settings.Calculator.Light"
+                    parent="android:Theme.Holo.Light" >
+                </style>
+
+                <style name="Theme.Calculator.ButtonStyle.Light.Action" >
+                    <item name="android:background">
+@drawable/btn_action_light
+                    </item>
+                    <item name="android:textColor">
+@color/text_color
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.Display" >
+                    <item name="android:textColor">
+@color/text_color
+                    </item>
+                    <item name="android:textSize">
+@dimen/display_text_size
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:inputType">
+text|textNoSuggestions
+                    </item>
+                    <item name="android:gravity">
+right|center_vertical
+                    </item>
+                    <item name="android:maxLines">
+1
+                    </item>
+                    <item name="android:scrollbars">
+none
+                    </item>
+                    <item name="android:scrollHorizontally">
+true
+                    </item>
+                    <item name="android:layout_width">
+match_parent
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                    <item name="android:paddingTop">
+8dp
+                    </item>
+                    <item name="android:paddingLeft">
+8dp
+                    </item>
+                    <item name="android:paddingRight">
+8dp
+                    </item>
+                    <item name="android:paddingBottom">
+8dp
+                    </item>
+                    <item name="max_height">
+@dimen/max_display_height
+                    </item>
+                </style>
+
+                <item
+                    name="button_hint_text_size_percent"
+                    type="integer">
+70
+                </item>
+
+                <style
+                    name="NormButLand"
+                    parent="Theme.AppTheme.Widget.Button" >
+                    <item name="android:padding">
+0dp
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                </style>
+
+                <dimen name="clingPunchThroughGraphicCenterRadius" >94dp
+                </dimen>
+
+                <style
+                    name="digit_button_style"
+                    parent="button_style" >
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:background">
+@drawable/btn_digit
+                    </item>
+                </style>
+
+                <style name="btn_clear" >
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:background">
+?android:attr/selectableItemBackground
+                    </item>
+                    <item name="android:textSize">
+@dimen/btn_clear_text_size
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonDigitCellStyle" >
+                    <item name="android:layout_width">
+0dip
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                    <item name="android:gravity">
+center
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:background">
+@drawable/btn_digit
+                    </item>
+                    <item name="android:textSize">
+@dimen/btn_digit_text_size
+                    </item>
+                    <item name="android:textColor">
+@color/text_color
+                    </item>
+                    <item name="android:textColorHint">
+@color/button_hint_text
+                    </item>
+                </style>
+
+                <dimen name="btn_operation_text_size" >40sp
+                </dimen>
+
+                <style name="btn_operation_cell_style" >
+                    <item name="android:layout_width">
+0dip
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                    <item name="android:gravity">
+center
+                    </item>
+                    <item name="android:background">
+#ffffff
+                    </item>
+                    <item name="android:textColor">
+#111111
+                    </item>
+                    <item name="android:textSize">
+@dimen/btn_operation_text_size
+                    </item>
+                </style>
+
+                <style name="ClingButton" >
+                    <item name="android:layout_width">
+wrap_content
+                    </item>
+                    <item name="android:layout_height">
+wrap_content
+                    </item>
+                    <item name="android:paddingTop">
+10dp
+                    </item>
+                    <item name="android:paddingBottom">
+15dp
+                    </item>
+                    <item name="android:paddingLeft">
+35dp
+                    </item>
+                    <item name="android:paddingRight">
+35dp
+                    </item>
+                    <item name="android:text">
+@string/cling_dismiss
+                    </item>
+                    <item name="android:textStyle">
+bold
+                    </item>
+                    <item name="android:background">
+@drawable/cling_button_bg
+                    </item>
+                </style>
+
+                <style name="btn_digit_cell_style" >
+                    <item name="android:layout_width">
+0dip
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                    <item name="android:gravity">
+center
+                    </item>
+                    <item name="android:background">
+#ffffff
+                    </item>
+                    <item name="android:textColor">
+#111111
+                    </item>
+                    <item name="android:textSize">
+@dimen/btn_digit_text_size
+                    </item>
+                </style>
+
+                <style
+                    name="Theme.Calculator.Light"
+                    parent="android:Theme.Holo.Light.NoActionBar" >
+                    <item name="android:windowBackground">
+@color/background_light
+                    </item>
+                    <item name="background_style">
+@style/Theme.Calculator.Background.Light
+                    </item>
+                    <item name="button_style">
+@style/Theme.Calculator.ButtonStyle.Light
+                    </item>
+                    <item name="delete_style">
+@style/Theme.Calculator.Delete.Light
+                    </item>
+                    <item name="clear_style">
+@style/Theme.Calculator.Clear.Light
+                    </item>
+                    <item name="digit_button_style">
+@style/Theme.Calculator.ButtonStyle.Light.Digit
+                    </item>
+                    <item name="digit_button_style_adv">
+@style/Theme.Calculator.ButtonStyle.Adv.Light
+                    </item>
+                    <item name="button_small_style">
+@style/Theme.Calculator.ButtonStyle.Light.Small
+                    </item>
+                    <item name="button_half_style">
+@style/Theme.Calculator.ButtonStyle.Light.Half
+                    </item>
+                    <item name="equal_button_style">
+@style/Theme.Calculator.ButtonStyle.Light.Equal
+                    </item>
+                    <item name="action_button_style">
+@style/Theme.Calculator.ButtonStyle.Light.Action
+                    </item>
+                    <item name="button_del_style">
+@style/Theme.Calculator.ButtonStyle.Light.Del
+                    </item>
+                    <item name="slider_style">
+@style/Theme.Calculator.Slider.Light
+                    </item>
+                    <item name="ic_menu_overflow">
+@drawable/ic_menu_overflow_light
+                    </item>
+                    <item name="history_input">
+@color/history_input_light
+                    </item>
+                    <item name="history_result">
+@color/history_result_light
+                    </item>
+                    <item name="egg">
+@drawable/egg_light
+                    </item>
+                    <item name="graph_minus">
+@drawable/graph_minus_light
+                    </item>
+                    <item name="graph_plus">
+@drawable/graph_plus_light
+                    </item>
+                    <item name="graph_standard">
+@drawable/graph_standard_light
+                    </item>
+                    <item name="btn_digit_cell_style">
+@style/Theme.Calculator.ButtonDigitCellStyle.Light
+                    </item>
+                    <item name="btn_function_cell_style">
+@style/Theme.Calculator.ButtonFunctionCellStyle.Light
+                    </item>
+                    <item name="btn_operation_cell_style">
+@style/Theme.Calculator.ButtonOperationCellStyle.Light
+                    </item>
+                    <item name="equal_btn_operation_cell_style">
+@style/Theme.Calculator.ButtonOperationCellStyle.Light.Equal
+                    </item>
+                    <item name="display_style">
+@style/Theme.Calculator.Display.Light
+                    </item>
+                    <item name="menu_bg">
+@drawable/menu_bg_light
+                    </item>
+                    <item name="calc_clear_symbol">
+@drawable/calc_clear_symbol_light
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.Background.Light" >
+                    <item name="android:background">
+@drawable/btn_slider_holo_light
+                    </item>
+                    <item name="android:src">
+@drawable/ic_action_dummy
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonOperationCellStyle.Light" >
+                    <item name="android:background">
+@drawable/btn_function_light
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:textColor">
+@color/text_color_light
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.Delete.Light" >
+                    <item name="android:background">
+@drawable/btn_digit_light
+                    </item>
+                    <item name="android:src">
+@drawable/backspace
+                    </item>
+                </style>
+
+                <style
+                    name="ResultTheme"
+                    parent="android:style/Widget.EditText" >
+                    <item name="android:padding">
+5dp
+                    </item>
+                    <item name="android:textSize">
+40sp
+                    </item>
+                    <item name="android:textColor">
+#fff
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                </style>
+
+                <style
+                    name="TitleText"
+                    parent="AppTheme" >
+                    <item name="android:textColor">
+#ffffff
+                    </item>
+                    <item name="android:textSize">
+20sp
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:background">
+#00F2F2EC
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonStyle.Light" >
+                    <item name="android:background">
+@drawable/btn_function_light
+                    </item>
+                    <item name="android:textColor">
+@color/text_color_light
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonFunctionCellStyle" >
+                    <item name="android:layout_width">
+0dip
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                    <item name="android:background">
+@drawable/btn_function
+                    </item>
+                    <item name="android:textSize">
+@dimen/btn_function_text_size
+                    </item>
+                    <item name="android:textColor">
+@color/text_color
+                    </item>
+                    <item name="android:textColorHint">
+@color/button_hint_text
+                    </item>
+                </style>
+
+                <dimen name="matrix_edit_text_padding" >17dp
+                </dimen>
+
+                <style name="ClingTitleText" >
+                    <item name="android:layout_width">
+wrap_content
+                    </item>
+                    <item name="android:layout_height">
+wrap_content
+                    </item>
+                    <item name="android:layout_marginBottom">
+5dp
+                    </item>
+                    <item name="android:textSize">
+23sp
+                    </item>
+                    <item name="android:textColor">
+#49C0EC
+                    </item>
+                    <item name="android:shadowColor">
+#000000
+                    </item>
+                    <item name="android:shadowDy">
+2
+                    </item>
+                    <item name="android:shadowRadius">
+2.0
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.ButtonFunctionCellStyle.Light" >
+                    <item name="android:layout_width">
+0dip
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                    <item name="android:background">
+@drawable/btn_function_light
+                    </item>
+                    <item name="android:textSize">
+@dimen/btn_function_text_size
+                    </item>
+                    <item name="android:textColor">
+@color/text_color_light
+                    </item>
+                    <item name="android:textColorHint">
+@color/button_hint_text
+                    </item>
+                </style>
+
+                <dimen name="button_hint_offset_y" >20dp
+                </dimen>
+                <dimen name="button_hint_offset_x" >20dp
+                </dimen>
+
+                <style name="Theme.Calculator.ButtonOperationCellStyle.Light.Equal" >
+                    <item name="android:background">
+@drawable/btn_equal_light
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:textColor">
+@color/text_color
+                    </item>
+                </style>
+
+                <style name="Theme.Calculator.Clear.Light" >
+                    <item name="android:background">
+@drawable/btn_digit_light
+                    </item>
+                    <item name="android:src">
+@drawable/clear
+                    </item>
+                </style>
+
+                <style
+                    name="Theme.AppTheme.Widget.Button"
+                    parent="android:style/Widget.Button" >
+                    <item name="android:padding">
+0dp
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif-thin"
+                    </item>
+                    <item name="android:textColor">
+#121212
+                    </item>
+                    <item name="android:textSize">
+@dimen/norm_button_text
+                    </item>
+                </style>
+            </file>
+            <file
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/values/dimens.xml"
+                qualifiers="" >
+                <dimen name="norm_button_text" >40sp
+                </dimen>
+                <dimen name="panel_height" >200dp
+                </dimen>
+                <dimen name="adv_button_text" >20sp
+                </dimen>
+                <dimen name="adv_button_padding" >0dp
+                </dimen>
+            </file>
+            <file
+                name="menu"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/menu/menu.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                name="simple_pad"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-port/simple_pad.xml"
+                qualifiers="port"
+                type="layout" />
+            <file
+                name="matrix_cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-port/matrix_cling.xml"
+                qualifiers="port"
+                type="layout" />
+            <file
+                name="simple_cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-port/simple_cling.xml"
+                qualifiers="port"
+                type="layout" />
+            <file
+                name="matrix_pad"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-port/matrix_pad.xml"
+                qualifiers="port"
+                type="layout" />
+            <file
+                name="graph_cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-port/graph_cling.xml"
+                qualifiers="port"
+                type="layout" />
+            <file
+                name="hex_pad"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-port/hex_pad.xml"
+                qualifiers="port"
+                type="layout" />
+            <file
+                name="graph_pad"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-port/graph_pad.xml"
+                qualifiers="port"
+                type="layout" />
+            <file
+                name="function_pad"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-port/function_pad.xml"
+                qualifiers="port"
+                type="layout" />
+            <file
+                name="hex_cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-port/hex_cling.xml"
+                qualifiers="port"
+                type="layout" />
+            <file
+                name="advanced_pad"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-port/advanced_pad.xml"
+                qualifiers="port"
+                type="layout" />
+            <file
+                name="main"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-port/main.xml"
+                qualifiers="port"
+                type="layout" />
+            <file
+                name="calculator_widget_info"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/xml/calculator_widget_info.xml"
+                qualifiers=""
+                type="xml" />
+            <file
+                name="calc_clear_symbol"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-sw600dp-xhdpi/calc_clear_symbol.png"
+                qualifiers="sw600dp-xhdpi-v13"
+                type="drawable" />
+            <file
+                name="calculator_input_field"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-sw600dp-xhdpi/calculator_input_field.9.png"
+                qualifiers="sw600dp-xhdpi-v13"
+                type="drawable" />
+            <file
+                name="calc_clear_symbol_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-sw600dp-xhdpi/calc_clear_symbol_light.png"
+                qualifiers="sw600dp-xhdpi-v13"
+                type="drawable" />
+            <file
+                name="egg"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/egg.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="matrix_background"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/matrix_background.9.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="history_divider"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/history_divider.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_plus"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/graph_plus.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="btn_cling_pressed"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/btn_cling_pressed.9.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_standard_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/graph_standard_light.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_menu_overflow"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/ic_menu_overflow.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="egg_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/egg_light.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/cling.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="hand"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/hand.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_minus"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/graph_minus.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_plus_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/graph_plus_light.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_standard"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/graph_standard.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_minus_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/graph_minus_light.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="calculator_input_field"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/calculator_input_field.9.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_menu_overflow_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/ic_menu_overflow_light.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="btn_cling_normal"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/btn_cling_normal.9.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="bg_cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-hdpi/bg_cling.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="simple_pad"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-land/simple_pad.xml"
+                qualifiers="land"
+                type="layout" />
+            <file
+                name="matrix_cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-land/matrix_cling.xml"
+                qualifiers="land"
+                type="layout" />
+            <file
+                name="simple_cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-land/simple_cling.xml"
+                qualifiers="land"
+                type="layout" />
+            <file
+                name="matrix_pad"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-land/matrix_pad.xml"
+                qualifiers="land"
+                type="layout" />
+            <file
+                name="graph_cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-land/graph_cling.xml"
+                qualifiers="land"
+                type="layout" />
+            <file
+                name="hex_pad"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-land/hex_pad.xml"
+                qualifiers="land"
+                type="layout" />
+            <file
+                name="graph_pad"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-land/graph_pad.xml"
+                qualifiers="land"
+                type="layout" />
+            <file
+                name="function_pad"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-land/function_pad.xml"
+                qualifiers="land"
+                type="layout" />
+            <file
+                name="hex_cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-land/hex_cling.xml"
+                qualifiers="land"
+                type="layout" />
+            <file
+                name="advanced_pad"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-land/advanced_pad.xml"
+                qualifiers="land"
+                type="layout" />
+            <file
+                name="main"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout-land/main.xml"
+                qualifiers="land"
+                type="layout" />
+            <file
+                name="calc_clear_symbol"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-sw600dp-hdpi/calc_clear_symbol.png"
+                qualifiers="sw600dp-hdpi-v13"
+                type="drawable" />
+            <file
+                name="calculator_input_field"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-sw600dp-hdpi/calculator_input_field.9.png"
+                qualifiers="sw600dp-hdpi-v13"
+                type="drawable" />
+            <file
+                name="calc_clear_symbol_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-sw600dp-hdpi/calc_clear_symbol_light.png"
+                qualifiers="sw600dp-hdpi-v13"
+                type="drawable" />
+            <file
+                name="preferences"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout/preferences.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="widget"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout/widget.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="widget_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout/widget_light.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="history_panel"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout/history_panel.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="history_entry"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/layout/history_entry.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_close_exit"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/anim/activity_close_exit.xml"
+                qualifiers=""
+                type="anim" />
+            <file
+                name="activity_close_enter"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/anim/activity_close_enter.xml"
+                qualifiers=""
+                type="anim" />
+            <file
+                name="activity_open_exit"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/anim/activity_open_exit.xml"
+                qualifiers=""
+                type="anim" />
+            <file
+                name="activity_open_enter"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/anim/activity_open_enter.xml"
+                qualifiers=""
+                type="anim" />
+            <file
+                name="calc_clear_symbol"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-sw600dp-mdpi/calc_clear_symbol.png"
+                qualifiers="sw600dp-mdpi-v13"
+                type="drawable" />
+            <file
+                name="calculator_input_field"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-sw600dp-mdpi/calculator_input_field.9.png"
+                qualifiers="sw600dp-mdpi-v13"
+                type="drawable" />
+            <file
+                name="calc_clear_symbol_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-sw600dp-mdpi/calc_clear_symbol_light.png"
+                qualifiers="sw600dp-mdpi-v13"
+                type="drawable" />
+            <file
+                name="circle"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/raw/circle.svg"
+                qualifiers=""
+                type="raw" />
+            <file
+                name="egg"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/egg.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="matrix_background"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/matrix_background.9.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="history_divider"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/history_divider.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_plus"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/graph_plus.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="btn_cling_pressed"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/btn_cling_pressed.9.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_standard_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/graph_standard_light.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_menu_overflow"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/ic_menu_overflow.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="egg_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/egg_light.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/cling.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="hand"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/hand.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_minus"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/graph_minus.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_plus_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/graph_plus_light.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_standard"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/graph_standard.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_minus_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/graph_minus_light.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="calculator_input_field"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/calculator_input_field.9.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_menu_overflow_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/ic_menu_overflow_light.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="btn_cling_normal"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/btn_cling_normal.9.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="bg_cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-mdpi/bg_cling.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="egg"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/egg.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="matrix_background"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/matrix_background.9.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_plus"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/graph_plus.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="btn_cling_pressed"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/btn_cling_pressed.9.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_standard_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/graph_standard_light.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_menu_overflow"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/ic_menu_overflow.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="egg_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/egg_light.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/cling.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="hand"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/hand.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_minus"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/graph_minus.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_plus_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/graph_plus_light.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_standard"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/graph_standard.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="graph_minus_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/graph_minus_light.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="calculator_input_field"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/calculator_input_field.9.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_menu_overflow_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/ic_menu_overflow_light.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="btn_cling_normal"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/btn_cling_normal.9.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="bg_cling"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable-xhdpi/bg_cling.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="text_color_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/color/text_color_light.xml"
+                qualifiers=""
+                type="color" />
+            <file
+                name="text_color"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/color/text_color.xml"
+                qualifiers=""
+                type="color" />
+            <file
+                name="btn_del"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_del.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="raw"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/raw.svg"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="ic_action_settings"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/ic_action_settings.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_slider_holo"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_slider_holo.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="ic_action_dummy_dark"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/ic_action_dummy_dark.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_digit_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_digit_light.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="clear_dark"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/clear_dark.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_keyboard_key_light_normal_holo_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_keyboard_key_light_normal_holo_light.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_clear"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_clear.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="menu_bg_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/menu_bg_light.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="menu_bg"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/menu_bg.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_keyboard_key_dark_pressed_holo"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_keyboard_key_dark_pressed_holo.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_digit_adv_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_digit_adv_light.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_transparent"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_transparent.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="raw_dark"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/raw_dark.svg"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_function"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_function.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_keyboard_key_light_normal_holo"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_keyboard_key_light_normal_holo.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_keyboard_key_equal_holo_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_keyboard_key_equal_holo_light.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_digit_adv"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_digit_adv.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_equal_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_equal_light.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="ic_action_history"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/ic_action_history.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="ic_menu_moreoverflow_normal_holo_dark"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/ic_menu_moreoverflow_normal_holo_dark.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="white_button"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/white_button.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="circle_pressed"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/circle_pressed.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_keyboard_key_light_pressed_holo"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_keyboard_key_light_pressed_holo.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_function_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_function_light.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="backspace"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/backspace.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="ic_action_dummy"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/ic_action_dummy.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_slider_holo_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_slider_holo_light.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_action_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_action_light.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_keyboard_key_light_pressed_holo_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_keyboard_key_light_pressed_holo_light.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="ic_launcher_calculator"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/ic_launcher_calculator.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_digit"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_digit.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_keyboard_adv_light_normal_holo_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_keyboard_adv_light_normal_holo_light.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="ic_action_backspace"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/ic_action_backspace.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_keyboard_key_dark_normal_holo"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_keyboard_key_dark_normal_holo.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_action"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_action.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="backspace_dark"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/backspace_dark.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="ic_launcher_calculator_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/ic_launcher_calculator_light.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="cling_button_bg"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/cling_button_bg.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="circle"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/circle.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_keyboard_key_dark_selected_holo"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_keyboard_key_dark_selected_holo.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_transparent2"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_transparent2.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="ic_action_keyboard"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/ic_action_keyboard.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="circle_dark"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/circle_dark.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_keyboard_key_light_disabled_holo"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_keyboard_key_light_disabled_holo.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_keyboard_key_dark_normal_holo_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_keyboard_key_dark_normal_holo_light.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="ic_action_remove"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/ic_action_remove.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_keyboard_adv_normal_holo_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_keyboard_adv_normal_holo_light.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="clear"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/clear.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_slider_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_slider_light.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="btn_keyboard_key_dark_pressed_holo_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/drawable/btn_keyboard_key_dark_pressed_holo_light.9.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="ic_launcher_calculator"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/mipmap-xhdpi/ic_launcher_calculator.png"
+                qualifiers="xhdpi-v4"
+                type="mipmap" />
+            <file
+                name="ic_launcher_calculator_light"
+                path="/home/paolo/studio/Numix Calculator1/app/src/main/res/mipmap-xhdpi/ic_launcher_calculator_light.png"
+                qualifiers="xhdpi-v4"
+                type="mipmap" />
+        </source>
+        <source path="/home/paolo/studio/Numix Calculator1/app/build/generated/res/rs/debug" />
+        <source path="/home/paolo/studio/Numix Calculator1/app/build/generated/res/generated/debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/home/paolo/studio/Numix Calculator1/app/src/debug/res" />
+    </dataSet>
+
+</merger>
