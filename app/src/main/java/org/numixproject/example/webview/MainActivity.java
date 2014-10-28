@@ -13,7 +13,9 @@ import static android.webkit.WebSettings.LOAD_DEFAULT;
 
 public class MainActivity extends Activity {
 
-    // Start page: save your local index in /src/main/assets/www/index.html
+    // Add your HTML, JavaScript and CSS files under /src/main/assets/www/
+    // If you want to use a remote URL, change the value of INDEX
+    // You also need to add internet permissions in the manifest file
     private final String INDEX = "file:///android_asset/www/index.html";
 
     private WebView webView;
@@ -34,7 +36,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set webview options
         setContentView(R.layout.main);
 
         webView = (WebView) findViewById(R.id.webview);
@@ -43,14 +44,12 @@ public class MainActivity extends Activity {
 
         String appCachePath = getApplicationContext().getCacheDir().getAbsolutePath();
 
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-        webSettings.setSupportZoom(false);
-        webSettings.setSaveFormData(true);
-        webSettings.setDomStorageEnabled(true);
-        webSettings.setAppCacheEnabled(true);
-        webSettings.setAppCachePath(appCachePath);
-        webSettings.setAllowFileAccess(true);
+        webSettings.setJavaScriptEnabled(true); // Enable JavaScript
+        webSettings.setSupportZoom(false); // Disable Zoom buttons
+        webSettings.setDomStorageEnabled(true); // Enable localStorage
+        webSettings.setAppCacheEnabled(true); // Enable appCache
+        webSettings.setAppCachePath(appCachePath); // Set appCache path (needed)
+        webSettings.setAllowFileAccess(true); // Enable import from file URLs
         webSettings.setCacheMode(LOAD_DEFAULT);
 
         webView.setWebViewClient(new webViewClient());
@@ -60,8 +59,8 @@ public class MainActivity extends Activity {
             WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG);
         }
 
-        // Start webview
-            webView.loadUrl(INDEX);
+        // Load the web page
+        webView.loadUrl(INDEX);
     }
 
     private class webViewClient extends WebViewClient {
