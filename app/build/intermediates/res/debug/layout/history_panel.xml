@@ -3,4 +3,4 @@
     android:layout_height="match_parent"
     style="?background_style"
     android:id="@+id/history" />
-<!-- From: file:/home/paolo/studio/Numix%20Calculator1/app/src/main/res/layout/history_panel.xml -->
+<!-- From: file:/home/paolo/Development/com.numix.calculator.pro/app/src/main/res/layout/history_panel.xml -->

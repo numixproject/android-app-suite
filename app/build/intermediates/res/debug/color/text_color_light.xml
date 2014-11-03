@@ -19,4 +19,4 @@
     <item android:state_pressed="true" android:color="@color/button_pressed_text_light" />
     <item android:color="@color/button_text_light" />
 </selector>
-<!-- From: file:/home/paolo/studio/Numix%20Calculator1/app/src/main/res/color/text_color_light.xml -->
+<!-- From: file:/home/paolo/Development/com.numix.calculator.pro/app/src/main/res/color/text_color_light.xml -->

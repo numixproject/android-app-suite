@@ -24,9 +24,12 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
+import com.numix.calculator_pro.Calculator;
 import com.numix.calculator_pro.Calculator.LargePanel;
 import com.numix.calculator_pro.Calculator.Panel;
 import com.numix.calculator_pro.Calculator.SmallPanel;
+import com.numix.calculator_pro.CalculatorSettings;
+import com.numix.calculator_pro.R;
 import com.numix.calculator_pro.view.CalculatorDisplay;
 import com.numix.calculator_pro.view.CalculatorViewPager;
 import com.numix.calculator_pro.view.Cling;

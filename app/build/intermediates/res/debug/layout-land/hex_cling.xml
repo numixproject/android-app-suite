@@ -44,4 +44,4 @@
         android:layout_gravity="bottom|right"
         android:onClick="dismissHexCling" />
 </com.numix.calculator_pro.view.Cling>
-<!-- From: file:/home/paolo/studio/Numix%20Calculator1/app/src/main/res/layout-land/hex_cling.xml -->
+<!-- From: file:/home/paolo/Development/com.numix.calculator.pro/app/src/main/res/layout-land/hex_cling.xml -->

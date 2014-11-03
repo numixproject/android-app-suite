@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <PreferenceCategory
         android:title="@string/pref_panels" >
-        <CheckBoxPreference
+        <SwitchPreference
             android:title="@string/graph"
             android:key="GRAPH"
             android:defaultValue="@bool/GRAPH" />
@@ -10,19 +10,19 @@
             android:title="@string/function"
             android:key="FUNCTION"
             android:defaultValue="@bool/FUNCTION" /> -->
-        <CheckBoxPreference
+        <SwitchPreference
             android:title="@string/hexPanel"
             android:key="HEX"
             android:defaultValue="@bool/HEX" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:title="@string/basic"
             android:key="BASIC"
             android:defaultValue="@bool/BASIC" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:title="@string/advanced"
             android:key="ADVANCED"
             android:defaultValue="@bool/ADVANCED" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:title="@string/matrix"
             android:key="MATRIX"
             android:defaultValue="@bool/MATRIX" />
@@ -38,14 +38,14 @@
             android:key="CLICK_TO_OPEN_HISTORY"
             android:defaultValue="@bool/CLICK_TO_OPEN_HISTORY" />
         <CheckBoxPreference
-            android:title="@string/digitGrouping"
+            android:title="Group digits"
             android:key="DIGIT_GROUPING"
             android:defaultValue="false" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/pref_units" >
-        <SwitchPreference
-            android:title="@string/trigUnits"
+        <CheckBoxPreference
+            android:title="Use radiants instead of degrees"
             android:key="USE_RADIANS"
             android:switchTextOn="@string/radians"
             android:switchTextOff="@string/degrees"
@@ -54,7 +54,7 @@
     <PreferenceCategory
         android:title="@string/pref_theme" >
         <SwitchPreference
-            android:title="Numix"
+            android:title="Light Theme"
             android:key="THEME_STYLE"
             android:switchTextOn="@string/holo_light"
             android:switchTextOff="@string/holo_dark"

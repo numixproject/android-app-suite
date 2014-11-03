@@ -43,4 +43,4 @@
         android:showAsAction="ifRoom|withText"
         android:title="@string/graph"/>
 </menu>
-<!-- From: file:/home/paolo/studio/Numix%20Calculator1/app/src/main/res/menu/menu.xml -->
+<!-- From: file:/home/paolo/Development/com.numix.calculator.pro/app/src/main/res/menu/menu.xml -->

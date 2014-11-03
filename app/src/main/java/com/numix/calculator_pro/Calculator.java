@@ -21,6 +21,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.ActivityOptions;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -114,6 +115,7 @@ public class Calculator extends Activity implements Logic.Listener, OnClickListe
         }
     }
 
+    int currentapiVersion = android.os.Build.VERSION.SDK_INT;
     private static final String STATE_CURRENT_VIEW = "state-current-view";
     private static final String STATE_CURRENT_VIEW_SMALL = "state-current-view-small";
     private static final String STATE_CURRENT_VIEW_LARGE = "state-current-view-large";
@@ -326,7 +328,12 @@ public class Calculator extends Activity implements Logic.Listener, OnClickListe
     public void onClickListenerSettings(View v) {
         Intent preferencesintent = (Intent) new Intent(this,
                 Preferences.class);
-        startActivity(preferencesintent);
+        if (currentapiVersion >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            startActivity(preferencesintent,
+                    ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        } else{
+            startActivity(preferencesintent);
+        }
     }
 
     public void onClickListenerHistory(View v) {

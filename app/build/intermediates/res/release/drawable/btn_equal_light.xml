@@ -22,4 +22,4 @@
     <item android:state_selected="true" android:drawable="@drawable/btn_keyboard_key_dark_pressed_holo_light" />
     <item android:state_pressed="true" android:drawable="@drawable/circle_pressed" />
 </selector>
-<!-- From: file:/home/paolo/studio/Numix%20Calculator1/app/src/main/res/drawable/btn_equal_light.xml -->
+<!-- From: file:/home/paolo/Development/com.numix.calculator.pro/app/src/main/res/drawable/btn_equal_light.xml -->

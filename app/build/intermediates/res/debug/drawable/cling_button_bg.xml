@@ -18,4 +18,4 @@
     <item android:state_pressed="true" android:drawable="@drawable/btn_cling_pressed" />
     <item android:drawable="@drawable/btn_cling_normal" />
 </selector>
-<!-- From: file:/home/paolo/studio/Numix%20Calculator1/app/src/main/res/drawable/cling_button_bg.xml -->
+<!-- From: file:/home/paolo/Development/com.numix.calculator.pro/app/src/main/res/drawable/cling_button_bg.xml -->

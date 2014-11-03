@@ -241,7 +241,7 @@
     <style name="Theme.Calculator.ButtonStyle.Equal" >
         <item name="android:background">@drawable/btn_equal_light</item>
         <item name="android:textColor">@color/text_color</item>
-        <item name="android:src">@drawable/circle_dark</item>
+        <item name="android:src">@drawable/circle</item>
     </style>
 
     <style name="Theme.Calculator.ButtonStyle.Light.Action" >

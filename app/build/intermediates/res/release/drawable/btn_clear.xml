@@ -5,4 +5,4 @@
     <item android:state_selected="true" android:drawable="@drawable/btn_keyboard_key_light_pressed_holo" />
     <item android:state_pressed="true" android:drawable="@drawable/btn_keyboard_key_light_pressed_holo" />
     <item android:drawable="@drawable/clear" />
-</selector><!-- From: file:/home/paolo/studio/Numix%20Calculator1/app/src/main/res/drawable/btn_clear.xml -->
+</selector><!-- From: file:/home/paolo/Development/com.numix.calculator.pro/app/src/main/res/drawable/btn_clear.xml -->

@@ -5,4 +5,4 @@
     <item android:state_selected="true" android:drawable="@color/transparent" />
     <item android:state_pressed="true" android:drawable="@color/transparent" />
     <item android:drawable="@drawable/backspace" />
-</selector><!-- From: file:/home/paolo/studio/Numix%20Calculator1/app/src/main/res/drawable/btn_transparent.xml -->
+</selector><!-- From: file:/home/paolo/Development/com.numix.calculator.pro/app/src/main/res/drawable/btn_transparent.xml -->

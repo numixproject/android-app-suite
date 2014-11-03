@@ -15,4 +15,4 @@
             android:fillBefore="false" android:fillAfter="false"
             android:duration="@android:integer/config_shortAnimTime"/>
 </set>
-<!-- From: file:/home/paolo/studio/Numix%20Calculator1/app/src/main/res/anim/activity_open_enter.xml -->
+<!-- From: file:/home/paolo/Development/com.numix.calculator.pro/app/src/main/res/anim/activity_open_enter.xml -->

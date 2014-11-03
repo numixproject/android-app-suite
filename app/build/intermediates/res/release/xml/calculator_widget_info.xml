@@ -5,4 +5,4 @@
     android:initialKeyguardLayout="@layout/widget"
     android:updatePeriodMillis="0"
     android:widgetCategory="home_screen|keyguard"
-    android:resizeMode="vertical" /><!-- From: file:/home/paolo/studio/Numix%20Calculator1/app/src/main/res/xml/calculator_widget_info.xml -->
+    android:resizeMode="vertical" /><!-- From: file:/home/paolo/Development/com.numix.calculator.pro/app/src/main/res/xml/calculator_widget_info.xml -->

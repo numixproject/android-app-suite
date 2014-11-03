@@ -20,4 +20,4 @@
     <item android:state_pressed="true" android:drawable="@color/dark_selected" />
     <item android:drawable="@drawable/btn_keyboard_key_dark_normal_holo" />
 </selector>
-<!-- From: file:/home/paolo/studio/Numix%20Calculator1/app/src/main/res/drawable/btn_digit.xml -->
+<!-- From: file:/home/paolo/Development/com.numix.calculator.pro/app/src/main/res/drawable/btn_digit.xml -->

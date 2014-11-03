@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Numix Calculator1.iml" filepath="$PROJECT_DIR$/Numix Calculator1.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.numix.calculator.pro.iml" filepath="$PROJECT_DIR$/com.numix.calculator.pro.iml" />
     </modules>
   </component>
 </project>
