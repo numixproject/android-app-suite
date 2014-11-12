@@ -153,7 +153,8 @@
     </style>
 
     <style name="Theme.Calculator.ButtonStyle.Digit" >
-       <item name="android:background">@drawable/btn_digit</item>
+       <item name="android:background">@drawable/btn_digit_light</item>
+        <item name="android:textColor">#222222</item>
         <item name="android:fontFamily">sans-serif-thin"</item>
     </style>
 

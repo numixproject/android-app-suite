@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="#e84e40"
     android:layout_width="match_parent"
     android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="100">
     <LinearLayout
         android:layout_width="match_parent"
         android:minHeight="60dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2">
         <TextView
             android:id="@+id/display"
             android:layout_width="match_parent"
@@ -26,24 +34,42 @@
             android:gravity="right|center_vertical"
             android:visibility="gone"
             style="@style/Theme.Calculator.Display" />
-        <Button
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="8">
+        <ImageButton
             android:id="@+id/delete"
             android:text="@string/del"
+            android:src="@drawable/backspace_light"
+            android:background="#e84e40"
+            android:scaleType="centerInside"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:textSize="20sp"
-            style="@style/Theme.Calculator.ButtonStyle" />
-        <Button
+            style="@style/Theme.Calculator.ButtonStyle.Digit" />
+        <ImageButton
             android:id="@+id/clear"
             android:text="@string/clear"
+            android:src="@drawable/clear"
+            android:background="#e84e40"
+            android:scaleType="centerInside"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:textSize="20sp"
             android:visibility="gone"
-            style="@style/Theme.Calculator.ButtonStyle" />
+            style="@style/Theme.Calculator.ButtonStyle.Digit" />
+        </RelativeLayout>
     </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:background="#ffffff"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="40">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -79,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/Theme.Calculator.ButtonStyle" />
+                style="@style/Theme.Calculator.ButtonStyle.Digit" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -112,7 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/Theme.Calculator.ButtonStyle" />
+                style="@style/Theme.Calculator.ButtonStyle.Digit" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -145,7 +171,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/Theme.Calculator.ButtonStyle" />
+                style="@style/Theme.Calculator.ButtonStyle.Digit" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -171,14 +197,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/Theme.Calculator.ButtonStyle" />
+                style="@style/Theme.Calculator.ButtonStyle.Digit" />
             <Button
                 android:id="@+id/plus"
                 android:text="@string/plus"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/Theme.Calculator.ButtonStyle" />
+                style="@style/Theme.Calculator.ButtonStyle.Digit" />
         </LinearLayout>
     </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>
