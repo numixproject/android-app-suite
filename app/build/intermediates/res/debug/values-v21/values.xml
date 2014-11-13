@@ -103,7 +103,7 @@
             @transition/change_image_transform</item>
         <item name="android:windowSharedElementExitTransition">
             @transition/change_image_transform</item>
-        <item name="android:colorPrimaryDark">#E51C23</item>
+        <item name="android:colorPrimaryDark">#F44336</item>
         <item name="android:navigationBarColor">#222222</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="background_style">@style/Theme.Calculator.Background</item>
@@ -268,6 +268,7 @@
 
     </style>
     <style name="Theme.Calculator.ButtonStyle.Light.Digit">
+        <item name="android:textColor">#222222</item>
         <item name="android:background">@drawable/btn_digit_light</item>
         <item name="android:fontFamily">sans-serif-thin"</item>
     </style>
@@ -342,7 +343,7 @@
         <item name="android:windowSharedElementExitTransition">
             @transition/change_image_transform</item>
         <item name="android:navigationBarColor">#333333</item>
-        <item name="android:colorPrimaryDark">@color/graph_color</item>
+        <item name="android:colorPrimaryDark">#e84e40</item>
         <item name="android:windowBackground">@color/background_light</item>
         <item name="background_style">@style/Theme.Calculator.Background.Light</item>
         <item name="button_style">@style/Theme.Calculator.ButtonStyle.Light</item>
