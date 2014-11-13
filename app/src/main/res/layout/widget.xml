@@ -53,7 +53,7 @@
         <ImageButton
             android:id="@+id/clear"
             android:text="@string/clear"
-            android:src="@drawable/clear"
+            android:src="@drawable/clear_light"
             android:background="#e84e40"
             android:scaleType="centerInside"
             android:layout_width="match_parent"

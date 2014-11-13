@@ -36,7 +36,7 @@
     <color name="background_light">#FFFFFF</color>
     <color name="button_pressed">#e5e5e5</color>
     <color name="almost_tra">#22ffffff</color>
-    <color name="graph_color">#d64937</color>
+    <color name="graph_color">#e84e40</color>
     <color name="action_pressed">#bf3827</color>
     <color name="transparent">#00ffffff</color>
 </resources>
