@@ -37,6 +37,7 @@
         android:id="@+id/card_view"
         android:layout_width="fill_parent"
         android:layout_weight="1"
+        android:elevation="1dp"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="3dp">
 
@@ -44,7 +45,6 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:id="@+id/iconLight"
-        android:layout_below="@id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"/>
 
