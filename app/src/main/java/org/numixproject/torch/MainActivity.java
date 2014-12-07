@@ -95,6 +95,8 @@ public class MainActivity extends Activity {
             return;
         } else
             camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        cam.setParameters(camParams);
+        cam.startPreview();
     }
 
     private void turnOff(View v) {
@@ -105,9 +107,8 @@ public class MainActivity extends Activity {
         }
         else {
             camParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-
             cam.setParameters(camParams);
-            cam.startPreview();
+            cam.stopPreview();
         }
     }
 
