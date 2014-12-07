@@ -16,9 +16,22 @@
   ~  *****************************************************************************
   -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.numixproject.torch.MainActivity"
-    tools:ignore="MergeRootFrame" />
+    tools:ignore="MergeRootFrame">
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:src="@drawable/fab"
+        fab:fab_type="normal"
+        fab:fab_colorNormal="#FFEB3B"
+        fab:fab_colorPressed="#FDD835"
+        fab:fab_colorRipple="#FDD835" />
+</FrameLayout>

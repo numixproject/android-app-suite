@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 
 import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 
 /*
@@ -45,6 +44,7 @@ public class MainActivity extends Activity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
     }
 
         /**
@@ -62,7 +62,8 @@ public class MainActivity extends Activity {
         public PlaceholderFragment() {
          }
 
-        @Override
+
+            @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
             try {
@@ -101,7 +102,6 @@ public class MainActivity extends Activity {
                     turnOnOff(isChecked);
                 }
             });
-
 
             // Seekbar
             SeekBar skBar = (SeekBar) rootView.findViewById(R.id.seekBar);

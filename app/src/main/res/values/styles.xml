@@ -2,7 +2,9 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Material">
-        <!-- Customize your theme here. -->
+        <item name="android:colorPrimaryDark">#0097A7</item>
+        <item name="android:colorPrimary">#00BAD2</item>
+        <item name="android:textColorPrimary">#ffffff</item>
     </style>
 
     <style name="textBig" parent="@android:style/TextAppearance.Large">
