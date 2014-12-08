@@ -24,6 +24,13 @@
     android:background="#EEEEEE"
     tools:context="org.numixproject.torch.MainActivity">
 
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:visibility="visible"
+        android:layout_height="fill_parent">
+
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -100,5 +107,18 @@
         fab:fab_colorNormal="#FFEB3B"
         fab:fab_colorPressed="#FDD835"
         fab:fab_colorRipple="#FDD835" />
+    </FrameLayout>
+    </RelativeLayout>
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="invisible"
+        android:id="@+id/home_view">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#FFEB3B">
+
+        </LinearLayout>
     </FrameLayout>
 </RelativeLayout>

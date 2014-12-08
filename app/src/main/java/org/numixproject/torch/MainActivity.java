@@ -1,5 +1,6 @@
 package org.numixproject.torch;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 
@@ -86,6 +88,7 @@ public class MainActivity extends Activity {
 
 
     public void turnOn(View v) {
+        View homeView = findViewById(R.id.home_view);
 
         if (freq != 0) {
             sr = new StroboRunner();
@@ -97,6 +100,23 @@ public class MainActivity extends Activity {
             camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
         cam.setParameters(camParams);
         cam.startPreview();
+
+        // Reveal Animation
+        // get the center for the clipping circle
+        int cx = (homeView.getLeft() + homeView.getRight()) / 2;
+        int cy = (homeView.getTop() + homeView.getBottom()) / 2;
+
+// get the final radius for the clipping circle
+        int finalRadius = Math.max(homeView.getWidth(), homeView.getHeight());
+
+// create the animator for this view (the start radius is zero)
+        Animator anim =
+                ViewAnimationUtils.createCircularReveal(homeView, cx, cy, 0, finalRadius);
+
+// make the view visible and start the animation
+        homeView.setVisibility(View.VISIBLE);
+        anim.start();
+
     }
 
     private void turnOff(View v) {

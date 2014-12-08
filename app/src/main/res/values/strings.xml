@@ -6,9 +6,11 @@
     <string name="torchon">Turn on/off the torch</string>
     <string name="freq">Strobo frequency</string>
     <string name="share_msg">There is a new weather app in the play store. Look here </string>
-
     <string name="dlg_donate_msg">If you like my work and want to support me, please donate a beer to me</string>
     <string name="dlg_donate_ok">Donate!</string>
     <string name="dlg_donate_cancel">Cancel</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>
