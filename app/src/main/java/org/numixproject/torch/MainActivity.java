@@ -1,6 +1,7 @@
 package org.numixproject.torch;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -12,11 +13,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -87,24 +90,14 @@ public class MainActivity extends Activity {
     private boolean isChecked = false;
 
 
-    public void turnOn(View v) {
+    public void startAnimation() {
         View homeView = findViewById(R.id.home_view);
-
-        if (freq != 0) {
-            sr = new StroboRunner();
-            sr.freq = freq;
-            t = new Thread(sr);
-            t.start();
-            return;
-        } else
-            camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        cam.setParameters(camParams);
-        cam.startPreview();
+        View fab = findViewById(R.id.fab);
 
         // Reveal Animation
         // get the center for the clipping circle
-        int cx = (homeView.getLeft() + homeView.getRight()) / 2;
-        int cy = (homeView.getTop() + homeView.getBottom()) / 2;
+        int cx = (fab.getLeft() + homeView.getRight()) / 2;
+        int cy = (fab.getTop() + homeView.getBottom()) / 2;
 
 // get the final radius for the clipping circle
         int finalRadius = Math.max(homeView.getWidth(), homeView.getHeight());
@@ -116,10 +109,55 @@ public class MainActivity extends Activity {
 // make the view visible and start the animation
         homeView.setVisibility(View.VISIBLE);
         anim.start();
-
     }
 
-    private void turnOff(View v) {
+    public void stopAnimation() {
+        // previously visible view
+        final View homeView = findViewById(R.id.home_view);
+        View fab = findViewById(R.id.fab);
+
+// get the center for the clipping circle
+        int cx = (fab.getLeft() + fab.getRight()) / 2;
+        int cy = (fab.getTop() + fab.getBottom()) / 2;
+
+// get the initial radius for the clipping circle
+        int initialRadius = homeView.getWidth();
+
+// create the animation (the final radius is zero)
+        Animator anim =
+                ViewAnimationUtils.createCircularReveal(homeView, cx, cy, initialRadius, 0);
+
+// make the view invisible when the animation is done
+        anim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                homeView.setVisibility(View.INVISIBLE);
+            }
+        });
+
+// start the animation
+        anim.start();
+    }
+
+
+    public void turnOn(View v) {
+        startAnimation();
+        if (freq != 0) {
+            sr = new StroboRunner();
+            sr.freq = freq;
+            t = new Thread(sr);
+            t.start();
+            startAnimation();
+            return;
+        } else
+        camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        cam.setParameters(camParams);
+        cam.startPreview();
+    }
+
+    public void turnOff(View v) {
+        stopAnimation();
         if (t != null) {
             sr.stopRunning = true;
             t = null;
@@ -130,6 +168,7 @@ public class MainActivity extends Activity {
             cam.setParameters(camParams);
             cam.stopPreview();
         }
+
     }
 
 

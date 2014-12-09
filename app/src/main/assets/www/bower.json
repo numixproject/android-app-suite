@@ -1,0 +1,20 @@
+{
+  "name": "DartEditor",
+  "version": "1.7.2",
+  "homepage": "https://github.com/PaoloRotolo/DartEditor",
+  "authors": [
+    "Paolo Rotolo <paolorotolo@ubuntu.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.1"
+  }
+}

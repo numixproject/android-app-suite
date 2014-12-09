@@ -119,6 +119,12 @@
             android:layout_height="fill_parent"
             android:background="#FFEB3B">
 
+            <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#00000000"
+                android:onClick="turnOff"
+                android:src="@drawable/torch"/>
         </LinearLayout>
     </FrameLayout>
 </RelativeLayout>
