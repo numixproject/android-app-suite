@@ -115,6 +115,7 @@
         android:visibility="invisible"
         android:id="@+id/home_view">
         <LinearLayout
+            android:id="@+id/activeLayout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="#FFEB3B">

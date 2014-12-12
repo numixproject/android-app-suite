@@ -2,6 +2,8 @@ package org.numixproject.torch;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -21,10 +23,15 @@ import android.view.View.OnClickListener;
 
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 /*
@@ -88,6 +95,10 @@ public class MainActivity extends Activity {
     private StroboRunner sr;
     private Thread t;
     private boolean isChecked = false;
+    int counter = 1;
+    private boolean yellow = true;
+
+
 
 
     public void startAnimation() {
@@ -143,6 +154,7 @@ public class MainActivity extends Activity {
 
     public void turnOn(View v) {
         startAnimation();
+        backgroundGrey();
         if (freq != 0) {
             sr = new StroboRunner();
             sr.freq = freq;
@@ -158,7 +170,9 @@ public class MainActivity extends Activity {
 
     public void turnOff(View v) {
         stopAnimation();
-        if (t != null) {
+        backgroundYellow();
+        final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout);
+        activeLayout.setBackgroundColor(0xFFFFEB3B);        if (t != null) {
             sr.stopRunning = true;
             t = null;
             return ;
@@ -168,8 +182,27 @@ public class MainActivity extends Activity {
             cam.setParameters(camParams);
             cam.stopPreview();
         }
-
     }
+
+    private static final ScheduledExecutorService worker =
+            Executors.newSingleThreadScheduledExecutor();
+
+    /*Start here*/
+    private void backgroundGrey() {
+        final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout);
+        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFFFFEB3B,0xFF333333 ).setDuration(1500);
+        animator.setEvaluator(new ArgbEvaluator());
+        animator.start();
+    }
+
+    private void backgroundYellow() {
+        final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout);
+        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFF333333,0xFFFFEB3B ).setDuration(300);
+        animator.setEvaluator(new ArgbEvaluator());
+        animator.start();
+    }
+
+
 
 
     private class StroboRunner implements Runnable {
