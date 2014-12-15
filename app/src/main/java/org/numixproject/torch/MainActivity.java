@@ -242,6 +242,9 @@ public class MainActivity extends Activity {
         stopAnimationDemand();
     }
 
+    public void manageOnDemand(View v) {
+    }
+
 
     public void turnOff(View v) {
 
