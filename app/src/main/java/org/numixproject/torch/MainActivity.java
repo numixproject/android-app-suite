@@ -21,10 +21,12 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
@@ -152,9 +154,18 @@ public class MainActivity extends Activity {
     }
 
 
+    Switch activeOnTouch = (Switch) findViewById(R.id.activeOnTouch);
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                boolean onDemand = true;
+            } else {
+                boolean onDemand = false;
+            }
+        };
+
+
     public void turnOn(View v) {
         startAnimation();
-        backgroundGrey();
         if (freq != 0) {
             sr = new StroboRunner();
             sr.freq = freq;
@@ -163,14 +174,15 @@ public class MainActivity extends Activity {
             startAnimation();
             return;
         } else
-        camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
         cam.setParameters(camParams);
         cam.startPreview();
     }
 
+
     public void turnOff(View v) {
+
         stopAnimation();
-        backgroundYellow();
         final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout);
         activeLayout.setBackgroundColor(0xFFFFEB3B);        if (t != null) {
             sr.stopRunning = true;
