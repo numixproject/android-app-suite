@@ -105,12 +105,12 @@ public class MainActivity extends Activity {
 
     public void startAnimation() {
         View homeView = findViewById(R.id.home_view);
-        View fab = findViewById(R.id.fab);
+        View fab = findViewById(R.id.notView);
 
         // Reveal Animation
         // get the center for the clipping circle
-        int cx = (fab.getLeft() + homeView.getRight()) / 2;
-        int cy = (fab.getTop() + homeView.getBottom()) / 2;
+        int cx = (fab.getLeft() + fab.getRight()) / 2;
+        int cy = (fab.getTop() + fab.getBottom()) / 2;
 
 // get the final radius for the clipping circle
         int finalRadius = Math.max(homeView.getWidth(), homeView.getHeight());
@@ -126,12 +126,12 @@ public class MainActivity extends Activity {
 
     public void startAnimationDemand() {
         View homeView2 = findViewById(R.id.home_view2);
-        View fab = findViewById(R.id.fab);
+        View fab = findViewById(R.id.notView2);
 
         // Reveal Animation
         // get the center for the clipping circle
-        int cx = (fab.getLeft() + homeView2.getRight()) / 2;
-        int cy = (fab.getTop() + homeView2.getBottom()) / 2;
+        int cx = (fab.getLeft() + homeView2.getRight()) /2 ;
+        int cy = (fab.getTop() + homeView2.getBottom()) /2 ;
 
 // get the final radius for the clipping circle
         int finalRadius = Math.max(homeView2.getWidth(), homeView2.getHeight());
@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
     public void stopAnimation() {
         // previously visible view
         final View homeView = findViewById(R.id.home_view);
-        View fab = findViewById(R.id.fab);
+        View fab = findViewById(R.id.notView);
 
 // get the center for the clipping circle
         int cx = (fab.getLeft() + fab.getRight()) / 2;
@@ -177,7 +177,7 @@ public class MainActivity extends Activity {
     public void stopAnimationDemand() {
         // previously visible view
         final View homeView = findViewById(R.id.home_view2);
-        View fab = findViewById(R.id.fab3);
+        View fab = findViewById(R.id.notView3);
 
 // get the center for the clipping circle
         int cx = (fab.getLeft() + fab.getRight()) / 2;

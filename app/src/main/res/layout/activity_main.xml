@@ -98,6 +98,7 @@
         android:layout_height="fill_parent">
 
     <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/notView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
@@ -116,6 +117,7 @@
         android:visibility="invisible">
 
     <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/notView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
@@ -173,6 +175,7 @@
             android:id="@+id/fab3">
 
             <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/notView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
