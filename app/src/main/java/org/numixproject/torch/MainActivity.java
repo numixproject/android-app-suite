@@ -124,6 +124,27 @@ public class MainActivity extends Activity {
         anim.start();
     }
 
+    public void startAnimationDemand() {
+        View homeView2 = findViewById(R.id.home_view2);
+        View fab = findViewById(R.id.fab);
+
+        // Reveal Animation
+        // get the center for the clipping circle
+        int cx = (fab.getLeft() + homeView2.getRight()) / 2;
+        int cy = (fab.getTop() + homeView2.getBottom()) / 2;
+
+// get the final radius for the clipping circle
+        int finalRadius = Math.max(homeView2.getWidth(), homeView2.getHeight());
+
+// create the animator for this view (the start radius is zero)
+        Animator anim =
+                ViewAnimationUtils.createCircularReveal(homeView2, cx, cy, 0, finalRadius);
+
+// make the view visible and start the animation
+        homeView2.setVisibility(View.VISIBLE);
+        anim.start();
+    }
+
     public void stopAnimation() {
         // previously visible view
         final View homeView = findViewById(R.id.home_view);
@@ -153,15 +174,49 @@ public class MainActivity extends Activity {
         anim.start();
     }
 
+    public void stopAnimationDemand() {
+        // previously visible view
+        final View homeView = findViewById(R.id.home_view2);
+        View fab = findViewById(R.id.fab3);
 
-    Switch activeOnTouch = (Switch) findViewById(R.id.activeOnTouch);
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
-                boolean onDemand = true;
-            } else {
-                boolean onDemand = false;
+// get the center for the clipping circle
+        int cx = (fab.getLeft() + fab.getRight()) / 2;
+        int cy = (fab.getTop() + fab.getBottom()) / 2;
+
+// get the initial radius for the clipping circle
+        int initialRadius = homeView.getWidth();
+
+// create the animation (the final radius is zero)
+        Animator anim =
+                ViewAnimationUtils.createCircularReveal(homeView, cx, cy, initialRadius, 0);
+
+// make the view invisible when the animation is done
+        anim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                homeView.setVisibility(View.INVISIBLE);
             }
-        };
+        });
+
+// start the animation
+        anim.start();
+    }
+
+    public void onToggleClicked(View view) {
+        // Is the toggle on?
+        boolean on = ((Switch) view).isChecked();
+        FrameLayout fab2 = (FrameLayout) findViewById(R.id.fab2);
+        FrameLayout fab = (FrameLayout) findViewById(R.id.fab);
+
+        if (on) {
+            fab2.setVisibility(View.VISIBLE);
+            fab.setVisibility(View.INVISIBLE);
+        } else {
+            fab.setVisibility(View.VISIBLE);
+            fab2.setVisibility(View.INVISIBLE);
+        }
+    }
 
 
     public void turnOn(View v) {
@@ -177,6 +232,14 @@ public class MainActivity extends Activity {
             camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
         cam.setParameters(camParams);
         cam.startPreview();
+    }
+
+    public void turnOnDemand(View v) {
+        startAnimationDemand();
+    }
+
+    public void turnOffDemand(View v) {
+        stopAnimationDemand();
     }
 
 

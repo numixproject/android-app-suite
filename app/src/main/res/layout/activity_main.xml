@@ -47,6 +47,7 @@
                 android:id="@+id/activeOnTouch"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
+                android:onClick="onToggleClicked"
                 android:gravity="center_horizontal|center_vertical"
                 android:layout_weight="0.3"
                 />
@@ -93,7 +94,7 @@
 
     <FrameLayout
         android:layout_width="fill_parent"
-        android:id="@+id/fab1"
+        android:id="@+id/fab"
         android:layout_height="fill_parent">
 
     <com.melnykov.fab.FloatingActionButton
@@ -120,11 +121,11 @@
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             android:src="@drawable/fab"
-            android:onClick="turnOn"
+            android:onClick="turnOnDemand"
             fab:fab_type="normal"
-            fab:fab_colorNormal="#222222"
-            fab:fab_colorPressed="#111111"
-            fab:fab_colorRipple="#111111" />
+            fab:fab_colorNormal="#444444"
+            fab:fab_colorPressed="#222222"
+            fab:fab_colorRipple="#222222" />
     </FrameLayout>
     </RelativeLayout>
 
@@ -144,8 +145,45 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="#00000000"
-                android:onClick="manageTorch"
+                android:onClick="turnOff"
                 android:src="@drawable/torch"/>
         </LinearLayout>
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="invisible"
+        android:id="@+id/home_view2">
+        <LinearLayout
+            android:id="@+id/activeLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#333333">
+
+            <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#00000000"
+                android:onClick="turnOff"
+                android:src="@drawable/torch"/>
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/fab3">
+
+            <com.melnykov.fab.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="16dp"
+                android:src="@drawable/fab"
+                android:onClick="turnOffDemand"
+                fab:fab_type="normal"
+                fab:fab_colorNormal="#00BAD2"
+                fab:fab_colorPressed="#0097A7"
+                fab:fab_colorRipple="#0097A7" />
+        </FrameLayout>
+
     </FrameLayout>
 </RelativeLayout>
