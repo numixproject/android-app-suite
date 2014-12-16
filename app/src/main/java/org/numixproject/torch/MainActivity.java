@@ -38,21 +38,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 
-/*
- * Copyright (C) 2014 Francesco Azzola - Surviving with Android (http://www.survivingwithandroid.com)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 public class MainActivity extends Activity {
 
 
@@ -72,6 +57,28 @@ public class MainActivity extends Activity {
         catch(Throwable t) {
             t.printStackTrace();
         }
+
+        // Active on press listener
+        final ImageButton onDemandLamp = (ImageButton) findViewById(R.id.onDemandLamp);
+
+        onDemandLamp.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if(event.getAction() == (MotionEvent.ACTION_UP)){
+                    //Turn off the light after press
+                    turnOffTorchDemand();
+                    backgroundGrey();
+                }
+                else{
+                    //Turn on the light during press
+                    backgroundYellow();
+                    turnOnTorchDemand();
+                }
+                return true;
+            }
+        });
 
         // Seekbar
         SeekBar skBar = (SeekBar) findViewById(R.id.seekBar);
@@ -236,17 +243,26 @@ public class MainActivity extends Activity {
         cam.startPreview();
     }
 
+    public void turnOnTorchDemand() {
+        if (freq != 0) {
+            sr = new StroboRunner();
+            sr.freq = freq;
+            t = new Thread(sr);
+            t.start();
+            startAnimation();
+            return;
+        } else
+            camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        cam.setParameters(camParams);
+        cam.startPreview();
+    }
+
     public void turnOnDemand(View v) {
         startAnimationDemand();
     }
 
     public void turnOffDemand(View v) {
         stopAnimationDemand();
-    }
-
-    public void manageOnDemand(View v) {
-        ImageButton onDemandLamp = (ImageButton) findViewById(R.id.onDemandLamp);
-        // find out how to handle while touch event here.
     }
 
     @Override
@@ -275,20 +291,33 @@ public class MainActivity extends Activity {
         }
     }
 
+    public void turnOffTorchDemand() {
+        if (t != null) {
+            sr.stopRunning = true;
+            t = null;
+            return ;
+        }
+        else {
+            camParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+            cam.setParameters(camParams);
+            cam.stopPreview();
+        }
+    }
+
     private static final ScheduledExecutorService worker =
             Executors.newSingleThreadScheduledExecutor();
 
     /*Start here*/
     private void backgroundGrey() {
-        final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout);
-        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFFFFEB3B,0xFF333333 ).setDuration(1500);
+        final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout2);
+        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFFFFEB3B,0xFF333333 ).setDuration(200);
         animator.setEvaluator(new ArgbEvaluator());
         animator.start();
     }
 
     private void backgroundYellow() {
-        final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout);
-        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFF333333,0xFFFFEB3B ).setDuration(300);
+        final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout2);
+        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFF333333,0xFFFFEB3B ).setDuration(200);
         animator.setEvaluator(new ArgbEvaluator());
         animator.start();
     }
