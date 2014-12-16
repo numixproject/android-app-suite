@@ -181,7 +181,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
                 android:layout_margin="16dp"
-                android:src="@drawable/fab"
+                android:src="@drawable/ic_navigation_arrow_back"
                 android:onClick="turnOffDemand"
                 fab:fab_type="normal"
                 fab:fab_colorNormal="#00BAD2"
