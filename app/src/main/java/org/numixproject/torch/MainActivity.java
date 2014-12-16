@@ -10,6 +10,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Camera;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import android.view.View.OnClickListener;
 
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -243,8 +245,19 @@ public class MainActivity extends Activity {
     }
 
     public void manageOnDemand(View v) {
+        ImageButton onDemandLamp = (ImageButton) findViewById(R.id.onDemandLamp);
+        // find out how to handle while touch event here.
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(event.getAction()==MotionEvent.ACTION_DOWN){
+            Log.e("Touching", "Touching the Screen");
+        }
+        else if(event.getAction()==MotionEvent.ACTION_UP){
+            Log.e("Touching up", "Touching the Screen up");}
+        return true;
+    }
 
     public void turnOff(View v) {
 

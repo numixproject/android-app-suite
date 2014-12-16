@@ -163,6 +163,7 @@
             android:background="#333333">
 
             <ImageButton
+                android:id="@+id/onDemandLamp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="#00000000"
