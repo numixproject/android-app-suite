@@ -5,8 +5,15 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -239,6 +246,7 @@ public class MainActivity extends Activity {
 
 
     public void turnOn(View v) {
+        showNotification();
         startAnimation();
         if (freq != 0) {
             sr = new StroboRunner();
@@ -333,8 +341,27 @@ public class MainActivity extends Activity {
         animator.start();
     }
 
+    private void showNotification(){
+        final int MY_NOTIFICATION_ID=1;
+        NotificationManager notificationManager;
+        Notification myNotification;
 
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        myNotification = new Notification(R.drawable.fab, "Notification!", System.currentTimeMillis());
+        Context context = getApplicationContext();
+        String notificationTitle = "Numix Material Torch";
+        String notificationText = "Flashlight on. Tap to disable.";
+        Intent myIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, myIntent, Intent.FILL_IN_ACTION);
+        myNotification.flags |= Notification.FLAG_AUTO_CANCEL;
+        myNotification.setLatestEventInfo(context, notificationTitle, notificationText, pendingIntent);
+        notificationManager.notify(MY_NOTIFICATION_ID, myNotification);
+    }
 
+    protected void onNewIntent(Intent intent) {
+        turnOffTorchDemand();
+        stopAnimation();
+    }
 
     private class StroboRunner implements Runnable {
 
