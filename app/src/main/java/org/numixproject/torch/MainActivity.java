@@ -5,37 +5,19 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
 import android.hardware.Camera;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-
-import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
-import android.widget.Toast;
-
-import com.melnykov.fab.FloatingActionButton;
-
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends Activity {
@@ -279,7 +261,8 @@ public class MainActivity extends Activity {
 
         stopAnimation();
         final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout);
-        activeLayout.setBackgroundColor(0xFFFFEB3B);        if (t != null) {
+        activeLayout.setBackgroundColor(0xFFFFEB3B);
+        if (t != null) {
             sr.stopRunning = true;
             t = null;
             return ;
