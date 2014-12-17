@@ -93,8 +93,8 @@
                 <Switch
                     android:id="@+id/activeStrobo"
                     android:layout_width="wrap_content"
+                    android:onClick="onStroboClicked"
                     android:layout_height="fill_parent"
-                    android:onClick="onToggleClicked"
                     android:gravity="center_horizontal|center_vertical"
                     android:layout_weight="0.3"
                     />
@@ -105,6 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView2"
+                android:visibility="invisible"
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="#444444"
                 android:layout_marginTop="15dp"
@@ -116,6 +117,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/seekBar"
                 android:layout_centerHorizontal="true"
+                android:visibility="invisible"
                 android:onClick="turnOn"
                 android:max="100"/>
             </LinearLayout>

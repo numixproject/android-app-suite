@@ -16,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -199,13 +201,39 @@ public class MainActivity extends Activity {
         boolean on = ((Switch) view).isChecked();
         FrameLayout fab2 = (FrameLayout) findViewById(R.id.fab2);
         FrameLayout fab = (FrameLayout) findViewById(R.id.fab);
+        Switch stroboSwitch = (Switch) findViewById(R.id.activeStrobo);
 
         if (on) {
+            stroboSwitch.setChecked(false);
+            stroboSwitch.setEnabled(false);
             fab2.setVisibility(View.VISIBLE);
             fab.setVisibility(View.INVISIBLE);
         } else {
+            stroboSwitch.setEnabled(true);
             fab.setVisibility(View.VISIBLE);
             fab2.setVisibility(View.INVISIBLE);
+        }
+    }
+
+
+    public void onStroboClicked(View view) {
+        // Is the toggle on?
+        boolean on = ((Switch) view).isChecked();
+        SeekBar bar = (SeekBar) findViewById(R.id.seekBar);
+        Switch stroboSwitch = (Switch) findViewById(R.id.activeOnTouch);
+        TextView stroboText = (TextView) findViewById(R.id.textView2);
+
+        if (on) {
+            stroboSwitch.setChecked(false);
+            stroboSwitch.setEnabled(false);
+            bar.setVisibility(View.VISIBLE);
+            stroboText.setVisibility(View.VISIBLE);
+
+        } else {
+            stroboSwitch.setEnabled(true);
+            bar.setProgress(0);
+            bar.setVisibility(View.INVISIBLE);
+            stroboText.setVisibility(View.INVISIBLE);
         }
     }
 
