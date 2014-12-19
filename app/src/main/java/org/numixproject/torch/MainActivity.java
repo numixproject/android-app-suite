@@ -5,11 +5,15 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -25,12 +29,32 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 
 public class MainActivity extends Activity {
 
+    // Check if flashlight is present on device
+    public boolean hasFlash() {
+        if (cam == null) {
+            return false;
+        }
+
+        Camera.Parameters parameters = cam.getParameters();
+
+        if (parameters.getFlashMode() == null) {
+            return false;
+        }
+
+        List<String> supportedFlashModes = parameters.getSupportedFlashModes();
+        if (supportedFlashModes == null || supportedFlashModes.isEmpty() || supportedFlashModes.size() == 1 && supportedFlashModes.get(0).equals(Camera.Parameters.FLASH_MODE_OFF)) {
+            return false;
+        }
+
+        return true;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +71,13 @@ public class MainActivity extends Activity {
         }
         catch(Throwable t) {
             t.printStackTrace();
+        }
+
+        if (hasFlash()) {
+
+        } else {
+            // Call Dialog here.
+            // System.exit(0);
         }
 
         // Active on press listener
@@ -89,6 +120,7 @@ public class MainActivity extends Activity {
 
         });
         }
+
 
     public Camera cam;
     private Camera.Parameters camParams;
