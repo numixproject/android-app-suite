@@ -22,12 +22,14 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -76,8 +78,41 @@ public class MainActivity extends Activity {
         if (hasFlash()) {
 
         } else {
-            // Call Dialog here.
-            // System.exit(0);
+
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+
+            alertDialog.setCancelable(false);
+
+            // Setting Dialog Title
+            alertDialog.setTitle("Flashlight not availalbe...");
+
+            // Setting Dialog Message
+            alertDialog.setMessage("Your device is not compatible with this app or doesn't have a flashlight. DO YOU WANT TO USE YOUR SCREEN AS A TORCH INSTEAD?");
+
+
+            // Setting Positive "Yes" Button
+            alertDialog.setPositiveButton("Yes, of course", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,int which) {
+                    FrameLayout legacy = (FrameLayout) findViewById(R.id.legacy);
+                    // Write your code here to invoke YES event
+                    Toast.makeText(getApplicationContext(), "You clicked on YES", Toast.LENGTH_SHORT).show();
+                    legacy.setVisibility(View.VISIBLE);
+                    WindowManager.LayoutParams layout = getWindow().getAttributes();
+                    layout.screenBrightness = 1F;
+                    getWindow().setAttributes(layout);
+                }
+            });
+
+            // Setting Negative "NO" Button
+            alertDialog.setNegativeButton("No, thanks", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Write your code here to invoke NO event
+                    System.exit(0);
+                }
+            });
+
+            // Showing Alert Message
+            alertDialog.show();
         }
 
         // Active on press listener
