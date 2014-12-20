@@ -326,7 +326,7 @@ public class MainActivity extends Activity {
     }
 
     public void turnOff(View v) {
-
+        stopNotification();
         stopAnimation();
         final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout);
         activeLayout.setBackgroundColor(0xFFFFEB3B);
@@ -373,7 +373,7 @@ public class MainActivity extends Activity {
         animator.start();
     }
 
-    private void showNotification(){
+    private void showNotification() {
         final int MY_NOTIFICATION_ID=1;
         NotificationManager notificationManager;
         Notification myNotification;
@@ -388,6 +388,11 @@ public class MainActivity extends Activity {
         myNotification.flags |= Notification.FLAG_AUTO_CANCEL;
         myNotification.setLatestEventInfo(context, notificationTitle, notificationText, pendingIntent);
         notificationManager.notify(MY_NOTIFICATION_ID, myNotification);
+    }
+
+    private void stopNotification() {
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.cancel(1);
     }
 
     protected void onNewIntent(Intent intent) {
