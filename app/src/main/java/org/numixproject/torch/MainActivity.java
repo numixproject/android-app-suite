@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
             alertDialog.setCancelable(false);
 
             // Setting Dialog Title
-            alertDialog.setTitle("Flashlight not availalbe...");
+            alertDialog.setTitle("Flashlight not available...");
 
             // Setting Dialog Message
             alertDialog.setMessage("Your device is not compatible with this app or doesn't have a flashlight. DO YOU WANT TO USE YOUR SCREEN AS A TORCH INSTEAD?");
@@ -95,7 +95,6 @@ public class MainActivity extends Activity {
                 public void onClick(DialogInterface dialog,int which) {
                     FrameLayout legacy = (FrameLayout) findViewById(R.id.legacy);
                     // Write your code here to invoke YES event
-                    Toast.makeText(getApplicationContext(), "You clicked on YES", Toast.LENGTH_SHORT).show();
                     legacy.setVisibility(View.VISIBLE);
                     WindowManager.LayoutParams layout = getWindow().getAttributes();
                     layout.screenBrightness = 1F;
