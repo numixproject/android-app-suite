@@ -21,6 +21,9 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -32,6 +35,9 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -40,7 +46,18 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements BillingProcessor.IBillingHandler {
+
+    BillingProcessor bp;
+    public Camera cam;
+    private Camera.Parameters camParams;
+    private boolean hasCam;
+    private int freq;
+    private StroboRunner sr;
+    private Thread t;
+    private boolean isChecked = false;
+    int counter = 1;
+    private boolean yellow = true;
 
     // Check if flashlight is present on device
     public boolean hasFlash() {
@@ -66,6 +83,7 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bp = new BillingProcessor(this, "YOUR LICENSE KEY FROM GOOGLE PLAY CONSOLE HERE", this);
         try {
             //Log.d("TORCH", "Check cam");
             // Get CAM reference
@@ -159,19 +177,25 @@ public class MainActivity extends Activity {
         });
         }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_actions, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-    public Camera cam;
-    private Camera.Parameters camParams;
-    private boolean hasCam;
-    private int freq;
-    private StroboRunner sr;
-    private Thread t;
-    private boolean isChecked = false;
-    int counter = 1;
-    private boolean yellow = true;
-
-
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                bp.purchase(MainActivity.this, "YOUR PRODUCT ID FROM GOOGLE PLAY CONSOLE HERE");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     public void startAnimation() {
         View homeView = findViewById(R.id.home_view);
@@ -478,5 +502,51 @@ public class MainActivity extends Activity {
             mAdView.loadAd(adRequest);
         }
     }
+
+    // IBillingHandler implementation
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!bp.handleActivityResult(requestCode, resultCode, data))
+            super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onBillingInitialized() {
+        /*
+         * Called then BillingProcessor was initialized and its ready to purchase
+         */
+    }
+
+    @Override
+    public void onProductPurchased(String productId, TransactionDetails details) {
+        /*
+         * Called then requested PRODUCT ID was successfully purchased
+         */
+    }
+
+    @Override
+    public void onBillingError(int errorCode, Throwable error) {
+        /*
+         * Called then some error occured. See Constants class for more details
+         */
+    }
+
+    @Override
+    public void onPurchaseHistoryRestored() {
+        /*
+         * Called then purchase history was restored and the list of all owned PRODUCT ID's
+         * was loaded from Google Play
+         */
+    }
+
+    @Override
+    public void onDestroy() {
+        if (bp != null)
+            bp.release();
+
+        super.onDestroy();
+    }
+
 }
 

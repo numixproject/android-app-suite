@@ -8,7 +8,7 @@ android {
         applicationId "org.numixproject.torch"
         minSdkVersion 21
         targetSdkVersion 21
-        versionCode 2
+        versionCode 3
         versionName "1.0"
     }
 
@@ -35,4 +35,5 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.2'
     compile "com.android.support:appcompat-v7:21.0.+"
     compile 'com.google.android.gms:play-services:6.+'
+    compile 'com.anjlab.android.iab.v3:library:1.0.+@aar'
 }
