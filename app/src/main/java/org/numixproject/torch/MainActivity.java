@@ -83,7 +83,7 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bp = new BillingProcessor(this, "YOUR LICENSE KEY FROM GOOGLE PLAY CONSOLE HERE", this);
+        bp = new BillingProcessor(this, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn8CsUgsjvHzwR3bEiF5qcAXNlmjy/IcXILzQCaiHEF6wjkFCQEt8Nb0MfweiNjqTbM9j1kbgRz3dp2ZxMqDKtGkYtEV12txv86k2mf97NuN+HSG0aGjPX9A2QhdvHAVuWXhdhyA8nNbXc25S6H/kV+FXtjN5XHf6opxw3rOdVwUAyv0ARFdX+PYFjQ1GmfPZSlKbpY+9r9nQnIM96SuqCm1+PiwXWN6XG+ymCZrXeehn+rqzD1yPny67m9KSTWo8+FB2ygB6KgbNl/JCHJsn6vsdWgeIF/u1lVB81Z+m5Y7fRsG06aM3+Iq6pXimwqofjxO3WaLFbrU8sOZQIzWTYQIDAQAB", this);
         try {
             //Log.d("TORCH", "Check cam");
             // Get CAM reference
@@ -147,11 +147,11 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
                 if(event.getAction() == (MotionEvent.ACTION_UP)){
                     //Turn off the light after press
                     turnOffTorchDemand();
-                    backgroundGrey();
                 }
-                else{
+                else if(event.getAction() == (MotionEvent.ACTION_MOVE)){
+                    // Do nothing: background is still yellow
+                } else {
                     //Turn on the light during press
-                    backgroundYellow();
                     turnOnTorchDemand();
                 }
                 return true;
@@ -190,7 +190,7 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_settings:
-                bp.purchase(MainActivity.this, "YOUR PRODUCT ID FROM GOOGLE PLAY CONSOLE HERE");
+                bp.purchase(MainActivity.this, "remove_ads");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -367,6 +367,8 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
             camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
         cam.setParameters(camParams);
         cam.startPreview();
+        backgroundYellow();
+
     }
 
     public void turnOnDemand(View v) {
@@ -384,6 +386,8 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
         }
         else if(event.getAction()==MotionEvent.ACTION_UP){
             Log.e("Touching up", "Touching the Screen up");}
+        else if(event.getAction()==MotionEvent.ACTION_MOVE){
+            Log.e("Touching up", "Moving on the Screen");}
         return true;
     }
 
@@ -415,12 +419,12 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
             cam.setParameters(camParams);
             cam.stopPreview();
         }
+        backgroundGrey();
     }
 
     private static final ScheduledExecutorService worker =
             Executors.newSingleThreadScheduledExecutor();
 
-    /*Start here*/
     private void backgroundGrey() {
         final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout2);
         ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFFFFEB3B,0xFF333333 ).setDuration(200);
@@ -431,6 +435,13 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
     private void backgroundYellow() {
         final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout2);
         ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFF333333,0xFFFFEB3B ).setDuration(200);
+        animator.setEvaluator(new ArgbEvaluator());
+        animator.start();
+    }
+
+    private void backgroundYellowFast() {
+        final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout2);
+        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFF333333,0xFFFFEB3B );
         animator.setEvaluator(new ArgbEvaluator());
         animator.start();
     }
@@ -488,6 +499,7 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
         }
     }
     public static class AdFragment extends Fragment {
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
