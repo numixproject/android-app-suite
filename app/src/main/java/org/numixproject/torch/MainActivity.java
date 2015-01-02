@@ -191,7 +191,11 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_activity_actions, menu);
+        if (bp.isPurchased("remove_ads")){
+            inflater.inflate(R.menu.main_activity_actions_no_ads, menu);
+        } else {
+            inflater.inflate(R.menu.main_activity_actions, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
