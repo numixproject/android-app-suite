@@ -82,8 +82,18 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
         bp = new BillingProcessor(this, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn8CsUgsjvHzwR3bEiF5qcAXNlmjy/IcXILzQCaiHEF6wjkFCQEt8Nb0MfweiNjqTbM9j1kbgRz3dp2ZxMqDKtGkYtEV12txv86k2mf97NuN+HSG0aGjPX9A2QhdvHAVuWXhdhyA8nNbXc25S6H/kV+FXtjN5XHf6opxw3rOdVwUAyv0ARFdX+PYFjQ1GmfPZSlKbpY+9r9nQnIM96SuqCm1+PiwXWN6XG+ymCZrXeehn+rqzD1yPny67m9KSTWo8+FB2ygB6KgbNl/JCHJsn6vsdWgeIF/u1lVB81Z+m5Y7fRsG06aM3+Iq6pXimwqofjxO3WaLFbrU8sOZQIzWTYQIDAQAB", this);
+
+        // Restore purchases
+        bp.loadOwnedPurchasesFromGoogle();
+
+        if (bp.isPurchased("remove_ads")){
+            setContentView(R.layout.activity_main_noads);
+        } else {
+            setContentView(R.layout.activity_main);
+        }
+
         try {
             //Log.d("TORCH", "Check cam");
             // Get CAM reference
