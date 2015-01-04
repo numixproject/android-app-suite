@@ -16,6 +16,7 @@ import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
@@ -82,6 +83,7 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         bp = new BillingProcessor(this, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn8CsUgsjvHzwR3bEiF5qcAXNlmjy/IcXILzQCaiHEF6wjkFCQEt8Nb0MfweiNjqTbM9j1kbgRz3dp2ZxMqDKtGkYtEV12txv86k2mf97NuN+HSG0aGjPX9A2QhdvHAVuWXhdhyA8nNbXc25S6H/kV+FXtjN5XHf6opxw3rOdVwUAyv0ARFdX+PYFjQ1GmfPZSlKbpY+9r9nQnIM96SuqCm1+PiwXWN6XG+ymCZrXeehn+rqzD1yPny67m9KSTWo8+FB2ygB6KgbNl/JCHJsn6vsdWgeIF/u1lVB81Z+m5Y7fRsG06aM3+Iq6pXimwqofjxO3WaLFbrU8sOZQIzWTYQIDAQAB", this);
 
@@ -472,7 +474,7 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
         String notificationText = "Flashlight on. Tap to disable.";
         Intent myIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, myIntent, Intent.FILL_IN_ACTION);
-        myNotification.flags |= Notification.FLAG_AUTO_CANCEL;
+        myNotification.flags |= Notification.FLAG_ONGOING_EVENT;
         myNotification.setLatestEventInfo(context, notificationTitle, notificationText, pendingIntent);
         notificationManager.notify(MY_NOTIFICATION_ID, myNotification);
     }
@@ -484,6 +486,7 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
 
     protected void onNewIntent(Intent intent) {
         turnOffTorchDemand();
+        stopNotification();
         stopAnimation();
     }
 
