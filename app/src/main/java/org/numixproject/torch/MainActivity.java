@@ -26,6 +26,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
@@ -42,12 +44,13 @@ import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 
-public class MainActivity extends Activity implements BillingProcessor.IBillingHandler {
+public class MainActivity extends Activity implements SurfaceHolder.Callback, BillingProcessor.IBillingHandler {
 
     BillingProcessor bp;
     public Camera cam;
@@ -59,6 +62,8 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
     private boolean isChecked = false;
     int counter = 1;
     private boolean yellow = true;
+    private SurfaceHolder mHolder ;
+
 
     // Check if flashlight is present on device
     public boolean hasFlash() {
@@ -188,6 +193,14 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
 
         });
         }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        SurfaceView preview = (SurfaceView)findViewById(R.id.PREVIEW);
+        SurfaceHolder mHolder = preview.getHolder();
+        mHolder.addCallback(this);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -422,6 +435,29 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
             cam.setParameters(camParams);
             cam.stopPreview();
         }
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder,int format,int width,int height){
+
+    }
+
+    @Override
+    public void surfaceCreated(SurfaceHolder holder){
+        mHolder = holder;
+        try {
+            Log.i("SurfaceHolder", "setting preview");
+            cam.setPreviewDisplay(mHolder);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder){
+        Log.i("SurfaceHolder", "stopping preview");
+        cam.stopPreview();
+        mHolder = null;
     }
 
     public void turnOffTorchDemand() {

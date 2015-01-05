@@ -7,6 +7,11 @@
     android:background="#EEEEEE"
     tools:context="org.numixproject.torch.MainActivity">
 
+    <SurfaceView
+        android:id="@+id/PREVIEW"
+        android:layout_width="1dp"
+        android:layout_height="1dp"/>
+
 
     <RelativeLayout
         android:layout_width="fill_parent"
