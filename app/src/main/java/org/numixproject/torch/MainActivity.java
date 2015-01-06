@@ -96,7 +96,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
         bp.loadOwnedPurchasesFromGoogle();
 
         if (bp.isPurchased("remove_ads")){
-            setContentView(R.layout.activity_main_noads);
+            setContentView(R.layout.activity_main);
         } else {
             setContentView(R.layout.activity_main);
         }
@@ -424,7 +424,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
         stopNotification();
         stopAnimation();
         final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout);
-        activeLayout.setBackgroundColor(0xFFFFEB3B);
+        activeLayout.setBackgroundColor(0xFFFFC107);
         if (t != null) {
             sr.stopRunning = true;
             t = null;
@@ -434,6 +434,25 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
             camParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
             cam.setParameters(camParams);
             cam.stopPreview();
+        }
+    }
+
+    // SOS
+    public void SOSstart(){
+        String myString = "0101010101";
+        long blinkDelay = 50;
+
+        for (int i = 0; i < myString.length(); i++) {
+            if (myString.charAt(i) == '0') {
+                camParams.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+            } else {
+                camParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+            }
+            try {
+                Thread.sleep(blinkDelay);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -479,21 +498,21 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
 
     private void backgroundGrey() {
         final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout2);
-        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFFFFEB3B,0xFF333333 ).setDuration(200);
+        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFFFFC107,0xFF333333 ).setDuration(200);
         animator.setEvaluator(new ArgbEvaluator());
         animator.start();
     }
 
     private void backgroundYellow() {
         final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout2);
-        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFF333333,0xFFFFEB3B ).setDuration(200);
+        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFF333333,0xFFFFC107 ).setDuration(200);
         animator.setEvaluator(new ArgbEvaluator());
         animator.start();
     }
 
     private void backgroundYellowFast() {
         final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout2);
-        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFF333333,0xFFFFEB3B );
+        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFF333333,0xFFFFC107 );
         animator.setEvaluator(new ArgbEvaluator());
         animator.start();
     }

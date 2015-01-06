@@ -18,7 +18,6 @@
         android:visibility="visible"
         android:layout_height="fill_parent">
 
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -178,9 +177,9 @@
         android:src="@drawable/fab"
         android:onClick="turnOn"
         fab:fab_type="normal"
-        fab:fab_colorNormal="#FFEB3B"
-        fab:fab_colorPressed="#FDD835"
-        fab:fab_colorRipple="#FDD835" />
+        fab:fab_colorNormal="#FFC107"
+        fab:fab_colorPressed="#99FFC107"
+        fab:fab_colorRipple="#90FFC107" />
     </FrameLayout>
     <FrameLayout
         android:layout_width="fill_parent"
@@ -201,6 +200,26 @@
             fab:fab_colorPressed="#222222"
             fab:fab_colorRipple="#222222" />
     </FrameLayout>
+        <!-- SOS -->
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/SOSfab"
+            android:visibility="invisible">
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/SOSView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="16dp"
+                android:src="@drawable/fab"
+                android:onClick="turnOnDemand"
+                fab:fab_type="normal"
+                fab:fab_colorNormal="#c0392b"
+                fab:fab_colorPressed="#99c0392b"
+                fab:fab_colorRipple="#99c0392b" />
+        </FrameLayout>
     </RelativeLayout>
 
 
@@ -213,7 +232,28 @@
             android:id="@+id/activeLayout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="#FFEB3B">
+            android:background="#FFC107">
+
+            <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#00000000"
+                android:onClick="turnOff"
+                android:src="@drawable/torch"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- SOS -->
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="invisible"
+        android:id="@+id/SOS_view">
+        <LinearLayout
+            android:id="@+id/sosLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#c0392b">
 
             <ImageButton
                 android:layout_width="fill_parent"

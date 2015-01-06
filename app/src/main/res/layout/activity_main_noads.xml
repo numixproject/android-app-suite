@@ -157,9 +157,9 @@
         android:src="@drawable/fab"
         android:onClick="turnOn"
         fab:fab_type="normal"
-        fab:fab_colorNormal="#FFEB3B"
-        fab:fab_colorPressed="#FDD835"
-        fab:fab_colorRipple="#FDD835" />
+        fab:fab_colorNormal="#FFC107"
+        fab:fab_colorPressed="#99FFC107"
+        fab:fab_colorRipple="#F0FFC107" />
     </FrameLayout>
     <FrameLayout
         android:layout_width="fill_parent"
@@ -192,7 +192,7 @@
             android:id="@+id/activeLayout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="#FFEB3B">
+            android:background="#FFC107">
 
             <ImageButton
                 android:layout_width="fill_parent"
