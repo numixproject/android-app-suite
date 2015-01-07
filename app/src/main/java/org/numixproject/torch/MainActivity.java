@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -198,7 +199,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
     public void onStart() {
         super.onStart();
         SurfaceView preview = (SurfaceView)findViewById(R.id.PREVIEW);
-        SurfaceHolder mHolder = preview.getHolder();
+        mHolder = preview.getHolder();
         mHolder.addCallback(this);
     }
 
@@ -329,9 +330,12 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
     public void onToggleClicked(View view) {
         // Is the toggle on?
         boolean on = ((Switch) view).isChecked();
+        TextView stroboText = (TextView) findViewById(R.id.textView2);
         FrameLayout fab2 = (FrameLayout) findViewById(R.id.fab2);
         FrameLayout fab = (FrameLayout) findViewById(R.id.fab);
         Switch stroboSwitch = (Switch) findViewById(R.id.activeStrobo);
+        SeekBar bar = (SeekBar) findViewById(R.id.seekBar);
+
 
         if (on) {
             stroboSwitch.setChecked(false);
@@ -342,6 +346,37 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
             stroboSwitch.setEnabled(true);
             fab.setVisibility(View.VISIBLE);
             fab2.setVisibility(View.INVISIBLE);
+            bar.setVisibility(View.INVISIBLE);
+            stroboText.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void sosSwitch(View view) {
+
+        boolean on = ((Switch) view).isChecked();
+
+        Switch onDemandSwitch = (Switch) findViewById(R.id.activeOnTouch);
+        Switch stroboSwitch = (Switch) findViewById(R.id.activeStrobo);
+        Switch sosSwitch = (Switch) findViewById(R.id.switch_SOS);
+        FrameLayout fab2 = (FrameLayout) findViewById(R.id.fab2);
+        FrameLayout fab = (FrameLayout) findViewById(R.id.fab);
+        FrameLayout SOSfab = (FrameLayout) findViewById(R.id.SOSfab);
+
+        if (on) {
+            fab.setVisibility(View.INVISIBLE);
+            fab2.setVisibility(View.INVISIBLE);
+            SOSfab.setVisibility(View.VISIBLE);
+            onDemandSwitch.setEnabled(false);
+            onDemandSwitch.setChecked(false);
+            stroboSwitch.setEnabled(false);
+            stroboSwitch.setChecked(false);
+
+        } else {
+            SOSfab.setVisibility(View.INVISIBLE);
+            fab.setVisibility(View.VISIBLE);
+            onDemandSwitch.setEnabled(true);
+            stroboSwitch.setEnabled(true);
+
         }
     }
 
@@ -393,11 +428,10 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
             startAnimation();
             return;
         } else
-            camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            backgroundYellow();
+        camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
         cam.setParameters(camParams);
         cam.startPreview();
-        backgroundYellow();
-
     }
 
     public void turnOnDemand(View v) {
@@ -438,15 +472,14 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
     }
 
     // SOS
-    public void SOSstart(){
-        String myString = "0101010101";
-        long blinkDelay = 50;
-
+    public void onSOSClicked(final View view){
+        String myString = "1010101";
+        long blinkDelay = 500; //Delay in ms
         for (int i = 0; i < myString.length(); i++) {
             if (myString.charAt(i) == '0') {
-                camParams.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+                turnOnTorchDemand();
             } else {
-                camParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                turnOffTorchDemand();
             }
             try {
                 Thread.sleep(blinkDelay);
@@ -454,7 +487,28 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
                 e.printStackTrace();
             }
         }
+        shortSOS(view);
     }
+
+    public void shortSOS(final View view){
+        String myString = "01010";
+        long blinkDelay = 100; //Delay in ms
+        for (int i = 0; i < myString.length(); i++) {
+            if (myString.charAt(i) == '0') {
+                turnOnTorchDemand();
+            } else {
+                turnOffTorchDemand();
+            }
+            try {
+                Thread.sleep(blinkDelay);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        onSOSClicked(view);
+    }
+
+
 
     @Override
     public void surfaceChanged(SurfaceHolder holder,int format,int width,int height){
@@ -486,11 +540,11 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
             return ;
         }
         else {
+            backgroundGrey();
             camParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
             cam.setParameters(camParams);
             cam.stopPreview();
         }
-        backgroundGrey();
     }
 
     private static final ScheduledExecutorService worker =
