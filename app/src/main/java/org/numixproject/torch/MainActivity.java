@@ -18,6 +18,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
@@ -59,7 +61,9 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
     private boolean hasCam;
     private int freq;
     private StroboRunner sr;
+    private SOS sos;
     private Thread t;
+    private Thread tr;
     private boolean isChecked = false;
     int counter = 1;
     private boolean yellow = true;
@@ -434,6 +438,20 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
         cam.startPreview();
     }
 
+    public void turnOnSOS() {
+        if (freq != 0) {
+            sr = new StroboRunner();
+            sr.freq = freq;
+            t = new Thread(sr);
+            t.start();
+            startAnimation();
+            return;
+        } else
+        camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        cam.setParameters(camParams);
+        cam.startPreview();
+    }
+
     public void turnOnDemand(View v) {
         startAnimationDemand();
     }
@@ -473,42 +491,29 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
 
     // SOS
     public void onSOSClicked(final View view){
-        String myString = "1010101";
-        long blinkDelay = 500; //Delay in ms
-        for (int i = 0; i < myString.length(); i++) {
-            if (myString.charAt(i) == '0') {
-                turnOnTorchDemand();
-            } else {
-                turnOffTorchDemand();
-            }
-            try {
-                Thread.sleep(blinkDelay);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        shortSOS(view);
+        View homeView2 = findViewById(R.id.SOS_view);
+        View fab = findViewById(R.id.notView2);
+
+        // Reveal Animation
+        // get the center for the clipping circle
+        int cx = (fab.getLeft() + homeView2.getRight()) /2 ;
+        int cy = (fab.getTop() + homeView2.getBottom()) /2 ;
+
+// get the final radius for the clipping circle
+        int finalRadius = Math.max(homeView2.getWidth(), homeView2.getHeight());
+
+// create the animator for this view (the start radius is zero)
+        Animator anim =
+                ViewAnimationUtils.createCircularReveal(homeView2, cx, cy, 0, finalRadius);
+
+// make the view visible and start the animation
+        homeView2.setVisibility(View.VISIBLE);
+        anim.start();
+
+        sos = new SOS();
+        tr = new Thread(sos);
+        tr.start();
     }
-
-    public void shortSOS(final View view){
-        String myString = "01010";
-        long blinkDelay = 100; //Delay in ms
-        for (int i = 0; i < myString.length(); i++) {
-            if (myString.charAt(i) == '0') {
-                turnOnTorchDemand();
-            } else {
-                turnOffTorchDemand();
-            }
-            try {
-                Thread.sleep(blinkDelay);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        onSOSClicked(view);
-    }
-
-
 
     @Override
     public void surfaceChanged(SurfaceHolder holder,int format,int width,int height){
@@ -541,6 +546,53 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
         }
         else {
             backgroundGrey();
+            camParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+            cam.setParameters(camParams);
+            cam.stopPreview();
+        }
+    }
+
+    public void onSOSoffClicked(View view) {
+        sos.stopRunning = true;
+        tr.interrupt();
+        tr = null;
+
+        // previously visible view
+        final View homeView = findViewById(R.id.SOS_view);
+        View fab = findViewById(R.id.notView);
+
+// get the center for the clipping circle
+        int cx = (fab.getLeft() + fab.getRight()) / 2;
+        int cy = (fab.getTop() + fab.getBottom()) / 2;
+
+// get the initial radius for the clipping circle
+        int initialRadius = homeView.getWidth();
+
+// create the animation (the final radius is zero)
+        Animator anim =
+                ViewAnimationUtils.createCircularReveal(homeView, cx, cy, initialRadius, 0);
+
+// make the view invisible when the animation is done
+        anim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                homeView.setVisibility(View.INVISIBLE);
+            }
+        });
+
+// start the animation
+        anim.start();
+        turnOffSOS();
+    }
+
+    public void turnOffSOS() {
+        if (t != null) {
+            sr.stopRunning = true;
+            t = null;
+            return ;
+        }
+        else {
             camParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
             cam.setParameters(camParams);
             cam.stopPreview();
@@ -598,6 +650,57 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
         stopNotification();
         stopAnimation();
     }
+
+    private class SOS implements Runnable {
+
+        boolean stopRunning = false;
+
+        @Override
+        public void run() {
+                String myString = "1010101";
+                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 5000);
+                long blinkDelay = 250; //Delay in ms
+                for (int i = 0; i < myString.length(); i++) {
+                    if (myString.charAt(i) == '0') {
+                        turnOnSOS();
+                        tg.startTone(ToneGenerator.TONE_DTMF_6, 250);
+                    } else {
+                        turnOffSOS();
+                    }
+                    try {
+                        Thread.sleep(blinkDelay);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            while (!stopRunning) {
+                shortSOS();
+            }
+            }
+
+            public void shortSOS(){
+                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 5000);
+                String myString = "01010";
+                long blinkDelay = 50; //Delay in ms
+                for (int i = 0; i < myString.length(); i++) {
+                    if (myString.charAt(i) == '0') {
+                        turnOnSOS();
+                        tg.startTone(ToneGenerator.TONE_DTMF_6, 50); //200 is duration in ms
+                    } else {
+                        turnOffSOS();
+                    }
+                    try {
+                        Thread.sleep(blinkDelay);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                while (!stopRunning) {
+                    run();
+                }
+            }
+        }
+
 
     private class StroboRunner implements Runnable {
 
