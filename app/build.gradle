@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.0.2"
+    buildToolsVersion "21.1.1"
 
     defaultConfig {
         applicationId 'org.numixproject.torch'
         minSdkVersion 21
         targetSdkVersion 21
-        versionCode 5
+        versionCode 7
         versionName "1.0"
     }
 

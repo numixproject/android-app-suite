@@ -280,7 +280,7 @@
                 android:layout_height="fill_parent"
                 android:background="#00000000"
                 android:onClick="turnOff"
-                android:src="@drawable/torch"/>
+                android:src="@drawable/ic_torch_symbol_within_app"/>
         </LinearLayout>
     </FrameLayout>
 
@@ -301,7 +301,7 @@
                 android:layout_height="fill_parent"
                 android:background="#00000000"
                 android:onClick="onSOSoffClicked"
-                android:src="@drawable/torch"/>
+                android:src="@drawable/ic_torch_symbol_within_app"/>
         </LinearLayout>
     </FrameLayout>
     <FrameLayout
@@ -335,7 +335,7 @@
                 android:layout_height="fill_parent"
                 android:background="#00000000"
                 android:onClick="manageOnDemand"
-                android:src="@drawable/torch"/>
+                android:src="@drawable/ic_torch_symbol_within_app"/>
         </LinearLayout>
         <FrameLayout
             android:layout_width="fill_parent"

@@ -391,11 +391,15 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
         SeekBar bar = (SeekBar) findViewById(R.id.seekBar);
         Switch stroboSwitch = (Switch) findViewById(R.id.activeOnTouch);
         TextView stroboText = (TextView) findViewById(R.id.textView2);
+        Switch SOSSwitch = (Switch) findViewById(R.id.switch_SOS);
 
         if (on) {
             stroboSwitch.setChecked(false);
             stroboSwitch.setEnabled(false);
+            SOSSwitch.setChecked(false);
+            SOSSwitch.setEnabled(false);
             bar.setVisibility(View.VISIBLE);
+            bar.setProgress(90);
             stroboText.setVisibility(View.VISIBLE);
 
         } else {
@@ -629,7 +633,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
         Notification myNotification;
 
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        myNotification = new Notification(R.drawable.fab, "Notification!", System.currentTimeMillis());
+        myNotification = new Notification(R.drawable.ic_stat_torch_symbol_within_app, "Notification!", System.currentTimeMillis());
         Context context = getApplicationContext();
         String notificationTitle = "Numix Material Torch";
         String notificationText = "Flashlight on. Tap to disable.";
@@ -659,11 +663,11 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
         public void run() {
                 String myString = "1010101";
                 final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 5000);
-                long blinkDelay = 250; //Delay in ms
+                long blinkDelay = 50; //Delay in ms
                 for (int i = 0; i < myString.length(); i++) {
                     if (myString.charAt(i) == '0') {
                         turnOnSOS();
-                        tg.startTone(ToneGenerator.TONE_DTMF_6, 250);
+                        tg.startTone(ToneGenerator.TONE_DTMF_6, 50);
                     } else {
                         turnOffSOS();
                     }
@@ -674,13 +678,35 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
                     }
                 }
             while (!stopRunning) {
-                shortSOS();
+                longSOS();
             }
             }
 
+        public void longSOS(){
+            final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 5000);
+            String myString = "010101";
+            long blinkDelay = 250; //Delay in ms
+            for (int i = 0; i < myString.length(); i++) {
+                if (myString.charAt(i) == '0') {
+                    turnOnSOS();
+                    tg.startTone(ToneGenerator.TONE_DTMF_6, 250); //200 is duration in ms
+                } else {
+                    turnOffSOS();
+                }
+                try {
+                    Thread.sleep(blinkDelay);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            while (!stopRunning) {
+                shortSOS();
+            }
+        }
+
             public void shortSOS(){
                 final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 5000);
-                String myString = "01010";
+                String myString = "010101111111";
                 long blinkDelay = 50; //Delay in ms
                 for (int i = 0; i < myString.length(); i++) {
                     if (myString.charAt(i) == '0') {

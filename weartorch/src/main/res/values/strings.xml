@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Torch</string>
+    <string name="app_name">Numix Torch</string>
+    <string name="action_settings">Settings</string>
+    <string name="torchon">Turn on/off the torch</string>
+    <string name="freq">Strobo frequency</string>
+    <string name="share_msg">There is a new weather app in the play store. Look here </string>
+    <string name="dlg_donate_msg">If you like my work and want to support me, please donate a beer to me</string>
+    <string name="dlg_donate_ok">Donate!</string>
+    <string name="dlg_donate_cancel">Cancel</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="banner_ad_unit_id">ca-app-pub-4742625114157019/8249057484</string>
 
 </resources>
