@@ -7,353 +7,365 @@
     android:background="#EEEEEE"
     tools:context="org.numixproject.torch.MainActivity">
 
-    <SurfaceView
-        android:id="@+id/PREVIEW"
-        android:layout_width="1dp"
-        android:layout_height="1dp"/>
-
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:visibility="visible"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+
+        <android.support.v7.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"/>
+
+        <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical"
-            android:padding="15dp">
+            android:layout_height="fill_parent">
 
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view"
+            <SurfaceView
+                android:id="@+id/PREVIEW"
+                android:layout_width="1dp"
+                android:layout_height="1dp"/>
+
+
+            <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_weight="1"
-                android:elevation="1dp"
-                android:layout_height="wrap_content">
+                android:visibility="visible"
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="1"
-                    android:padding="15dp">
+                android:layout_height="fill_parent">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="Activate on Tap"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:textSize="@dimen/abc_text_size_body_1_material"
-                        android:layout_weight="0.7"
-                        android:textColor="#222222"/>
-                    <Switch
-                        android:id="@+id/activeOnTouch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:onClick="onToggleClicked"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:layout_weight="0.3"
-                        />
-                </LinearLayout>
 
-            </android.support.v7.widget.CardView>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2">
-
-            </LinearLayout>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_SOS"
-                android:layout_width="fill_parent"
-                android:layout_weight="1"
-                android:elevation="1dp"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="1"
-                    android:padding="15dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="SOS mode"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:textSize="@dimen/abc_text_size_body_1_material"
-                        android:layout_weight="0.7"
-                        android:textColor="#222222"/>
-                    <Switch
-                        android:id="@+id/switch_SOS"
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:onClick="sosSwitch"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:layout_weight="0.3"
-                        />
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2">
-
-            </LinearLayout>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view2"
-                android:layout_width="fill_parent"
-                android:layout_weight="20"
-                android:elevation="1dp"
-                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:orientation="vertical"
-                    android:padding="15dp"
-                    android:weightSum="1">
+                    android:padding="15dp">
+
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/card_view"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:elevation="1dp"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="1"
+                            android:padding="15dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="Activate on Tap"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:textSize="@dimen/abc_text_size_body_1_material"
+                                android:layout_weight="0.7"
+                                android:textColor="#222222"/>
+                            <Switch
+                                android:id="@+id/activeOnTouch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:onClick="onToggleClicked"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:layout_weight="0.3"
+                                />
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
 
                     <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="0.3">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Blinking"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:textSize="@dimen/abc_text_size_body_1_material"
-                            android:layout_weight="0.7"
-                            android:textColor="#222222"/>
-                        <Switch
-                            android:id="@+id/activeStrobo"
-                            android:layout_width="wrap_content"
-                            android:onClick="onStroboClicked"
-                            android:layout_height="fill_parent"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:layout_weight="0.3"
-                            />
-                    </LinearLayout>
-
-                    <TextView
-                        android:text="Blinking frequency"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView2"
-                        android:visibility="invisible"
-                        android:textSize="@dimen/abc_text_size_body_1_material"
-                        android:textColor="#444444"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_weight="2">
 
+                    </LinearLayout>
 
-                    <SeekBar
-                        android:layout_width="match_parent"
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/card_SOS"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:elevation="1dp"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="1"
+                            android:padding="15dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="SOS mode"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:textSize="@dimen/abc_text_size_body_1_material"
+                                android:layout_weight="0.7"
+                                android:textColor="#222222"/>
+                            <Switch
+                                android:id="@+id/switch_SOS"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:onClick="sosSwitch"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:layout_weight="0.3"
+                                />
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/seekBar"
-                        android:layout_centerHorizontal="true"
-                        android:visibility="invisible"
-                        android:onClick="turnOn"
-                        android:max="100"/>
+                        android:layout_weight="2">
+
+                    </LinearLayout>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/card_view2"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="20"
+                        android:elevation="1dp"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical"
+                            android:padding="15dp"
+                            android:weightSum="1">
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="0.3">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+                                    android:text="Blinking"
+                                    android:gravity="center_horizontal|center_vertical"
+                                    android:textSize="@dimen/abc_text_size_body_1_material"
+                                    android:layout_weight="0.7"
+                                    android:textColor="#222222"/>
+                                <Switch
+                                    android:id="@+id/activeStrobo"
+                                    android:layout_width="wrap_content"
+                                    android:onClick="onStroboClicked"
+                                    android:layout_height="fill_parent"
+                                    android:gravity="center_horizontal|center_vertical"
+                                    android:layout_weight="0.3"
+                                    />
+                            </LinearLayout>
+
+                            <TextView
+                                android:text="Blinking frequency"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView2"
+                                android:visibility="invisible"
+
+                                android:textSize="@dimen/abc_text_size_body_1_material"
+                                android:textColor="#444444"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginBottom="10dp"/>
+
+
+                            <SeekBar
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/seekBar"
+                                android:layout_centerHorizontal="true"
+                                android:visibility="invisible"
+
+                                android:onClick="turnOn"
+                                android:max="100"/>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2">
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10">
+
+                    </LinearLayout>
+
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2">
-
-            </LinearLayout>
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view3"
-                android:layout_width="fill_parent"
-                android:elevation="1dp"
-                android:layout_height="wrap_content">
-                -
-
-                <fragment android:name="org.numixproject.torch.MainActivity$AdFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/adFragment" />
-
-                <fragment
-                    android:id="@+id/adFragment"
-                    android:name="org.numixproject.torch.MainActivity$AdFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true" />
 
 
-            </android.support.v7.widget.CardView>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="10">
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:id="@+id/fab"
+                    android:layout_height="fill_parent">
 
-            </LinearLayout>
+                    <com.melnykov.fab.FloatingActionButton
+                        android:id="@+id/notView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/fab"
+                        android:onClick="turnOn"
+                        fab:fab_type="normal"
+                        fab:fab_colorNormal="#FFC107"
+                        fab:fab_colorPressed="#99FFC107"
+                        fab:fab_colorRipple="#90FFC107" />
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/fab2"
+                    android:visibility="invisible"
+                    >
 
-        </LinearLayout>
+                    <com.melnykov.fab.FloatingActionButton
+                        android:id="@+id/notView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/fab"
+                        android:onClick="turnOnDemand"
+                        fab:fab_type="normal"
+                        fab:fab_colorNormal="#444444"
+                        fab:fab_colorPressed="#222222"
+                        fab:fab_colorRipple="#222222" />
+                </FrameLayout>
+                <!-- SOS -->
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/SOSfab"
+                    android:visibility="invisible"
+                    >
 
-
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:id="@+id/fab"
-            android:layout_height="fill_parent">
-
-            <com.melnykov.fab.FloatingActionButton
-                android:id="@+id/notView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="16dp"
-                android:src="@drawable/fab"
-                android:onClick="turnOn"
-                fab:fab_type="normal"
-                fab:fab_colorNormal="#FFC107"
-                fab:fab_colorPressed="#99FFC107"
-                fab:fab_colorRipple="#90FFC107" />
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/fab2"
-            android:visibility="invisible">
-
-            <com.melnykov.fab.FloatingActionButton
-                android:id="@+id/notView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="16dp"
-                android:src="@drawable/fab"
-                android:onClick="turnOnDemand"
-                fab:fab_type="normal"
-                fab:fab_colorNormal="#444444"
-                fab:fab_colorPressed="#222222"
-                fab:fab_colorRipple="#222222" />
-        </FrameLayout>
-        <!-- SOS -->
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/SOSfab"
-            android:visibility="invisible">
-
-            <com.melnykov.fab.FloatingActionButton
-                android:id="@+id/SOSView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="16dp"
-                android:src="@drawable/fab"
-                android:onClick="onSOSClicked"
-                fab:fab_type="normal"
-                fab:fab_colorNormal="#c0392b"
-                fab:fab_colorPressed="#99c0392b"
-                fab:fab_colorRipple="#99c0392b" />
-        </FrameLayout>
-    </RelativeLayout>
+                    <com.melnykov.fab.FloatingActionButton
+                        android:id="@+id/SOSView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/fab"
+                        android:onClick="onSOSClicked"
+                        fab:fab_type="normal"
+                        fab:fab_colorNormal="#c0392b"
+                        fab:fab_colorPressed="#99c0392b"
+                        fab:fab_colorRipple="#99c0392b" />
+                </FrameLayout>
+            </RelativeLayout>
 
 
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:visibility="invisible"
-        android:id="@+id/home_view">
-        <LinearLayout
-            android:id="@+id/activeLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="#FFC107">
-
-            <ImageButton
+            <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="#00000000"
-                android:onClick="turnOff"
-                android:src="@drawable/ic_torch_symbol_within_app"/>
-        </LinearLayout>
-    </FrameLayout>
+                android:visibility="invisible"
 
-    <!-- SOS -->
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:visibility="invisible"
-        android:id="@+id/SOS_view">
-        <LinearLayout
-            android:id="@+id/sosLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="#c0392b">
+                android:id="@+id/home_view">
+                <LinearLayout
+                    android:id="@+id/activeLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#FFC107">
 
-            <ImageButton
+                    <ImageButton
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="#00000000"
+                        android:onClick="turnOff"
+                        android:src="@drawable/ic_torch_symbol_within_app"/>
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- SOS -->
+            <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="#00000000"
-                android:onClick="onSOSoffClicked"
-                android:src="@drawable/ic_torch_symbol_within_app"/>
-        </LinearLayout>
-    </FrameLayout>
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:visibility="invisible"
-        android:id="@+id/legacy">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:id="@+id/legacyLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="#FFFFFF">
+                android:visibility="invisible"
 
-        </LinearLayout>
-    </FrameLayout>
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:visibility="invisible"
-        android:id="@+id/home_view2">
-        <LinearLayout
-            android:id="@+id/activeLayout2"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="#333333">
+                android:id="@+id/SOS_view">
+                <LinearLayout
+                    android:id="@+id/sosLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#c0392b">
 
-            <ImageButton
-                android:id="@+id/onDemandLamp"
+                    <ImageButton
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="#00000000"
+                        android:onClick="onSOSoffClicked"
+                        android:src="@drawable/ic_torch_symbol_within_app"/>
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="#00000000"
-                android:onClick="manageOnDemand"
-                android:src="@drawable/ic_torch_symbol_within_app"/>
-        </LinearLayout>
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/fab3">
+                android:visibility="invisible"
 
-            <com.melnykov.fab.FloatingActionButton
-                android:id="@+id/notView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="16dp"
-                android:src="@drawable/ic_navigation_arrow_back"
-                android:onClick="turnOffDemand"
-                fab:fab_type="normal"
-                fab:fab_colorNormal="#00BAD2"
-                fab:fab_colorPressed="#0097A7"
-                fab:fab_colorRipple="#0097A7" />
-        </FrameLayout>
-    </FrameLayout>
+                android:id="@+id/legacy">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@+id/legacyLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#FFFFFF">
+
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:visibility="invisible"
+
+
+                android:id="@+id/home_view2">
+                <LinearLayout
+                    android:id="@+id/activeLayout2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#333333">
+
+                    <ImageButton
+                        android:id="@+id/onDemandLamp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="#00000000"
+                        android:onClick="manageOnDemand"
+                        android:src="@drawable/ic_torch_symbol_within_app"/>
+                </LinearLayout>
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/fab3">
+
+                    <com.melnykov.fab.FloatingActionButton
+                        android:id="@+id/notView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/ic_navigation_arrow_back"
+                        android:onClick="turnOffDemand"
+                        fab:fab_type="normal"
+                        fab:fab_colorNormal="#00BAD2"
+                        fab:fab_colorPressed="#0097A7"
+                        fab:fab_colorRipple="#0097A7" />
+                </FrameLayout>
+            </FrameLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
 </RelativeLayout>

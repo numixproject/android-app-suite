@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId 'org.numixproject.torch'
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 21
         versionCode 7
         versionName "1.0"
@@ -28,12 +28,12 @@ android {
 dependencies {
     wearApp project(':weartorch')
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:21.0.2'
     compile 'com.android.support:cardview-v7:21.0.2'
     compile 'com.android.support:recyclerview-v7:21.0.2'
+    compile 'com.android.support:appcompat-v7:21.0.+'
+    compile 'com.android.support:cardview-v7:21.0.+'
     compile 'com.melnykov:floatingactionbutton:1.1.0'
     compile 'com.android.support:support-v4:21.0.2'
-    compile "com.android.support:appcompat-v7:21.0.+"
     compile 'com.google.android.gms:play-services:6.+'
     compile 'com.anjlab.android.iab.v3:library:1.0.+@aar'
 }

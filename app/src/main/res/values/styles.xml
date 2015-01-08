@@ -2,13 +2,12 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Material">
-        <item name="android:colorPrimaryDark">#0097A7</item>
-        <item name="android:colorPrimary">#00BAD2</item>
-        <item name="android:textColorPrimary">#ffffff</item>
-
-        <!-- enable window content transitions -->
-        <item name="android:windowContentTransitions">true</item>
+    <style name="AppTheme" parent="AppTheme.Base"/>
+    <style name="AppTheme.Base" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimaryDark">#0097A7</item>
+        <item name="colorPrimary">#00BAD2</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
     <style name="textBig" parent="@android:style/TextAppearance.Large">

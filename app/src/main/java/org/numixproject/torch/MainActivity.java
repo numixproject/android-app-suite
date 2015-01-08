@@ -20,8 +20,10 @@ import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.SwitchPreference;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +37,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -47,13 +50,15 @@ import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 
-public class MainActivity extends Activity implements SurfaceHolder.Callback, BillingProcessor.IBillingHandler {
+public class MainActivity extends ActionBarActivity implements SurfaceHolder.Callback, BillingProcessor.IBillingHandler {
 
     BillingProcessor bp;
     public Camera cam;
@@ -101,9 +106,14 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
         bp.loadOwnedPurchasesFromGoogle();
 
         if (bp.isPurchased("remove_ads")){
-            setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_main_noads);
         } else {
             setContentView(R.layout.activity_main);
+        }
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
         }
 
         try {
@@ -155,7 +165,6 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
             });
 
             // Showing Alert Message
-            alertDialog.show();
         }
 
         // Active on press listener
@@ -243,13 +252,20 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
 // get the final radius for the clipping circle
         int finalRadius = Math.max(homeView.getWidth(), homeView.getHeight());
 
-// create the animator for this view (the start radius is zero)
-        Animator anim =
-                ViewAnimationUtils.createCircularReveal(homeView, cx, cy, 0, finalRadius);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // create the animator for this view (the start radius is zero)
+            Animator anim =
+                    ViewAnimationUtils.createCircularReveal(homeView, cx, cy, 0, finalRadius);
 
 // make the view visible and start the animation
-        homeView.setVisibility(View.VISIBLE);
-        anim.start();
+            homeView.setVisibility(View.VISIBLE);
+            anim.start();
+        } else {
+            TranslateAnimation animate = new TranslateAnimation(-homeView.getWidth(),0,0,0);
+            animate.setDuration(500);
+            homeView.startAnimation(animate);
+            homeView.setVisibility(View.VISIBLE);
+        }
     }
 
     public void startAnimationDemand() {
@@ -264,13 +280,22 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
 // get the final radius for the clipping circle
         int finalRadius = Math.max(homeView2.getWidth(), homeView2.getHeight());
 
-// create the animator for this view (the start radius is zero)
-        Animator anim =
-                ViewAnimationUtils.createCircularReveal(homeView2, cx, cy, 0, finalRadius);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // create the animator for this view (the start radius is zero)
+            Animator anim =
+                    ViewAnimationUtils.createCircularReveal(homeView2, cx, cy, 0, finalRadius);
 
 // make the view visible and start the animation
-        homeView2.setVisibility(View.VISIBLE);
-        anim.start();
+            homeView2.setVisibility(View.VISIBLE);
+            anim.start();
+        } else {
+            TranslateAnimation animate = new TranslateAnimation(-homeView2.getWidth(),0,0,0);
+            animate.setDuration(500);
+            homeView2.startAnimation(animate);
+            homeView2.setVisibility(View.VISIBLE);
+        }
+
     }
 
     public void stopAnimation() {
@@ -285,21 +310,28 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
 // get the initial radius for the clipping circle
         int initialRadius = homeView.getWidth();
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 // create the animation (the final radius is zero)
-        Animator anim =
-                ViewAnimationUtils.createCircularReveal(homeView, cx, cy, initialRadius, 0);
+            Animator anim =
+                    ViewAnimationUtils.createCircularReveal(homeView, cx, cy, initialRadius, 0);
 
 // make the view invisible when the animation is done
-        anim.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                homeView.setVisibility(View.INVISIBLE);
-            }
-        });
+            anim.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    homeView.setVisibility(View.INVISIBLE);
+                }        });
 
 // start the animation
-        anim.start();
+            anim.start();
+        } else {
+            TranslateAnimation animate = new TranslateAnimation(0,-homeView.getWidth(),0,0);
+            animate.setDuration(500);
+            homeView.startAnimation(animate);
+            homeView.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     public void stopAnimationDemand() {
@@ -314,21 +346,28 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
 // get the initial radius for the clipping circle
         int initialRadius = homeView.getWidth();
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 // create the animation (the final radius is zero)
-        Animator anim =
-                ViewAnimationUtils.createCircularReveal(homeView, cx, cy, initialRadius, 0);
+            Animator anim =
+                    ViewAnimationUtils.createCircularReveal(homeView, cx, cy, initialRadius, 0);
 
 // make the view invisible when the animation is done
-        anim.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                homeView.setVisibility(View.INVISIBLE);
-            }
-        });
+            anim.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    homeView.setVisibility(View.INVISIBLE);
+                }        });
 
 // start the animation
-        anim.start();
+            anim.start();
+        } else {
+            TranslateAnimation animate = new TranslateAnimation(0,-homeView.getWidth(),0,0);
+            animate.setDuration(500);
+            homeView.startAnimation(animate);
+            homeView.setVisibility(View.INVISIBLE);
+
+        }
     }
 
     public void onToggleClicked(View view) {
@@ -507,13 +546,20 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
 // get the final radius for the clipping circle
         int finalRadius = Math.max(homeView2.getWidth(), homeView2.getHeight());
 
-// create the animator for this view (the start radius is zero)
-        Animator anim =
-                ViewAnimationUtils.createCircularReveal(homeView2, cx, cy, 0, finalRadius);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // create the animator for this view (the start radius is zero)
+            Animator anim =
+                    ViewAnimationUtils.createCircularReveal(homeView2, cx, cy, 0, finalRadius);
 
 // make the view visible and start the animation
-        homeView2.setVisibility(View.VISIBLE);
-        anim.start();
+            homeView2.setVisibility(View.VISIBLE);
+            anim.start();
+        } else {
+            TranslateAnimation animate = new TranslateAnimation(-homeView2.getWidth(),0,0,0);
+            animate.setDuration(500);
+            homeView2.startAnimation(animate);
+            homeView2.setVisibility(View.VISIBLE);
+        }
 
         sos = new SOS();
         tr = new Thread(sos);
@@ -573,21 +619,27 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
 // get the initial radius for the clipping circle
         int initialRadius = homeView.getWidth();
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 // create the animation (the final radius is zero)
-        Animator anim =
-                ViewAnimationUtils.createCircularReveal(homeView, cx, cy, initialRadius, 0);
+            Animator anim =
+                    ViewAnimationUtils.createCircularReveal(homeView, cx, cy, initialRadius, 0);
 
 // make the view invisible when the animation is done
-        anim.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                homeView.setVisibility(View.INVISIBLE);
-            }
-        });
+            anim.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    homeView.setVisibility(View.INVISIBLE);
+                }        });
 
 // start the animation
-        anim.start();
+            anim.start();
+        } else {
+            TranslateAnimation animate = new TranslateAnimation(0,-homeView.getWidth(),0,0);
+            animate.setDuration(500);
+            homeView.startAnimation(animate);
+            homeView.setVisibility(View.INVISIBLE);
+        }
         turnOffSOS();
     }
 
