@@ -165,6 +165,7 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
             });
 
             // Showing Alert Message
+            alertDialog.show();
         }
 
         // Active on press listener
@@ -218,14 +219,18 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
+        // Inflate the menu items for use in the action bar.
         if (bp.isPurchased("remove_ads")){
+            MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.main_activity_actions_no_ads, menu);
+            return super.onCreateOptionsMenu(menu);
+
         } else {
+            MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.main_activity_actions, menu);
+            return super.onCreateOptionsMenu(menu);
+
         }
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -245,7 +250,8 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
         View fab = findViewById(R.id.notView);
 
         // Reveal Animation
-        // get the center for the clipping circle
+        // get the center for the
+        // clipping circle
         int cx = (fab.getLeft() + fab.getRight()) / 2;
         int cy = (fab.getTop() + fab.getBottom()) / 2;
 
@@ -703,7 +709,7 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
     }
 
     protected void onNewIntent(Intent intent) {
-        turnOffTorchDemand();
+        turnOffSOS();
         stopNotification();
         stopAnimation();
     }
