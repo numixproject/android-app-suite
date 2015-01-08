@@ -404,6 +404,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Bi
 
         } else {
             stroboSwitch.setEnabled(true);
+            SOSSwitch.setEnabled(true);
             bar.setProgress(0);
             bar.setVisibility(View.INVISIBLE);
             stroboText.setVisibility(View.INVISIBLE);
