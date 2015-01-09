@@ -14,7 +14,7 @@ Numix Torch is simple flashlight app designed with material design in mind. It c
 ***USAGE:***
 Just press the flashlight button on the bottom right. If you wish you may activate the on tap flashlight, sos or blinking option before that.
 
-***If you have a wearable, just install Numix Torch on your paired phone. The app will be automatically installed on your watch too. ***
+***If you have a wearable, just install Numix Torch on your paired phone. The app will be automatically installed on your watch too.***
  
 ***GOOGLE PLAY:***
 You can simply install Numix Torch from Google Play: https://play.google.com/store/apps/details?id=org.numixproject.torch
