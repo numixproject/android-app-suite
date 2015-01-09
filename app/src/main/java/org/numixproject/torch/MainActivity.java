@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.SwitchPreference;
 import android.support.v4.app.NotificationCompat;
+import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -378,11 +379,11 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
 
     public void onToggleClicked(View view) {
         // Is the toggle on?
-        boolean on = ((Switch) view).isChecked();
+        boolean on = ((SwitchCompat) view).isChecked();
         TextView stroboText = (TextView) findViewById(R.id.textView2);
         FrameLayout fab2 = (FrameLayout) findViewById(R.id.fab2);
         FrameLayout fab = (FrameLayout) findViewById(R.id.fab);
-        Switch stroboSwitch = (Switch) findViewById(R.id.activeStrobo);
+        SwitchCompat stroboSwitch = (SwitchCompat) findViewById(R.id.activeStrobo);
         SeekBar bar = (SeekBar) findViewById(R.id.seekBar);
 
 
@@ -402,11 +403,11 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
 
     public void sosSwitch(View view) {
 
-        boolean on = ((Switch) view).isChecked();
+        boolean on = ((SwitchCompat) view).isChecked();
 
-        Switch onDemandSwitch = (Switch) findViewById(R.id.activeOnTouch);
-        Switch stroboSwitch = (Switch) findViewById(R.id.activeStrobo);
-        Switch sosSwitch = (Switch) findViewById(R.id.switch_SOS);
+        SwitchCompat onDemandSwitch = (SwitchCompat) findViewById(R.id.activeOnTouch);
+        SwitchCompat stroboSwitch = (SwitchCompat) findViewById(R.id.activeStrobo);
+        SwitchCompat sosSwitch = (SwitchCompat) findViewById(R.id.switch_SOS);
         FrameLayout fab2 = (FrameLayout) findViewById(R.id.fab2);
         FrameLayout fab = (FrameLayout) findViewById(R.id.fab);
         FrameLayout SOSfab = (FrameLayout) findViewById(R.id.SOSfab);
@@ -432,11 +433,11 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
 
     public void onStroboClicked(View view) {
         // Is the toggle on?
-        boolean on = ((Switch) view).isChecked();
+        boolean on = ((SwitchCompat) view).isChecked();
         SeekBar bar = (SeekBar) findViewById(R.id.seekBar);
-        Switch stroboSwitch = (Switch) findViewById(R.id.activeOnTouch);
+        SwitchCompat stroboSwitch = (SwitchCompat) findViewById(R.id.activeOnTouch);
         TextView stroboText = (TextView) findViewById(R.id.textView2);
-        Switch SOSSwitch = (Switch) findViewById(R.id.switch_SOS);
+        SwitchCompat SOSSwitch = (SwitchCompat) findViewById(R.id.switch_SOS);
 
         if (on) {
             stroboSwitch.setChecked(false);
