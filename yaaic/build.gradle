@@ -1,0 +1,29 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.1"
+
+    defaultConfig {
+        applicationId "org.numixproject.hermes"
+        minSdkVersion 16
+        targetSdkVersion 21
+
+        testApplicationId "org.numixproject.hermes.test"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile project(':viewPagerIndicator')
+    compile 'com.android.support:support-v4:21.0.0'
+    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:3.5.1'
+}
