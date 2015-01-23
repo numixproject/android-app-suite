@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.numix.calculator"
-    android:versionName="2.6"
-    android:versionCode="7">
+    android:versionName="2.6.1"
+    android:versionCode="8">
+
+    <!-- Include required permissions for Google Mobile Ads to run-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <original-package android:name="com.numix.calculator" />
     <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="21"/>
@@ -16,6 +20,9 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/calculator_widget_info" />
         </receiver>
+        <!--This meta-data tag is required to use Google Play Services.-->
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <activity android:name=".Calculator" 
                   android:theme="@style/Theme.Calculator"
                   android:windowSoftInputMode="stateAlwaysHidden">
@@ -48,5 +55,9 @@
             </intent-filter>
         </activity-alias>
         <activity android:name=".Preferences" android:theme="@style/Theme.Settings.Calculator" android:label="@string/settings" />
+        <activity android:name=".AdMob" android:theme="@style/Theme.Settings.Calculator" android:label="Applying new settings..." />
+        <activity android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
     </application>
 </manifest> 

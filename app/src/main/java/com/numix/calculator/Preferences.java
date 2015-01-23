@@ -34,10 +34,19 @@ public class Preferences extends Activity {
         }
     }
 
+    // Handle back button press
+    @Override
+    public void onBackPressed() {
+
+            startActivity(new Intent(this, AdMob.class));
+            finish();
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            startActivity(new Intent(this, Calculator.class));
+            startActivity(new Intent(this, AdMob.class));
             finish();
             return true;
         }
