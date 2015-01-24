@@ -30,7 +30,7 @@ import java.util.LinkedHashMap;
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
 import org.numixproject.hermes.R;
-import org.numixproject.hermes.Yaaic;
+import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.activity.ServersActivity;
 import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.model.Broadcast;
@@ -132,7 +132,7 @@ public class IRCService extends Service
 
         // Load servers from Database
         Database db = new Database(this);
-        Yaaic.getInstance().setServers(db.getServers());
+        Hermes.getInstance().setServers(db.getServers());
         db.close();
 
         // Broadcast changed server list
@@ -560,7 +560,7 @@ public class IRCService extends Service
     public void checkServiceStatus()
     {
         boolean shutDown = true;
-        ArrayList<Server> mServers = Yaaic.getInstance().getServersAsArrayList();
+        ArrayList<Server> mServers = Hermes.getInstance().getServersAsArrayList();
         int mSize = mServers.size();
         Server server;
 

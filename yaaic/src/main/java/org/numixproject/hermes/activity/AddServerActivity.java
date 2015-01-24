@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import org.numixproject.hermes.R;
-import org.numixproject.hermes.Yaaic;
+import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.exception.ValidationException;
 import org.numixproject.hermes.model.Authentication;
@@ -37,6 +37,11 @@ import org.numixproject.hermes.model.Status;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -46,18 +51,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-
 /**
  * Add a new server to the list
  *
  * @author Sebastian Kaspari <sebastian@yaaic.org>
  */
-public class AddServerActivity extends SherlockActivity implements OnClickListener
+public class AddServerActivity extends ActionBarActivity implements OnClickListener
 {
     private static final int REQUEST_CODE_CHANNELS       = 1;
     private static final int REQUEST_CODE_COMMANDS       = 2;
@@ -177,7 +176,7 @@ public class AddServerActivity extends SherlockActivity implements OnClickListen
      * On menu item selected
      */
     @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item)
+    public boolean onOptionsItemSelected(MenuItem item)
     {
         switch (item.getItemId()) {
             case R.id.save:
@@ -189,7 +188,7 @@ public class AddServerActivity extends SherlockActivity implements OnClickListen
                 break;
         }
 
-        return super.onMenuItemSelected(featureId, item);
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -317,7 +316,7 @@ public class AddServerActivity extends SherlockActivity implements OnClickListen
         server.setAutoJoinChannels(channels);
         server.setConnectCommands(commands);
 
-        Yaaic.getInstance().addServer(server);
+        Hermes.getInstance().addServer(server);
     }
 
     /**
@@ -353,7 +352,7 @@ public class AddServerActivity extends SherlockActivity implements OnClickListen
         server.setAutoJoinChannels(channels);
         server.setConnectCommands(commands);
 
-        Yaaic.getInstance().updateServer(server);
+        Hermes.getInstance().updateServer(server);
     }
 
     /**

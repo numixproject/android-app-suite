@@ -23,7 +23,7 @@ package org.numixproject.hermes.activity;
 import java.util.ArrayList;
 
 import org.numixproject.hermes.R;
-import org.numixproject.hermes.Yaaic;
+import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.adapter.ServerListAdapter;
 import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.irc.IRCBinder;
@@ -43,6 +43,10 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -50,17 +54,12 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-
 /**
  * List of servers
  *
  * @author Sebastian Kaspari <sebastian@yaaic.org>
  */
-public class ServersActivity extends SherlockActivity implements ServiceConnection, ServerListener, OnItemClickListener, OnItemLongClickListener {
+public class ServersActivity extends ActionBarActivity implements ServiceConnection, ServerListener, OnItemClickListener, OnItemLongClickListener {
     private IRCBinder binder;
     private ServerReceiver receiver;
     private ServerListAdapter adapter;
@@ -246,7 +245,7 @@ public class ServersActivity extends SherlockActivity implements ServiceConnecti
      */
     private void editServer(int serverId)
     {
-        Server server = Yaaic.getInstance().getServerById(serverId);
+        Server server = Hermes.getInstance().getServerById(serverId);
 
         if (server.getStatus() != Status.DISCONNECTED) {
             Toast.makeText(this, getResources().getString(R.string.disconnect_before_editing), Toast.LENGTH_SHORT).show();
@@ -277,8 +276,7 @@ public class ServersActivity extends SherlockActivity implements ServiceConnecti
      * On menu item selected
      */
     @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add:
                 startActivityForResult(new Intent(this, AddServerActivity.class), 0);
@@ -290,7 +288,7 @@ public class ServersActivity extends SherlockActivity implements ServiceConnecti
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
             case R.id.disconnect_all:
-                ArrayList<Server> mServers = Yaaic.getInstance().getServersAsArrayList();
+                ArrayList<Server> mServers = Hermes.getInstance().getServersAsArrayList();
                 for (Server server : mServers) {
                     if (binder.getService().hasConnection(server.getId())) {
                         server.setStatus(Status.DISCONNECTED);
@@ -328,7 +326,7 @@ public class ServersActivity extends SherlockActivity implements ServiceConnecti
         db.removeServerById(serverId);
         db.close();
 
-        Yaaic.getInstance().removeServerById(serverId);
+        Hermes.getInstance().removeServerById(serverId);
         adapter.loadServers();
     }
 

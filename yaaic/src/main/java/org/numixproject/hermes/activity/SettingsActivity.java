@@ -23,17 +23,17 @@ package org.numixproject.hermes.activity;
 import org.numixproject.hermes.R;
 
 import android.os.Bundle;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
-import com.actionbarsherlock.view.MenuItem;
+import android.preference.PreferenceActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
 /**
  * Settings
  *
  * @author Sebastian Kaspari <sebastian@yaaic.org>
  */
-public class SettingsActivity extends SherlockPreferenceActivity
+public class SettingsActivity extends PreferenceActivity
 {
     /**
      * On create
@@ -43,9 +43,6 @@ public class SettingsActivity extends SherlockPreferenceActivity
     {
         super.onCreate(savedInstanceState);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
         addPreferencesFromResource(R.xml.preferences);
     }
 
@@ -53,8 +50,7 @@ public class SettingsActivity extends SherlockPreferenceActivity
      * On menu item selected.
      */
     @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() ==  android.R.id.home) {
             finish();
         }

@@ -24,6 +24,6 @@ android {
 dependencies {
     compile project(':viewPagerIndicator')
     compile 'com.android.support:support-v4:21.0.0'
-    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    compile 'com.android.support:appcompat-v7:21.0.+'
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:3.5.1'
 }

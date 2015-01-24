@@ -25,7 +25,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.numixproject.hermes.R;
-import org.numixproject.hermes.Yaaic;
+import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.adapter.ConversationPagerAdapter;
 import org.numixproject.hermes.adapter.MessageListAdapter;
 import org.numixproject.hermes.command.CommandParser;
@@ -66,9 +66,14 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
 import android.text.method.TextKeyListener;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.inputmethod.EditorInfo;
@@ -77,18 +82,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 
 /**
  * The server view with a scrollable list of all channels
  *
  * @author Sebastian Kaspari <sebastian@yaaic.org>
  */
-public class ConversationActivity extends SherlockActivity implements ServiceConnection, ServerListener, ConversationListener
+public class ConversationActivity extends ActionBarActivity implements ServiceConnection, ServerListener, ConversationListener
 {
     public static final int REQUEST_CODE_SPEECH = 99;
 
@@ -181,7 +181,7 @@ public class ConversationActivity extends SherlockActivity implements ServiceCon
         super.onCreate(savedInstanceState);
 
         serverId = getIntent().getExtras().getInt("serverId");
-        server = Yaaic.getInstance().getServerById(serverId);
+        server = Hermes.getInstance().getServerById(serverId);
         Settings settings = new Settings(this);
 
         // Finish activity if server does not exist anymore - See #55
@@ -429,8 +429,7 @@ public class ConversationActivity extends SherlockActivity implements ServiceCon
      * On menu item selected
      */
     @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case  android.R.id.home:
                 finish();

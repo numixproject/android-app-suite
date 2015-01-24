@@ -31,7 +31,7 @@ import org.jibble.pircbot.NickAlreadyInUseException;
 import org.jibble.pircbot.PircBot;
 import org.jibble.pircbot.User;
 import org.numixproject.hermes.R;
-import org.numixproject.hermes.Yaaic;
+import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.command.CommandParser;
 import org.numixproject.hermes.model.Broadcast;
 import org.numixproject.hermes.model.Channel;
@@ -72,7 +72,7 @@ public class IRCConnection extends PircBot
      */
     public IRCConnection(IRCService service, int serverId)
     {
-        this.server = Yaaic.getInstance().getServerById(serverId);
+        this.server = Hermes.getInstance().getServerById(serverId);
         this.service = service;
 
         this.debugTraffic = service.getSettings().debugTraffic();

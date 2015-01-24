@@ -29,8 +29,8 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:icon="@drawable/icon"
-        android:label="Yaaic"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Hermes"
         android:theme="@style/Theme.Yaaic"
         android:allowBackup="true">
         <activity

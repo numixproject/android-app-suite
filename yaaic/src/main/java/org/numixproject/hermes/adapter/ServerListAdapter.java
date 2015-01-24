@@ -23,7 +23,7 @@ package org.numixproject.hermes.adapter;
 import java.util.ArrayList;
 
 import org.numixproject.hermes.R;
-import org.numixproject.hermes.Yaaic;
+import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.model.Server;
 
 import android.content.Context;
@@ -61,7 +61,7 @@ public class ServerListAdapter extends BaseAdapter
      */
     public void loadServers()
     {
-        servers = Yaaic.getInstance().getServersAsArrayList();
+        servers = Hermes.getInstance().getServersAsArrayList();
         notifyDataSetChanged();
     }
 
