@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Yaaic" parent="Theme.AppCompat">
+    <style name="Theme.Yaaic" parent="Theme.AppCompat.NoActionBar">
         <!-- Main theme colors -->
         <!--   your app branding color for the app bar -->
-        <item name="colorPrimary">#757575</item>
-        <item name="colorPrimaryDark">#616161</item>
+        <item name="colorPrimary">#333333</item>
+        <item name="colorPrimaryDark">#242424</item>
         <item name="colorAccent">#ff9800</item>
+
     </style>
     <style name="edittext_holo" parent="@android:style/Widget.EditText">
         <item name="android:focusable">true</item>

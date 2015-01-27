@@ -44,6 +44,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -64,6 +65,7 @@ public class ServersActivity extends ActionBarActivity implements ServiceConnect
     private ServerReceiver receiver;
     private ServerListAdapter adapter;
     private ListView list;
+    private ListView mDrawerList;
     private static int instanceCount = 0;
 
     /**
@@ -94,6 +96,14 @@ public class ServersActivity extends ActionBarActivity implements ServiceConnect
         list.setAdapter(adapter);
         list.setOnItemClickListener(this);
         list.setOnItemLongClickListener(this);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerList.setAdapter(adapter);
+        mDrawerList.setOnItemClickListener(this);
+        mDrawerList.setOnItemLongClickListener(this);
+        Toolbar actionBar = (Toolbar) findViewById(R.id.action_bar);
+        if (actionBar != null) {
+            setSupportActionBar(actionBar);
+        }
     }
 
     /**
@@ -269,7 +279,7 @@ public class ServersActivity extends ActionBarActivity implements ServiceConnect
         MenuInflater inflater = new MenuInflater(this);
         inflater.inflate(R.menu.servers, menu);
 
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     /**
@@ -300,7 +310,7 @@ public class ServersActivity extends ActionBarActivity implements ServiceConnect
                 binder.getService().stopForegroundCompat(R.string.app_name);
         }
 
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     /**
