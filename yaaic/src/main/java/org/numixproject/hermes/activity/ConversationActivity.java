@@ -68,6 +68,7 @@ import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.method.TextKeyListener;
 import android.view.KeyEvent;
@@ -189,12 +190,15 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             this.finish();
         }
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
         setTitle(server.getTitle());
 
         setContentView(R.layout.conversations);
+
+        /* Action Bar */
+        Toolbar actionBar = (Toolbar) findViewById(R.id.action_bar);
+        if (actionBar != null) {
+            setSupportActionBar(actionBar);
+        }
 
         boolean isLandscape = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
 

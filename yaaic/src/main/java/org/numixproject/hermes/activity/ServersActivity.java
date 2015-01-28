@@ -43,7 +43,10 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -66,7 +69,9 @@ public class ServersActivity extends ActionBarActivity implements ServiceConnect
     private ServerListAdapter adapter;
     private ListView list;
     private ListView mDrawerList;
+    private DrawerLayout mDrawerLayout;
     private static int instanceCount = 0;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     /**
      * On create
@@ -100,11 +105,25 @@ public class ServersActivity extends ActionBarActivity implements ServiceConnect
         mDrawerList.setAdapter(adapter);
         mDrawerList.setOnItemClickListener(this);
         mDrawerList.setOnItemLongClickListener(this);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+
+        /* Action Bar */
         Toolbar actionBar = (Toolbar) findViewById(R.id.action_bar);
         if (actionBar != null) {
             setSupportActionBar(actionBar);
         }
+
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
+                this,  mDrawerLayout, actionBar,
+                R.string.drawer_open, R.string.drawer_close
+        );
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        mDrawerToggle.syncState();
     }
+
 
     /**
      * On Destroy
@@ -287,6 +306,11 @@ public class ServersActivity extends ActionBarActivity implements ServiceConnect
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
         switch (item.getItemId()) {
             case R.id.add:
                 startActivityForResult(new Intent(this, AddServerActivity.class), 0);
