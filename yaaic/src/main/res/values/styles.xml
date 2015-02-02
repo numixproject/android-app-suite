@@ -3,8 +3,8 @@
     <style name="Theme.Yaaic" parent="Theme.AppCompat.NoActionBar">
         <!-- Main theme colors -->
         <!--   your app branding color for the app bar -->
-        <item name="colorPrimary">#333333</item>
-        <item name="colorPrimaryDark">#242424</item>
+        <item name="colorPrimary">#ff9800</item>
+        <item name="colorPrimaryDark">#FB8C00</item>
         <item name="colorAccent">#ff9800</item>
 
     </style>

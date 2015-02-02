@@ -68,10 +68,7 @@ public class ServersActivity extends ActionBarActivity implements ServiceConnect
     private ServerReceiver receiver;
     private ServerListAdapter adapter;
     private ListView list;
-    private ListView mDrawerList;
-    private DrawerLayout mDrawerLayout;
     private static int instanceCount = 0;
-    private ActionBarDrawerToggle mDrawerToggle;
 
     /**
      * On create
@@ -101,27 +98,15 @@ public class ServersActivity extends ActionBarActivity implements ServiceConnect
         list.setAdapter(adapter);
         list.setOnItemClickListener(this);
         list.setOnItemLongClickListener(this);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerList.setAdapter(adapter);
-        mDrawerList.setOnItemClickListener(this);
-        mDrawerList.setOnItemLongClickListener(this);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+
 
         /* Action Bar */
         Toolbar actionBar = (Toolbar) findViewById(R.id.action_bar);
         if (actionBar != null) {
             setSupportActionBar(actionBar);
         }
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
-                this,  mDrawerLayout, actionBar,
-                R.string.drawer_open, R.string.drawer_close
-        );
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        mDrawerToggle.syncState();
     }
 
 
@@ -306,11 +291,6 @@ public class ServersActivity extends ActionBarActivity implements ServiceConnect
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
         switch (item.getItemId()) {
             case R.id.add:
                 startActivityForResult(new Intent(this, AddServerActivity.class), 0);
