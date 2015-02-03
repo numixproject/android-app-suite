@@ -25,5 +25,6 @@ dependencies {
     compile project(':viewPagerIndicator')
     compile 'com.android.support:support-v4:21.0.0'
     compile 'com.android.support:appcompat-v7:21.0.+'
+    compile 'it.neokree:MaterialNavigationDrawer:1.3'
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:3.5.1'
 }

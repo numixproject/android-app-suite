@@ -34,8 +34,9 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:theme="@style/Theme.Yaaic"
         android:allowBackup="true">
         <activity
-            android:name=".activity.ServersActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
+            android:theme="@style/MyNavigationDrawerTheme"
             android:launchMode="standard" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
