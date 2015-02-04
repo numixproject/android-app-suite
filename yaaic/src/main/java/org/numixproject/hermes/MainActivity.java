@@ -7,9 +7,16 @@ import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.SlidingPaneLayout;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.numixproject.hermes.activity.ServersActivity;
 import org.numixproject.hermes.adapter.ServerListAdapter;
@@ -26,6 +33,7 @@ import java.util.ArrayList;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
+import it.neokree.materialnavigationdrawer.elements.listeners.MaterialSectionListener;
 
 public class MainActivity extends MaterialNavigationDrawer implements ServiceConnection {
     private static int instanceCount = 0;
@@ -33,15 +41,39 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     private ServerReceiver receiver;
     private ServerListAdapter adapter;
 
+    private SlidingUpPanelLayout serverSliding = null;
+
+
     @Override
     public void init(Bundle savedInstanceState) {
-        MaterialSection section = newSection("Section 1", new ServersActivity());
-        MaterialSection section2 = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
+        MaterialSection home = newSection("Home", new ServersActivity());
+        MaterialSection addserver = newSection("Add new Server", new Intent(this, AddServerActivity.class));
+        MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
+        MaterialSection help = newSection("Help", R.drawable.ic_ic_help_24px , new Intent(this, SettingsActivity.class));
+        MaterialSection about = newSection("About", R.drawable.ic_ic_info_24px , new Intent(this, SettingsActivity.class));
 
-        addSection(section);
-        addSection(section2);
+        addSection(home);
+        addSection(addserver);
+        addBottomSection(settings);
+        addBottomSection(help);
+        addBottomSection(about);
+        setDrawerHeaderImage(R.drawable.cover);
 
-        section.setSectionColor(Color.rgb(255,152,0),Color.rgb(251,140,0));
+
+        this.addSection(newSection("Servers List", new MaterialSectionListener() {
+            @Override
+            public void onClick(MaterialSection section) {
+                FragmentManager fm = getSupportFragmentManager();
+
+//if you added fragment via layout xml
+                HomeFragment fragment = (HomeFragment)fm.findFragmentByTag("serverFragment");
+                fragment.openServerPane();
+            }
+        }));
+
+
+
+
 
              /*
          * With activity:launchMode = standard, we get duplicated activities
@@ -116,7 +148,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
      * On activity result
      */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+         protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         if (resultCode == RESULT_OK) {
             // Refresh list from database

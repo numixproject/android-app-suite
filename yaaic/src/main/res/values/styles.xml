@@ -6,13 +6,14 @@
         <item name="colorAccent">#ff9800</item>
 
     </style>
-    <style name="MyNavigationDrawerTheme" parent="MaterialNavigationDrawerTheme.TranslucentKitKatStatusBar">
+    <style name="MyNavigationDrawerTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar.TranslucentKitKatStatusBar">
         <item name="colorPrimary">#ff9800</item>
         <item name="colorPrimaryDark">#FB8C00</item>
         <item name="singleAccount">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
         <item name="colorAccent">#ff9800</item>
         <item name="multipaneSupport">true</item>
-        <item name="drawerType">@integer/DRAWERTYPE_NO_HEADER</item>
+        <item name="drawerType">@integer/DRAWERTYPE_IMAGE</item>
         <item name="rippleBackport">true</item>
     </style>
     <style name="edittext_holo" parent="@android:style/Widget.EditText">

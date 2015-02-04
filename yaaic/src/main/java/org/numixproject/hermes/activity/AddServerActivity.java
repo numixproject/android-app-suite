@@ -80,7 +80,6 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         setContentView(R.layout.serveradd);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
 
         authentication = new Authentication();
         aliases = new ArrayList<String>();

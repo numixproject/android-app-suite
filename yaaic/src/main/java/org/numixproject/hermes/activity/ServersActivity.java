@@ -17,6 +17,7 @@ package org.numixproject.hermes.activity;
 
 import java.util.ArrayList;
 
+import org.numixproject.hermes.HomeFragment;
 import org.numixproject.hermes.R;
 import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.adapter.ServerListAdapter;
@@ -40,6 +41,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -54,9 +56,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 /**
  * List of servers
@@ -69,24 +74,39 @@ public class ServersActivity extends Fragment implements ServiceConnection, Serv
     private ServerListAdapter adapter;
     private ListView list;
     private static int instanceCount = 0;
+    private SlidingUpPanelLayout serverSliding = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentActivity faActivity  = (FragmentActivity)    super.getActivity();
-        LinearLayout llLayout    = (LinearLayout)    inflater.inflate(R.layout.servers, container, false);
+        FrameLayout llLayout    = (FrameLayout)    inflater.inflate(R.layout.servers, container, false);
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.home_fragment, new HomeFragment(), "serverFragment");
+        ft.commit();
+
+        HomeFragment fragB = (HomeFragment) getFragmentManager().findFragmentByTag("serverFragment");
+
+        View V = inflater.inflate(R.layout.server_sliding_fragment, container, false);
 
         adapter = new ServerListAdapter();
 
-        list = (ListView) llLayout.findViewById(android.R.id.list);
+        list = (ListView) V.findViewById(android.R.id.list);
         list.setAdapter(adapter);
         list.setOnItemClickListener(this);
         list.setOnItemLongClickListener(this);
 
         llLayout.findViewById(R.id.mainLayout);
 
+        serverSliding = (SlidingUpPanelLayout) llLayout.findViewById(R.id.sliding_layout);
+        serverSliding.setEnableDragViewTouchEvents(true);
+
         return llLayout;
     }
 
+    public void openServerPane() {
+        serverSliding.expandPanel();
+    }
 
     /**
      * On Destroy

@@ -1,0 +1,45 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:tag="serverFragment"
+    android:id="@+id/home_mainFragment"
+    android:layout_height="fill_parent">
+
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sliding_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top"
+    sothree:panelHeight="15dp"
+    sothree:shadowHeight="4dp">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:background="#dedede"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="HOME Page here!"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:layout_width="fill_parent"
+        android:background="#FB8C00"
+        android:layout_height="fill_parent">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="SERVER LIST HERE!"
+            android:textColor="#ffffff"/>
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="1px"
+            android:layout_height="1px" />
+    </LinearLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
+</FrameLayout>
