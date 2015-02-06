@@ -46,6 +46,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
     @Override
     public void init(Bundle savedInstanceState) {
+        allowArrowAnimation();
         MaterialSection home = newSection("Home", new ServersActivity());
         MaterialSection addserver = newSection("Add new Server", new Intent(this, AddServerActivity.class));
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));

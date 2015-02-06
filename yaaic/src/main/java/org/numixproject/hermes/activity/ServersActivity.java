@@ -37,6 +37,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
@@ -62,6 +63,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 
 /**
  * List of servers
@@ -126,6 +129,10 @@ public class ServersActivity extends Fragment implements ServiceConnection, Serv
     {
         super.onResume();
 
+        ((MaterialNavigationDrawer)this.getActivity()).changeToolbarColor(Color.rgb(255,152,0),
+                Color.rgb(251,140,0)
+        );
+
         // Start and connect to service
         Intent intent = new Intent(super.getActivity(), IRCService.class);
         intent.setAction(IRCService.ACTION_BACKGROUND);
@@ -136,6 +143,8 @@ public class ServersActivity extends Fragment implements ServiceConnection, Serv
         super.getActivity().registerReceiver(receiver, new IntentFilter(Broadcast.SERVER_UPDATE));
 
         adapter.loadServers();
+
+
     }
 
     /**
@@ -268,7 +277,6 @@ public class ServersActivity extends Fragment implements ServiceConnection, Serv
             startActivityForResult(intent, 0);
         }
     }
-
 
     /**
      * On menu item selected
