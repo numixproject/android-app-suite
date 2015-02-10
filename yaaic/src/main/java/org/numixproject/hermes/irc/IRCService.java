@@ -29,9 +29,9 @@ import java.util.LinkedHashMap;
 
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
+import org.numixproject.hermes.HomeFragment;
 import org.numixproject.hermes.R;
 import org.numixproject.hermes.Hermes;
-import org.numixproject.hermes.activity.ServersActivity;
 import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.model.Broadcast;
 import org.numixproject.hermes.model.Conversation;
@@ -199,7 +199,7 @@ public class IRCService extends Service
             notification = new Notification(R.drawable.icon, getText(R.string.notification_running), System.currentTimeMillis());
 
             // The PendingIntent to launch our activity if the user selects this notification
-            Intent notifyIntent = new Intent(this, ServersActivity.class);
+            Intent notifyIntent = new Intent(this, HomeFragment.class);
             notifyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notifyIntent, 0);
 
@@ -227,7 +227,7 @@ public class IRCService extends Service
     {
         if (foreground) {
             notification = new Notification(R.drawable.icon, text, System.currentTimeMillis());
-            Intent notifyIntent = new Intent(this, ServersActivity.class);
+            Intent notifyIntent = new Intent(this, HomeFragment.class);
             notifyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notifyIntent, 0);
 

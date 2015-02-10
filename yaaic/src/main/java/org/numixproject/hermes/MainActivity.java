@@ -1,6 +1,5 @@
 package org.numixproject.hermes;
 
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -8,20 +7,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.SlidingPaneLayout;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
-import org.numixproject.hermes.activity.ServersActivity;
 import org.numixproject.hermes.adapter.ServerListAdapter;
 import org.numixproject.hermes.irc.IRCBinder;
-import org.numixproject.hermes.irc.IRCService;
 import org.numixproject.hermes.activity.AboutActivity;
 import org.numixproject.hermes.activity.AddServerActivity;
 import org.numixproject.hermes.activity.SettingsActivity;
@@ -41,17 +34,22 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     private ServerReceiver receiver;
     private ServerListAdapter adapter;
 
-    private SlidingUpPanelLayout serverSliding = null;
+
 
 
     @Override
     public void init(Bundle savedInstanceState) {
         allowArrowAnimation();
-        MaterialSection home = newSection("Home", new ServersActivity());
+
+        final MaterialSection home = newSection("Home", new HomeFragment());
         MaterialSection addserver = newSection("Add new Server", new Intent(this, AddServerActivity.class));
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
         MaterialSection help = newSection("Help", R.drawable.ic_ic_help_24px , new Intent(this, SettingsActivity.class));
         MaterialSection about = newSection("About", R.drawable.ic_ic_info_24px , new Intent(this, SettingsActivity.class));
+
+        final FragmentManager fm = getSupportFragmentManager();
+        final HomeFragment fragment = (HomeFragment)home.getTargetFragment();
+
 
         addSection(home);
         addSection(addserver);
@@ -60,14 +58,12 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         addBottomSection(about);
         setDrawerHeaderImage(R.drawable.cover);
 
+        home.setSectionColor(Color.rgb(255,152,0),Color.rgb(251,140,0)
+        );
 
         this.addSection(newSection("Servers List", new MaterialSectionListener() {
             @Override
             public void onClick(MaterialSection section) {
-                FragmentManager fm = getSupportFragmentManager();
-
-//if you added fragment via layout xml
-                HomeFragment fragment = (HomeFragment)fm.findFragmentByTag("serverFragment");
                 fragment.openServerPane();
             }
         }));
