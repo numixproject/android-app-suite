@@ -39,10 +39,9 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
     @Override
     public void init(Bundle savedInstanceState) {
-        allowArrowAnimation();
 
-        final MaterialSection home = newSection("Home", new HomeFragment());
-        MaterialSection addserver = newSection("Add new Server", new Intent(this, AddServerActivity.class));
+        MaterialSection home = newSection("Chat", new HomeFragment());
+        MaterialSection addserver = newSection("Add new server", new Intent(this, AddServerActivity.class));
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
         MaterialSection help = newSection("Help", R.drawable.ic_ic_help_24px , new Intent(this, SettingsActivity.class));
         MaterialSection about = newSection("About", R.drawable.ic_ic_info_24px , new Intent(this, SettingsActivity.class));
@@ -50,25 +49,19 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         final FragmentManager fm = getSupportFragmentManager();
         final HomeFragment fragment = (HomeFragment)home.getTargetFragment();
 
-
         addSection(home);
-        addSection(addserver);
-        addBottomSection(settings);
-        addBottomSection(help);
-        addBottomSection(about);
-        setDrawerHeaderImage(R.drawable.cover);
-
-        home.setSectionColor(Color.rgb(255,152,0),Color.rgb(251,140,0)
-        );
-
-        this.addSection(newSection("Servers List", new MaterialSectionListener() {
+        this.addSection(newSection("Connect to ...", new MaterialSectionListener() {
             @Override
             public void onClick(MaterialSection section) {
                 fragment.openServerPane();
             }
         }));
-
-
+        addSection(addserver);
+        addBottomSection(settings);
+        addBottomSection(help);
+        addBottomSection(about);
+        setDrawerHeaderImage(R.drawable.cover);
+        allowArrowAnimation();
 
 
 
@@ -112,7 +105,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
     /**
      * On menu item selected
-     */
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -140,7 +133,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
         return super.onOptionsItemSelected(item);
     }
-
+*/
     /**
      * On activity result
      */

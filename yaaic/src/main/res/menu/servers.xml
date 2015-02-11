@@ -22,6 +22,12 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/search"
+        android:title="Search"
+        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+        android:showAsAction="collapseActionView|ifRoom"
+        android:actionViewClass="android.widget.SearchView" />
+<!--
         <item
             android:id="@+id/add"
             android:title="@string/add_server_menu"
@@ -38,4 +44,5 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:id="@+id/about"
             android:title="@string/about_menu"
             android:icon="@android:drawable/ic_menu_help" />
+    -->
     </menu>

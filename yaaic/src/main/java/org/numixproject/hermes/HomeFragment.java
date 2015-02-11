@@ -244,7 +244,7 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
 
     /**
      * On menu item selected
-     */
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -272,7 +272,7 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
 
         return super.onOptionsItemSelected(item);
     }
-
+/*
 
     /**
      * Delete server

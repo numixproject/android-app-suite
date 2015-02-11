@@ -29,7 +29,7 @@
         android:orientation="vertical"
         android:gravity="bottom"
         android:layout_width="fill_parent"
-        android:background="#FB8C00"
+        android:background="#994baeae"
         android:layout_height="fill_parent">
         <TextView
             android:layout_width="fill_parent"
