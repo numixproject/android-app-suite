@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Yaaic" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">#8681d1</item>
-        <item name="colorPrimaryDark">#8681d1</item>
-        <item name="colorAccent">#ff9800</item>
-
-    </style>
-    <style name="MyNavigationDrawerTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
+    <style name="MyNavigationDrawerTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar.TranslucentKitKatStatusBar">
         <item name="colorPrimary">#4baeae</item>
         <item name="colorPrimaryDark">#4baeae</item>
         <item name="singleAccount">true</item>

@@ -23,7 +23,9 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
     package="org.numixproject.hermes"
     android:installLocation="auto"
     android:versionCode="1"
-    android:versionName="0.1" >
+    android:versionName="0.1"
+    android:theme="@style/MyNavigationDrawerTheme"
+    >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -47,6 +49,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         </activity>
         <activity
             android:name=".activity.AddServerActivity"
+            android:theme="@style/MyNavigationDrawerTheme"
             android:label="@string/add_server_label" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

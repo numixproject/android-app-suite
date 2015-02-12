@@ -93,9 +93,7 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
     {
         super.onResume();
 
-        ((MaterialNavigationDrawer)this.getActivity()).changeToolbarColor(Color.rgb(255, 152, 0),
-                Color.rgb(251,140,0)
-        );
+
 
         // Start and connect to service
         Intent intent = new Intent(super.getActivity(), IRCService.class);

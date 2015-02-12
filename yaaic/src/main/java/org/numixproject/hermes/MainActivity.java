@@ -40,16 +40,18 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     @Override
     public void init(Bundle savedInstanceState) {
 
-        MaterialSection home = newSection("Chat", new HomeFragment());
+        MaterialSection home2 = newSection("Chat", new HomeFragment());
         MaterialSection addserver = newSection("Add new server", new Intent(this, AddServerActivity.class));
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
         MaterialSection help = newSection("Help", R.drawable.ic_ic_help_24px , new Intent(this, SettingsActivity.class));
         MaterialSection about = newSection("About", R.drawable.ic_ic_info_24px , new Intent(this, SettingsActivity.class));
 
+        addSection(home2);
         final FragmentManager fm = getSupportFragmentManager();
-        final HomeFragment fragment = (HomeFragment)home.getTargetFragment();
+        final HomeFragment fragment = (HomeFragment)home2.getTargetFragment();
 
-        addSection(home);
+
+
         this.addSection(newSection("Connect to ...", new MaterialSectionListener() {
             @Override
             public void onClick(MaterialSection section) {
