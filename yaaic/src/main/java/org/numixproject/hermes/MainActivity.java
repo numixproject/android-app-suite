@@ -2,6 +2,7 @@ package org.numixproject.hermes;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,6 +19,9 @@ import org.numixproject.hermes.irc.IRCBinder;
 import org.numixproject.hermes.activity.AboutActivity;
 import org.numixproject.hermes.activity.AddServerActivity;
 import org.numixproject.hermes.activity.SettingsActivity;
+import org.numixproject.hermes.irc.IRCService;
+import org.numixproject.hermes.listener.ServerListener;
+import org.numixproject.hermes.model.Broadcast;
 import org.numixproject.hermes.model.Server;
 import org.numixproject.hermes.model.Status;
 import org.numixproject.hermes.receiver.ServerReceiver;
@@ -28,7 +32,7 @@ import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 import it.neokree.materialnavigationdrawer.elements.listeners.MaterialSectionListener;
 
-public class MainActivity extends MaterialNavigationDrawer implements ServiceConnection {
+public class MainActivity extends MaterialNavigationDrawer implements ServiceConnection, ServerListener {
     private static int instanceCount = 0;
     private IRCBinder binder;
     private ServerReceiver receiver;
@@ -40,16 +44,19 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     @Override
     public void init(Bundle savedInstanceState) {
 
-        MaterialSection home2 = newSection("Chat", new HomeFragment());
+        MaterialSection home = newSection("Chat", new HomeFragment());
         MaterialSection addserver = newSection("Add new server", new Intent(this, AddServerActivity.class));
+        MaterialSection notifications = newSection("Snooze Notifications", new Intent(this, SettingsActivity.class));
+        MaterialSection pro = newSection("Upgrade to Pro",  new Intent(this, SettingsActivity.class));
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
         MaterialSection help = newSection("Help", R.drawable.ic_ic_help_24px , new Intent(this, SettingsActivity.class));
-        MaterialSection about = newSection("About", R.drawable.ic_ic_info_24px , new Intent(this, SettingsActivity.class));
+        MaterialSection about = newSection("About", R.drawable.ic_ic_info_24px , new Intent(this, AboutActivity.class));
 
-        addSection(home2);
+        addSection(home);
         final FragmentManager fm = getSupportFragmentManager();
-        final HomeFragment fragment = (HomeFragment)home2.getTargetFragment();
+        final HomeFragment fragment = (HomeFragment)home.getTargetFragment();
 
+        this.addSubheader("Servers");
 
 
         this.addSection(newSection("Connect to ...", new MaterialSectionListener() {
@@ -58,7 +65,27 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
                 fragment.openServerPane();
             }
         }));
+
+
         addSection(addserver);
+
+
+        this.addSection(newSection("Disconnect all", new MaterialSectionListener() {
+            @Override
+            public void onClick(MaterialSection section) {
+                ArrayList<Server> mServers = Hermes.getInstance().getServersAsArrayList();
+                for (Server server : mServers) {
+                    if (binder.getService().hasConnection(server.getId())) {
+                        server.setStatus(Status.DISCONNECTED);
+                        server.setMayReconnect(false);
+                        binder.getService().getConnection(server.getId()).quitServer();
+                    }
+                }
+                // ugly
+                binder.getService().stopForegroundCompat(R.string.app_name);            }
+        }));
+        addBottomSection(notifications);
+        addBottomSection(pro);
         addBottomSection(settings);
         addBottomSection(help);
         addBottomSection(about);
@@ -82,6 +109,50 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         }
         instanceCount++;
     }
+
+    /**
+     * On pause
+     */
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+
+        if (binder != null && binder.getService() != null) {
+            binder.getService().checkServiceStatus();
+        }
+
+        unbindService(this);
+        unregisterReceiver(receiver);
+    }
+
+
+    /**
+     * On server status update
+     */
+    @Override
+    public void onStatusUpdate()
+    {
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+
+
+        // Start and connect to service
+        Intent intent = new Intent(this, IRCService.class);
+        intent.setAction(IRCService.ACTION_BACKGROUND);
+        startService(intent);
+        bindService(intent, this, 0);
+
+        receiver = new ServerReceiver(this);
+        registerReceiver(receiver, new IntentFilter(Broadcast.SERVER_UPDATE));
+
+    }
+
 
     @Override
     public void onDestroy()
@@ -136,17 +207,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         return super.onOptionsItemSelected(item);
     }
 */
-    /**
-     * On activity result
-     */
-    @Override
-         protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if (resultCode == RESULT_OK) {
-            // Refresh list from database
-            adapter.loadServers();
-        }
-    }
 
     /**
      * Service connected to Activity
