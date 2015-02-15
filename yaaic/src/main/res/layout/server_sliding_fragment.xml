@@ -25,21 +25,19 @@
             android:text="HOME Page here!"
             android:textColor="#ffffff"/>
     </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:gravity="bottom"
-        android:layout_width="fill_parent"
-        android:background="#994baeae"
-        android:layout_height="fill_parent">
-        <TextView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="SERVER LIST HERE!"
-            android:textColor="#ffffff"/>
-        <ListView
-            android:id="@android:id/list"
-            android:layout_width="1px"
-            android:layout_height="1px" />
-    </LinearLayout>
+            android:layout_height="fill_parent">
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+        </LinearLayout>
+    </RelativeLayout>
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 </FrameLayout>

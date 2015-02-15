@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,6 +65,7 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
         serverSliding.setEnableDragViewTouchEvents(true);
 
         adapter = new ServerListAdapter();
+
 
         list = (ListView) llLayout.findViewById(android.R.id.list);
         list.setAdapter(adapter);
