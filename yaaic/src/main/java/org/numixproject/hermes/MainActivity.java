@@ -44,22 +44,21 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     @Override
     public void init(Bundle savedInstanceState) {
 
-        MaterialSection home = newSection("Chat", new HomeFragment());
-        MaterialSection addserver = newSection("Add new server", new Intent(this, AddServerActivity.class));
-        MaterialSection notifications = newSection("Snooze Notifications", new Intent(this, SettingsActivity.class));
-        MaterialSection pro = newSection("Upgrade to Pro",  new Intent(this, SettingsActivity.class));
+        MaterialSection home = newSection("Chat", R.drawable.ic_ic_chat_24px, new HomeFragment());
+        MaterialSection addserver = newSection("Add new server", R.drawable.ic_ic_add_24px, new Intent(this, AddServerActivity.class));
+        MaterialSection notifications = newSection("Snooze Notifications", R.drawable.ic_ic_notifications_off_24px, new Intent(this, SettingsActivity.class));
+        MaterialSection pro = newSection("Unlock all features", R.drawable.ic_ic_vpn_key_24px,  new Intent(this, SettingsActivity.class));
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
         MaterialSection help = newSection("Help", R.drawable.ic_ic_help_24px , new Intent(this, SettingsActivity.class));
         MaterialSection about = newSection("About", R.drawable.ic_ic_info_24px , new Intent(this, AboutActivity.class));
 
         addSection(home);
-        final FragmentManager fm = getSupportFragmentManager();
         final HomeFragment fragment = (HomeFragment)home.getTargetFragment();
 
         this.addSubheader("Servers");
 
 
-        this.addSection(newSection("Connect to ...", new MaterialSectionListener() {
+        this.addSection(newSection("Connect to ...", R.drawable.ic_ic_swap_horiz_24px, new MaterialSectionListener() {
             @Override
             public void onClick(MaterialSection section) {
                 fragment.openServerPane();
@@ -70,7 +69,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         addSection(addserver);
 
 
-        this.addSection(newSection("Disconnect all", new MaterialSectionListener() {
+        this.addSection(newSection("Disconnect all", R.drawable.ic_ic_close_24px, new MaterialSectionListener() {
             @Override
             public void onClick(MaterialSection section) {
                 ArrayList<Server> mServers = Hermes.getInstance().getServersAsArrayList();
