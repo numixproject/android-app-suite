@@ -7,6 +7,7 @@
         <item name="colorAccent">#ff9800</item>
         <item name="multipaneSupport">true</item>
         <item name="drawerType">@integer/DRAWERTYPE_IMAGE</item>
+        <item name="android:windowContentOverlay">@drawable/above_shadow</item>
         <item name="rippleBackport">true</item>
     </style>
     <style name="edittext_holo" parent="@android:style/Widget.EditText">

@@ -27,11 +27,13 @@ import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.model.Server;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -41,8 +43,8 @@ import android.widget.TextView;
  */
 public class ServerListAdapter extends BaseAdapter
 {
-    private static final int COLOR_CONNECTED    = 0xFFbcbcbc;
-    private static final int COLOR_DISCONNECTED = 0xFF585858;
+    private static final int COLOR_CONNECTED    = Color.parseColor("#4BAEAE");
+    private static final int COLOR_DISCONNECTED = Color.parseColor("#9E9E9E");
 
     private ArrayList<Server> servers;
 
@@ -137,16 +139,15 @@ public class ServerListAdapter extends BaseAdapter
 
         TextView hostView = (TextView) v.findViewById(R.id.host);
         hostView.setText(server.getIdentity().getNickname() + " @ " + server.getHost() + " : " + server.getPort());
+        LinearLayout serverCard = (LinearLayout) v.findViewById(R.id.server_card);
 
         if (server.isConnected()) {
-            titleView.setTextColor(COLOR_CONNECTED);
-            hostView.setTextColor(COLOR_CONNECTED);
+            serverCard.setBackgroundColor(COLOR_CONNECTED);
+            // hostView.setTextColor(COLOR_CONNECTED);
         } else {
-            titleView.setTextColor(COLOR_DISCONNECTED);
-            hostView.setTextColor(COLOR_DISCONNECTED);
+            serverCard.setBackgroundColor(COLOR_DISCONNECTED);
+            // hostView.setTextColor(COLOR_DISCONNECTED);
         }
-
-        ((ImageView) v.findViewById(R.id.status)).setImageResource(server.getStatusIcon());
 
         return v;
     }
