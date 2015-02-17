@@ -194,11 +194,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         setContentView(R.layout.conversations);
 
-        /* Action Bar */
-        Toolbar actionBar = (Toolbar) findViewById(R.id.action_bar);
-        if (actionBar != null) {
-            setSupportActionBar(actionBar);
-        }
 
         boolean isLandscape = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
 

@@ -32,7 +32,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -47,7 +46,7 @@ public class ServerListAdapter extends BaseAdapter
     private static final int COLOR_DISCONNECTED = Color.parseColor("#9E9E9E");
 
     private ArrayList<Server> servers;
-
+    ArrayList<String> channels = new ArrayList<String>();
     /**
      * Create a new adapter for server lists
      */
@@ -140,6 +139,24 @@ public class ServerListAdapter extends BaseAdapter
         TextView hostView = (TextView) v.findViewById(R.id.host);
         hostView.setText(server.getIdentity().getNickname() + " @ " + server.getHost() + " : " + server.getPort());
         LinearLayout serverCard = (LinearLayout) v.findViewById(R.id.server_card);
+
+        channels = server.getCurrentChannelNames();
+        TextView channelsList = (TextView) v.findViewById(R.id.channel_list);
+
+        String s = "";
+        for (int i = 0; i < channels.size(); i++) {
+            s += channels.get(i) + "\n";
+        }
+        channelsList.setText(s);
+
+        TextView serverRooms = (TextView) v.findViewById(R.id.server_rooms);
+
+        if(channels.isEmpty())
+        {
+        serverRooms.setVisibility(View.INVISIBLE);
+        } else {
+            serverRooms.setVisibility(View.VISIBLE);
+        }
 
         if (server.isConnected()) {
             serverCard.setBackgroundColor(COLOR_CONNECTED);

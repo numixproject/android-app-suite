@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Hermes" parent="Theme.AppCompat">
+        <item name="colorPrimary">#4baeae</item>
+        <item name="colorPrimaryDark">#4baeae</item>
+        <item name="colorAccent">#ff9800</item>
+    </style>
     <style name="MyNavigationDrawerTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar.TranslucentKitKatStatusBar">
         <item name="colorPrimary">#4baeae</item>
         <item name="colorPrimaryDark">#4baeae</item>
@@ -10,14 +15,12 @@
         <item name="android:windowContentOverlay">@drawable/above_shadow</item>
         <item name="rippleBackport">true</item>
     </style>
-    <style name="edittext_holo" parent="@android:style/Widget.EditText">
-        <item name="android:focusable">true</item>
-        <item name="android:focusableInTouchMode">true</item>
-        <item name="android:clickable">true</item>
-        <item name="android:background">@drawable/edit_text_holo_dark</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:textColorHint">#FFFFFF</item>
-        <item name="android:textColorHighlight">#FF0000</item>
+    <style name="HermesDialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorPrimary">#4baeae</item>
+        <item name="colorPrimaryDark">#4baeae</item>
+        <item name="colorAccent">#ff9800</item>
+    </style>
+
+    <style name="edittext_holo" parent="Widget.AppCompat.EditText">
      </style>
 </resources>

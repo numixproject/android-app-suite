@@ -67,7 +67,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         <activity
             android:name=".activity.AboutActivity"
             android:label="@string/about_label"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@style/HermesDialog" >
         </activity>
         <activity
             android:name=".activity.SettingsActivity"
@@ -76,36 +76,36 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         <activity
             android:name=".activity.JoinActivity"
             android:label="@string/join_label"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@style/HermesDialog" >
         </activity>
         <activity
             android:name=".activity.UsersActivity"
             android:label="@string/users"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@style/HermesDialog" >
         </activity>
         <activity
             android:name=".activity.AddAliasActivity"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@style/HermesDialog" >
         </activity>
         <activity
             android:name=".activity.AddChannelActivity"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@style/HermesDialog" >
         </activity>
         <activity
             android:name=".activity.AddCommandsActivity"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@style/HermesDialog" >
         </activity>
         <activity
             android:name=".activity.MessageActivity"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@style/HermesDialog" >
         </activity>
         <activity
             android:name=".activity.UserActivity"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@style/HermesDialog" >
         </activity>
         <activity
             android:name=".activity.AuthenticationActivity"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@style/HermesDialog" >
         </activity>
 
         <service android:name=".irc.IRCService" >

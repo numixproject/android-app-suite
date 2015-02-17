@@ -38,13 +38,16 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/server_card"
+        android:orientation="horizontal"
         android:background="#42595D">
         <TextView
             android:id="@+id/title"
             android:padding="20dp"
-            android:layout_width="fill_parent"
+            android:gravity="start"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Server"
+            android:layout_weight="0.9"
             android:textColor="#ffffff"
             android:textSize="25sp" />
 
@@ -62,6 +65,25 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
            android:layout_height="wrap_content"
            android:text="irc.example.com"
            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:id="@+id/server_rooms"
+            android:layout_height="wrap_content"
+            android:text="Rooms:"/>
+
+        <TextView
+            android:id="@+id/channel_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="irc.example.com"
+            android:textSize="12sp" />
     </LinearLayout>
 </LinearLayout>
 </android.support.v7.widget.CardView>
