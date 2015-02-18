@@ -264,6 +264,14 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         input.setInputType(input.getInputType() | setInputTypeFlags);
 
+        input.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSoftKeyboard(v);
+            }
+
+        });
+
         // Create a new scrollback history
         scrollback = new Scrollback();
     }

@@ -62,6 +62,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         </activity>
         <activity
             android:name=".activity.ConversationActivity"
+            android:theme="@style/Hermes"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
