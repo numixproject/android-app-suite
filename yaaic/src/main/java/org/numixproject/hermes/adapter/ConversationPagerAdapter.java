@@ -44,8 +44,8 @@ import com.viewpagerindicator.TitlePageIndicator;
  */
 public class ConversationPagerAdapter extends PagerAdapter implements ConversationStateProvider
 {
-    public static final int COLOR_NONE      = Color.parseColor("#55EEEEEE");
-    public static final int COLOR_DEFAULT   = Color.parseColor("#55EEEEEE");
+    public static final int COLOR_NONE      = Color.parseColor("#55333333");
+    public static final int COLOR_DEFAULT   = Color.parseColor("#55333333");
     public static final int COLOR_MESSAGE   = 0xFFFFEB3B;
     public static final int COLOR_HIGHLIGHT = 0xFFF44336;
 

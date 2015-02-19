@@ -212,14 +212,14 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         indicator = (ConversationIndicator) findViewById(R.id.titleIndicator);
         indicator.setServer(server);
         indicator.setViewPager(pager);
-        indicator.setFooterColor(Color.parseColor("#009688"));
-        indicator.setFooterLineHeight(0);
+        indicator.setFooterColor(Color.parseColor("#d1d1d1"));
+        indicator.setFooterLineHeight(2);
         indicator.setFooterIndicatorHeight(3 * density);
         indicator.setPadding(10,10,10,10);
-        indicator.setFooterIndicatorStyle(IndicatorStyle.None);
-        indicator.setSelectedColor(0xFFFFFFFF);
-        indicator.setSelectedBold(true);
-        indicator.setBackgroundColor(Color.parseColor("#5bb6b3"));
+        indicator.setFooterIndicatorStyle(IndicatorStyle.Underline);
+        indicator.setSelectedColor(0xFF222222);
+        indicator.setSelectedBold(false);
+        indicator.setBackgroundColor(Color.parseColor("#eeeeee"));
 
         historySize = settings.getHistorySize();
 
