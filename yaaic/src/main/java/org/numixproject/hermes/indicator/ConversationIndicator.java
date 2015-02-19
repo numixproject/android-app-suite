@@ -216,9 +216,10 @@ public class ConversationIndicator extends FrameLayout implements OnPageChangeLi
     /**
      * Set the text size for the title indicator.
      *
+     * @param complexUnitSp
      * @param textSize
      */
-    public void setTextSize(float textSize)
+    public void setTextSize(int complexUnitSp, float textSize)
     {
         titleIndicator.setTextSize(textSize);
     }

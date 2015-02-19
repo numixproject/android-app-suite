@@ -25,6 +25,7 @@ import org.numixproject.hermes.adapter.MessageListAdapter;
 import org.numixproject.hermes.listener.MessageClickListener;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.widget.ListView;
 
 /**
@@ -49,7 +50,7 @@ public class MessageListView extends ListView
 
         setCacheColorHint(0x000000);
         setVerticalFadingEdgeEnabled(false);
-        setBackgroundResource(R.drawable.conversation_background);
+        setBackgroundColor(Color.parseColor("#FFFFFF"));
         setScrollBarStyle(SCROLLBARS_OUTSIDE_INSET);
 
         // Scale padding by screen density

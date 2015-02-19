@@ -60,6 +60,7 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -71,6 +72,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.method.TextKeyListener;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -209,16 +211,15 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         indicator = (ConversationIndicator) findViewById(R.id.titleIndicator);
         indicator.setServer(server);
-        indicator.setTypeface(Typeface.MONOSPACE);
         indicator.setViewPager(pager);
-
-        indicator.setFooterColor(0xFF31B6E7);
-        indicator.setFooterLineHeight(1 * density);
+        indicator.setFooterColor(Color.parseColor("#009688"));
+        indicator.setFooterLineHeight(0);
         indicator.setFooterIndicatorHeight(3 * density);
-        indicator.setFooterIndicatorStyle(IndicatorStyle.Underline);
+        indicator.setPadding(10,10,10,10);
+        indicator.setFooterIndicatorStyle(IndicatorStyle.None);
         indicator.setSelectedColor(0xFFFFFFFF);
         indicator.setSelectedBold(true);
-        indicator.setBackgroundColor(0xFF181818);
+        indicator.setBackgroundColor(Color.parseColor("#5bb6b3"));
 
         historySize = settings.getHistorySize();
 
@@ -229,7 +230,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         }
 
         float fontSize = settings.getFontSize();
-        indicator.setTextSize(fontSize * density);
+        indicator.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
 
         input.setTextSize(settings.getFontSize());
         input.setTypeface(Typeface.MONOSPACE);

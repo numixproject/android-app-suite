@@ -23,7 +23,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
     <item
         android:id="@+id/join"
         android:title="@string/join_channel"
-        android:icon="@drawable/actionbar_add"
+        android:icon="@drawable/ic_action_ic_add_24px"
         android:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/users"

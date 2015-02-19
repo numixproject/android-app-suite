@@ -50,7 +50,7 @@ public class Message
     public static final int COLOR_BLUE    = 0xFF729fcf;
     public static final int COLOR_YELLOW  = 0xFFbe9b01;
     public static final int COLOR_GREY    = 0xFFaaaaaa;
-    public static final int COLOR_DEFAULT = 0xFFeeeeee;
+    public static final int COLOR_DEFAULT = 0xFF212121;
 
     /* normal message, this is the default */
     public static final int TYPE_MESSAGE = 0;
@@ -58,24 +58,22 @@ public class Message
     /* join, part or quit */
     public static final int TYPE_MISC    = 1;
 
-    /* Some are light versions because dark colors hardly readable on
-     * Yaaic's dark background */
     public static final int[] colors = {
         0xFFffffff, // White
         0xFFffff00, // Yellow
         0xFFff00ff, // Fuchsia
         0xFFff0000, // Red
         0xFFc0c0c0, // Silver
-        0xFF808080, // Gray
+        0xFF9E9E9E, // Material Gray
         0xFF808000, // Olive
-        0xFFC040C0, // Light Purple
-        0xFFC04040, // Light Maroon
+        0xFF4A148C, // Material Purple
+        0xFF3E2723, // Material Brown
         0xFF00ffff, // Agua
-        0xFF80ff80, // Light Lime
+        0xFFCDDC39, // Material Lime
         0xFF008080, // Teal
         0xFF008000, // Green
-        0xFF8484FF, // Light Blue
-        0xFF6060D0, // Light Navy
+        0xFF1565C0, // Material Blue
+        0xFF388E3C, // Material Green
         0xFF000000, // Black
     };
 

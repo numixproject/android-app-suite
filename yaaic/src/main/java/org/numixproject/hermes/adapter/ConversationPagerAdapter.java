@@ -30,6 +30,7 @@ import org.numixproject.hermes.model.Server;
 import org.numixproject.hermes.view.MessageListView;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -43,10 +44,10 @@ import com.viewpagerindicator.TitlePageIndicator;
  */
 public class ConversationPagerAdapter extends PagerAdapter implements ConversationStateProvider
 {
-    public static final int COLOR_NONE      = 0x0;
-    public static final int COLOR_DEFAULT   = 0xFFDDDDDD;
-    public static final int COLOR_MESSAGE   = 0xFF31B6E7;
-    public static final int COLOR_HIGHLIGHT = 0xFFFFBB00;
+    public static final int COLOR_NONE      = Color.parseColor("#55EEEEEE");
+    public static final int COLOR_DEFAULT   = Color.parseColor("#55EEEEEE");
+    public static final int COLOR_MESSAGE   = 0xFFFFEB3B;
+    public static final int COLOR_HIGHLIGHT = 0xFFF44336;
 
     private final Server server;
     private LinkedList<ConversationInfo> conversations;

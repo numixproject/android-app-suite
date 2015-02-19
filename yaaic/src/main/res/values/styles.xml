@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Hermes" parent="Theme.AppCompat">
-        <item name="colorPrimary">#4baeae</item>
-        <item name="colorPrimaryDark">#4baeae</item>
+        <item name="colorPrimary">#ff0097a6</item>
+        <item name="colorPrimaryDark">#ff0097a6</item>
         <item name="colorAccent">#ff9800</item>
     </style>
     <style name="MyNavigationDrawerTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar.TranslucentKitKatStatusBar">
-        <item name="colorPrimary">#4baeae</item>
-        <item name="colorPrimaryDark">#4baeae</item>
+        <item name="colorPrimary">#ff0097a6</item>
+        <item name="colorPrimaryDark">#ff0097a6</item>
         <item name="singleAccount">true</item>
         <item name="colorAccent">#ff9800</item>
         <item name="multipaneSupport">true</item>

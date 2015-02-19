@@ -42,7 +42,7 @@ import android.widget.TextView;
  */
 public class ServerListAdapter extends BaseAdapter
 {
-    private static final int COLOR_CONNECTED    = Color.parseColor("#4BAEAE");
+    private static final int COLOR_CONNECTED    = Color.parseColor("#0097a6");
     private static final int COLOR_DISCONNECTED = Color.parseColor("#9E9E9E");
 
     private ArrayList<Server> servers;
