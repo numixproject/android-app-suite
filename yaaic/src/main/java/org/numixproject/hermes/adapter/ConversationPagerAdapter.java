@@ -46,8 +46,8 @@ public class ConversationPagerAdapter extends PagerAdapter implements Conversati
 {
     public static final int COLOR_NONE      = Color.parseColor("#55333333");
     public static final int COLOR_DEFAULT   = Color.parseColor("#55333333");
-    public static final int COLOR_MESSAGE   = 0xFFFFEB3B;
-    public static final int COLOR_HIGHLIGHT = 0xFFF44336;
+    public static final int COLOR_MESSAGE = Color.parseColor("#ff4285f5");
+    public static final int COLOR_HIGHLIGHT   = Color.parseColor("#ff0f9d59");
 
     private final Server server;
     private LinkedList<ConversationInfo> conversations;
