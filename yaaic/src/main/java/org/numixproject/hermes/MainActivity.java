@@ -144,10 +144,11 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     {
         super.onResume();
 
-        Intent intent2 = getIntent();
+        // Check if opened by Conversation Activity
+        Intent intentConversation = getIntent();
         int value = -1;
-        if (null != intent2) {
-            value = intent2.getIntExtra("OpenPane", -1);
+        if (null != intentConversation) {
+            value = intentConversation.getIntExtra("OpenPane", -1);
         }
         if (-1 != value) {
             openServerPane();
