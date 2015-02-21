@@ -163,9 +163,9 @@ public class ServerListAdapter extends BaseAdapter
 
         if(channels.isEmpty())
         {
-        serverRooms.setVisibility(View.INVISIBLE);
+        serverRooms.setText("Connect to see availables rooms.");
         } else {
-            serverRooms.setVisibility(View.VISIBLE);
+            serverRooms.setText("Rooms:");
         }
 
         if (server.isConnected()) {
