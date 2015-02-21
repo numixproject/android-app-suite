@@ -34,10 +34,11 @@ import it.neokree.materialnavigationdrawer.elements.listeners.MaterialSectionLis
 
 public class MainActivity extends MaterialNavigationDrawer implements ServiceConnection, ServerListener {
     private static int instanceCount = 0;
-    private IRCBinder binder;
+    public static IRCBinder binder;
     private ServerReceiver receiver;
     private ServerListAdapter adapter;
 
+    private HomeFragment fragment = null;
 
 
 
@@ -53,7 +54,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         MaterialSection about = newSection("About", R.drawable.ic_ic_info_24px , new Intent(this, AboutActivity.class));
         getSupportActionBar().setElevation(3);
         addSection(home);
-        final HomeFragment fragment = (HomeFragment)home.getTargetFragment();
 
         this.addSubheader("Servers");
 
@@ -61,9 +61,11 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         this.addSection(newSection("Connect to ...", R.drawable.ic_ic_swap_horiz_24px, new MaterialSectionListener() {
             @Override
             public void onClick(MaterialSection section) {
-                fragment.openServerPane();
+                openServerPane();
             }
         }));
+
+        fragment = (HomeFragment)home.getTargetFragment();
 
 
         addSection(addserver);
@@ -106,7 +108,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         if (instanceCount > 0) {
             finish();
         }
-        instanceCount++;
     }
 
     /**
@@ -125,6 +126,10 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         unregisterReceiver(receiver);
     }
 
+    public void openServerPane(){
+        fragment.openServerPane();
+    }
+
 
     /**
      * On server status update
@@ -139,6 +144,14 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     {
         super.onResume();
 
+        Intent intent2 = getIntent();
+        int value = -1;
+        if (null != intent2) {
+            value = intent2.getIntExtra("OpenPane", -1);
+        }
+        if (-1 != value) {
+            openServerPane();
+        }
 
 
         // Start and connect to service

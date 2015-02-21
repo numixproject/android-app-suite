@@ -20,6 +20,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.numixproject.hermes.listener;
 
+import org.numixproject.hermes.ConversationFragment;
 import org.numixproject.hermes.activity.ConversationActivity;
 
 import android.app.Activity;
@@ -59,6 +60,6 @@ public class SpeechClickListener implements OnClickListener
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "");
 
-        activity.startActivityForResult(intent, ConversationActivity.REQUEST_CODE_SPEECH);
+        activity.startActivityForResult(intent, ConversationFragment.REQUEST_CODE_SPEECH);
     }
 }
