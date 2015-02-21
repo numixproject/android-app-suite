@@ -53,6 +53,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:id="@+id/moreButton"
             android:src="@drawable/ic_ic_more_vert_24px"/>
 
         </LinearLayout>

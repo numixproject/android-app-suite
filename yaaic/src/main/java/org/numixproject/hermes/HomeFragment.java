@@ -148,6 +148,55 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
         binder = null;
     }
 
+    public boolean onMoreButtonClick(int position){
+        final Server server = adapter.getItem(position);
+
+        if (server == null) {
+            // "Add server" view selected
+            return true;
+        }
+
+        final CharSequence[] items = {
+                getString(R.string.connect),
+                getString(R.string.disconnect),
+                getString(R.string.edit),
+                getString(R.string.delete)
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(super.getActivity());
+        builder.setTitle(server.getTitle());
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                switch (item) {
+                    case 0: // Connect
+                        if (server.getStatus() == Status.DISCONNECTED) {
+                            binder.connect(server);
+                            server.setStatus(Status.CONNECTING);
+                            adapter.notifyDataSetChanged();
+                        }
+                        break;
+                    case 1: // Disconnect
+                        server.clearConversations();
+                        server.setStatus(Status.DISCONNECTED);
+                        server.setMayReconnect(false);
+                        binder.getService().getConnection(server.getId()).quitServer();
+                        break;
+                    case 2: // Edit
+                        editServer(server.getId());
+                        break;
+                    case 3: // Delete
+                        binder.getService().getConnection(server.getId()).quitServer();
+                        deleteServer(server.getId());
+                        break;
+                }
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+        return true;
+    };
+
     /**
      * On server selected
      */

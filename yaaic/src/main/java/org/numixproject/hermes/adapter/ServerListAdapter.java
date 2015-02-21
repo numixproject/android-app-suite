@@ -22,6 +22,7 @@ package org.numixproject.hermes.adapter;
 
 import java.util.ArrayList;
 
+import org.numixproject.hermes.MainActivity;
 import org.numixproject.hermes.R;
 import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.model.Server;
@@ -32,6 +33,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -120,9 +122,10 @@ public class ServerListAdapter extends BaseAdapter
      * @param parent
      */
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(final int position, View convertView, ViewGroup parent)
     {
         Server server = getItem(position);
+        final Context mcontext = parent.getContext();
 
         LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -150,6 +153,13 @@ public class ServerListAdapter extends BaseAdapter
         channelsList.setText(s);
 
         TextView serverRooms = (TextView) v.findViewById(R.id.server_rooms);
+        final ImageView moreButton = (ImageView) v.findViewById(R.id.moreButton);
+
+        moreButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ((MainActivity)mcontext).onCardMoreClicked(position);
+            }
+        });
 
         if(channels.isEmpty())
         {

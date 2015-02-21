@@ -11,6 +11,8 @@ import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
@@ -44,7 +46,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
     @Override
     public void init(Bundle savedInstanceState) {
-
         MaterialSection home = newSection("Chat", R.drawable.ic_ic_chat_24px, new HomeFragment());
         MaterialSection addserver = newSection("Add new server", R.drawable.ic_ic_add_24px, new Intent(this, AddServerActivity.class));
         MaterialSection notifications = newSection("Snooze Notifications", R.drawable.ic_ic_notifications_off_24px, new Intent(this, SettingsActivity.class));
@@ -130,6 +131,10 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         fragment.openServerPane();
     }
 
+    public void onCardMoreClicked(int position){
+        fragment.onMoreButtonClick(position);
+    }
+
 
     /**
      * On server status update
@@ -153,7 +158,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         if (-1 != value) {
             openServerPane();
         }
-
 
         // Start and connect to service
         Intent intent = new Intent(this, IRCService.class);
