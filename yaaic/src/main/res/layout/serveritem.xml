@@ -51,10 +51,12 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:text="Server"
             android:layout_weight="0.9"
             android:textColor="#ffffff"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="0px"
             android:layout_height="fill_parent"
+            android:layout_weight="0.14"
+            android:layout_marginRight="5dp"
             android:id="@+id/moreButton"
             android:src="@drawable/ic_ic_more_vert_24px_white"/>
 
@@ -64,8 +66,8 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="30dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp">
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp">
 
         <TextView
            android:id="@+id/host"
@@ -122,7 +124,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             android:src="@drawable/ic_ic_arrow_forward_24px"/>
         <TextView
             android:id="@+id/addRoom"
