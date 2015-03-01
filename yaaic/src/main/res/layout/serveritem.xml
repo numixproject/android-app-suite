@@ -90,7 +90,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="10dp"
-        android:paddingBottom="5dp"
+        android:paddingBottom="10dp"
         android:paddingLeft="30dp">
 
         <TextView
@@ -119,7 +119,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:orientation="horizontal"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
-        android:paddingLeft="30dp">
+        android:paddingLeft="16dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

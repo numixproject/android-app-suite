@@ -164,6 +164,7 @@ public class ServerListAdapter extends BaseAdapter
         if(channels.isEmpty())
         {
         serverRooms.setText("Connect to see availables rooms.");
+            channelsList.setHeight(0);
         } else {
             serverRooms.setText("Rooms:");
         }
