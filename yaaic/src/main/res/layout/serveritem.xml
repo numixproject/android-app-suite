@@ -42,7 +42,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:background="#42595D">
         <TextView
             android:id="@+id/title"
-            android:paddingLeft="30dp"
+            android:paddingLeft="16dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:gravity="start"
@@ -65,9 +65,9 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="30dp"
-        android:paddingBottom="12dp"
-        android:paddingTop="12dp">
+        android:paddingLeft="16dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
 
         <TextView
            android:id="@+id/host"
@@ -75,7 +75,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
            android:layout_height="wrap_content"
            android:text="irc.example.com"
             android:textColor="#1e1e1e"
-           android:textSize="15sp" />
+           android:textSize="14sp" />
 
 
         </LinearLayout>
@@ -89,14 +89,15 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="30dp">
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp">
 
         <TextView
             android:layout_width="fill_parent"
             android:id="@+id/server_rooms"
             android:textColor="#1e1e1e"
+            android:textSize="12sp"
             android:layout_height="wrap_content"
             android:text="Rooms:"/>
 
@@ -117,24 +118,24 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
+
         android:paddingLeft="16dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1.2"
-            android:src="@drawable/ic_ic_arrow_forward_24px"/>
         <TextView
             android:id="@+id/addRoom"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="    Connect to another room"
+            android:text="Connect to another room"
             android:layout_gravity="center_vertical"
             android:textColor="#717171"
-            android:textSize="12sp" />
-        </LinearLayout>
+            android:textSize="11sp" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.2"
+            android:paddingRight="16dp"
+            android:src="@drawable/ic_ic_arrow_forward_24px"/>
+    </LinearLayout>
 </LinearLayout>
 </android.support.v7.widget.CardView>
