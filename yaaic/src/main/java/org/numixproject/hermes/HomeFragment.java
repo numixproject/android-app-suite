@@ -221,6 +221,29 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
         startActivity(intent);
     }
 
+    // same of OnItemClick. But opens new room too.
+    public void openServerWithNewRoom(int position) {
+        Server server = adapter.getItem(position);
+
+        if (server == null) {
+            // "Add server" was selected
+            startActivityForResult(new Intent(super.getActivity(), AddServerActivity.class), 0);
+            return;
+        }
+
+        Intent intent = new Intent(super.getActivity(), ConversationActivity.class);
+
+        if (server.getStatus() == Status.DISCONNECTED && !server.mayReconnect()) {
+            server.setStatus(Status.PRE_CONNECTING);
+            intent.putExtra("connect", true);
+        }
+
+        intent.putExtra("serverId", server.getId());
+        // Intent wants to open another room
+        intent.putExtra("NewRoom", 1);
+        startActivity(intent);
+    }
+
     /**
      * On long click
      */

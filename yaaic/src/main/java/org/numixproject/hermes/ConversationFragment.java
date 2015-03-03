@@ -99,6 +99,8 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
     private ConversationPagerAdapter pagerAdapter;
 
     private Scrollback scrollback;
+    private Menu menu;
+
 
     // XXX: This is ugly. This is a buffer for a channel that should be joined after showing the
     //      JoinActivity. As onActivityResult() is called before onResume() a "channel joined"
@@ -170,11 +172,6 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         FragmentActivity faActivity  = (FragmentActivity)    super.getActivity();
         // Replace LinearLayout by the type of the root element of the layout you're trying to load
         LinearLayout llLayout    = (LinearLayout)    inflater.inflate(R.layout.conversations, container, false);
-        // Of course you will want to faActivity and llLayout in the class and not this method to access them in the rest of
-        // the class, just initialize them here
-
-        // Content of previous onCreate() here
-        // ...
 
         serverId = super.getActivity().getIntent().getExtras().getInt("serverId");
         server = Hermes.getInstance().getServerById(serverId);
@@ -192,8 +189,6 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         }
 
         super.getActivity().setTitle(server.getTitle());
-
-
 
         boolean isLandscape = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
 
@@ -484,6 +479,11 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         }
 
         return true;
+    }
+
+    // Adds a new room.
+    public void joinNewRoom(){
+        onOptionsItemSelected(menu.findItem(R.id.join));
     }
 
     /**

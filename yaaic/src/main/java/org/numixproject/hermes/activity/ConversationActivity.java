@@ -99,6 +99,9 @@ import it.neokree.materialnavigationdrawer.elements.listeners.MaterialSectionLis
  * @author Sebastian Kaspari <sebastian@yaaic.org>
  */
 public class ConversationActivity extends MaterialNavigationDrawer {
+
+    private ConversationFragment fragment = null;
+
     @Override
     public void init(Bundle savedInstanceState) {
         MaterialSection home = newSection("Chat", R.drawable.ic_ic_chat_24px, new ConversationFragment());
@@ -112,6 +115,8 @@ public class ConversationActivity extends MaterialNavigationDrawer {
         addSection(home);
 
         this.addSubheader("Servers");
+
+        fragment = (ConversationFragment)home.getTargetFragment();
 
         // Intent to open MainActivity on "Connect to" click in sidebar.
         final Intent intent = new Intent(this, MainActivity.class);
@@ -150,6 +155,27 @@ public class ConversationActivity extends MaterialNavigationDrawer {
         addBottomSection(about);
         setDrawerHeaderImage(R.drawable.cover);
         allowArrowAnimation();
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        // Check if opened by new Room button in ServerCard
+        Intent intentConversation = getIntent();
+        int value = -1;
+        if (null != intentConversation) {
+            value = intentConversation.getIntExtra("NewRoom", -1);
+        }
+        if (-1 != value) {
+            joinNewRoom();
+        }
+    }
+
+    // Do method join new Room in ConversationFragment
+    public void joinNewRoom(){
+        fragment.joinNewRoom();
     }
 
 }

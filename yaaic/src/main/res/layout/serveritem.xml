@@ -114,11 +114,11 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:background="#dedede"
         android:orientation="vertical"
         android:padding="10dp"/>
-    <LinearLayout
+   <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
+        android:id="@+id/connectNewRoom"
         android:paddingLeft="16dp">
         <TextView
             android:id="@+id/addRoom"

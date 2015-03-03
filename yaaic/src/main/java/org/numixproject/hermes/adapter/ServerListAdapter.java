@@ -25,9 +25,11 @@ import java.util.ArrayList;
 import org.numixproject.hermes.MainActivity;
 import org.numixproject.hermes.R;
 import org.numixproject.hermes.Hermes;
+import org.numixproject.hermes.activity.ConversationActivity;
 import org.numixproject.hermes.model.Server;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -152,6 +154,7 @@ public class ServerListAdapter extends BaseAdapter
         }
         channelsList.setText(s);
 
+        // More button top left of server card
         TextView serverRooms = (TextView) v.findViewById(R.id.server_rooms);
         final ImageView moreButton = (ImageView) v.findViewById(R.id.moreButton);
 
@@ -161,6 +164,15 @@ public class ServerListAdapter extends BaseAdapter
             }
         });
 
+        // Final Add new Room button in server card
+        final LinearLayout connectNewRoom = (LinearLayout) v.findViewById(R.id.connectNewRoom);
+        connectNewRoom.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ((MainActivity)mcontext).openServerWithNewRoom(position);
+            }
+        });
+
+        // If Rooms list is empty, don't display the section in Server cards.
         if(channels.isEmpty())
         {
         serverRooms.setText("Connect to see availables rooms.");
@@ -169,6 +181,7 @@ public class ServerListAdapter extends BaseAdapter
             serverRooms.setText("Rooms:");
         }
 
+        // If connected on server, set card color
         if (server.isConnected()) {
             serverCard.setBackgroundColor(COLOR_CONNECTED);
             // hostView.setTextColor(COLOR_CONNECTED);
