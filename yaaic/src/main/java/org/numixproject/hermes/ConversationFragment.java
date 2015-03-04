@@ -365,8 +365,18 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
                 }
             }.start();
         }
-
         server.setIsForeground(true);
+    }
+
+    public void joinNewChannel(final String channel){
+
+            new Thread() {
+                @Override
+                public void run() {
+                    binder.getService().getConnection(serverId).joinChannel(channel);
+                    joinChannelBuffer = null;
+                }
+            }.start();
     }
 
     /**
@@ -479,11 +489,6 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         }
 
         return true;
-    }
-
-    // Adds a new room.
-    public void joinNewRoom(){
-        onOptionsItemSelected(menu.findItem(R.id.join));
     }
 
     /**

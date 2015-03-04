@@ -169,13 +169,16 @@ public class ConversationActivity extends MaterialNavigationDrawer {
             value = intentConversation.getIntExtra("NewRoom", -1);
         }
         if (-1 != value) {
-            joinNewRoom();
+            String channel;
+            // take channel name from putExtras
+            channel = getIntent().getExtras().getString("channel");
+            joinNewRoom(channel);
         }
     }
 
     // Do method join new Room in ConversationFragment
-    public void joinNewRoom(){
-        fragment.joinNewRoom();
+    public void joinNewRoom(String channel){
+        fragment.joinNewChannel(channel);
     }
 
 }

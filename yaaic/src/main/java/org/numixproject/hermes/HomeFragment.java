@@ -28,6 +28,7 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import org.numixproject.hermes.activity.AboutActivity;
 import org.numixproject.hermes.activity.AddServerActivity;
 import org.numixproject.hermes.activity.ConversationActivity;
+import org.numixproject.hermes.activity.JoinActivity;
 import org.numixproject.hermes.activity.SettingsActivity;
 import org.numixproject.hermes.adapter.ServerListAdapter;
 import org.numixproject.hermes.db.Database;
@@ -52,6 +53,9 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
     private ServerReceiver receiver;
     private ServerListAdapter adapter;
     private ListView list;
+    private String channel;
+    private int positionBuffer;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -223,25 +227,39 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
 
     // same of OnItemClick. But opens new room too.
     public void openServerWithNewRoom(int position) {
-        Server server = adapter.getItem(position);
+        startActivityForResult(new Intent(super.getActivity(), JoinActivity.class), 1);
+        // store position in Buffer
+        positionBuffer = position;
 
-        if (server == null) {
-            // "Add server" was selected
-            startActivityForResult(new Intent(super.getActivity(), AddServerActivity.class), 0);
+    }
+
+    /**
+     * On activity result
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (resultCode != super.getActivity().RESULT_OK) {
+            // ignore other result codes
             return;
         }
 
-        Intent intent = new Intent(super.getActivity(), ConversationActivity.class);
+        switch (requestCode) {
+            case 1:
+                channel = data.getExtras().getString("channel");
+                Intent intent = new Intent(super.getActivity(), ConversationActivity.class);
+                // send position in intent.putExtra
+                final Server server = adapter.getItem(positionBuffer);
 
-        if (server.getStatus() == Status.DISCONNECTED && !server.mayReconnect()) {
-            server.setStatus(Status.PRE_CONNECTING);
-            intent.putExtra("connect", true);
+                intent.putExtra("serverId", server.getId());
+                // Intent wants to open another room
+                intent.putExtra("NewRoom", 1);
+                intent.putExtra("channel", channel);
+
+                // starts ConversationActivity
+                startActivity(intent);
+                break;
         }
-
-        intent.putExtra("serverId", server.getId());
-        // Intent wants to open another room
-        intent.putExtra("NewRoom", 1);
-        startActivity(intent);
     }
 
     /**
