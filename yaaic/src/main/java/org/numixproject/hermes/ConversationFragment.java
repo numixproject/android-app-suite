@@ -79,14 +79,13 @@ import android.widget.Toast;
  *
  * @author Sebastian Kaspari <sebastian@yaaic.org>
  */
-public class ConversationFragment extends Fragment implements ServiceConnection, ServerListener, ConversationListener
-{
+public class ConversationFragment extends Fragment implements ServiceConnection, ServerListener, ConversationListener {
     public static final int REQUEST_CODE_SPEECH = 99;
 
     private static final int REQUEST_CODE_JOIN = 1;
     private static final int REQUEST_CODE_USERS = 2;
     private static final int REQUEST_CODE_USER = 3;
-    private static final int REQUEST_CODE_NICK_COMPLETION= 4;
+    private static final int REQUEST_CODE_NICK_COMPLETION = 4;
 
     private int serverId;
     private Server server;
@@ -118,8 +117,7 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
          * On key pressed (input line)
          */
         @Override
-        public boolean onKey(View view, int keyCode, KeyEvent event)
-        {
+        public boolean onKey(View view, int keyCode, KeyEvent event) {
             EditText input = (EditText) view;
 
             if (event.getAction() != KeyEvent.ACTION_DOWN) {
@@ -169,9 +167,9 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
 
-        FragmentActivity faActivity  = (FragmentActivity)    super.getActivity();
+        FragmentActivity faActivity = (FragmentActivity) super.getActivity();
         // Replace LinearLayout by the type of the root element of the layout you're trying to load
-        LinearLayout llLayout    = (LinearLayout)    inflater.inflate(R.layout.conversations, container, false);
+        LinearLayout llLayout = (LinearLayout) inflater.inflate(R.layout.conversations, container, false);
 
         serverId = super.getActivity().getIntent().getExtras().getInt("serverId");
         server = Hermes.getInstance().getServerById(serverId);
@@ -180,7 +178,6 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         // setContentView(R.layout.activity_layout);
 
         // The FragmentActivity doesn't contain the layout directly so we must use our instance of     LinearLayout :
-
 
 
         // Finish activity if server does not exist anymore - See #55
@@ -208,7 +205,7 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         indicator.setFooterColor(Color.parseColor("#d1d1d1"));
         indicator.setFooterLineHeight(2);
         indicator.setFooterIndicatorHeight(3 * density);
-        indicator.setPadding(10,10,10,10);
+        indicator.setPadding(10, 10, 10, 10);
         indicator.setFooterIndicatorStyle(IndicatorStyle.Underline);
         indicator.setSelectedColor(0xFF222222);
         indicator.setSelectedBold(false);
@@ -277,8 +274,7 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
      * On resume
      */
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         // register the receivers as early as possible, otherwise we may loose a broadcast message
         channelReceiver = new ConversationReceiver(server.getId(), this);
         super.getActivity().registerReceiver(channelReceiver, new IntentFilter(Broadcast.CONVERSATION_MESSAGE));
@@ -357,6 +353,8 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
 
         // Join channel that has been selected in JoinActivity (onActivityResult())
         if (joinChannelBuffer != null) {
+            super.getActivity().bindService(intent, this, 0);
+
             new Thread() {
                 @Override
                 public void run() {
@@ -368,15 +366,18 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         server.setIsForeground(true);
     }
 
-    public void joinNewChannel(final String channel){
+    public void joinNewChannel(final String channel) {
 
-            new Thread() {
-                @Override
-                public void run() {
-                    binder.getService().getConnection(serverId).joinChannel(channel);
-                    joinChannelBuffer = null;
-                }
-            }.start();
+        // Start service
+        Intent intent = new Intent(super.getActivity(), IRCService.class);
+        intent.setAction(IRCService.ACTION_FOREGROUND);
+        super.getActivity().startService(intent);
+        super.getActivity().bindService(intent, this, 0);
+        serverId = super.getActivity().getIntent().getExtras().getInt("serverId");
+
+
+        binder.getService().getConnection(serverId).joinChannel(channel);
+                joinChannelBuffer = null;
     }
 
     /**
