@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.jibble.pircbot.PircBot;
 import org.numixproject.hermes.R;
 import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.activity.JoinActivity;
@@ -209,7 +210,7 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         indicator.setFooterIndicatorStyle(IndicatorStyle.Underline);
         indicator.setSelectedColor(0xFF222222);
         indicator.setSelectedBold(false);
-        indicator.setBackgroundColor(Color.parseColor("#eeeeee"));
+        indicator.setBackgroundColor(Color.parseColor("#eeffffff"));
 
         historySize = settings.getHistorySize();
 
@@ -223,7 +224,7 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         indicator.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
 
         input.setTextSize(settings.getFontSize());
-        input.setTypeface(Typeface.MONOSPACE);
+        input.setTypeface(Typeface.SANS_SERIF);
 
         // Optimization : cache field lookups
         Collection<Conversation> mConversations = server.getConversations();
@@ -367,17 +368,12 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
     }
 
     public void joinNewChannel(final String channel) {
-
-        // Start service
-        Intent intent = new Intent(super.getActivity(), IRCService.class);
+        final Intent intent = new Intent(super.getActivity(), IRCService.class);
         intent.setAction(IRCService.ACTION_FOREGROUND);
         super.getActivity().startService(intent);
         super.getActivity().bindService(intent, this, 0);
-        serverId = super.getActivity().getIntent().getExtras().getInt("serverId");
-
-
         binder.getService().getConnection(serverId).joinChannel(channel);
-                joinChannelBuffer = null;
+        joinChannelBuffer = null;
     }
 
     /**

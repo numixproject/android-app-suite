@@ -26,7 +26,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
     android:id="@+id/conversationFragment"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#eeeeee">
+    android:background="#ffffff">
     <org.numixproject.hermes.indicator.ConversationIndicator
         android:id="@+id/titleIndicator"
         android:layout_width="fill_parent"

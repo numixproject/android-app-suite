@@ -36,6 +36,7 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.text.util.Linkify;
+import android.util.TypedValue;
 import android.widget.TextView;
 
 /**
@@ -329,8 +330,9 @@ public class Message
         canvas.setLinkTextColor(COLOR_BLUE);
 
         canvas.setText(this.render(context));
-        canvas.setTextSize(settings.getFontSize());
-        canvas.setTypeface(Typeface.MONOSPACE);
+        canvas.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        canvas.setTypeface(Typeface.SANS_SERIF);
+        canvas.setLineSpacing(1.5f, 1.5f);
         canvas.setTextColor(COLOR_DEFAULT);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {

@@ -52,7 +52,7 @@ public class MessageListView extends ListView
         setVerticalFadingEdgeEnabled(false);
 
         // Message Background.
-        setBackgroundColor(Color.parseColor("#EEEEEE"));
+        setBackgroundColor(Color.parseColor("#ffffff"));
         setScrollBarStyle(SCROLLBARS_OUTSIDE_INSET);
 
         // Scale padding by screen density
