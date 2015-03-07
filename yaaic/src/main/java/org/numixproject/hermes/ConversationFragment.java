@@ -67,6 +67,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -190,6 +191,9 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
 
         boolean isLandscape = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
 
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+
         EditText input = (EditText) llLayout.findViewById(R.id.input);
         input.setOnKeyListener(inputKeyListener);
 
@@ -197,6 +201,7 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
 
         pagerAdapter = new ConversationPagerAdapter(getActivity(), server);
         pager.setAdapter(pagerAdapter);
+
 
         final float density = getResources().getDisplayMetrics().density;
 
@@ -268,6 +273,9 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         scrollback = new Scrollback();
 
         llLayout.findViewById(R.id.conversationFragment);
+
+        // Handle resizing when Keyboard is up
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         return llLayout; // We must return the loaded Layout
     }
 
@@ -928,6 +936,7 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
      */
     private void openSoftKeyboard(View view) {
         ((InputMethodManager) super.getActivity().getSystemService(super.getActivity().INPUT_METHOD_SERVICE)).showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 
     /**

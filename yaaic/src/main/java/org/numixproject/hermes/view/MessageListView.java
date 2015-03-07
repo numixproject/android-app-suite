@@ -26,6 +26,7 @@ import org.numixproject.hermes.listener.MessageClickListener;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.widget.ListView;
 
 /**
@@ -59,7 +60,8 @@ public class MessageListView extends ListView
         float density = context.getResources().getDisplayMetrics().density;
         int padding = (int) (5 * density);
         setPadding(padding, padding, padding, padding);
-
+        setDivider(new ColorDrawable(0x00FFFFFFF));
+        setDividerHeight(20);
         setTranscriptMode(TRANSCRIPT_MODE_NORMAL);
     }
 

@@ -332,7 +332,6 @@ public class Message
         canvas.setText(this.render(context));
         canvas.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         canvas.setTypeface(Typeface.SANS_SERIF);
-        canvas.setLineSpacing(1.5f, 1.5f);
         canvas.setTextColor(COLOR_DEFAULT);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {

@@ -82,6 +82,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -155,6 +156,7 @@ public class ConversationActivity extends MaterialNavigationDrawer {
         addBottomSection(about);
         setDrawerHeaderImage(R.drawable.cover);
         allowArrowAnimation();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 
     @Override

@@ -20,7 +20,4 @@
         <item name="colorPrimaryDark">#4baeae</item>
         <item name="colorAccent">#ff9800</item>
     </style>
-
-    <style name="edittext_holo" parent="Widget.AppCompat.EditText">
-     </style>
 </resources>
