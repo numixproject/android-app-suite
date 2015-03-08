@@ -63,7 +63,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         <activity
             android:name=".activity.ConversationActivity"
             android:theme="@style/MyNavigationDrawerTheme"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
             >
 
             </activity>

@@ -112,7 +112,6 @@ public class ConversationActivity extends MaterialNavigationDrawer {
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
         MaterialSection help = newSection("Help", R.drawable.ic_ic_help_24px , new Intent(this, SettingsActivity.class));
         MaterialSection about = newSection("About", R.drawable.ic_ic_info_24px , new Intent(this, AboutActivity.class));
-        getSupportActionBar().setElevation(3);
         addSection(home);
 
         this.addSubheader("Servers");

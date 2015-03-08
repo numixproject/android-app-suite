@@ -37,6 +37,7 @@ import org.numixproject.hermes.receiver.ServerReceiver;
 
 import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -215,7 +216,7 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         indicator.setFooterIndicatorStyle(IndicatorStyle.Underline);
         indicator.setSelectedColor(0xFF222222);
         indicator.setSelectedBold(false);
-        indicator.setBackgroundColor(Color.parseColor("#eeffffff"));
+        indicator.setBackgroundColor(Color.parseColor("#fff5f5f5"));
 
         historySize = settings.getHistorySize();
 
@@ -228,7 +229,6 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         float fontSize = settings.getFontSize();
         indicator.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
 
-        input.setTextSize(settings.getFontSize());
         input.setTypeface(Typeface.SANS_SERIF);
 
         // Optimization : cache field lookups
@@ -295,18 +295,6 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         super.getActivity().registerReceiver(serverReceiver, new IntentFilter(Broadcast.SERVER_UPDATE));
 
         super.onResume();
-
-        // Check if speech recognition is enabled and available
-        if (new Settings(super.getActivity()).isVoiceRecognitionEnabled()) {
-            PackageManager pm = super.getActivity().getPackageManager();
-            Button speechButton = (Button) getView().findViewById(R.id.speech);
-            List<ResolveInfo> activities = pm.queryIntentActivities(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
-
-            if (activities.size() != 0) {
-                ((Button) getView().findViewById(R.id.speech)).setOnClickListener(new SpeechClickListener(super.getActivity()));
-                speechButton.setVisibility(View.VISIBLE);
-            }
-        }
 
         // Start service
         Intent intent = new Intent(super.getActivity(), IRCService.class);
@@ -935,7 +923,7 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
      * Open the soft keyboard (helper function)
      */
     private void openSoftKeyboard(View view) {
-        ((InputMethodManager) super.getActivity().getSystemService(super.getActivity().INPUT_METHOD_SERVICE)).showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+        ((InputMethodManager) super.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 

@@ -42,21 +42,23 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:focusableInTouchMode="true"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#e0e0e0">
+        </TextView>
         <EditText
-            android:id="@+id/input"
-            android:layout_width="0dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:focusableInTouchMode="true"
+            android:id="@+id/input"
+            android:hint="Write a message..."
+            android:background="#fafafa"
+            android:textSize="16sp"
+            android:padding="20dp"
             android:inputType="textImeMultiLine|textAutoCorrect|textCapSentences"
             android:textIsSelectable="true"
             android:imeOptions="actionSend" />
-        <Button
-            android:id="@+id/speech"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@android:drawable/ic_btn_speak_now"
-            android:visibility="gone" />
     </LinearLayout>
 </LinearLayout>
