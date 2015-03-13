@@ -210,10 +210,9 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         indicator.setServer(server);
         indicator.setViewPager(pager);
         indicator.setFooterColor(Color.parseColor("#d1d1d1"));
-        indicator.setFooterLineHeight(2);
-        indicator.setFooterIndicatorHeight(3 * density);
+        indicator.setFooterLineHeight(1);
         indicator.setPadding(10, 10, 10, 10);
-        indicator.setFooterIndicatorStyle(IndicatorStyle.Underline);
+        indicator.setFooterIndicatorStyle(IndicatorStyle.None);
         indicator.setSelectedColor(0xFF222222);
         indicator.setSelectedBold(false);
         indicator.setBackgroundColor(Color.parseColor("#fff5f5f5"));
