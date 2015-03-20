@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Hermes" parent="Theme.AppCompat">
+    <style name="Hermes" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">#ff0097a6</item>
         <item name="colorPrimaryDark">#ff0097a6</item>
         <item name="colorAccent">#ff9800</item>

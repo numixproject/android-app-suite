@@ -68,7 +68,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
         fragment = (HomeFragment)home.getTargetFragment();
 
-
         addSection(addserver);
 
 

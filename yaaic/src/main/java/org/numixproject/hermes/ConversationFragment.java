@@ -34,6 +34,7 @@ import org.numixproject.hermes.model.Status;
 import org.numixproject.hermes.model.User;
 import org.numixproject.hermes.receiver.ConversationReceiver;
 import org.numixproject.hermes.receiver.ServerReceiver;
+import org.numixproject.hermes.utils.AndroidBug5497Workaround;
 
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -192,9 +193,6 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
 
         boolean isLandscape = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
 
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-
         EditText input = (EditText) llLayout.findViewById(R.id.input);
         input.setOnKeyListener(inputKeyListener);
 
@@ -274,7 +272,6 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         llLayout.findViewById(R.id.conversationFragment);
 
         // Handle resizing when Keyboard is up
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         return llLayout; // We must return the loaded Layout
     }
 

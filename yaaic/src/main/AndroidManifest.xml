@@ -62,7 +62,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         </activity>
         <activity
             android:name=".activity.ConversationActivity"
-            android:theme="@style/MyNavigationDrawerTheme"
+            android:theme="@style/Hermes"
             android:windowSoftInputMode="adjustResize"
             >
 
@@ -74,6 +74,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         </activity>
         <activity
             android:name=".activity.SettingsActivity"
+            android:theme="@style/Hermes"
             android:label="@string/settings_label" >
         </activity>
         <activity
