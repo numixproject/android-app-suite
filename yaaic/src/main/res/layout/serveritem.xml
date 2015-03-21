@@ -27,8 +27,8 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     card_view:cardCornerRadius="2dp"
-    android:paddingTop="15dp"
-    android:layout_margin="5dp">
+    android:paddingTop="8dp"
+    android:layout_margin="8dp">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -43,20 +43,21 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         <TextView
             android:id="@+id/title"
             android:paddingLeft="16dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:gravity="start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Server"
             android:layout_weight="0.9"
             android:textColor="#ffffff"
-            android:textSize="20sp" />
+            android:textSize="24sp" />
         <ImageView
-            android:layout_width="0px"
+            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_weight="0.14"
-            android:layout_marginRight="5dp"
+            android:padding="16dp"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
             android:id="@+id/moreButton"
             android:src="@drawable/ic_ic_more_vert_24px_white"/>
 
