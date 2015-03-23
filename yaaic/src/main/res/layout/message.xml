@@ -30,6 +30,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_height="60dp"
         android:lineSpacingExtra="2sp"
         android:padding="12dp"
+        android:background="@drawable/card_bg_r8"
         android:autoLink="all"
         android:gravity="center_vertical"
         android:linksClickable="true"
