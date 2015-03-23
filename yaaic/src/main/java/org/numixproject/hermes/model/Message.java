@@ -22,7 +22,6 @@ package org.numixproject.hermes.model;
 
 import java.util.Date;
 
-import org.numixproject.hermes.R;
 import org.numixproject.hermes.utils.MircColors;
 import org.numixproject.hermes.utils.Smilies;
 
@@ -34,7 +33,6 @@ import android.os.Build;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.text.util.Linkify;
@@ -232,7 +230,7 @@ public class Message
 
         if (canvas == null) {
             String prefix    = hasIcon() && settings.showIcons() ? "  " : "";
-            String nick      = hasSender() ? sender + " - " : "";
+            String nick      = hasSender() ? " " + sender + " - " : "";
             String timestamp = settings.showTimestamp() ? renderTimeStamp(settings.use24hFormat(), settings.includeSeconds()) : "";
 
             canvas = new SpannableString(prefix + timestamp + nick);
