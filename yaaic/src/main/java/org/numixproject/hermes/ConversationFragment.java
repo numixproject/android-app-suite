@@ -510,7 +510,7 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
             Message message = conversation.pollBufferedMessage();
 
             if (adapter != null && message != null) {
-                adapter.addMessage(message);
+                adapter.addMessageCard(message);
                 int status;
 
                 switch (message.getType())
@@ -772,7 +772,7 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
             if (!text.trim().startsWith("/")) {
                 if (conversation.getType() != Conversation.TYPE_SERVER) {
                     String nickname = binder.getService().getConnection(serverId).getNick();
-                    //conversation.addMessage(new Message("<" + nickname + "> " + text));
+                    //conversation.addMessage(new Message(" " + nickname + "- " + text));
                     conversation.addMessage(new Message(text, nickname));
                     binder.getService().getConnection(serverId).sendMessage(conversation.getName(), text);
                 } else {

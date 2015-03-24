@@ -93,6 +93,17 @@ public class MessageListAdapter extends BaseAdapter
         notifyDataSetChanged();
     }
 
+    public void addMessageCard(Message message)
+    {
+        messages.add(message.renderTextViewCard(context));
+
+        if (messages.size() > historySize) {
+            messages.remove(0);
+        }
+
+        notifyDataSetChanged();
+    }
+
     /**
      * Add a list of messages to the list
      * 

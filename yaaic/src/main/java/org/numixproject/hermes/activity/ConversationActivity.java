@@ -205,8 +205,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         pagerAdapter = new ConversationPagerAdapter(this, server);
         pager.setAdapter(pagerAdapter);
 
-        final float density = getResources().getDisplayMetrics().density;
-
         indicator = (ConversationIndicator) findViewById(R.id.titleIndicator);
         indicator.setServer(server);
         indicator.setViewPager(pager);
@@ -496,9 +494,15 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         while(conversation.hasBufferedMessages()) {
             Message message = conversation.pollBufferedMessage();
+            String messageText = message.getText();
 
             if (adapter != null && message != null) {
-                adapter.addMessage(message);
+                if (message.hasSender()) {
+                    adapter.addMessageCard(message);
+                } else {
+                    adapter.addMessage(message);
+                }
+
                 int status;
 
                 switch (message.getType())

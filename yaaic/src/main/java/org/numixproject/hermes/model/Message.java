@@ -22,17 +22,20 @@ package org.numixproject.hermes.model;
 
 import java.util.Date;
 
+import org.numixproject.hermes.R;
 import org.numixproject.hermes.utils.MircColors;
 import org.numixproject.hermes.utils.Smilies;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.text.util.Linkify;
@@ -230,7 +233,7 @@ public class Message
 
         if (canvas == null) {
             String prefix    = hasIcon() && settings.showIcons() ? "  " : "";
-            String nick      = hasSender() ? " " + sender + " - " : "";
+            String nick      = hasSender() ? "" + sender + " - " : "";
             String timestamp = settings.showTimestamp() ? renderTimeStamp(settings.use24hFormat(), settings.includeSeconds()) : "";
 
             canvas = new SpannableString(prefix + timestamp + nick);
@@ -256,11 +259,13 @@ public class Message
 
                 if (settings.showColorsNick()) {
                     canvas.setSpan(new ForegroundColorSpan(getSenderColor()), start, end , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 }
             }
 
             if (hasIcon() && settings.showIcons()) {
                 Drawable drawable = context.getResources().getDrawable(icon);
+                Drawable drawable1 = context.getResources().getDrawable(R.drawable.card_bg_r4);
                 drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
                 canvas.setSpan(new ImageSpan(drawable, ImageSpan.ALIGN_BOTTOM), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
@@ -287,7 +292,7 @@ public class Message
      *
      * @return
      */
-    private boolean hasSender()
+    public boolean hasSender()
     {
         return sender != null;
     }
@@ -333,6 +338,30 @@ public class Message
         canvas.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         canvas.setTypeface(Typeface.SANS_SERIF);
         canvas.setTextColor(COLOR_DEFAULT);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            setupViewForHoneycombAndLater(canvas);
+        }
+
+        return canvas;
+    }
+
+    public TextView renderTextViewCard(Context context)
+    {
+        // XXX: We should not read settings here ALWAYS for EVERY textview
+        Settings settings = new Settings(context);
+
+        TextView canvas = new TextView(context);
+
+        canvas.setAutoLinkMask(Linkify.ALL);
+        canvas.setLinksClickable(true);
+        canvas.setLinkTextColor(COLOR_BLUE);
+
+        canvas.setText(this.render(context));
+        canvas.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        canvas.setTypeface(Typeface.SANS_SERIF);
+        canvas.setTextColor(COLOR_DEFAULT);
+        canvas.setBackgroundResource(R.drawable.card_bg_r4);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             setupViewForHoneycombAndLater(canvas);
