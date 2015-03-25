@@ -265,7 +265,6 @@ public class Message
 
             if (hasIcon() && settings.showIcons()) {
                 Drawable drawable = context.getResources().getDrawable(icon);
-                Drawable drawable1 = context.getResources().getDrawable(R.drawable.card_bg_r4);
                 drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
                 canvas.setSpan(new ImageSpan(drawable, ImageSpan.ALIGN_BOTTOM), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
@@ -361,7 +360,7 @@ public class Message
         canvas.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         canvas.setTypeface(Typeface.SANS_SERIF);
         canvas.setTextColor(COLOR_DEFAULT);
-        canvas.setBackgroundResource(R.drawable.card_bg_r4);
+        canvas.setBackgroundResource(R.drawable.chatcard);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             setupViewForHoneycombAndLater(canvas);
