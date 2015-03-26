@@ -233,7 +233,7 @@ public class Message
 
         if (canvas == null) {
             String prefix    = hasIcon() && settings.showIcons() ? "  " : "";
-            String nick      = hasSender() ? "" + sender + " - " : "";
+            String nick      = hasSender() ? " " + sender + " - " : "";
             String timestamp = settings.showTimestamp() ? renderTimeStamp(settings.use24hFormat(), settings.includeSeconds()) : "";
 
             canvas = new SpannableString(prefix + timestamp + nick);
