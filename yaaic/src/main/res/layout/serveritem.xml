@@ -55,7 +55,8 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:padding="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
             android:id="@+id/moreButton"

@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.numixproject.hermes.adapter.ServerListAdapter;
+import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.irc.IRCBinder;
 import org.numixproject.hermes.activity.AboutActivity;
 import org.numixproject.hermes.activity.AddServerActivity;
@@ -110,21 +112,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         }
     }
 
-    /**
-     * On pause
-     */
-    @Override
-    public void onPause()
-    {
-        super.onPause();
-
-        if (binder != null && binder.getService() != null) {
-            binder.getService().checkServiceStatus();
-        }
-
-        unbindService(this);
-        unregisterReceiver(receiver);
-    }
 
     public void openServerPane(){
         fragment.openServerPane();
@@ -138,14 +125,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         fragment.onMoreButtonClick(position);
     }
 
-
-    /**
-     * On server status update
-     */
-    @Override
-    public void onStatusUpdate()
-    {
-    }
 
     @Override
     public void onResume()
@@ -174,12 +153,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     }
 
 
-    @Override
-    public void onDestroy()
-    {
-        super.onDestroy();
-        instanceCount--;
-    }
 
     /**
      * Options Menu (Menu Button pressed)
@@ -195,6 +168,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
         return super.onCreateOptionsMenu(menu);
     }
+
 
     /**
      * On menu item selected
@@ -229,6 +203,32 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 */
 
     /**
+     * On Destroy
+     */
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        instanceCount--;
+    }
+
+    /**
+     * On pause
+     */
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+
+        if (binder != null && binder.getService() != null) {
+            binder.getService().checkServiceStatus();
+        }
+
+        unbindService(this);
+        unregisterReceiver(receiver);
+    }
+
+    /**
      * Service connected to Activity
      */
     @Override
@@ -244,6 +244,40 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     public void onServiceDisconnected(ComponentName name)
     {
         binder = null;
+    }
+
+    /**
+     * On activity result
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (resultCode == RESULT_OK) {
+            // Refresh list from database
+            adapter.loadServers();
+        }
+    }
+
+    /**
+     * Delete server
+     *
+     * @param serverId
+     */
+    public void deleteServer(int serverId)
+    {
+        Database db = new Database(this);
+        db.removeServerById(serverId);
+        db.close();
+
+        Hermes.getInstance().removeServerById(serverId);
+        adapter.loadServers();
+    }
+
+    /**
+     * On server status update
+     */
+    @Override
+    public void onStatusUpdate() {
     }
 
 }

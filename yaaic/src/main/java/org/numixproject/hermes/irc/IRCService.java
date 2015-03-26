@@ -1,21 +1,16 @@
 /*
 Yaaic - Yet Another Android IRC Client
-
 Copyright 2009-2013 Sebastian Kaspari
 Copyright 2012 Daniel E. Moctezuma <democtezuma@gmail.com>
-
 This file is part of Yaaic.
-
 Yaaic is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
-
 Yaaic is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
-
 You should have received a copy of the GNU General Public License
 along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -29,9 +24,9 @@ import java.util.LinkedHashMap;
 
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
-import org.numixproject.hermes.HomeFragment;
 import org.numixproject.hermes.R;
 import org.numixproject.hermes.Hermes;
+import org.numixproject.hermes.MainActivity;
 import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.model.Broadcast;
 import org.numixproject.hermes.model.Conversation;
@@ -58,11 +53,11 @@ import android.os.SystemClock;
  */
 public class IRCService extends Service
 {
-    public static final String ACTION_FOREGROUND = "org.numixproject.hermes.service.foreground";
-    public static final String ACTION_BACKGROUND = "org.numixproject.hermes.service.background";
-    public static final String ACTION_ACK_NEW_MENTIONS = "org.numixproject.hermes.service.ack_new_mentions";
-    public static final String EXTRA_ACK_SERVERID = "org.numixproject.hermes.service.ack_serverid";
-    public static final String EXTRA_ACK_CONVTITLE = "org.numixproject.hermes.service.ack_convtitle";
+    public static final String ACTION_FOREGROUND = "org.yaaic.service.foreground";
+    public static final String ACTION_BACKGROUND = "org.yaaic.service.background";
+    public static final String ACTION_ACK_NEW_MENTIONS = "org.yaaic.service.ack_new_mentions";
+    public static final String EXTRA_ACK_SERVERID = "org.yaaic.service.ack_serverid";
+    public static final String EXTRA_ACK_CONVTITLE = "org.yaaic.service.ack_convtitle";
 
     private static final int FOREGROUND_NOTIFICATION = 1;
     private static final int NOTIFICATION_LED_OFF_MS = 1000;
@@ -196,10 +191,10 @@ public class IRCService extends Service
             foreground = true;
 
             // Set the icon, scrolling text and timestamp
-            notification = new Notification(R.drawable.icon, getText(R.string.notification_running), System.currentTimeMillis());
+            notification = new Notification(R.mipmap.ic_launcher, getText(R.string.notification_running), System.currentTimeMillis());
 
             // The PendingIntent to launch our activity if the user selects this notification
-            Intent notifyIntent = new Intent(this, HomeFragment.class);
+            Intent notifyIntent = new Intent(this, MainActivity.class);
             notifyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notifyIntent, 0);
 
@@ -226,8 +221,8 @@ public class IRCService extends Service
     private void updateNotification(String text, String contentText, boolean vibrate, boolean sound, boolean light)
     {
         if (foreground) {
-            notification = new Notification(R.drawable.icon, text, System.currentTimeMillis());
-            Intent notifyIntent = new Intent(this, HomeFragment.class);
+            notification = new Notification(R.mipmap.ic_launcher, text, System.currentTimeMillis());
+            Intent notifyIntent = new Intent(this, MainActivity.class);
             notifyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notifyIntent, 0);
 
@@ -468,9 +463,9 @@ public class IRCService extends Service
 
                     if (server.getAuthentication().hasSaslCredentials()) {
                         connection.setSaslCredentials(
-                            server.getAuthentication().getSaslUsername(),
-                            server.getAuthentication().getSaslPassword()
-                            );
+                                server.getAuthentication().getSaslUsername(),
+                                server.getAuthentication().getSaslPassword()
+                        );
                     }
 
                     if (server.getPassword() != "") {
@@ -516,10 +511,10 @@ public class IRCService extends Service
                     server.getConversation(ServerInfo.DEFAULT_NAME).addMessage(message);
 
                     Intent cIntent = Broadcast.createConversationIntent(
-                        Broadcast.CONVERSATION_MESSAGE,
-                        serverId,
-                        ServerInfo.DEFAULT_NAME
-                        );
+                            Broadcast.CONVERSATION_MESSAGE,
+                            serverId,
+                            ServerInfo.DEFAULT_NAME
+                    );
                     sendBroadcast(cIntent);
                 }
             }
