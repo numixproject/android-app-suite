@@ -79,10 +79,9 @@ import android.widget.Toast;
 
 
 /**
- * The server view with a scrollable list of all channels
- *
- * @author Sebastian Kaspari <sebastian@yaaic.org>
+ * DO NOT EDIT!!! WE DON'T USE FRAGMENT HERE ANYMORE.
  */
+
 public class ConversationFragment extends Fragment implements ServiceConnection, ServerListener, ConversationListener {
     public static final int REQUEST_CODE_SPEECH = 99;
 
@@ -272,6 +271,8 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
         llLayout.findViewById(R.id.conversationFragment);
 
         // Handle resizing when Keyboard is up
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
         return llLayout; // We must return the loaded Layout
     }
 

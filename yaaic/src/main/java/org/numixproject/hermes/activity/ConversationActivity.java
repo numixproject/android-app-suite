@@ -79,6 +79,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -240,6 +241,14 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 createNewConversation(conversation.getName());
             }
         }
+
+        input.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSoftKeyboard(v);
+            }
+
+        });
 
         int setInputTypeFlags = 0;
 
@@ -912,7 +921,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
      */
     private void openSoftKeyboard(View view) {
         ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-    }
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);    }
 
     /**
      * Remove the status char off the front of a nick if one is present
