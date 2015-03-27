@@ -149,7 +149,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
         receiver = new ServerReceiver(this);
         registerReceiver(receiver, new IntentFilter(Broadcast.SERVER_UPDATE));
-
     }
 
 
