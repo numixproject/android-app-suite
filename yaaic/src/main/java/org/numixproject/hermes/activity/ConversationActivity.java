@@ -72,6 +72,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
 import android.text.method.TextKeyListener;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -182,6 +183,16 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        String intentExtra = getIntent().getStringExtra("joinChannel");
+
+        // Check if intentExtra is null or empty
+        if (intentExtra != null && !intentExtra.isEmpty()){
+            // if not open the new room dialog
+            if (intentExtra.equals("joinChannel")) {
+                openServerWithNewRoom();
+            }
+        }
 
         serverId = getIntent().getExtras().getInt("serverId");
         server = Hermes.getInstance().getServerById(serverId);
@@ -356,6 +367,12 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         }
 
         server.setIsForeground(true);
+    }
+
+
+    // same of OnItemClick. But opens new room too.
+    public void openServerWithNewRoom() {
+        startActivityForResult(new Intent(this, JoinActivity.class), 1);
     }
 
     /**

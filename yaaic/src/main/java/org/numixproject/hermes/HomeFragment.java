@@ -56,7 +56,6 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
     private String channel;
     private int positionBuffer;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -227,10 +226,24 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
 
     // same of OnItemClick. But opens new room too.
     public void openServerWithNewRoom(int position) {
-        startActivityForResult(new Intent(super.getActivity(), JoinActivity.class), 1);
-        // store position in Buffer
-        positionBuffer = position;
+        Server server = adapter.getItem(position);
 
+        if (server == null) {
+            // "Add server" was selected
+            startActivityForResult(new Intent(super.getActivity(), AddServerActivity.class), 0);
+            return;
+        }
+
+        Intent intent = new Intent(super.getActivity(), ConversationActivity.class);
+
+        if (server.getStatus() == Status.DISCONNECTED && !server.mayReconnect()) {
+            server.setStatus(Status.PRE_CONNECTING);
+            intent.putExtra("connect", true);
+        }
+
+        intent.putExtra("serverId", server.getId());
+        intent.putExtra("joinChannel","joinChannel");
+        startActivity(intent);
     }
 
     /**
