@@ -184,16 +184,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     {
         super.onCreate(savedInstanceState);
 
-        String intentExtra = getIntent().getStringExtra("joinChannel");
-
-        // Check if intentExtra is null or empty
-        if (intentExtra != null && !intentExtra.isEmpty()){
-            // if not open the new room dialog
-            if (intentExtra.equals("joinChannel")) {
-                openServerWithNewRoom();
-            }
-        }
-
         serverId = getIntent().getExtras().getInt("serverId");
         server = Hermes.getInstance().getServerById(serverId);
         Settings settings = new Settings(this);
@@ -282,7 +272,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         // Create a new scrollback history
         scrollback = new Scrollback();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 
     /**
@@ -342,6 +331,15 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 ackIntent.putExtra(IRCService.EXTRA_ACK_CONVTITLE, name);
                 startService(ackIntent);
             }
+
+                // Check if intentExtra is null or empty
+            if (getIntent().getStringExtra("joinChannel") != null && !getIntent().getStringExtra("joinChannel").isEmpty()){
+                // if not open the new room dialog
+                if (getIntent().getStringExtra("joinChannel").equals("joinChannel")) {
+                    getIntent().removeExtra("joinChannel");
+                    startActivityForResult(new Intent(this, JoinActivity.class), 1);
+                }
+            }
         }
 
         // Remove views for conversations that ended while we were paused
@@ -367,12 +365,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         }
 
         server.setIsForeground(true);
-    }
-
-
-    // same of OnItemClick. But opens new room too.
-    public void openServerWithNewRoom() {
-        startActivityForResult(new Intent(this, JoinActivity.class), 1);
     }
 
     /**
