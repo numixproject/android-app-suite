@@ -22,9 +22,9 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
     android:textSize="16sp"
-    android:text="pocmo"
-    android:drawableLeft="@drawable/user"
-    android:drawablePadding="3dp">
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="20dp"
+    android:text="pocmo">
 </TextView>

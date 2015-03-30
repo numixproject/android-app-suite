@@ -15,7 +15,7 @@
         <item name="android:windowContentOverlay">@drawable/above_shadow</item>
         <item name="rippleBackport">true</item>
     </style>
-    <style name="HermesDialog" parent="Theme.AppCompat.Dialog">
+    <style name="HermesDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorPrimary">#4baeae</item>
         <item name="colorPrimaryDark">#4baeae</item>
         <item name="colorAccent">#ff9800</item>
