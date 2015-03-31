@@ -21,13 +21,19 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
 package org.numixproject.hermes.activity;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import org.numixproject.hermes.R;
 import org.numixproject.hermes.model.Extra;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -44,6 +50,9 @@ public class UsersActivity extends ListActivity implements OnItemClickListener
     /**
      * On create
      */
+
+    String[] users;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -52,15 +61,15 @@ public class UsersActivity extends ListActivity implements OnItemClickListener
 
         setContentView(R.layout.users);
 
-        final String[] users = getIntent().getExtras().getStringArray(Extra.USERS);
         getListView().setOnItemClickListener(this);
 
-        // Add sorted list of users in own thread to avoid blocking UI
+        users = getIntent().getExtras().getStringArray(Extra.USERS);
+
         // TODO: Move to a background task and show loading indicator while sorting
         Arrays.sort(users, String.CASE_INSENSITIVE_ORDER);
-        getListView().setAdapter(new ArrayAdapter<String>(UsersActivity.this, R.layout.useritem, users));
+        ArrayAdapter userArray = new ArrayAdapter<String>(UsersActivity.this, R.layout.useritem, users);
+        getListView().setAdapter(userArray);
     }
-
     /**
      * On user selected
      */

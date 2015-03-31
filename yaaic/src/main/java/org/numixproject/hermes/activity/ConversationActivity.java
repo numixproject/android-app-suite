@@ -193,7 +193,9 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             this.finish();
         }
 
-        setTitle(server.getTitle());
+        try {
+        setTitle(server.getTitle());}
+        catch (Exception e){};
 
         setContentView(R.layout.conversations);
 
