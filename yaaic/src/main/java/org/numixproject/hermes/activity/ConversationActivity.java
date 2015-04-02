@@ -523,11 +523,13 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                         // Check if sender is Op
                         if (binder.getService().getConnection(serverId).getUser(target, message.getSender()).isOp()) {
                             // If yes, display an appropriate icon
-                            message.setIcon(R.drawable.error);
+                            message.setIcon(R.drawable.ic_ic_sms_failed_24px);
+                            adapter.addMessageCard(message);
+                        } else if (binder.getService().getConnection(serverId).getUser(target, message.getSender()).hasVoice()){
+                            message.setIcon(R.drawable.ic_ic_mic_24px);
                             adapter.addMessageCard(message);
                         } else {
                             adapter.addMessageCard(message);
-                            Log.i("ConversationActivity", "Taliking with a normal human");
                         }
                     } catch (Exception E){
                         // Do nothing
