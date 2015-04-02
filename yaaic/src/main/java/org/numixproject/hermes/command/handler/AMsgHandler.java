@@ -56,7 +56,7 @@ public class AMsgHandler extends BaseHandler
 
             for (Conversation currentConversation : mConversations) {
                 if (currentConversation.getType() == Conversation.TYPE_CHANNEL) {
-                    Message message = new Message("<" + service.getConnection(server.getId()).getNick() + "> " + text);
+                    Message message = new Message(" " + service.getConnection(server.getId()).getNick() + " - " + text);
                     currentConversation.addMessage(message);
 
                     Intent intent = Broadcast.createConversationIntent(

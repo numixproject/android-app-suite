@@ -54,7 +54,7 @@ public class MsgHandler extends BaseHandler
             Conversation targetConversation = server.getConversation(params[1]);
 
             if (targetConversation != null) {
-                Message message = new Message("<" + service.getConnection(server.getId()).getNick() + "> " + text);
+                Message message = new Message(" " + service.getConnection(server.getId()).getNick() + " - " + text);
                 targetConversation.addMessage(message);
 
                 Intent intent = Broadcast.createConversationIntent(

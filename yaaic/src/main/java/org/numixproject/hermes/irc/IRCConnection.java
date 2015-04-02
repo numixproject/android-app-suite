@@ -479,7 +479,7 @@ public class IRCConnection extends PircBot
                 service.addNewMention(
                     server.getId(),
                     conversation,
-                    target + ": <" + sender + "> " + text,
+                    target + ": " + sender + " - " + text,
                     service.getSettings().isVibrateHighlightEnabled(),
                     service.getSettings().isSoundHighlightEnabled(),
                     service.getSettings().isLedHighlightEnabled()
@@ -691,7 +691,7 @@ public class IRCConnection extends PircBot
             service.addNewMention(
                 server.getId(),
                 conversation,
-                "<" + sender + "> " + text,
+                " " + sender + " - " + text,
                 service.getSettings().isVibrateHighlightEnabled(),
                 service.getSettings().isSoundHighlightEnabled(),
                 service.getSettings().isLedHighlightEnabled()

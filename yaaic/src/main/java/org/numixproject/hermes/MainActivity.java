@@ -252,8 +252,10 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         if (resultCode == RESULT_OK) {
-            // Refresh list from database
-            adapter.loadServers();
+            try {
+                // Refresh list from database
+                adapter.loadServers();
+            } catch (Exception e){};
         }
     }
 

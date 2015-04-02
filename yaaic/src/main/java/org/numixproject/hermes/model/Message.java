@@ -49,8 +49,8 @@ import android.widget.TextView;
  */
 public class Message
 {
-    public static final int COLOR_GREEN   = 0xFF458509;
-    public static final int COLOR_RED     = 0xFFcc0000;
+    public static final int COLOR_GREEN   = 0xFF1B5E20;
+    public static final int COLOR_RED     = 0xFFB71C1C;
     public static final int COLOR_BLUE    = 0xFF729fcf;
     public static final int COLOR_YELLOW  = 0xFFbe9b01;
     public static final int COLOR_GREY    = 0xFFaaaaaa;
@@ -63,22 +63,18 @@ public class Message
     public static final int TYPE_MISC    = 1;
 
     public static final int[] colors = {
-        0xFFffffff, // White
-        0xFFffff00, // Yellow
-        0xFFff00ff, // Fuchsia
-        0xFFff0000, // Red
-        0xFFc0c0c0, // Silver
-        0xFF9E9E9E, // Material Gray
-        0xFF808000, // Olive
-        0xFF4A148C, // Material Purple
-        0xFF3E2723, // Material Brown
-        0xFF00ffff, // Agua
-        0xFFCDDC39, // Material Lime
-        0xFF008080, // Teal
-        0xFF008000, // Green
-        0xFF1565C0, // Material Blue
-        0xFF388E3C, // Material Green
-        0xFF000000, // Black
+        0xFF311B92, // White
+        0xFF1A237E, // Yellow
+        0xFF0D47A1, // Fuchsia
+        0xFF01579B, // Red
+        0xFF006064, // Silver
+        0xFF004D40, // Material Gray
+        0xFFF57F17, // Olive
+        0xFFFF6F00, // Material Purple
+        0xFFE65100, // Material Brown
+        0xFF3E2723, // Agua
+        0xFF212121, // Material Lime
+        0xFF263238, // Teal
     };
 
     public static final int NO_ICON  = -1;
@@ -294,6 +290,11 @@ public class Message
     public boolean hasSender()
     {
         return sender != null;
+    }
+
+    public String getSender()
+    {
+        return sender;
     }
 
     /**

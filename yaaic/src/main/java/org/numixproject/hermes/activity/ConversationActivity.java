@@ -514,11 +514,24 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         while(conversation.hasBufferedMessages()) {
             Message message = conversation.pollBufferedMessage();
-            String messageText = message.getText();
 
             if (adapter != null && message != null) {
                 if (message.hasSender()) {
-                    adapter.addMessageCard(message);
+                    Log.i("ConversationActivity", pagerAdapter.getPageTitle(pager.getCurrentItem()));
+                    Log.i("ConversationActivity", message.getSender());
+                    try {
+                        // Check if sender is Op
+                        if (binder.getService().getConnection(serverId).getUser(pagerAdapter.getPageTitle(pager.getCurrentItem()), message.getSender()).isOp()) {
+                            // If yes, display an appropriate icon
+                            message.setIcon(R.drawable.error);
+                            adapter.addMessageCard(message);
+                        } else {
+                            adapter.addMessageCard(message);
+                            Log.i("ConversationActivity", "Taliking with a normal human");
+                        }
+                    } catch (Exception E){
+                        // Do nothing
+                    };
                 } else {
                     adapter.addMessage(message);
                 }
