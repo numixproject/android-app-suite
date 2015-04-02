@@ -521,7 +521,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                     Log.i("ConversationActivity", message.getSender());
                     try {
                         // Check if sender is Op
-                        if (binder.getService().getConnection(serverId).getUser(pagerAdapter.getPageTitle(pager.getCurrentItem()), message.getSender()).isOp()) {
+                        if (binder.getService().getConnection(serverId).getUser(target, message.getSender()).isOp()) {
                             // If yes, display an appropriate icon
                             message.setIcon(R.drawable.error);
                             adapter.addMessageCard(message);
