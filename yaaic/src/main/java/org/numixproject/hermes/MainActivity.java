@@ -48,7 +48,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
     @Override
     public void init(Bundle savedInstanceState) {
-        MaterialSection home = newSection("Chat", R.drawable.ic_ic_chat_24px, new HomeFragment());
+        MaterialSection home = newSection("Connect to...", R.drawable.ic_ic_swap_horiz_24px, new HomeFragment());
         MaterialSection addserver = newSection("Add new server", R.drawable.ic_ic_add_24px, new Intent(this, AddServerActivity.class));
         MaterialSection notifications = newSection("Snooze Notifications", R.drawable.ic_ic_notifications_off_24px, new Intent(this, SettingsActivity.class));
         MaterialSection pro = newSection("Unlock all features", R.drawable.ic_ic_vpn_key_24px,  new Intent(this, SettingsActivity.class));
@@ -59,14 +59,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         addSection(home);
 
         this.addSubheader("Servers");
-
-
-        this.addSection(newSection("Connect to ...", R.drawable.ic_ic_swap_horiz_24px, new MaterialSectionListener() {
-            @Override
-            public void onClick(MaterialSection section) {
-                openServerPane();
-            }
-        }));
 
         fragment = (HomeFragment)home.getTargetFragment();
 
@@ -112,11 +104,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         }
     }
 
-
-    public void openServerPane(){
-        fragment.openServerPane();
-    }
-
     public void openServerWithNewRoom(int position) {
         fragment.openServerWithNewRoom(position);
     }
@@ -130,16 +117,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     public void onResume()
     {
         super.onResume();
-
-        // Check if opened by Conversation Activity
-        Intent intentConversation = getIntent();
-        int value = -1;
-        if (null != intentConversation) {
-            value = intentConversation.getIntExtra("OpenPane", -1);
-        }
-        if (-1 != value) {
-            openServerPane();
-        }
 
         // Start and connect to service
         Intent intent = new Intent(this, IRCService.class);

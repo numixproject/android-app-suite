@@ -48,7 +48,6 @@ import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 
 public class HomeFragment extends Fragment implements ServiceConnection, ServerListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
-    private SlidingUpPanelLayout serverSliding = null;
     private IRCBinder binder;
     private ServerReceiver receiver;
     private ServerListAdapter adapter;
@@ -66,9 +65,6 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
         // Inflate the layout for this fragment
         llLayout.findViewById(R.id.home_mainFragment);
 
-        serverSliding = (SlidingUpPanelLayout) llLayout.findViewById(R.id.sliding_layout);
-        serverSliding.setEnableDragViewTouchEvents(true);
-
         adapter = new ServerListAdapter();
 
 
@@ -78,10 +74,6 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
         list.setOnItemLongClickListener(this);
 
         return llLayout;
-    }
-
-    public void openServerPane() {
-        serverSliding.expandPanel();
     }
 
     /**
