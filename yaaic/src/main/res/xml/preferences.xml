@@ -28,7 +28,9 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:title="@string/settings_reconnect_title"
             android:summary="@string/settings_reconnect_desc"
             android:key="@string/key_reconnect"
-            android:defaultValue="@string/default_reconnect" />
+            android:defaultValue="@string/default_reconnect"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <ListPreference
             android:title="@string/settings_reconnect_interval_title"
             android:summary="@string/settings_reconnect_interval_desc"
@@ -37,12 +39,15 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:entries="@array/reconnect_interval_labels"
             android:entryValues="@array/reconnect_interval_values"
             android:key="@string/key_reconnect_interval"
-            android:defaultValue="@string/default_reconnect_interval" />
+            android:defaultValue="@string/default_reconnect_interval"
+            />
         <CheckBoxPreference
             android:title="@string/settings_ignore_motd_title"
             android:summary="@string/settings_ignore_motd_desc"
             android:key="@string/key_ignore_motd"
-            android:defaultValue="@string/default_ignore_motd" />
+            android:defaultValue="@string/default_ignore_motd"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_chat">
@@ -58,69 +63,95 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:title="@string/settings_icons_title"
             android:summary="@string/settings_icons_desc"
             android:key="@string/key_show_icons"
-            android:defaultValue="@string/default_show_icons" />
+            android:defaultValue="@string/default_show_icons"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_colors_title"
             android:summary="@string/settings_colors_desc"
             android:key="@string/key_show_colors"
-            android:defaultValue="@string/default_show_colors"/>
+            android:defaultValue="@string/default_show_colors"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_colors_nick_title"
             android:key="@string/key_show_colors_nick"
             android:summary="@string/settings_colors_nick_desc"
-            android:defaultValue="@string/default_show_colors_nick"/>
+            android:defaultValue="@string/default_show_colors_nick"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_timestamp_title"
             android:summary="@string/settings_timestamp_desc"
             android:key="@string/key_show_timestamp"
-            android:defaultValue="@string/default_show_timestamp" />
+            android:defaultValue="@string/default_show_timestamp"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_24h_title"
             android:summary="@string/settings_24h_desc"
             android:key="@string/key_24h_format"
             android:defaultValue="@string/default_24h_format"
-            android:dependency="@string/key_show_timestamp" />
+            android:dependency="@string/key_show_timestamp"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_include_seconds_title"
             android:summary="@string/settings_include_seconds_desc"
             android:key="@string/key_include_seconds"
             android:defaultValue="@string/default_include_seconds"
-            android:dependency="@string/key_show_timestamp" />
+            android:dependency="@string/key_show_timestamp"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_joinpartquit_title"
             android:summary="@string/settings_joinpartquit_desc"
             android:key="@string/key_show_joinpartquit"
-            android:defaultValue="@string/default_show_joinpartquit" />
+            android:defaultValue="@string/default_show_joinpartquit"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_noticeserverwindow_title"
             android:summary="@string/settings_noticeserverwindow_desc"
             android:key="@string/key_notice_server_window"
-            android:defaultValue="@string/default_notice_server_window" />
+            android:defaultValue="@string/default_notice_server_window"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_mirc_colors_title"
             android:summary="@string/settings_mirc_colors_desc"
             android:key="@string/key_mirc_colors"
-            android:defaultValue="@string/default_mirc_colors" />
+            android:defaultValue="@string/default_mirc_colors"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_graphical_smilies_title"
             android:summary="@string/settings_graphical_smilies_desc"
             android:key="@string/key_graphical_smilies"
-            android:defaultValue="@string/default_graphical_smilies" />
+            android:defaultValue="@string/default_graphical_smilies"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_autocorrect_text_title"
             android:summary="@string/settings_autocorrect_text_desc"
             android:key="@string/key_autocorrect_text"
-            android:defaultValue="@string/default_autocorrect_text" />
+            android:defaultValue="@string/default_autocorrect_text"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_autocap_sentences_title"
             android:summary="@string/settings_autocap_sentences_desc"
             android:key="@string/key_autocap_sentences"
-            android:defaultValue="@string/default_autocap_sentences" />
+            android:defaultValue="@string/default_autocap_sentences"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_ime_extract_title"
             android:summary="@string/settings_ime_extract_desc"
             android:key="@string/key_ime_extract"
-            android:defaultValue="@string/default_ime_extract" />
+            android:defaultValue="@string/default_ime_extract"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <EditTextPreference
             android:title="@string/settings_history_size_title"
             android:summary="@string/settings_history_size_desc"
@@ -134,17 +165,23 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:title="@string/settings_sound_highlight_title"
             android:summary="@string/settings_sound_highlight_desc"
             android:key="@string/key_sound_highlight"
-            android:defaultValue="@string/default_sound_highlight" />
+            android:defaultValue="@string/default_sound_highlight"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_vibrate_highlight_title"
             android:summary="@string/settings_vibrate_highlight_desc"
             android:key="@string/key_vibrate_highlight"
-            android:defaultValue="@string/default_vibrate_highlight" />
+            android:defaultValue="@string/default_vibrate_highlight"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <CheckBoxPreference
             android:title="@string/settings_led_highlight_title"
             android:summary="@string/settings_led_highlight_desc"
             android:key="@string/key_led_highlight"
-            android:defaultValue="@string/default_led_highlight" />
+            android:defaultValue="@string/default_led_highlight"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_misc">
@@ -152,7 +189,9 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:title="@string/settings_voice_recognition_title"
             android:summary="@string/settings_voice_recognition_desc"
             android:key="@string/key_voice_recognition"
-            android:defaultValue="@string/default_voice_recognition" />
+            android:defaultValue="@string/default_voice_recognition"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
         <EditTextPreference
             android:title="@string/settings_quitmessage_title"
             android:summary="@string/settings_quitmessage_desc"
@@ -164,6 +203,8 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:title="@string/settings_debug_traffic_title"
             android:summary="@string/settings_debug_traffic_desc"
             android:key="@string/key_debug_traffic"
-            android:defaultValue="@string/default_debug_traffic" />
+            android:defaultValue="@string/default_debug_traffic"
+            android:button="@drawable/abc_btn_check_material"
+            android:buttonTint="@color/colorAccent"/>
     </PreferenceCategory>
 </PreferenceScreen>

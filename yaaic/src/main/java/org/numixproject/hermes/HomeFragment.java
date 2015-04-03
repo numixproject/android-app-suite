@@ -6,30 +6,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-
-import org.numixproject.hermes.activity.AboutActivity;
 import org.numixproject.hermes.activity.AddServerActivity;
 import org.numixproject.hermes.activity.ConversationActivity;
-import org.numixproject.hermes.activity.JoinActivity;
-import org.numixproject.hermes.activity.SettingsActivity;
 import org.numixproject.hermes.adapter.ServerListAdapter;
 import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.irc.IRCBinder;
@@ -40,10 +29,6 @@ import org.numixproject.hermes.model.Extra;
 import org.numixproject.hermes.model.Server;
 import org.numixproject.hermes.model.Status;
 import org.numixproject.hermes.receiver.ServerReceiver;
-
-import java.util.ArrayList;
-
-import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 
 
 public class HomeFragment extends Fragment implements ServiceConnection, ServerListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
@@ -60,7 +45,7 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
                              Bundle savedInstanceState) {
 
 
-        FrameLayout llLayout = (FrameLayout) inflater.inflate(R.layout.server_sliding_fragment, container, false);
+        FrameLayout llLayout = (FrameLayout) inflater.inflate(R.layout.home_fragment, container, false);
 
         // Inflate the layout for this fragment
         llLayout.findViewById(R.id.home_mainFragment);
@@ -93,8 +78,6 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
     {
         super.onResume();
 
-
-
         // Start and connect to service
         Intent intent = new Intent(super.getActivity(), IRCService.class);
         intent.setAction(IRCService.ACTION_BACKGROUND);
@@ -105,8 +88,6 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
         super.getActivity().registerReceiver(receiver, new IntentFilter(Broadcast.SERVER_UPDATE));
 
         adapter.loadServers();
-
-
     }
 
     /**

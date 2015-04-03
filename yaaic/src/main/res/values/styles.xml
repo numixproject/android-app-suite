@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Hermes" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#ff0097a6</item>
-        <item name="colorPrimaryDark">#ff0097a6</item>
-        <item name="colorAccent">#ff9800</item>
+        <item name="colorPrimary">#0097A7</item>
+        <item name="colorPrimaryDark">#00838F</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="Preferences" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#0097A7</item>
+        <item name="colorPrimaryDark">#00838F</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="MyNavigationDrawerTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar.TranslucentKitKatStatusBar">
-        <item name="colorPrimary">#ff0097a6</item>
-        <item name="colorPrimaryDark">#ff0097a6</item>
+        <item name="colorPrimary">#0097A7</item>
+        <item name="colorPrimaryDark">#00838F</item>
         <item name="singleAccount">true</item>
-        <item name="colorAccent">#ff9800</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="multipaneSupport">true</item>
         <item name="drawerType">@integer/DRAWERTYPE_IMAGE</item>
         <item name="android:windowContentOverlay">@drawable/above_shadow</item>

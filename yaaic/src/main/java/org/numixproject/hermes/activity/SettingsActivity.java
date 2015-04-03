@@ -24,27 +24,43 @@ import org.numixproject.hermes.R;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 /**
  * Settings
  *
  * @author Sebastian Kaspari <sebastian@yaaic.org>
  */
-public class SettingsActivity extends PreferenceActivity
-{
-    /**
-     * On create
-     */
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
+public class SettingsActivity extends ActionBarActivity {
 
-        addPreferencesFromResource(R.xml.preferences);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.preferences);
+
+        getFragmentManager().beginTransaction()
+                .replace(R.id.preferencesFrame, new MyPreferenceFragment()).commit();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+
+    public static class MyPreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            addPreferencesFromResource(R.xml.preferences);
+        }
+    }
+
 
     /**
      * On menu item selected.
@@ -57,4 +73,5 @@ public class SettingsActivity extends PreferenceActivity
 
         return true;
     }
+
 }
