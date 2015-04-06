@@ -39,8 +39,8 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:launchMode="standard"
-            android:theme="@style/MyNavigationDrawerTheme"
- >
+            android:theme="@style/MyNavigationDrawerTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

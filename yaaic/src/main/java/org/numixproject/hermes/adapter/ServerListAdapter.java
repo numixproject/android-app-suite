@@ -21,11 +21,13 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
 package org.numixproject.hermes.adapter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.numixproject.hermes.MainActivity;
 import org.numixproject.hermes.R;
 import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.activity.ConversationActivity;
+import org.numixproject.hermes.model.Conversation;
 import org.numixproject.hermes.model.Server;
 
 import android.content.Context;
@@ -149,8 +151,18 @@ public class ServerListAdapter extends BaseAdapter
         TextView channelsList = (TextView) v.findViewById(R.id.channel_list);
 
         String s = "";
+
         for (int i = 0; i < channels.size(); i++) {
-            s += channels.get(i) + "\n";
+            Conversation conversation = server.getConversation(channels.get(i));
+                // Only scroll to new conversation if it was selected before
+            int Mentions = conversation.getNewMentions();
+            if (Mentions == 0) {
+                s += channels.get(i) + "(0 Notifications)" + "\n";
+            } else if (Mentions == 1) {
+                s += channels.get(i) + "(1 Notification)" + "\n";
+            } else {
+                s += channels.get(i) + "(" + Mentions + " Notifications)" + "\n";
+            }
         }
         channelsList.setText(s);
 
