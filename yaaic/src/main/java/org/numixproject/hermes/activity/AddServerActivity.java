@@ -24,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import org.numixproject.hermes.MainActivity;
 import org.numixproject.hermes.R;
 import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.db.Database;
@@ -80,6 +81,7 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         setContentView(R.layout.serveradd);
 
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         authentication = new Authentication();
         aliases = new ArrayList<String>();
@@ -157,37 +159,18 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         }
     }
 
-    /**
-     * On options menu requested
-     */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        super.onCreateOptionsMenu(menu);
-
-        MenuInflater inflater = new MenuInflater(this);
-        inflater.inflate(R.menu.addserver, menu);
-
-        return true;
-    }
-
-    /**
-     * On menu item selected
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.save:
-                save();
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 return true;
-
-            case  android.R.id.home:
-                finish();
-                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     /**

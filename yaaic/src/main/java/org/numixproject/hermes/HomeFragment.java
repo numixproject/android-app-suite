@@ -17,6 +17,8 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import org.numixproject.hermes.activity.AddServerActivity;
 import org.numixproject.hermes.activity.ConversationActivity;
 import org.numixproject.hermes.adapter.ServerListAdapter;
@@ -39,6 +41,7 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
     private ListView list;
     private String channel;
     private int positionBuffer;
+    private FloatingActionButton fab = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,16 +52,29 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
 
         // Inflate the layout for this fragment
         llLayout.findViewById(R.id.home_mainFragment);
-
         adapter = new ServerListAdapter();
 
+        fab = (FloatingActionButton) llLayout.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                newAddServerActivity(v);
+            }
+        });
 
         list = (ListView) llLayout.findViewById(android.R.id.list);
         list.setAdapter(adapter);
         list.setOnItemClickListener(this);
         list.setOnItemLongClickListener(this);
 
+        fab.attachToListView(list);
+
         return llLayout;
+    }
+
+    private void newAddServerActivity(View v){
+        Intent intent = new Intent(super.getActivity(), AddServerActivity.class);
+        startActivity(intent);
     }
 
     /**

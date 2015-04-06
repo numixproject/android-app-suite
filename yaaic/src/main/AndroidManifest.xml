@@ -49,7 +49,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         </activity>
         <activity
             android:name=".activity.AddServerActivity"
-            android:theme="@style/MyNavigationDrawerTheme"
+            android:theme="@style/Hermes"
             android:label="@string/add_server_label" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

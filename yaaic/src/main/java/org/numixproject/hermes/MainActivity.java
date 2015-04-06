@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.numixproject.hermes.adapter.ServerListAdapter;
@@ -41,8 +42,10 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     public static IRCBinder binder;
     private ServerReceiver receiver;
     private ServerListAdapter adapter;
+    View v;
 
     private HomeFragment fragment = null;
+
 
 
 
@@ -54,7 +57,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         MaterialSection pro = newSection("Unlock all features", R.drawable.ic_ic_vpn_key_24px,  new Intent(this, SettingsActivity.class));
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
         MaterialSection help = newSection("Help", R.drawable.ic_ic_help_24px , new Intent(this, SettingsActivity.class));
-        MaterialSection about = newSection("About", R.drawable.ic_ic_info_24px , new Intent(this, AboutActivity.class));
+        MaterialSection about = newSection("About", R.drawable.ic_ic_info_24px, new Intent(this, AboutActivity.class));
         getSupportActionBar().setElevation(3);
         addSection(home);
 
@@ -110,6 +113,10 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
     public void onCardMoreClicked(int position){
         fragment.onMoreButtonClick(position);
+    }
+
+    private void newServerActivity() {
+
     }
 
 
