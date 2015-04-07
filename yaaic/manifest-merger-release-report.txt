@@ -27,19 +27,22 @@ ADDED from AndroidManifest.xml:31:5
 		ADDED from AndroidManifest.xml:31:22
 application
 ADDED from AndroidManifest.xml:33:5
-MERGED from com.android.support:support-v4:21.0.3:16:5
-MERGED from com.android.support:support-v4:21.0.3:16:5
-MERGED from com.android.support:appcompat-v7:21.0.3:16:5
-MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.android.support:support-v4:22.0.0:22:5
+MERGED from com.android.support:support-v4:22.0.0:22:5
+MERGED from com.android.support:appcompat-v7:22.0.0:22:5
+MERGED from com.android.support:support-v4:22.0.0:22:5
 MERGED from com.sothree.slidinguppanel:library:2.0.4:9:5
-MERGED from com.android.support:support-v4:21.0.3:16:5
-MERGED from it.neokree:MaterialNavigationDrawer:1.3.2:14:5
+MERGED from com.android.support:support-v4:22.0.0:22:5
+MERGED from it.neokree:MaterialNavigationDrawer:1.3.3:14:5
+MERGED from com.android.support:appcompat-v7:22.0.0:22:5
+MERGED from com.android.support:support-v4:22.0.0:22:5
 MERGED from com.balysv:material-ripple:1.0.1:12:5
-MERGED from com.android.support:appcompat-v7:21.0.3:16:5
-MERGED from com.android.support:support-v4:21.0.3:16:5
 MERGED from com.android.support:cardview-v7:21.0.3:16:5
+MERGED from com.melnykov:floatingactionbutton:1.3.0:12:5
 MERGED from com.android.support:recyclerview-v7:21.0.3:17:5
-MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.android.support:support-v4:22.0.0:22:5
+MERGED from com.android.support:recyclerview-v7:21.0.3:17:5
+MERGED from com.android.support:support-v4:22.0.0:22:5
 	android:label
 		ADDED from AndroidManifest.xml:35:9
 	android:allowBackup
@@ -177,21 +180,24 @@ ADDED from AndroidManifest.xml:115:9
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from org.numixproject.hermes:viewPagerIndicator:unspecified:7:5
-MERGED from com.android.support:support-v4:21.0.3:15:5
-MERGED from com.android.support:support-v4:21.0.3:15:5
-MERGED from com.android.support:appcompat-v7:21.0.3:15:5
-MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.android.support:support-v4:22.0.0:20:5
+MERGED from com.android.support:support-v4:22.0.0:20:5
+MERGED from com.android.support:appcompat-v7:22.0.0:20:5
+MERGED from com.android.support:support-v4:22.0.0:20:5
 MERGED from com.sothree.slidinguppanel:library:2.0.4:7:5
-MERGED from com.android.support:support-v4:21.0.3:15:5
-MERGED from it.neokree:MaterialNavigationDrawer:1.3.2:8:5
+MERGED from com.android.support:support-v4:22.0.0:20:5
+MERGED from it.neokree:MaterialNavigationDrawer:1.3.3:8:5
+MERGED from com.android.support:appcompat-v7:22.0.0:20:5
+MERGED from com.android.support:support-v4:22.0.0:20:5
 MERGED from com.balysv:material-ripple:1.0.1:8:5
-MERGED from com.android.support:appcompat-v7:21.0.3:15:5
-MERGED from com.android.support:support-v4:21.0.3:15:5
 MERGED from com.android.support:cardview-v7:21.0.3:15:5
+MERGED from com.melnykov:floatingactionbutton:1.3.0:8:5
 MERGED from com.android.support:recyclerview-v7:21.0.3:15:5
-MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.android.support:support-v4:22.0.0:20:5
+MERGED from com.android.support:recyclerview-v7:21.0.3:15:5
+MERGED from com.android.support:support-v4:22.0.0:20:5
 	tools:overrideLibrary
-		ADDED from it.neokree:MaterialNavigationDrawer:1.3.2:11:9
+		ADDED from it.neokree:MaterialNavigationDrawer:1.3.3:11:9
 	android:targetSdkVersion
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
@@ -200,6 +206,7 @@ MERGED from com.android.support:support-v4:21.0.3:15:5
 		INJECTED from AndroidManifest.xml:0:0
 activity#android.support.v7.widget.TestActivity
 ADDED from com.android.support:recyclerview-v7:21.0.3:18:9
+MERGED from com.android.support:recyclerview-v7:21.0.3:18:9
 	android:label
 		ADDED from com.android.support:recyclerview-v7:21.0.3:18:19
 	android:name

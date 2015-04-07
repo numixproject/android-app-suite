@@ -410,6 +410,25 @@ public class Server
     }
 
     /**
+     * Get names of the currently queries
+     *
+     * @return
+     */
+    public ArrayList<String> getCurrentQueryNames()
+    {
+        ArrayList<String> channels = new ArrayList<String>();
+        Collection<Conversation> mConversations = conversations.values();
+
+        for (Conversation conversation : mConversations) {
+            if (conversation.getType() == Conversation.TYPE_QUERY) {
+                channels.add(conversation.getName());
+            }
+        }
+
+        return channels;
+    }
+
+    /**
      * Get icon for current server status
      * 
      * @return int Status icon ressource

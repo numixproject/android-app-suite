@@ -650,7 +650,7 @@ public class IRCConnection extends PircBot
     @Override
     protected void onPrivateMessage(String sender, String login, String hostname, String target, String text)
     {
-        Message message = new Message("<" + sender + "> " + text);
+        Message message = new Message(" " + sender + " - " + text);
         String queryNick = sender;
 
         if (queryNick.equals(this.getNick())) {

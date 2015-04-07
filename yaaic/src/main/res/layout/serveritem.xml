@@ -65,6 +65,29 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
+        android:layout_height="2px"
+        android:background="#dedede"
+        android:orientation="vertical"
+        android:padding="10dp"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mpCounter"
+        android:text="0 new messages"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="16dp"
@@ -72,21 +95,20 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:paddingTop="8dp">
 
         <TextView
-           android:id="@+id/host"
-           android:layout_width="fill_parent"
-           android:layout_height="wrap_content"
-           android:text="irc.example.com"
-            android:textColor="#1e1e1e"
-           android:textSize="14sp" />
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="user_name (1 message)"
+            android:id="@+id/mpDetails"/>
 
+    </LinearLayout>
 
-        </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="2px"
         android:background="#dedede"
         android:orientation="vertical"
         android:padding="10dp"/>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

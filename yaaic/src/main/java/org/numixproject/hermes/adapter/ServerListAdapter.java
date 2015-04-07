@@ -22,6 +22,7 @@ package org.numixproject.hermes.adapter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.numixproject.hermes.MainActivity;
 import org.numixproject.hermes.R;
@@ -53,6 +54,7 @@ public class ServerListAdapter extends BaseAdapter
 
     private ArrayList<Server> servers;
     ArrayList<String> channels = new ArrayList<String>();
+    ArrayList<String> query = new ArrayList<String>();
     /**
      * Create a new adapter for server lists
      */
@@ -143,28 +145,79 @@ public class ServerListAdapter extends BaseAdapter
         TextView titleView = (TextView) v.findViewById(R.id.title);
         titleView.setText(server.getTitle());
 
-        TextView hostView = (TextView) v.findViewById(R.id.host);
-        hostView.setText(server.getIdentity().getNickname() + " @ " + server.getHost() + " : " + server.getPort());
         LinearLayout serverCard = (LinearLayout) v.findViewById(R.id.server_card);
 
         channels = server.getCurrentChannelNames();
+        query = server.getCurrentQueryNames();
         TextView channelsList = (TextView) v.findViewById(R.id.channel_list);
+        TextView mpCounterTextView = (TextView) v.findViewById(R.id.mpCounter);
+        TextView mpDetailsTextView = (TextView) v.findViewById(R.id.mpDetails);
 
+        // Show Channels list and Mentions for each channel in Server Card
         String s = "";
 
         for (int i = 0; i < channels.size(); i++) {
-            Conversation conversation = server.getConversation(channels.get(i));
+            try {
+                Conversation conversation = server.getConversation(channels.get(i));
                 // Only scroll to new conversation if it was selected before
-            int Mentions = conversation.getNewMentions();
-            if (Mentions == 0) {
-                s += channels.get(i) + "(0 Notifications)" + "\n";
-            } else if (Mentions == 1) {
-                s += channels.get(i) + "(1 Notification)" + "\n";
-            } else {
-                s += channels.get(i) + "(" + Mentions + " Notifications)" + "\n";
+                int Mentions = conversation.getNewMentions();
+
+                if (Mentions == 1) {
+                    s += channels.get(i) + "(1 mention)" + "\n";
+                } else if (Mentions == 0) {
+                    s += channels.get(i) + "\n";
+                } else {
+                    s += channels.get(i) + "(" + Mentions + " mentions)" +  "\n";
+                }
+            } catch (Exception E) {
+                // Do nothing
             }
         }
         channelsList.setText(s);
+
+        // Show MP detsils in Server Card
+        String t = "";
+
+        for (int i = 0; i < query.size(); i++) {
+            Conversation queries = null;
+            try {
+                queries = server.getConversation(query.get(i));
+            } catch (Exception e) {
+                // Do nothing;
+            }
+            int Queries = 0;
+            String QueriesName = null;
+            try {
+                Queries = queries.getNewMentions();
+                QueriesName = queries.getName();
+            } catch (Exception e) {
+                // do nothing
+            }
+            if (Queries == 0) {
+                t += QueriesName + " (0 messages)" + "\n";
+            } else if (Queries == 1) {
+                t += QueriesName + " (1 message)" + "\n";
+            } else {
+                t += QueriesName + " (" + Queries + " messages)" + "\n";
+            }
+        }
+        mpDetailsTextView.setText(t);
+
+        // Show MP in general counter Server Card
+        int counter = 0;
+
+        for (int i = 0; i < query.size(); i++) {
+            int Queries = 0;
+            try {
+                Queries = server.getConversation(query.get(i)).getNewMentions();
+                counter = Queries + counter;
+            } catch (Exception e) {
+                // do nothing
+            }
+        }
+
+
+            mpCounterTextView.setText(counter);
 
         // More button top left of server card
         TextView serverRooms = (TextView) v.findViewById(R.id.server_rooms);
