@@ -19,11 +19,13 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
 -->
+
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:scrollbarStyle="outsideInset"
+    android:background="#ffffff"
     android:padding="16dp">
     <LinearLayout
         android:orientation="vertical"
@@ -31,39 +33,49 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_height="wrap_content">
         <TextView
             android:text="@string/server"
+            android:layout_marginLeft="-8dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="3dip"
             style="?android:attr/listSeparatorTextViewStyle" />
         <TextView
-            android:text="@string/server_title"
+            android:text="Name"
+            android:layout_marginTop="8dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/title"
             android:contentDescription="@string/server_title"
+            android:layout_marginLeft="-4dp"
+            android:textSize="14sp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="true" />
         <TextView
             android:text="@string/server_host"
+            android:layout_marginTop="8dp"
+            android:paddingTop="8dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/host"
             android:contentDescription="@string/server_host"
+            android:textSize="14sp"
+            android:layout_marginLeft="-4dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:inputType="textNoSuggestions" />
         <TextView
+            android:layout_marginTop="8dp"
             android:text="@string/server_port"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/port"
+            android:textSize="14sp"
+            android:layout_marginLeft="-4dp"
             android:contentDescription="@string/server_port"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:minEms="6"
@@ -72,12 +84,15 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:maxLength="5" />
         <TextView
             android:text="@string/server_password"
+            android:layout_marginTop="8dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/password"
             android:contentDescription="@string/server_password"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
+            android:textSize="14sp"
+            android:layout_marginLeft="-4dp"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:password="true"
@@ -92,6 +107,8 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:visibility="gone" />
         <CheckBox
             android:id="@+id/useSSL"
+            android:checked="true"
+            android:layout_marginTop="8dp"
             android:contentDescription="@string/server_useSSL"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -99,51 +116,57 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
 <!-- ############################################################################ -->
         <TextView
             android:text="@string/user"
+            android:paddingTop="16dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="3dip"
+            android:layout_marginLeft="-8dp"
             style="?android:attr/listSeparatorTextViewStyle" />
         <TextView
-            android:text="@string/nickname"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/nickname"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:contentDescription="@string/nickname" />
-        <Button
-            android:id="@+id/aliases"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/aliases" />
-        <TextView
-            android:text="@string/ident"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/ident"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="yaaic"
-            android:contentDescription="@string/ident"
-            android:singleLine="true" />
-        <TextView
             android:text="@string/realname"
+            android:layout_marginTop="16dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/realname"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="-4dp"
+            android:textSize="14sp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text=""
+            android:hint="Enter your full name"
             android:contentDescription="@string/realname"
+            android:singleLine="true" />
+
+        <TextView
+            android:text="Nick and aliases"
+            android:layout_marginTop="8dp"
+
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/nickname"
+            android:hint="Enter nick and aliases separated by comma (,)"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginLeft="-4dp"
+            android:singleLine="true"
+            android:contentDescription="@string/nickname" />
+        <EditText
+            android:id="@+id/ident"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="hermes"
+            android:contentDescription="@string/ident"
             android:singleLine="true" />
 <!-- ############################################################################ -->
         <TextView
             android:text="@string/on_connect"
             android:layout_width="fill_parent"
+            android:layout_marginLeft="-8dp"
+
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dip"
             style="?android:attr/listSeparatorTextViewStyle" />
@@ -168,6 +191,8 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dip"
+            android:layout_marginLeft="-8dp"
+
             style="?android:attr/listSeparatorTextViewStyle" />
         <TextView
             android:text="@string/charset"

@@ -22,6 +22,8 @@ package org.numixproject.hermes.activity;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.numixproject.hermes.MainActivity;
@@ -61,7 +63,6 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
 {
     private static final int REQUEST_CODE_CHANNELS       = 1;
     private static final int REQUEST_CODE_COMMANDS       = 2;
-    private static final int REQUEST_CODE_ALIASES        = 3;
     private static final int REQUEST_CODE_AUTHENTICATION = 4;
 
     private Server server;
@@ -90,7 +91,6 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
 
         ((Button) findViewById(R.id.add)).setOnClickListener(this);
         ((Button) findViewById(R.id.cancel)).setOnClickListener(this);
-        ((Button) findViewById(R.id.aliases)).setOnClickListener(this);
         ((Button) findViewById(R.id.channels)).setOnClickListener(this);
         ((Button) findViewById(R.id.commands)).setOnClickListener(this);
         ((Button) findViewById(R.id.authentication)).setOnClickListener(this);
@@ -184,11 +184,6 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         }
 
         switch (requestCode) {
-            case REQUEST_CODE_ALIASES:
-                aliases.clear();
-                aliases.addAll(data.getExtras().getStringArrayList(Extra.ALIASES));
-                break;
-
             case REQUEST_CODE_CHANNELS:
                 channels = data.getExtras().getStringArrayList(Extra.CHANNELS);
                 break;
@@ -212,12 +207,6 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
     public void onClick(View v)
     {
         switch (v.getId()) {
-            case R.id.aliases:
-                Intent aliasIntent = new Intent(this, AddAliasActivity.class);
-                aliasIntent.putExtra(Extra.ALIASES, aliases);
-                startActivityForResult(aliasIntent, REQUEST_CODE_ALIASES);
-                break;
-
             case R.id.authentication:
                 Intent authIntent = new Intent(this, AuthenticationActivity.class);
                 authIntent.putExtra(Extra.NICKSERV_PASSWORD, authentication.getNickservPassword());
@@ -277,11 +266,11 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
 
         Identity identity = getIdentityFromView();
         long identityId = db.addIdentity(
-            identity.getNickname(),
-            identity.getIdent(),
-            identity.getRealName(),
-            identity.getAliases()
-            );
+                identity.getNickname(),
+                identity.getIdent(),
+                identity.getRealName(),
+                identity.getAliases()
+        );
 
         Server server = getServerFromView();
         server.setAuthentication(authentication);
@@ -373,16 +362,25 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
      */
     private Identity getIdentityFromView()
     {
-        String nickname = ((EditText) findViewById(R.id.nickname)).getText().toString().trim();
+        String nickname = ((EditText) findViewById(R.id.nickname)).getText().toString();
         String ident = ((EditText) findViewById(R.id.ident)).getText().toString().trim();
         String realname = ((EditText) findViewById(R.id.realname)).getText().toString().trim();
 
+        String[] floatStrings = nickname.split(",");
+
+        String[] nick = new String[floatStrings.length];
+        for (int i=0; i<nick.length; i++) {
+            nick[i] = String.valueOf(floatStrings[i]);
+        }
+
         Identity identity = new Identity();
-        identity.setNickname(nickname);
+        identity.setNickname(nick[0]);
         identity.setIdent(ident);
         identity.setRealName(realname);
 
-        identity.setAliases(aliases);
+        // convert String[] to ArrayList<String>
+        List<String> aliasesList = Arrays.asList(nick);
+        identity.setAliases(aliasesList);
 
         return identity;
     }
@@ -456,10 +454,10 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         // <special>    ::= '-' | '[' | ']' | '\' | '`' | '^' | '{' | '}'
         // Chars that are not in RFC 1459 but are supported too:
         // | and _
-        Pattern nickPattern = Pattern.compile("^[a-zA-Z_][a-zA-Z0-9^\\-`\\[\\]{}|_\\\\]*$");
-        if (!nickPattern.matcher(nickname).matches()) {
-            throw new ValidationException(getResources().getString(R.string.validation_invalid_nickname));
-        }
+        //Pattern nickPattern = Pattern.compile("^[a-zA-Z_][a-zA-Z0-9^\\-`\\[\\]{}|_\\\\]*$");
+        //if (!nickPattern.matcher(nickname).matches()) {
+        //    throw new ValidationException(getResources().getString(R.string.validation_invalid_nickname));
+        //}
 
         // We currently only allow chars, numbers and some special chars for ident
         Pattern identPattern = Pattern.compile("^[a-zA-Z0-9\\[\\]\\-_/]+$");

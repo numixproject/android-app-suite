@@ -204,20 +204,20 @@ public class ServerListAdapter extends BaseAdapter
         mpDetailsTextView.setText(t);
 
         // Show MP in general counter Server Card
-        int counter = 0;
+     //   int counter = 0;
 
-        for (int i = 0; i < query.size(); i++) {
-            int Queries = 0;
-            try {
-                Queries = server.getConversation(query.get(i)).getNewMentions();
-                counter = Queries + counter;
-            } catch (Exception e) {
-                // do nothing
-            }
-        }
+   //     for (int i = 0; i < query.size(); i++) {
+    //        int Queries = 0;
+     //       try {
+       //         Queries = server.getConversation(query.get(i)).getNewMentions();
+         //       counter = Queries + counter;
+           // } catch (Exception e) {
+             //   // do nothing
+           // }
+       // }
 
 
-            mpCounterTextView.setText(counter);
+         //   mpCounterTextView.setText(counter);
 
         // More button top left of server card
         TextView serverRooms = (TextView) v.findViewById(R.id.server_rooms);
