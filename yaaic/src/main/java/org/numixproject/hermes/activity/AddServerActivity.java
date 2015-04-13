@@ -102,7 +102,6 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         ((Button) findViewById(R.id.cancel)).setOnClickListener(this);
         ((Button) findViewById(R.id.channels)).setOnClickListener(this);
         ((Button) findViewById(R.id.commands)).setOnClickListener(this);
-        ((Button) findViewById(R.id.authentication)).setOnClickListener(this);
 
         Spinner spinner = (Spinner) findViewById(R.id.charset);
         String[] charsets = getResources().getStringArray(R.array.charsets);
