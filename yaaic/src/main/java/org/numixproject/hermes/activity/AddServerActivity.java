@@ -37,6 +37,8 @@ import org.numixproject.hermes.model.Identity;
 import org.numixproject.hermes.model.Server;
 import org.numixproject.hermes.model.Status;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,11 +49,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,7 +65,7 @@ import android.widget.Toast;
  *
  * @author Sebastian Kaspari <sebastian@yaaic.org>
  */
-public class AddServerActivity extends ActionBarActivity implements OnClickListener {
+public class AddServerActivity extends ActionBarActivity implements OnClickListener, AdapterView.OnItemClickListener {
 
     private static final int REQUEST_CODE_CHANNELS       = 1;
     private static final int REQUEST_CODE_COMMANDS       = 2;
@@ -80,6 +84,10 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
     private TextView saslPasswordLabel;
     private EditText saslPasswordEditText;
 
+    private EditText commandInput;
+    private ArrayAdapter<String> adapter2;
+    private Button okButton;
+
     /**
      * On create
      */
@@ -97,11 +105,6 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         aliases = new ArrayList<String>();
         channels = new ArrayList<String>();
         commands = new ArrayList<String>();
-
-        ((Button) findViewById(R.id.add)).setOnClickListener(this);
-        ((Button) findViewById(R.id.cancel)).setOnClickListener(this);
-        ((Button) findViewById(R.id.channels)).setOnClickListener(this);
-        ((Button) findViewById(R.id.commands)).setOnClickListener(this);
 
         Spinner spinner = (Spinner) findViewById(R.id.charset);
         String[] charsets = getResources().getStringArray(R.array.charsets);
@@ -171,11 +174,29 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         saslCheckbox = (CheckBox) findViewById(R.id.sasl_checkbox);
         saslUsernameEditText = (EditText) findViewById(R.id.sasl_username);
         saslPasswordEditText = (EditText) findViewById(R.id.sasl_password);
+
+        // Commands
+        commandInput = (EditText) findViewById(R.id.command);
+
+        adapter2 = new ArrayAdapter<String>(this, R.layout.commanditem);
+
+        ListView list2 = (ListView) findViewById(R.id.commands_list);
+        list2.setAdapter(adapter2);
+        list2.setOnItemClickListener(this);
+
+        ((Button) findViewById(R.id.add_command)).setOnClickListener(this);
+
+        for (String command : commands) {
+            adapter2.add(command);
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.save:
+                save();
+                return true;
             case android.R.id.home:
                 // app icon in action bar clicked; go home
                 Intent intent = new Intent(this, MainActivity.class);
@@ -216,6 +237,18 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
     public void onClick(View v)
     {
         switch (v.getId()) {
+            case R.id.add_command:
+                String command = commandInput.getText().toString().trim();
+
+                if (!command.startsWith("/")) {
+                    command = "/" + command;
+                }
+
+                commands.add(command);
+                adapter2.add(command);
+                commandInput.setText("/");
+                break;
+
             case R.id.channels:
                 Intent channelIntent = new Intent(this, AddChannelActivity.class);
                 channelIntent.putExtra(Extra.CHANNELS, channels);
@@ -237,6 +270,41 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.addserver, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * On item clicked
+     */
+    @Override
+    public void onItemClick(AdapterView<?> list, View item, int position, long id)
+    {
+        final String command = adapter2.getItem(position);
+
+        String[] items = { getResources().getString(R.string.action_remove) };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(command);
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                switch (item) {
+                    case 0: // Remove
+                        adapter2.remove(command);
+                        commands.remove(command);
+                        break;
+                }
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     /**

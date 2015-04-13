@@ -107,7 +107,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:visibility="gone" />
         <CheckBox
             android:id="@+id/useSSL"
-            android:checked="true"
+            android:checked="false"
             android:layout_marginTop="8dp"
             android:contentDescription="@string/server_useSSL"
             android:layout_width="fill_parent"
@@ -116,7 +116,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
 <!-- ############################################################################ -->
         <TextView
             android:text="@string/user"
-            android:paddingTop="16dp"
+            android:paddingTop="24dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-8dp"
@@ -207,36 +207,18 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_height="wrap_content"
             android:text="Login with NickServ" />
 <!-- ############################################################################ -->
-        <TextView
-            android:text="@string/on_connect"
-            android:layout_width="fill_parent"
-            android:layout_marginLeft="-8dp"
 
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="3dip"
-            style="?android:attr/listSeparatorTextViewStyle" />
-
-        <Button
-            android:id="@+id/channels"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/channels" />
-        <Button
-            android:id="@+id/commands"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/commands" />
 <!-- ############################################################################ -->
         <TextView
-            android:text="@string/preferences"
+            android:text="Advanced"
+            android:paddingTop="24dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="3dip"
             android:layout_marginLeft="-8dp"
-
             style="?android:attr/listSeparatorTextViewStyle" />
         <TextView
-            android:text="@string/charset"
+            android:text="Character encoding"
+            android:layout_marginTop="8dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <Spinner
@@ -244,24 +226,43 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:prompt="@string/select_charset" />
-<!-- ############################################################################ -->
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Commands to run on connection"
+            android:padding="5dp" />
+        <ListView
+            android:id="@+id/commands_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp">
-            <Button
-                android:id="@+id/add"
-                android:text="@string/server_save"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/command"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:singleLine="true"
+                android:text="/"
+                android:layout_weight="1"
+                android:inputType="textNoSuggestions" />
             <Button
-                android:id="@+id/cancel"
-                android:text="@string/action_cancel"
+                android:id="@+id/add_command"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:text="@string/action_add"
+                android:minWidth="75dp" />
         </LinearLayout>
+        </LinearLayout>
+
+
+
+<!-- ############################################################################ -->
     </LinearLayout>
 </ScrollView>
