@@ -50,8 +50,10 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -59,8 +61,8 @@ import android.widget.Toast;
  *
  * @author Sebastian Kaspari <sebastian@yaaic.org>
  */
-public class AddServerActivity extends ActionBarActivity implements OnClickListener
-{
+public class AddServerActivity extends ActionBarActivity implements OnClickListener {
+
     private static final int REQUEST_CODE_CHANNELS       = 1;
     private static final int REQUEST_CODE_COMMANDS       = 2;
     private static final int REQUEST_CODE_AUTHENTICATION = 4;
@@ -70,6 +72,13 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
     private ArrayList<String> aliases;
     private ArrayList<String> channels;
     private ArrayList<String> commands;
+
+    private CheckBox nickservCheckbox;
+    private CheckBox saslCheckbox;
+    private TextView saslUsernameLabel;
+    private EditText saslUsernameEditText;
+    private TextView saslPasswordLabel;
+    private EditText saslPasswordEditText;
 
     /**
      * On create
@@ -157,6 +166,12 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
                 ((EditText) findViewById(R.id.password)).setText(String.valueOf(uri.getQuery()));
             }
         }
+
+        // Autentication
+        nickservCheckbox = (CheckBox) findViewById(R.id.nickserv_checkbox);
+        saslCheckbox = (CheckBox) findViewById(R.id.sasl_checkbox);
+        saslUsernameEditText = (EditText) findViewById(R.id.sasl_username);
+        saslPasswordEditText = (EditText) findViewById(R.id.sasl_password);
     }
 
     @Override
@@ -192,11 +207,6 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
                 commands = data.getExtras().getStringArrayList(Extra.COMMANDS);
                 break;
 
-            case REQUEST_CODE_AUTHENTICATION:
-                authentication.setSaslUsername(data.getExtras().getString(Extra.SASL_USER));
-                authentication.setSaslPassword(data.getExtras().getString(Extra.SASL_PASSWORD));
-                authentication.setNickservPassword(data.getExtras().getString(Extra.NICKSERV_PASSWORD));
-                break;
         }
     }
 
@@ -207,14 +217,6 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
     public void onClick(View v)
     {
         switch (v.getId()) {
-            case R.id.authentication:
-                Intent authIntent = new Intent(this, AuthenticationActivity.class);
-                authIntent.putExtra(Extra.NICKSERV_PASSWORD, authentication.getNickservPassword());
-                authIntent.putExtra(Extra.SASL_USER, authentication.getSaslUsername());
-                authIntent.putExtra(Extra.SASL_PASSWORD, authentication.getSaslPassword());
-                startActivityForResult(authIntent, REQUEST_CODE_AUTHENTICATION);
-                break;
-
             case R.id.channels:
                 Intent channelIntent = new Intent(this, AddChannelActivity.class);
                 channelIntent.putExtra(Extra.CHANNELS, channels);
@@ -254,6 +256,13 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
             finish();
         } catch(ValidationException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        if (nickservCheckbox.isChecked()) {
+            authentication.setNickservPassword(saslPasswordEditText.toString());
+        } else if (saslCheckbox.isChecked()) {
+            authentication.setSaslUsername(saslUsernameEditText.toString());
+            authentication.setSaslPassword(saslPasswordEditText.toString());
         }
     }
 

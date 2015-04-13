@@ -161,6 +161,51 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:text="hermes"
             android:contentDescription="@string/ident"
             android:singleLine="true" />
+
+        <TextView
+            android:text="Username"
+            android:layout_marginTop="8dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/sasl_username"
+            android:hint="Enter NickServ/SASL username"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginLeft="-4dp"
+            android:singleLine="true"
+            android:contentDescription="@string/nickname" />
+        <TextView
+            android:text="Password"
+            android:layout_marginTop="8dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/sasl_password"
+            android:hint="Enter NickServ/SASL password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginLeft="-4dp"
+            android:singleLine="true"
+            android:contentDescription="@string/nickname" />
+        <CheckBox
+            android:id="@+id/sasl_checkbox"
+            android:checked="false"
+            android:layout_marginTop="8dp"
+            android:contentDescription="Login with SASL"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Login with SASL" />
+        <CheckBox
+            android:id="@+id/nickserv_checkbox"
+            android:checked="false"
+            android:layout_marginTop="8dp"
+            android:contentDescription="Login with NickServ"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Login with NickServ" />
 <!-- ############################################################################ -->
         <TextView
             android:text="@string/on_connect"
@@ -170,11 +215,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dip"
             style="?android:attr/listSeparatorTextViewStyle" />
-        <Button
-            android:id="@+id/authentication"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/authentication" />
+
         <Button
             android:id="@+id/channels"
             android:layout_width="fill_parent"
