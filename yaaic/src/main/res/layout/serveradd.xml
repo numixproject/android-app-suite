@@ -33,6 +33,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_height="wrap_content">
         <TextView
             android:text="@string/server"
+            android:textColor="#333333"
             android:layout_marginLeft="-8dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -117,6 +118,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         <TextView
             android:text="@string/user"
             android:paddingTop="24dp"
+            android:textColor="#333333"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-8dp"
@@ -212,6 +214,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         <TextView
             android:text="Advanced"
             android:paddingTop="24dp"
+            android:textColor="#333333"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-8dp"
