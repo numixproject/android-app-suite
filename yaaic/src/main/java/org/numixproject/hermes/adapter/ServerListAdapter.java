@@ -28,8 +28,10 @@ import org.numixproject.hermes.MainActivity;
 import org.numixproject.hermes.R;
 import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.activity.ConversationActivity;
+import org.numixproject.hermes.model.Channel;
 import org.numixproject.hermes.model.Conversation;
 import org.numixproject.hermes.model.Server;
+import org.w3c.dom.Text;
 
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +42,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 /**
@@ -49,7 +52,7 @@ import android.widget.TextView;
  */
 public class ServerListAdapter extends BaseAdapter
 {
-    private static final int COLOR_CONNECTED    = Color.parseColor("#0097a6");
+    private static final int COLOR_CONNECTED    = Color.parseColor("#8bc34a");
     private static final int COLOR_DISCONNECTED = Color.parseColor("#9E9E9E");
 
     private ArrayList<Server> servers;
@@ -145,13 +148,60 @@ public class ServerListAdapter extends BaseAdapter
         TextView titleView = (TextView) v.findViewById(R.id.title);
         titleView.setText(server.getTitle());
 
-        LinearLayout serverCard = (LinearLayout) v.findViewById(R.id.server_card);
+        TextView serverStatus = (TextView) v.findViewById(R.id.text_ServerStatus);
+
+        ListView roomsList = (ListView) v.findViewById(R.id.rooms_list);
+
+
+        class mentionsAdapter extends BaseAdapter {
+            String[] Title, Detail;
+
+            mentionsAdapter() {
+                Title = null;
+                Detail = null;
+            }
+
+            public mentionsAdapter(String[] text, String[] text1) {
+                Title = text;
+                Detail = text1;
+            }
+
+            public int getCount() {
+                // TODO Auto-generated method stub
+                return Title.length;
+            }
+
+            public Object getItem(int arg0) {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+            public long getItemId(int position) {
+                // TODO Auto-generated method stub
+                return position;
+            }
+
+            public View getView(int position, View convertView, ViewGroup parent) {
+                LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View row;
+                row = inflater.inflate(R.layout.serverchannel_item, parent, false);
+                TextView room, mentions;
+                room = (TextView) row.findViewById(R.id.room_name);
+                mentions = (TextView) row.findViewById(R.id.mentions_number);
+                room.setText(Title[position]);
+                mentions.setText(Detail[position]);
+                return (row);
+            }
+        }
+
+
 
         channels = server.getCurrentChannelNames();
         query = server.getCurrentQueryNames();
         TextView channelsList = (TextView) v.findViewById(R.id.channel_list);
         TextView mpCounterTextView = (TextView) v.findViewById(R.id.mpCounter);
         TextView mpDetailsTextView = (TextView) v.findViewById(R.id.mpDetails);
+
 
         // Show Channels list and Mentions for each channel in Server Card
         String s = "";
@@ -161,6 +211,8 @@ public class ServerListAdapter extends BaseAdapter
                 Conversation conversation = server.getConversation(channels.get(i));
                 // Only scroll to new conversation if it was selected before
                 int Mentions = conversation.getNewMentions();
+
+                roomsList.setAdapter(new mentionsAdapter(channels, Mentions));
 
                 if (Mentions == 1) {
                     s += channels.get(i) + "(1 mention)" + "\n";
@@ -219,15 +271,15 @@ public class ServerListAdapter extends BaseAdapter
 
          //   mpCounterTextView.setText(counter);
 
-        // More button top left of server card
-        TextView serverRooms = (TextView) v.findViewById(R.id.server_rooms);
-        final ImageView moreButton = (ImageView) v.findViewById(R.id.moreButton);
+        // MOVED: More button top left of server card
+         TextView serverRooms = (TextView) v.findViewById(R.id.server_rooms);
+        //final ImageView moreButton = (ImageView) v.findViewById(R.id.moreButton);
 
-        moreButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ((MainActivity)mcontext).onCardMoreClicked(position);
-            }
-        });
+        //moreButton.setOnClickListener(new View.OnClickListener() {
+        //    public void onClick(View v) {
+        //        ((MainActivity)mcontext).onCardMoreClicked(position);
+        //    }
+        // });
 
         // Final Add new Room button in server card
         final LinearLayout connectNewRoom = (LinearLayout) v.findViewById(R.id.connectNewRoom);
@@ -248,11 +300,11 @@ public class ServerListAdapter extends BaseAdapter
 
         // If connected on server, set card color
         if (server.isConnected()) {
-            serverCard.setBackgroundColor(COLOR_CONNECTED);
-            // hostView.setTextColor(COLOR_CONNECTED);
+            serverStatus.setTextColor(COLOR_CONNECTED);
+            serverStatus.setText("CONNECTED");
         } else {
-            serverCard.setBackgroundColor(COLOR_DISCONNECTED);
-            // hostView.setTextColor(COLOR_DISCONNECTED);
+            serverStatus.setTextColor(COLOR_DISCONNECTED);
+            serverStatus.setText("DISCONNECTED");
         }
 
         return v;
