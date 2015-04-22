@@ -52,6 +52,13 @@ public class MainActivity extends Activity {
         webSettings.setAllowFileAccess(true); // Enable import from file URLs
         webSettings.setCacheMode(LOAD_DEFAULT);
 
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            String databasePath = getApplicationContext().getDir("databases", Context.MODE_PRIVATE).getPath();
+
+            webSettings.setDatabaseEnabled(true);
+            webSettings.setDatabasePath(databasePath);
+        }
+
         webView.setWebViewClient(new webViewClient());
 
         // Enable debugging in webview
