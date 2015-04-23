@@ -212,7 +212,7 @@ public class ServerListAdapter extends BaseAdapter
                 // Only scroll to new conversation if it was selected before
                 int Mentions = conversation.getNewMentions();
 
-                roomsList.setAdapter(new mentionsAdapter(channels, Mentions));
+                // roomsList.setAdapter(new mentionsAdapter(channels, Mentions));
 
                 if (Mentions == 1) {
                     s += channels.get(i) + "(1 mention)" + "\n";

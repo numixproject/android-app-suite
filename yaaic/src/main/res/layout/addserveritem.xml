@@ -22,11 +22,9 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical"
-    android:drawableLeft="@drawable/actionbar_add"
-    android:drawablePadding="5dip"
-    android:padding="10dip"
-    android:gravity="center_vertical"
-    android:text="@string/add_server_list"
-    android:textSize="18sp" />
+    android:layout_height="fill_parent"
+    android:layout_gravity="center"
+    android:padding="14dip"
+    android:gravity="center"
+    android:text="There are no servers added. \n Add some, may be?"
+    android:textSize="24sp" />
