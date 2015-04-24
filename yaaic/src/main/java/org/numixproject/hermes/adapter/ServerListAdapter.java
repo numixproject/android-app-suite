@@ -32,10 +32,11 @@ import org.numixproject.hermes.model.Channel;
 import org.numixproject.hermes.model.Conversation;
 import org.numixproject.hermes.model.Server;
 import org.w3c.dom.Text;
-
+import org.numixproject.hermes.utils.adapterHeight;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.IntegerRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -152,59 +153,13 @@ public class ServerListAdapter extends BaseAdapter
 
         ListView roomsList = (ListView) v.findViewById(R.id.rooms_list);
 
-
-        class mentionsAdapter extends BaseAdapter {
-            String[] Title, Detail;
-
-            mentionsAdapter() {
-                Title = null;
-                Detail = null;
-            }
-
-            public mentionsAdapter(String[] text, String[] text1) {
-                Title = text;
-                Detail = text1;
-            }
-
-            public int getCount() {
-                // TODO Auto-generated method stub
-                return Title.length;
-            }
-
-            public Object getItem(int arg0) {
-                // TODO Auto-generated method stub
-                return null;
-            }
-
-            public long getItemId(int position) {
-                // TODO Auto-generated method stub
-                return position;
-            }
-
-            public View getView(int position, View convertView, ViewGroup parent) {
-                LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View row;
-                row = inflater.inflate(R.layout.serverchannel_item, parent, false);
-                TextView room, mentions;
-                room = (TextView) row.findViewById(R.id.room_name);
-                mentions = (TextView) row.findViewById(R.id.mentions_number);
-                room.setText(Title[position]);
-                mentions.setText(Detail[position]);
-                return (row);
-            }
-        }
-
-
+        // Two main strings used in adapter for Rooms and Mentions
+        ArrayList<String> RoomsList = new ArrayList<String>();
+        ArrayList<Integer> MentionsList = new ArrayList<Integer>();
 
         channels = server.getCurrentChannelNames();
         query = server.getCurrentQueryNames();
-        TextView channelsList = (TextView) v.findViewById(R.id.channel_list);
-        TextView mpCounterTextView = (TextView) v.findViewById(R.id.mpCounter);
-        TextView mpDetailsTextView = (TextView) v.findViewById(R.id.mpDetails);
 
-
-        // Show Channels list and Mentions for each channel in Server Card
-        String s = "";
 
         for (int i = 0; i < channels.size(); i++) {
             try {
@@ -212,20 +167,29 @@ public class ServerListAdapter extends BaseAdapter
                 // Only scroll to new conversation if it was selected before
                 int Mentions = conversation.getNewMentions();
 
-                // roomsList.setAdapter(new mentionsAdapter(channels, Mentions));
 
                 if (Mentions == 1) {
-                    s += channels.get(i) + "(1 mention)" + "\n";
+                    RoomsList.add(channels.get(i));
+                    MentionsList.add(Mentions);
                 } else if (Mentions == 0) {
-                    s += channels.get(i) + "\n";
+                    // s += channels.get(i) + "\n";
+                    RoomsList.add(channels.get(i));
+                    MentionsList.add(Mentions);
                 } else {
-                    s += channels.get(i) + "(" + Mentions + " mentions)" +  "\n";
+                   // s += channels.get(i) + "(" + Mentions + " mentions)" +  "\n";
+                    RoomsList.add(channels.get(i));
+                    MentionsList.add(Mentions);
                 }
             } catch (Exception E) {
                 // Do nothing
             }
         }
-        channelsList.setText(s);
+
+        // Set Adapter to Rooms/Mentions list
+        roomsList.setAdapter(new mentionsAdapter(RoomsList, MentionsList));
+
+        // ListView workaround to fix height
+        adapterHeight.setListViewHeightBasedOnChildren(roomsList);
 
         // Show MP detsils in Server Card
         String t = "";
@@ -253,7 +217,6 @@ public class ServerListAdapter extends BaseAdapter
                 t += QueriesName + " (" + Queries + " messages)" + "\n";
             }
         }
-        mpDetailsTextView.setText(t);
 
         // Show MP in general counter Server Card
      //   int counter = 0;
@@ -272,7 +235,6 @@ public class ServerListAdapter extends BaseAdapter
          //   mpCounterTextView.setText(counter);
 
         // MOVED: More button top left of server card
-         TextView serverRooms = (TextView) v.findViewById(R.id.server_rooms);
         //final ImageView moreButton = (ImageView) v.findViewById(R.id.moreButton);
 
         //moreButton.setOnClickListener(new View.OnClickListener() {
@@ -292,10 +254,7 @@ public class ServerListAdapter extends BaseAdapter
         // If Rooms list is empty, don't display the section in Server cards.
         if(channels.isEmpty())
         {
-        serverRooms.setText("Connect to see availables rooms.");
-            channelsList.setHeight(0);
         } else {
-            serverRooms.setText("Rooms:");
         }
 
         // If connected on server, set card color
@@ -308,5 +267,52 @@ public class ServerListAdapter extends BaseAdapter
         }
 
         return v;
+    }
+
+    // Adapter for Room/Mentions ListView
+    class mentionsAdapter extends BaseAdapter {
+        ArrayList<String> Room;
+        ArrayList<Integer> Mentions;
+
+        mentionsAdapter() {
+            Room = null;
+            Mentions = null;
+        }
+
+        public mentionsAdapter(ArrayList<String> text, ArrayList<Integer> text1) {
+            Room = text;
+            Mentions = text1;
+        }
+
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return Room.size();
+        }
+
+        public Object getItem(int arg0) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View row;
+            row = inflater.inflate(R.layout.serverchannel_item, parent, false);
+            TextView room, mentions;
+            room = (TextView) row.findViewById(R.id.room_name);
+            mentions = (TextView) row.findViewById(R.id.mentions_number);
+            room.setText(Room.get(position));
+            try {
+                mentions.setText(Mentions.get(position));
+            } catch (Exception E) {
+                // Do nothing
+            }
+            return (row);
+        }
     }
 }
