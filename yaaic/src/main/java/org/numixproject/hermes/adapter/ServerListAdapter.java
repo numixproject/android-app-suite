@@ -308,7 +308,7 @@ public class ServerListAdapter extends BaseAdapter
             mentions = (TextView) row.findViewById(R.id.mentions_number);
             room.setText(Room.get(position));
             try {
-                mentions.setText(Mentions.get(position));
+                mentions.setText("" + Mentions.get(position));
             } catch (Exception E) {
                 // Do nothing
             }
