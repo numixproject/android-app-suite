@@ -19,14 +19,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:tag="serverFragment"
-    android:id="@+id/home_mainFragment"
-    android:layout_height="fill_parent">
-
 <android.support.v7.widget.CardView
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,6 +27,8 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
     android:layout_height="match_parent"
     card_view:cardCornerRadius="2dp"
     android:paddingTop="8dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     android:layout_margin="8dp">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -72,13 +66,33 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
 
         </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:divider="#ffffff"
+            android:clickable="false"
+            android:layout_gravity="left"
             android:layout_marginLeft="16dp"
+            android:layout_weight="0.5"
             android:id="@+id/rooms_list"/>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:divider="#ffffff"
+            android:clickable="false"
+            android:layout_weight="0.5"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="right"
+            android:id="@+id/mp_list"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -111,4 +125,3 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
     </LinearLayout>
 </LinearLayout>
 </android.support.v7.widget.CardView>
-</FrameLayout>

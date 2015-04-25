@@ -360,8 +360,12 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             new Thread() {
                 @Override
                 public void run() {
-                    binder.getService().getConnection(serverId).joinChannel(joinChannelBuffer);
-                    joinChannelBuffer = null;
+                    try {
+                        binder.getService().getConnection(serverId).joinChannel(joinChannelBuffer);
+                        joinChannelBuffer = null;
+                    } catch (Exception E) {
+                        // Do nothing
+                    }
                 }
             }.start();
         }

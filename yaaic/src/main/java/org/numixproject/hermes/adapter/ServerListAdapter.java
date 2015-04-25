@@ -164,22 +164,11 @@ public class ServerListAdapter extends BaseAdapter
         for (int i = 0; i < channels.size(); i++) {
             try {
                 Conversation conversation = server.getConversation(channels.get(i));
-                // Only scroll to new conversation if it was selected before
                 int Mentions = conversation.getNewMentions();
 
+                    RoomsList.add(channels.get(i));
+                    MentionsList.add(Mentions);
 
-                if (Mentions == 1) {
-                    RoomsList.add(channels.get(i));
-                    MentionsList.add(Mentions);
-                } else if (Mentions == 0) {
-                    // s += channels.get(i) + "\n";
-                    RoomsList.add(channels.get(i));
-                    MentionsList.add(Mentions);
-                } else {
-                   // s += channels.get(i) + "(" + Mentions + " mentions)" +  "\n";
-                    RoomsList.add(channels.get(i));
-                    MentionsList.add(Mentions);
-                }
             } catch (Exception E) {
                 // Do nothing
             }
@@ -192,7 +181,13 @@ public class ServerListAdapter extends BaseAdapter
         adapterHeight.setListViewHeightBasedOnChildren(roomsList);
 
         // Show MP detsils in Server Card
-        String t = "";
+
+        // Two main strings used in adapter for MPs
+        ArrayList<String> mpName = new ArrayList<String>();
+        ArrayList<Integer> mpNumber = new ArrayList<Integer>();
+
+        ListView mpList = (ListView) v.findViewById(R.id.mp_list);
+
 
         for (int i = 0; i < query.size(); i++) {
             Conversation queries = null;
@@ -209,30 +204,14 @@ public class ServerListAdapter extends BaseAdapter
             } catch (Exception e) {
                 // do nothing
             }
-            if (Queries == 0) {
-                t += QueriesName + " (0 messages)" + "\n";
-            } else if (Queries == 1) {
-                t += QueriesName + " (1 message)" + "\n";
-            } else {
-                t += QueriesName + " (" + Queries + " messages)" + "\n";
-            }
+                mpName.add(QueriesName);
+                mpNumber.add(Queries);
         }
 
-        // Show MP in general counter Server Card
-     //   int counter = 0;
-
-   //     for (int i = 0; i < query.size(); i++) {
-    //        int Queries = 0;
-     //       try {
-       //         Queries = server.getConversation(query.get(i)).getNewMentions();
-         //       counter = Queries + counter;
-           // } catch (Exception e) {
-             //   // do nothing
-           // }
-       // }
+        mpList.setAdapter(new mpAdapter(mpName, mpNumber));
 
 
-         //   mpCounterTextView.setText(counter);
+        //   mpCounterTextView.setText(counter);
 
         // MOVED: More button top left of server card
         //final ImageView moreButton = (ImageView) v.findViewById(R.id.moreButton);
@@ -309,6 +288,53 @@ public class ServerListAdapter extends BaseAdapter
             room.setText(Room.get(position));
             try {
                 mentions.setText("" + Mentions.get(position));
+            } catch (Exception E) {
+                // Do nothing
+            }
+            return (row);
+        }
+    }
+
+    // Adapter for MPs ListView
+    class mpAdapter extends BaseAdapter {
+        ArrayList<String> Name;
+        ArrayList<Integer> Number;
+
+        mpAdapter() {
+            Name = null;
+            Number = null;
+        }
+
+        public mpAdapter(ArrayList<String> text, ArrayList<Integer> text1) {
+            Name = text;
+            Number = text1;
+        }
+
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return Name.size();
+        }
+
+        public Object getItem(int arg0) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View row;
+            row = inflater.inflate(R.layout.servermp_item, parent, false);
+            TextView room, mentions;
+            room = (TextView) row.findViewById(R.id.mp_name);
+            mentions = (TextView) row.findViewById(R.id.mp_number);
+            room.setText(Name.get(position));
+            try {
+                mentions.setText("" + Number.get(position));
             } catch (Exception E) {
                 // Do nothing
             }
