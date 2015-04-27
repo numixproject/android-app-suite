@@ -6,6 +6,7 @@
     android:paddingBottom="8dp">
 <TextView
     android:layout_width="wrap_content"
+    android:gravity="right"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
     android:id="@+id/mp_name"
@@ -20,6 +21,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_gravity="right"
             android:id="@+id/mp_number"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"

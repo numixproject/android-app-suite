@@ -107,8 +107,8 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         }
     }
 
-    public void openServerWithNewRoom(int position) {
-        fragment.openServerWithNewRoom(position);
+    public void openServer(int position) {
+        fragment.openServer(position);
     }
 
     public void onCardMoreClicked(int position){

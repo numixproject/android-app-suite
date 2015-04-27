@@ -214,7 +214,7 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
     }
 
     // same of OnItemClick. But opens new room too.
-    public void openServerWithNewRoom(int position) {
+    public void openServer(int position) {
         Server server = adapter.getItem(position);
 
         if (server == null) {
@@ -231,7 +231,6 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
         }
 
         intent.putExtra("serverId", server.getId());
-        intent.putExtra("joinChannel","joinChannel");
         startActivity(intent);
     }
 

@@ -226,7 +226,7 @@ public class ServerListAdapter extends BaseAdapter
         final LinearLayout connectNewRoom = (LinearLayout) v.findViewById(R.id.connectNewRoom);
         connectNewRoom.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ((MainActivity)mcontext).openServerWithNewRoom(position);
+                ((MainActivity)mcontext).openServer(position);
             }
         });
 
