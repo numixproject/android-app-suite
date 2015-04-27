@@ -19,14 +19,53 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
 -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/roomsActivity"
+        android:background="#EEEEEE"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Recent channels"
+            android:textColor="#777777"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:textSize="16sp"/>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="2dp"
+            android:paddingTop="8dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/roomsActivityList"/>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
 
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:id="@+id/conversationFragment"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:visibility="gone"
     android:background="#ffffff">
+
     <org.numixproject.hermes.indicator.ConversationIndicator
         android:id="@+id/titleIndicator"
         android:layout_width="fill_parent"
@@ -62,3 +101,4 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:imeOptions="actionSend" />
     </LinearLayout>
 </LinearLayout>
+</RelativeLayout>

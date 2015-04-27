@@ -36,7 +36,6 @@ import org.numixproject.hermes.irc.IRCConnection;
 import org.numixproject.hermes.irc.IRCService;
 import org.numixproject.hermes.listener.ConversationListener;
 import org.numixproject.hermes.listener.ServerListener;
-import org.numixproject.hermes.listener.SpeechClickListener;
 import org.numixproject.hermes.model.Broadcast;
 import org.numixproject.hermes.model.Conversation;
 import org.numixproject.hermes.model.Extra;
@@ -51,16 +50,13 @@ import org.numixproject.hermes.model.User;
 import org.numixproject.hermes.receiver.ConversationReceiver;
 import org.numixproject.hermes.receiver.ServerReceiver;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -75,16 +71,22 @@ import android.text.method.TextKeyListener;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -274,6 +276,59 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         // Create a new scrollback history
         scrollback = new Scrollback();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Adapter section
+
+        final LinearLayout conversationLayout = (LinearLayout) findViewById(R.id.conversationFragment);
+        conversationLayout.setVisibility(LinearLayout.GONE);
+
+        ListView roomsList = (ListView) findViewById(R.id.roomsActivityList);
+
+        ArrayList<String> RoomsList = new ArrayList<String>();
+        ArrayList<Integer> MentionsList = new ArrayList<Integer>();
+
+        ArrayList<String> channels = new ArrayList<String>();
+        ArrayList<String> query = new ArrayList<String>();
+
+        channels = server.getCurrentChannelNames();
+        query = server.getCurrentQueryNames();
+
+        for (int i = 0; i < channels.size(); i++) {
+            try {
+                Conversation conversation = server.getConversation(channels.get(i));
+                int Mentions = conversation.getNewMentions();
+
+                RoomsList.add(channels.get(i));
+                MentionsList.add(Mentions);
+
+            } catch (Exception E) {
+                // Do nothing
+            }
+        }
+
+        roomsList.setAdapter(new mentionsAdapter(RoomsList, MentionsList));
+
+        // Handle click on adapter
+        roomsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // Set conversation VISIBLE
+                conversationLayout.setVisibility(LinearLayout.VISIBLE);
+
+                int pagerPosition;
+                String name;
+
+                // Find channel name from TextView
+                TextView roomName = (TextView) view.findViewById(R.id.room_name);
+                name = roomName.getText().toString();
+
+                // Find room's position in pager
+                pagerPosition = pagerAdapter.getPositionByName(name);
+
+                // Set position in pager
+                pager.setCurrentItem(pagerPosition, true);
+            }
+        });
     }
 
     /**
@@ -967,5 +1022,52 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             nick = nick.substring(1);
         }
         return nick;
+    }
+
+    // Adapter for Room List
+    class mentionsAdapter extends BaseAdapter {
+        ArrayList<String> Room;
+        ArrayList<Integer> Mentions;
+
+        mentionsAdapter() {
+            Room = null;
+            Mentions = null;
+        }
+
+        public mentionsAdapter(ArrayList<String> text, ArrayList<Integer> text1) {
+            Room = text;
+            Mentions = text1;
+        }
+
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return Room.size();
+        }
+
+        public Object getItem(int arg0) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View row;
+            row = inflater.inflate(R.layout.rooms_activity_item, parent, false);
+            TextView room, mentions;
+            room = (TextView) row.findViewById(R.id.room_name);
+            mentions = (TextView) row.findViewById(R.id.mentions_number);
+            room.setText(Room.get(position));
+            try {
+                mentions.setText("" + Mentions.get(position));
+            } catch (Exception E) {
+                // Do nothing
+            }
+            return (row);
+        }
     }
 }
