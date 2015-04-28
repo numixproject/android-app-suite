@@ -24,11 +24,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.numixproject.hermes.MainActivity;
 import org.numixproject.hermes.R;
 import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.adapter.ConversationPagerAdapter;
 import org.numixproject.hermes.adapter.MessageListAdapter;
 import org.numixproject.hermes.command.CommandParser;
+import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.indicator.ConversationIndicator;
 import org.numixproject.hermes.indicator.ConversationTitlePageIndicator.IndicatorStyle;
 import org.numixproject.hermes.irc.IRCBinder;
@@ -82,6 +84,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -115,10 +118,12 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     private ConversationIndicator indicator;
     private ConversationPagerAdapter pagerAdapter;
 
+    LinearLayout conversationLayout;
+
     private Scrollback scrollback;
     private FloatingActionButton fab = null;
 
-
+    mentionsAdapter roomAdapter;
     // XXX: This is ugly. This is a buffer for a channel that should be joined after showing the
     //      JoinActivity. As onActivityResult() is called before onResume() a "channel joined"
     //      broadcast may get lost as the broadcast receivers are registered in onResume() but the
@@ -283,7 +288,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         // Adapter section
 
-        final LinearLayout conversationLayout = (LinearLayout) findViewById(R.id.conversationFragment);
+        conversationLayout = (LinearLayout) findViewById(R.id.conversationFragment);
         conversationLayout.setVisibility(LinearLayout.GONE);
 
         ListView roomsList = (ListView) findViewById(R.id.roomsActivityList);
@@ -313,13 +318,14 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             fab = (FloatingActionButton) findViewById(R.id.room_fab);
             fab.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    // Do something when FAB is pressed
-
+                    // Start JoinActivity on FAB click
+                    joinRoom();
                 }
             });
         }
 
-        roomsList.setAdapter(new mentionsAdapter(RoomsList, MentionsList));
+        roomAdapter = new mentionsAdapter(RoomsList, MentionsList);
+        roomsList.setAdapter(roomAdapter);
 
         // Handle click on adapter
         roomsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -327,6 +333,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                                     int position, long id) {
                 // Set conversation VISIBLE
                 conversationLayout.setVisibility(LinearLayout.VISIBLE);
+                invalidateOptionsMenu();
 
                 int pagerPosition;
                 String name;
@@ -342,6 +349,10 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 pager.setCurrentItem(pagerPosition, true);
             }
         });
+    }
+
+    private void joinRoom() {
+        startActivityForResult(new Intent(this, JoinActivity.class), REQUEST_CODE_JOIN);
     }
 
     /**
@@ -490,15 +501,49 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
      * On options menu requested
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
+    public boolean onPrepareOptionsMenu(Menu menu)
     {
         super.onCreateOptionsMenu(menu);
+        menu.clear();
 
-        // inflate from xml
-        MenuInflater inflater = new MenuInflater(this);
-        inflater.inflate(R.menu.conversations, menu);
+        // Check the menu to display (Server or Conversation)
+        if (conversationLayout.getVisibility() == LinearLayout.GONE) {
+            // inflate Server options from xml
+            MenuInflater inflater = new MenuInflater(this);
+            inflater.inflate(R.menu.addserver, menu);
+        } else {
+            // inflate Conversation options from xml
+            MenuInflater inflater = new MenuInflater(this);
+            inflater.inflate(R.menu.conversations, menu);
+        }
 
-        return true;
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    private void editServer()
+    {
+        Server server = getServer();
+
+        if (server.getStatus() != Status.DISCONNECTED) {
+            Toast.makeText(this, getResources().getString(R.string.disconnect_before_editing), Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent intent = new Intent(this, AddServerActivity.class);
+            intent.putExtra(Extra.SERVER, serverId);
+            startActivityForResult(intent, 0);
+        }
+    }
+
+    public void deleteServer()
+    {
+        Database db = new Database(this);
+        db.removeServerById(serverId);
+        db.close();
+
+        Hermes.getInstance().removeServerById(serverId);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -509,6 +554,16 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         switch (item.getItemId()) {
             case  android.R.id.home:
                 finish();
+                break;
+            case R.id.refresh:
+                roomAdapter.notifyDataSetChanged();
+                break;
+            case R.id.edit: // Edit
+                editServer();
+                break;
+            case 3: // Delete
+                binder.getService().getConnection(server.getId()).quitServer();
+                deleteServer();
                 break;
 
             case R.id.disconnect:

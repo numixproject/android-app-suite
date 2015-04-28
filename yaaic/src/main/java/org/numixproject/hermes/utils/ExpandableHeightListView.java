@@ -33,7 +33,7 @@ public class ExpandableHeightListView extends ListView
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-        // HACK! TAKE THAT ANDROID!
+        // WORKAROUND TO FIX HEIGHT! TAKE THAT GOOGLE!
         if (isExpanded())
         {
             // Calculate entire height by providing a very large height hint.

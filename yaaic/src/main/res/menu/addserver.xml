@@ -22,8 +22,24 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/save"
-        android:title="@string/server_save"
-        android:icon="@drawable/ic_action_ic_check_24px"
+        android:id="@+id/refresh"
+        android:title="Refresh"
+        android:icon="@drawable/actionbar_users"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/connect"
+        android:title="Connect"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/disconnect"
+        android:title="Disconnect"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/edit"
+        android:title="Edit"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/delete"
+        android:title="Delete"
+        app:showAsAction="never" />
 </menu>
