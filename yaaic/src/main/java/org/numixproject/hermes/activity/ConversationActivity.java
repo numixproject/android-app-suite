@@ -89,6 +89,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.melnykov.fab.FloatingActionButton;
+
 /**
  * The server view with a scrollable list of all channels
  *
@@ -114,6 +116,8 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     private ConversationPagerAdapter pagerAdapter;
 
     private Scrollback scrollback;
+    private FloatingActionButton fab = null;
+
 
     // XXX: This is ugly. This is a buffer for a channel that should be joined after showing the
     //      JoinActivity. As onActivityResult() is called before onResume() a "channel joined"
@@ -304,6 +308,15 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             } catch (Exception E) {
                 // Do nothing
             }
+
+            // FAB section
+            fab = (FloatingActionButton) findViewById(R.id.room_fab);
+            fab.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    // Do something when FAB is pressed
+
+                }
+            });
         }
 
         roomsList.setAdapter(new mentionsAdapter(RoomsList, MentionsList));

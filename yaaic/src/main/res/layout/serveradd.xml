@@ -219,16 +219,50 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_height="wrap_content"
             android:layout_marginLeft="-8dp"
             style="?android:attr/listSeparatorTextViewStyle" />
-        <TextView
-            android:text="Character encoding"
-            android:layout_marginTop="8dp"
+
+        <!-- ############################################################################ -->
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-        <Spinner
-            android:id="@+id/charset"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:prompt="@string/select_charset" />
+            android:layout_height="fill_parent">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Channels to join automatically on connection"
+                android:padding="5dp" />
+
+            <org.numixproject.hermes.utils.ExpandableHeightListView
+                android:id="@+id/channels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cacheColorHint="#00000000"
+                android:fadingEdge="none"
+                android:focusable="false"
+                android:scrollbars="none"
+                >
+            </org.numixproject.hermes.utils.ExpandableHeightListView>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/channel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="#"
+                    android:layout_weight="1"
+                    android:inputType="textNoSuggestions" />
+                <Button
+                    android:id="@+id/add_room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_add"
+                    android:minWidth="75dp" />
+            </LinearLayout>
+
+        </LinearLayout>
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
@@ -239,18 +273,24 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_height="wrap_content"
             android:text="Commands to run on connection"
             android:padding="5dp" />
-        <ListView
+        <org.numixproject.hermes.utils.ExpandableHeightListView
             android:id="@+id/commands_list"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="#00000000"
+            android:fadingEdge="none"
+            android:focusable="false"
+            android:scrollbars="none"
+            >
+        </org.numixproject.hermes.utils.ExpandableHeightListView>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/command"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:singleLine="true"
                 android:text="/"
                 android:layout_weight="1"
@@ -264,8 +304,15 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
         </LinearLayout>
         </LinearLayout>
 
-
-
-<!-- ############################################################################ -->
+        <TextView
+            android:text="Character encoding"
+            android:layout_marginTop="8dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/charset"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/select_charset" />
     </LinearLayout>
 </ScrollView>

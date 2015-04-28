@@ -36,6 +36,8 @@ import org.numixproject.hermes.model.Extra;
 import org.numixproject.hermes.model.Identity;
 import org.numixproject.hermes.model.Server;
 import org.numixproject.hermes.model.Status;
+import org.numixproject.hermes.utils.ExpandableHeightListView;
+import org.numixproject.hermes.utils.adapterHeight;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -86,7 +88,10 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
 
     private EditText commandInput;
     private ArrayAdapter<String> adapter2;
-    private Button okButton;
+
+    private EditText channelInput;
+    private ArrayList<String> channels2;
+    private ArrayAdapter<String> adapter3;
 
     /**
      * On create
@@ -180,14 +185,36 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
 
         adapter2 = new ArrayAdapter<String>(this, R.layout.commanditem);
 
-        ListView list2 = (ListView) findViewById(R.id.commands_list);
+        ExpandableHeightListView list2 = (ExpandableHeightListView) findViewById(R.id.commands_list);
         list2.setAdapter(adapter2);
         list2.setOnItemClickListener(this);
+
+        // Workaround for ListView height
+        list2.setExpanded(true);
 
         ((Button) findViewById(R.id.add_command)).setOnClickListener(this);
 
         for (String command : commands) {
             adapter2.add(command);
+        }
+
+        // Autojoin Rooms
+        channelInput = (EditText) findViewById(R.id.channel);
+        channelInput.setSelection(1);
+
+        adapter3 = new ArrayAdapter<String>(this, R.layout.channelitem);
+
+        ExpandableHeightListView list3 = (ExpandableHeightListView) findViewById(R.id.channels);
+        list3.setAdapter(adapter3);
+        list3.setOnItemClickListener(this);
+
+        // Workaround for ListView height
+        list3.setExpanded(true);
+
+        ((Button) findViewById(R.id.add_room)).setOnClickListener(this);
+
+        for (String channel : channels) {
+            adapter3.add(channel);
         }
     }
 
@@ -237,6 +264,14 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
     public void onClick(View v)
     {
         switch (v.getId()) {
+            case R.id.add_room:
+                String channel = channelInput.getText().toString().trim();
+                channels.add(channel);
+                adapter3.add(channel);
+                channelInput.setText("#");
+                channelInput.setSelection(1);
+                break;
+
             case R.id.add_command:
                 String command = commandInput.getText().toString().trim();
 
@@ -284,27 +319,50 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
      * On item clicked
      */
     @Override
-    public void onItemClick(AdapterView<?> list, View item, int position, long id)
-    {
-        final String command = adapter2.getItem(position);
+    public void onItemClick(AdapterView<?> list, View item, int position, long id) {
+        // Check if the click comes from Commands or Room adapter
+        if (list.getId() == R.id.commands_list) {
 
-        String[] items = { getResources().getString(R.string.action_remove) };
+            final String command = adapter2.getItem(position);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(command);
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                switch (item) {
-                    case 0: // Remove
-                        adapter2.remove(command);
-                        commands.remove(command);
-                        break;
+            String[] items = {getResources().getString(R.string.action_remove)};
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(command);
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int item) {
+                    switch (item) {
+                        case 0: // Remove
+                            adapter2.remove(command);
+                            commands.remove(command);
+                            break;
+                    }
                 }
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        } else {
+            final String channel = adapter3.getItem(position);
+
+            String[] items = { getResources().getString(R.string.action_remove) };
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(channel);
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int item) {
+                    switch (item) {
+                        case 0: // Remove
+                            adapter3.remove(channel);
+                            channels.remove(channel);
+                            break;
+                    }
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
 
     /**
