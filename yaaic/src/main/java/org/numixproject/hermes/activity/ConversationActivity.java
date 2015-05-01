@@ -68,6 +68,7 @@ import android.os.IBinder;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.CardView;
 import android.text.InputType;
 import android.text.method.TextKeyListener;
 import android.util.Log;
@@ -349,7 +350,20 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 pager.setCurrentItem(pagerPosition, true);
             }
         });
-    }
+
+        // Click on Others
+        CardView otherCard = (CardView) findViewById(R.id.card_view_other);
+        otherCard.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                // Set conversation VISIBLE
+                conversationLayout.setVisibility(LinearLayout.VISIBLE);
+                invalidateOptionsMenu();
+
+                // Set position in pager
+                pager.setCurrentItem(0);
+            }
+        });
+        }
 
     private void joinRoom() {
         startActivityForResult(new Intent(this, JoinActivity.class), REQUEST_CODE_JOIN);
@@ -556,7 +570,8 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 finish();
                 break;
             case R.id.refresh:
-                roomAdapter.notifyDataSetChanged();
+                finish();
+                startActivity(getIntent());
                 break;
             case R.id.edit: // Edit
                 editServer();

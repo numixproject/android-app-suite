@@ -29,7 +29,7 @@
             android:paddingBottom="2dp"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:text="9"
+            android:text="0"
             android:textColor="#ffffff"
             />
     </LinearLayout>
