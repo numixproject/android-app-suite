@@ -582,17 +582,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         }
     }
 
-    public void deleteServer()
-    {
-        Database db = new Database(this);
-        db.removeServerById(serverId);
-        db.close();
-
-        Hermes.getInstance().removeServerById(serverId);
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
     private void refreshActivity() {
         Intent intent = getIntent();
         overridePendingTransition(0, 0);
@@ -624,9 +613,10 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             case R.id.edit: // Edit
                 editServer();
                 break;
-            case 3: // Delete
-                binder.getService().getConnection(server.getId()).quitServer();
-                deleteServer();
+            case R.id.delete: // Delete
+                Intent deleteServer = new Intent(this, MainActivity.class);
+                deleteServer.putExtra("serverId", serverId);
+                startActivity(deleteServer);
                 break;
 
             case R.id.disconnect:
@@ -635,7 +625,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 binder.getService().getConnection(serverId).quitServer();
                 server.clearConversations();
                 setResult(RESULT_OK);
-                finish();
                 break;
 
             case R.id.close:

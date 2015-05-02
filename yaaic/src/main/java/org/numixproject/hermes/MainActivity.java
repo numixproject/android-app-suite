@@ -125,6 +125,17 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     {
         super.onResume();
 
+        try {
+            // Find out if delete server
+            Intent mIntent = getIntent();
+            if (mIntent != null) {
+                int serverToDelete = mIntent.getIntExtra("serverId", 0);
+                deleteServer(serverToDelete);
+            }
+        } catch (Exception e){
+            // Do nothing
+        }
+
         // Start and connect to service
         Intent intent = new Intent(this, IRCService.class);
         intent.setAction(IRCService.ACTION_BACKGROUND);

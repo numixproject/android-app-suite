@@ -10,8 +10,8 @@ Copyright 2015 Numix Project Ltd.
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     card_view:cardCornerRadius="2dp"
-    android:paddingTop="8dp"
-    android:layout_margin="8dp">
+    android:paddingTop="4dp"
+    android:layout_margin="4dp">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"

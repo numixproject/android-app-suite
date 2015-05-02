@@ -9,7 +9,7 @@
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
             android:background="#E5E5E5"
-            android:padding="16dp"
+            android:padding="8dp"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
@@ -18,7 +18,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:divider="#00000000"
-                android:dividerHeight="16dp"
+                android:dividerHeight="8dp"
                 />
         </LinearLayout>
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
