@@ -89,7 +89,7 @@ Copyright 2015 Numix Project Ltd.
         android:id="@+id/connectNewRoom"
         android:paddingLeft="16dp">
         <TextView
-            android:id="@+id/addRoom"
+            android:id="@+id/buttonText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"

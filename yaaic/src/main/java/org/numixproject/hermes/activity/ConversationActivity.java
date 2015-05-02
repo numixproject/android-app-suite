@@ -225,13 +225,16 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         pagerAdapter = new ConversationPagerAdapter(this, server);
         pager.setAdapter(pagerAdapter);
 
+        final float density = getResources().getDisplayMetrics().density;
+
         indicator = (ConversationIndicator) findViewById(R.id.titleIndicator);
         indicator.setServer(server);
         indicator.setViewPager(pager);
         indicator.setFooterColor(Color.parseColor("#d1d1d1"));
         indicator.setFooterLineHeight(1);
         indicator.setPadding(10, 10, 10, 10);
-        indicator.setFooterIndicatorStyle(IndicatorStyle.None);
+        indicator.setFooterIndicatorStyle(IndicatorStyle.Underline);
+        indicator.setFooterIndicatorHeight(2 * density);
         indicator.setSelectedColor(0xFF222222);
         indicator.setSelectedBold(false);
         indicator.setBackgroundColor(Color.parseColor("#fff5f5f5"));

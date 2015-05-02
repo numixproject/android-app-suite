@@ -37,6 +37,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.IntegerRes;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -150,6 +151,7 @@ public class ServerListAdapter extends BaseAdapter
         titleView.setText(server.getTitle());
 
         TextView serverStatus = (TextView) v.findViewById(R.id.text_ServerStatus);
+        TextView serverButtonText = (TextView) v.findViewById(R.id.buttonText);
 
         ListView roomsList = (ListView) v.findViewById(R.id.rooms_list);
 
@@ -224,7 +226,15 @@ public class ServerListAdapter extends BaseAdapter
 
         // Final Add new Room button in server card
         final LinearLayout connectNewRoom = (LinearLayout) v.findViewById(R.id.connectNewRoom);
+        final CardView serverCard = (CardView) v.findViewById(R.id.card_view);
+
         connectNewRoom.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ((MainActivity)mcontext).openServer(position);
+            }
+        });
+
+        serverCard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ((MainActivity)mcontext).openServer(position);
             }
@@ -240,9 +250,12 @@ public class ServerListAdapter extends BaseAdapter
         if (server.isConnected()) {
             serverStatus.setTextColor(COLOR_CONNECTED);
             serverStatus.setText("CONNECTED");
+            serverButtonText.setText("VIEW ALL CHANNELS");
+
         } else {
             serverStatus.setTextColor(COLOR_DISCONNECTED);
             serverStatus.setText("DISCONNECTED");
+            serverButtonText.setText("CONNECT");
         }
 
         return v;
