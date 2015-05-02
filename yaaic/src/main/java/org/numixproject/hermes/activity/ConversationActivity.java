@@ -90,8 +90,12 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.numixproject.hermes.utils.SwipeDismissListViewTouchListener;
+import org.numixproject.hermes.utils.SwipeDismissTouchListener;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -294,6 +298,28 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         ExpandableHeightListView roomsList = (ExpandableHeightListView) findViewById(R.id.roomsActivityList);
         roomsList.setExpanded(true);
+
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        roomsList,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    roomAdapter.remove(position);
+                                }
+                                roomAdapter.notifyDataSetChanged();
+                            }
+                        });
+        roomsList.setOnTouchListener(touchListener);
+        // Setting this scroll listener is required to ensure that during ListView scrolling,
+        // we don't look for swipes.
+        roomsList.setOnScrollListener(touchListener.makeScrollListener());
 
         ArrayList<String> RoomsList = new ArrayList<String>();
         ArrayList<Integer> MentionsList = new ArrayList<Integer>();
@@ -587,6 +613,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 if (conversationLayout.getVisibility() == LinearLayout.VISIBLE) {
                     conversationLayout.setVisibility(LinearLayout.GONE);
                     invalidateOptionsMenu();
+                    refreshActivity();
                 } else {
                     finish();
                 }
@@ -1141,6 +1168,22 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         public mentionsAdapter(ArrayList<String> text, ArrayList<Integer> text1) {
             Room = text;
             Mentions = text1;
+        }
+
+        public void remove(int position) {
+
+            int pagerPosition;
+
+            // Find room's position in pager
+            pagerPosition = pagerAdapter.getPositionByName(Room.get(position));
+
+
+            Conversation conversationToClose = pagerAdapter.getItem(pagerPosition);
+            binder.getService().getConnection(serverId).partChannel(conversationToClose.getName());
+
+            Room.remove(position);
+            Mentions.remove(position);
+
         }
 
         public int getCount() {
