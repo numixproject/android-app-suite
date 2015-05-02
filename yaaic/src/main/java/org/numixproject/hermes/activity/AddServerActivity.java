@@ -221,6 +221,9 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.save:
+                save();
+                return true;
             case android.R.id.home:
                 // app icon in action bar clicked; go home
                 Intent intent = new Intent(this, MainActivity.class);

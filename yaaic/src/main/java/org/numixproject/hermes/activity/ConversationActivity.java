@@ -87,11 +87,9 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -533,7 +531,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         if (conversationLayout.getVisibility() == LinearLayout.GONE) {
             // inflate Server options from xml
             MenuInflater inflater = new MenuInflater(this);
-            inflater.inflate(R.menu.addserver, menu);
+            inflater.inflate(R.menu.room_activity, menu);
         } else {
             // inflate Conversation options from xml
             MenuInflater inflater = new MenuInflater(this);
@@ -588,6 +586,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             case  android.R.id.home:
                 if (conversationLayout.getVisibility() == LinearLayout.VISIBLE) {
                     conversationLayout.setVisibility(LinearLayout.GONE);
+                    invalidateOptionsMenu();
                 } else {
                     finish();
                 }
