@@ -44,7 +44,10 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.SystemClock;
+import android.support.v4.app.NotificationCompat;
 
 /**
  * The background service for managing the irc connections
@@ -190,8 +193,14 @@ public class IRCService extends Service
             }
             foreground = true;
 
-            // Set the icon, scrolling text and timestamp
-            notification = new Notification(R.mipmap.ic_launcher, getText(R.string.notification_running), System.currentTimeMillis());
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+            builder.setContentText(getText(R.string.notification_running));
+            builder.setSmallIcon(R.mipmap.ic_launcher);
+            builder.setWhen(System.currentTimeMillis());
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder.setColor(Color.parseColor("#0097A7"));
+            }
 
             // The PendingIntent to launch our activity if the user selects this notification
             Intent notifyIntent = new Intent(this, MainActivity.class);
@@ -199,7 +208,11 @@ public class IRCService extends Service
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notifyIntent, 0);
 
             // Set the info for the views that show in the notification panel.
-            notification.setLatestEventInfo(this, getText(R.string.app_name), getText(R.string.notification_not_connected), contentIntent);
+            builder.setContentIntent(contentIntent)
+                    .setWhen(System.currentTimeMillis())
+                    .setContentTitle(getText(R.string.app_name))
+                    .setContentText(getText(R.string.notification_not_connected));
+            Notification notification = builder.build();
 
             startForegroundCompat(FOREGROUND_NOTIFICATION, notification);
         } else if (ACTION_BACKGROUND.equals(intent.getAction()) && !foreground) {
@@ -220,8 +233,20 @@ public class IRCService extends Service
      */
     private void updateNotification(String text, String contentText, boolean vibrate, boolean sound, boolean light)
     {
+        Intent disconnect = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(IRCService.this, 0, disconnect, Intent.FILL_IN_ACTION);
+
         if (foreground) {
-            notification = new Notification(R.mipmap.ic_launcher, text, System.currentTimeMillis());
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+            builder.setContentText(text);
+            builder.setSmallIcon(R.mipmap.ic_launcher);
+            builder.setWhen(System.currentTimeMillis());
+            builder.addAction(R.drawable.ic_ic_close_24px, "DISCONNECT ALL", pendingIntent);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder.setColor(Color.parseColor("#0097A7"));
+            }
+
             Intent notifyIntent = new Intent(this, MainActivity.class);
             notifyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notifyIntent, 0);
@@ -244,7 +269,11 @@ public class IRCService extends Service
                 }
             }
 
-            notification.setLatestEventInfo(this, getText(R.string.app_name), contentText, contentIntent);
+            builder.setContentIntent(contentIntent)
+                    .setWhen(System.currentTimeMillis())
+                    .setContentTitle(getText(R.string.app_name))
+                    .setContentText(contentText);
+            Notification notification = builder.build();
 
             if (vibrate) {
                 notification.defaults |= Notification.DEFAULT_VIBRATE;

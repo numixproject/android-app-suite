@@ -47,13 +47,24 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     private HomeFragment fragment = null;
 
 
-
+    @Override
+    protected void onNewIntent(Intent indtent) {
+        ArrayList<Server> mServers = Hermes.getInstance().getServersAsArrayList();
+        for (Server server : mServers) {
+            if (binder.getService().hasConnection(server.getId())) {
+                server.setStatus(Status.DISCONNECTED);
+                server.setMayReconnect(false);
+                binder.getService().getConnection(server.getId()).quitServer();
+            }
+        }
+        // ugly
+        binder.getService().stopForegroundCompat(R.string.app_name);
+    }
 
     @Override
     public void init(Bundle savedInstanceState) {
         MaterialSection home = newSection("Connect to...", R.drawable.ic_ic_swap_horiz_24px, new HomeFragment());
         MaterialSection addserver = newSection("Add new server", R.drawable.ic_ic_add_24px, new Intent(this, AddServerActivity.class));
-        MaterialSection notifications = newSection("Snooze Notifications", R.drawable.ic_ic_notifications_off_24px, new Intent(this, SettingsActivity.class));
         MaterialSection pro = newSection("Unlock all features", R.drawable.ic_ic_vpn_key_24px,  new Intent(this, SettingsActivity.class));
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
         MaterialSection help = newSection("Help", R.drawable.ic_ic_help_24px , new Intent(this, SettingsActivity.class));
@@ -63,7 +74,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
         this.addSubheader("Servers");
 
-        fragment = (HomeFragment)home.getTargetFragment();
+        fragment = (HomeFragment) home.getTargetFragment();
 
         addSection(addserver);
 
@@ -82,7 +93,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
                 // ugly
                 binder.getService().stopForegroundCompat(R.string.app_name);            }
         }));
-        addBottomSection(notifications);
         addBottomSection(pro);
         addBottomSection(settings);
         addBottomSection(help);
