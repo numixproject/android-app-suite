@@ -24,8 +24,9 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
     <item
         android:id="@+id/refresh"
         android:title="Refresh"
-        android:icon="@drawable/actionbar_users"
-        app:showAsAction="always" />
+        android:icon="@drawable/ic_action_ic_refresh_24px"
+        app:showAsAction="always"
+        android:showAsAction="always"/>
     <item
         android:id="@+id/connect"
         android:title="Connect"

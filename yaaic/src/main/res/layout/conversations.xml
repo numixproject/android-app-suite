@@ -56,10 +56,21 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:paddingTop="8dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground">
-            <ListView
+            <org.numixproject.hermes.utils.ExpandableHeightListView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:focusable="false"
                 android:id="@+id/roomsActivityList"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:id="@+id/roomsActivityList_empty"
+                android:padding="16dp"
+                android:textColor="#111111"
+                android:text="No room available. \nMaybe Hermes is still connecting to server or you didn't select any room."/>
         </android.support.v7.widget.CardView>
         <TextView
             android:layout_width="fill_parent"
@@ -76,6 +87,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:id="@+id/card_view_other"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:focusable="false"
             card_view:cardCornerRadius="2dp"
             android:paddingTop="8dp"
             android:clickable="true"
@@ -84,6 +96,7 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
                 android:orientation="horizontal" android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:elevation="1dp"
                 android:padding="16dp">
                 <TextView
                     android:layout_width="wrap_content"
@@ -101,6 +114,8 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:fab="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
+        android:focusable="true"
+        android:clickable="true"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         >
@@ -110,7 +125,9 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:focusable="true"
             fab:fab_type="normal"
+            android:onClick="joinRoom"
             android:src="@drawable/fab"
             fab:fab_colorNormal="@color/colorAccent"
             fab:fab_colorPressed="@color/colorAccent"

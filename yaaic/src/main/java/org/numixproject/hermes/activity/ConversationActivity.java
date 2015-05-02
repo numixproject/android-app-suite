@@ -51,6 +51,7 @@ import org.numixproject.hermes.model.Status;
 import org.numixproject.hermes.model.User;
 import org.numixproject.hermes.receiver.ConversationReceiver;
 import org.numixproject.hermes.receiver.ServerReceiver;
+import org.numixproject.hermes.utils.ExpandableHeightListView;
 
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -78,6 +79,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
@@ -292,7 +294,8 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         conversationLayout = (LinearLayout) findViewById(R.id.conversationFragment);
         conversationLayout.setVisibility(LinearLayout.GONE);
 
-        ListView roomsList = (ListView) findViewById(R.id.roomsActivityList);
+        ExpandableHeightListView roomsList = (ExpandableHeightListView) findViewById(R.id.roomsActivityList);
+        roomsList.setExpanded(true);
 
         ArrayList<String> RoomsList = new ArrayList<String>();
         ArrayList<Integer> MentionsList = new ArrayList<Integer>();
@@ -317,16 +320,21 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
             // FAB section
             fab = (FloatingActionButton) findViewById(R.id.room_fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    // Start JoinActivity on FAB click
-                    joinRoom();
+            fab.setOnTouchListener(new View.OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event){
+                if(event.getAction() == MotionEvent.ACTION_UP){
+                    joinRoom(v);
+                    return true;
                 }
+                return false;
+            }
             });
         }
 
         roomAdapter = new mentionsAdapter(RoomsList, MentionsList);
         roomsList.setAdapter(roomAdapter);
+        roomsList.setEmptyView(findViewById(R.id.roomsActivityList_empty));
+
 
         // Handle click on adapter
         roomsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -364,10 +372,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             }
         });
         }
-
-    private void joinRoom() {
-        startActivityForResult(new Intent(this, JoinActivity.class), REQUEST_CODE_JOIN);
-    }
 
     /**
      * On resume
@@ -461,9 +465,14 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                     }
                 }
             }.start();
+            refreshActivity();
         }
 
         server.setIsForeground(true);
+    }
+
+    public void joinRoom(View v) {
+        startActivityForResult(new Intent(this, JoinActivity.class), REQUEST_CODE_JOIN);
     }
 
     /**
@@ -560,6 +569,16 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         startActivity(intent);
     }
 
+    private void refreshActivity() {
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+
+        overridePendingTransition(0, 0);
+        startActivity(intent);
+    }
+
     /**
      * On menu item selected
      */
@@ -567,11 +586,14 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case  android.R.id.home:
-                finish();
+                if (conversationLayout.getVisibility() == LinearLayout.VISIBLE) {
+                    conversationLayout.setVisibility(LinearLayout.GONE);
+                } else {
+                    finish();
+                }
                 break;
             case R.id.refresh:
-                finish();
-                startActivity(getIntent());
+                refreshActivity();
                 break;
             case R.id.edit: // Edit
                 editServer();
