@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.2 (9983) - http://www.bohemiancoding.com/sketch -->
+    <title>Hermes</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="0.5" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.75" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.084 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0.5" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.75" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.084 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <rect id="path-3" x="0" y="0" width="36.0515021" height="25.3953488" rx="2"></rect>
+        <linearGradient x1="20.0850885%" y1="23.8350533%" x2="80.090764%" y2="82.9922954%" id="linearGradient-5">
+            <stop stop-color="#000000" stop-opacity="0.1" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Hermes" sketch:type="MSArtboardGroup">
+            <path d="M24.8544206,37.5627907 L42.9974319,37.5627907 C44.1088343,37.5627907 45,36.6706149 45,35.5700603 L45,14.1601723 C45,13.0712758 44.1034197,12.1674419 42.9974319,12.1674419 L10.9510659,12.1674419 C9.83966353,12.1674419 8.94849785,13.0596177 8.94849785,14.1601723 L8.94849785,35.5700603 C8.94849785,36.6589568 9.84507813,37.5627907 10.9510659,37.5627907 L15.3945064,37.5627907 L20.1244635,45 L24.8544206,37.5627907 Z" id="Bottom-bubble" fill="#5C6BC0" filter="url(#filter-1)" sketch:type="MSShapeGroup"></path>
+            <g id="Top-bobble-mask" sketch:type="MSLayerGroup" transform="translate(3.000000, 6.000000)">
+                <mask id="mask-4" sketch:name="Top bubble" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <use id="Top-bubble" fill="#2196F3" filter="url(#filter-2)" sketch:type="MSShapeGroup" xlink:href="#path-3"></use>
+                <g id="Hash-and-shadow" mask="url(#mask-4)" sketch:type="MSShapeGroup">
+                    <g transform="translate(12.987124, 5.713953)">
+                        <path d="M1.9080625,11.7768524 L1.20577659,14.1627225 L20.6684149,33.7808217 L30.2102359,24.1627839 L30.2102359,24.1627839 L32.3921083,24.1627839 L8.44043614,0.019793955 L7.16197934,2.81931556 L7.16197934,2.81931556 L4.38464215,0.019793955 L3.50771372,1.01421862 L3.50771372,4.66044239 L4.00898992,4.63938905 L2.20382782,10.7720513 L2.20382782,8.85910339 L0.109616054,9.9640406 L1.9080625,11.7768524 Z M6.46116253,4.35394058 L5.96986741,5.42976208 L4.84304823,4.60435903 L6.13849901,4.54995076 L6.46116253,4.35394058 L6.46116253,4.35394058 Z M0.548080269,5.4338838 L2.82772526,7.73173781 L2.82772526,4.65756566 L0.548080269,5.4338838 Z" id="Faux-shadow" fill="url(#linearGradient-5)"></path>
+                        <path d="M1.72803802,9.93567344 L0.0656740273,9.93567344 L0.0656740273,8.27675093 L1.92234031,8.27675093 L2.26776659,5.46094825 L0.497456883,5.46094825 L0.497456883,3.80202574 L2.46206888,3.80202574 L2.95861916,0.00396630712 L4.42668087,0.00396630712 L3.97330887,3.80202574 L6.52082772,3.80202574 L6.99578886,0.00396630712 L8.48543972,0.00396630712 L8.03206772,3.80202574 L9.73761,3.80202574 L9.73761,5.46094825 L7.83776543,5.46094825 L7.49233915,8.27675093 L9.30582714,8.27675093 L9.30582714,9.93567344 L7.29803686,9.93567344 L6.77989744,14.1921194 L5.26865744,14.1921194 L5.78679687,9.93567344 L3.23927802,9.93567344 L2.74272773,14.1921194 L1.23148774,14.1921194 L1.72803802,9.93567344 Z M5.98109915,8.27675093 L6.32652544,5.46094825 L3.77900659,5.46094825 L3.4335803,8.27675093 L5.98109915,8.27675093 Z" id="Hash" fill="#FFFFFF"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

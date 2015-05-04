@@ -195,7 +195,7 @@ public class IRCService extends Service
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
             builder.setContentText(getText(R.string.notification_running));
-            builder.setSmallIcon(R.mipmap.ic_launcher);
+            builder.setSmallIcon(R.drawable.ic_stat_hermes2);
             builder.setWhen(System.currentTimeMillis());
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -239,9 +239,9 @@ public class IRCService extends Service
         if (foreground) {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
             builder.setContentText(text);
-            builder.setSmallIcon(R.mipmap.ic_launcher);
+            builder.setSmallIcon(R.drawable.ic_stat_hermes2);
             builder.setWhen(System.currentTimeMillis());
-            builder.addAction(R.drawable.ic_ic_close_24px, "DISCONNECT ALL", pendingIntent);
+            builder.addAction(R.drawable.ic_action_ic_close_24px, "DISCONNECT ALL", pendingIntent);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 builder.setColor(Color.parseColor("#0097A7"));
