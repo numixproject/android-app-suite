@@ -160,8 +160,9 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
 
         ArrayAdapter<String> hostAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, HOSTS);
-        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.host);
-        textView.setAdapter(hostAdapter);
+        AutoCompleteTextView hostTextView = (AutoCompleteTextView) findViewById(R.id.host);
+        hostTextView.setAdapter(hostAdapter);
+        hostTextView.setThreshold(0);
 
         Uri uri = getIntent().getData();
         if (uri != null && uri.getScheme().equals("irc")) {
@@ -222,9 +223,9 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         }
     }
 
-private static final String[] HOSTS = new String[] {
-        "gimp.net", "irc.freenode.org", "irc.ubuntu.com", "irc.debian.org"
-};
+    private static final String[] HOSTS = new String[] {
+        "irc.efnet.org", "irc.freenode.net", "irc.geekshed.net", "irc.gimp.org", "irc.ircnet.org", "irc.oftc.net", "irc.spotchat.org"
+    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

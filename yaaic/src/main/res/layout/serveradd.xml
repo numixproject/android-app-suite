@@ -46,7 +46,7 @@ Copyright 2015 Numix Project Ltd.
             android:contentDescription="@string/server_host"
             android:textSize="14sp"
             android:layout_marginLeft="-4dp"
-            android:hint="e.g.- irc.freenode.org"
+            android:hint="e.g.- irc.freenode.net"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
