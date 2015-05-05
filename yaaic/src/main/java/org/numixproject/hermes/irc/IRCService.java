@@ -42,6 +42,8 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
@@ -93,6 +95,8 @@ public class IRCService extends Service
     private HashMap<Integer, ReconnectReceiver> alarmReceivers;
     private final Object alarmIntentsLock;
 
+    BroadcastReceiver disconnectReceiver;
+
     /**
      * Create new service
      */
@@ -116,6 +120,30 @@ public class IRCService extends Service
     public void onCreate()
     {
         super.onCreate();
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("disconnect_all");
+// Add other actions as needed
+
+        disconnectReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals("disconnect_all")) {
+                    ArrayList<Server> mServers = Hermes.getInstance().getServersAsArrayList();
+                    for (Server server : mServers) {
+                        if (binder.getService().hasConnection(server.getId())) {
+                            server.setStatus(Status.DISCONNECTED);
+                            server.setMayReconnect(false);
+                            binder.getService().getConnection(server.getId()).quitServer();
+                        }
+                    }
+                    // ugly
+                    binder.getService().stopForegroundCompat(R.string.app_name);
+                }
+            }
+        };
+
+        registerReceiver(disconnectReceiver, filter);
 
         settings = new Settings(getBaseContext());
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -193,12 +221,19 @@ public class IRCService extends Service
             }
             foreground = true;
 
+            Intent disconnect = new Intent("disconnect_all");
+            PendingIntent pendingIntentDisconnect = PendingIntent.getBroadcast(this, 0, disconnect, PendingIntent.FLAG_CANCEL_CURRENT);
+
+
+
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
             builder.setContentText(getText(R.string.notification_running));
             builder.setSmallIcon(R.drawable.ic_stat_hermes2);
             builder.setWhen(System.currentTimeMillis());
+            builder.addAction(R.drawable.ic_action_ic_close_24px, "DISCONNECT ALL", pendingIntentDisconnect);
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 builder.setColor(Color.parseColor("#0097A7"));
             }
 
@@ -233,15 +268,15 @@ public class IRCService extends Service
      */
     private void updateNotification(String text, String contentText, boolean vibrate, boolean sound, boolean light)
     {
-        Intent disconnect = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(IRCService.this, 0, disconnect, Intent.FILL_IN_ACTION);
+        Intent disconnect = new Intent("disconnect_all");
+        PendingIntent pendingIntentDisconnect = PendingIntent.getBroadcast(this, 0, disconnect, PendingIntent.FLAG_CANCEL_CURRENT);
 
         if (foreground) {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
             builder.setContentText(text);
             builder.setSmallIcon(R.drawable.ic_stat_hermes2);
             builder.setWhen(System.currentTimeMillis());
-            builder.addAction(R.drawable.ic_action_ic_close_24px, "DISCONNECT ALL", pendingIntent);
+            builder.addAction(R.drawable.ic_action_ic_close_24px, "DISCONNECT ALL", pendingIntentDisconnect);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 builder.setColor(Color.parseColor("#0097A7"));
@@ -632,6 +667,8 @@ public class IRCService extends Service
     @Override
     public void onDestroy()
     {
+        unregisterReceiver(disconnectReceiver);
+
         // Make sure our notification is gone.
         if (foreground) {
             stopForegroundCompat(R.string.app_name);

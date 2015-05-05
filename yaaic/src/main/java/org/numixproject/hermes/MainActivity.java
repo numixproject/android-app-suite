@@ -1,9 +1,12 @@
 package org.numixproject.hermes;
 
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -48,7 +51,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
 
     @Override
-    protected void onNewIntent(Intent indtent) {
+    protected void onNewIntent(Intent intent) {
         ArrayList<Server> mServers = Hermes.getInstance().getServersAsArrayList();
         for (Server server : mServers) {
             if (binder.getService().hasConnection(server.getId())) {
@@ -77,7 +80,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         fragment = (HomeFragment) home.getTargetFragment();
 
         addSection(addserver);
-
 
         this.addSection(newSection("Disconnect all", R.drawable.ic_ic_close_24px, new MaterialSectionListener() {
             @Override
@@ -129,13 +131,20 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
 
     @Override
     public void onResume()
     {
         super.onResume();
 
+
         try {
+
             // Find out if delete server
             Intent mIntent = getIntent();
             if (mIntent != null) {
