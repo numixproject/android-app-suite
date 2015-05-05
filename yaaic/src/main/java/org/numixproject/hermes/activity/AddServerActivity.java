@@ -53,6 +53,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -69,8 +70,8 @@ import android.widget.Toast;
  */
 public class AddServerActivity extends ActionBarActivity implements OnClickListener, AdapterView.OnItemClickListener {
 
-    private static final int REQUEST_CODE_CHANNELS       = 1;
-    private static final int REQUEST_CODE_COMMANDS       = 2;
+    private static final int REQUEST_CODE_CHANNELS = 1;
+    private static final int REQUEST_CODE_COMMANDS = 2;
     private static final int REQUEST_CODE_AUTHENTICATION = 4;
 
     private Server server;
@@ -97,8 +98,7 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
      * On create
      */
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.serveradd);
@@ -132,7 +132,7 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
 
             // Set server values
             ((EditText) findViewById(R.id.title)).setText(server.getTitle());
-            ((EditText) findViewById(R.id.host)).setText(server.getHost());
+            ((AutoCompleteTextView) findViewById(R.id.host)).setText(server.getHost());
             ((EditText) findViewById(R.id.port)).setText(String.valueOf(server.getPort()));
             ((EditText) findViewById(R.id.password)).setText(server.getPassword());
 
@@ -157,6 +157,11 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
             EditText serverHostname = (EditText) findViewById(R.id.host);
             serverHostname.setInputType(0x80000);
         }
+
+        ArrayAdapter<String> hostAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, HOSTS);
+        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.host);
+        textView.setAdapter(hostAdapter);
 
         Uri uri = getIntent().getData();
         if (uri != null && uri.getScheme().equals("irc")) {
@@ -200,7 +205,6 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
 
         // Autojoin Rooms
         channelInput = (EditText) findViewById(R.id.channel);
-        channelInput.setSelection(1);
 
         adapter3 = new ArrayAdapter<String>(this, R.layout.channelitem);
 
@@ -217,6 +221,10 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
             adapter3.add(channel);
         }
     }
+
+private static final String[] HOSTS = new String[] {
+        "gimp.net", "irc.freenode.org", "irc.ubuntu.com", "irc.debian.org"
+};
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

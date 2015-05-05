@@ -41,11 +41,12 @@ Copyright 2015 Numix Project Ltd.
             android:paddingTop="8dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/host"
             android:contentDescription="@string/server_host"
             android:textSize="14sp"
             android:layout_marginLeft="-4dp"
+            android:hint="e.g.- irc.freenode.org"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -235,7 +236,8 @@ Copyright 2015 Numix Project Ltd.
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:text="#"
+                    android:text=""
+                    android:hint="e.g.- #numix"
                     android:layout_weight="1"
                     android:inputType="textNoSuggestions" />
                 <Button

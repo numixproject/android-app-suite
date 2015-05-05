@@ -24,7 +24,6 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import org.numixproject.hermes.adapter.ServerListAdapter;
 import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.irc.IRCBinder;
-import org.numixproject.hermes.activity.AboutActivity;
 import org.numixproject.hermes.activity.AddServerActivity;
 import org.numixproject.hermes.activity.SettingsActivity;
 import org.numixproject.hermes.irc.IRCService;
@@ -71,7 +70,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         MaterialSection pro = newSection("Unlock all features", R.drawable.ic_ic_vpn_key_24px,  new Intent(this, SettingsActivity.class));
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
         MaterialSection help = newSection("Help", R.drawable.ic_ic_help_24px , new Intent(this, SettingsActivity.class));
-        MaterialSection about = newSection("About", R.drawable.ic_ic_info_24px, new Intent(this, AboutActivity.class));
         getSupportActionBar().setElevation(3);
         addSection(home);
 
@@ -98,7 +96,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         addBottomSection(pro);
         addBottomSection(settings);
         addBottomSection(help);
-        addBottomSection(about);
         setDrawerHeaderImage(R.drawable.cover);
         allowArrowAnimation();
 
