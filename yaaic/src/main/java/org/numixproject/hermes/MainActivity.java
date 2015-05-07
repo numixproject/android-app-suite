@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.melnykov.fab.FloatingActionButton;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.numixproject.hermes.adapter.ServerListAdapter;
 import org.numixproject.hermes.db.Database;

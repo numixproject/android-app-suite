@@ -104,8 +104,6 @@ import org.numixproject.hermes.utils.SwipeDismissListViewTouchListener;
 import org.numixproject.hermes.utils.SwipeDismissTouchListener;
 import org.numixproject.hermes.utils.TinyDB;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.melnykov.fab.FloatingActionButton;
 
 /**
@@ -131,25 +129,19 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     private ViewPager pager;
     private ConversationIndicator indicator;
     private ConversationPagerAdapter pagerAdapter;
+    private ArrayList<String> RoomsList;
 
     LinearLayout conversationLayout;
+    ExpandableHeightListView roomsList;
 
     private Scrollback scrollback;
     private FloatingActionButton fab = null;
-
     mentionsAdapter roomAdapter;
-    // XXX: This is ugly. This is a buffer for a channel that should be joined after showing the
-    //      JoinActivity. As onActivityResult() is called before onResume() a "channel joined"
-    //      broadcast may get lost as the broadcast receivers are registered in onResume() but the
-    //      join command would be called in onActivityResult(). joinChannelBuffer will save the
-    //      channel name in onActivityResult() and run the join command in onResume().
     private String joinChannelBuffer;
-
     private int historySize;
-
     private boolean reconnectDialogActive = false;
-
-    private ArrayList<String> pinnedRooms = null;
+    private ArrayList<String> pinnedRooms = new ArrayList<>();
+    TinyDB tinydb;
 
     private final OnKeyListener inputKeyListener = new OnKeyListener() {
         /**
@@ -210,7 +202,11 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
+        tinydb = new TinyDB(getApplicationContext());
+        loadPinnedItems();
+        if (pinnedRooms.size() != 0) {
+            Toast.makeText(getApplicationContext(), pinnedRooms.get(0), Toast.LENGTH_SHORT).show();
+        }
         serverId = getIntent().getExtras().getInt("serverId");
         server = Hermes.getInstance().getServerById(serverId);
         Settings settings = new Settings(this);
@@ -310,7 +306,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         conversationLayout = (LinearLayout) findViewById(R.id.conversationFragment);
         conversationLayout.setVisibility(LinearLayout.GONE);
 
-        ExpandableHeightListView roomsList = (ExpandableHeightListView) findViewById(R.id.roomsActivityList);
+        roomsList = (ExpandableHeightListView) findViewById(R.id.roomsActivityList);
         roomsList.setExpanded(true);
 
         SwipeDismissListViewTouchListener touchListener =
@@ -335,7 +331,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         // we don't look for swipes.
         roomsList.setOnScrollListener(touchListener.makeScrollListener());
 
-        ArrayList<String> RoomsList = new ArrayList<String>();
+        RoomsList = new ArrayList<String>();
         ArrayList<Integer> MentionsList = new ArrayList<Integer>();
 
         ArrayList<String> channels = new ArrayList<String>();
@@ -373,7 +369,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         roomsList.setAdapter(roomAdapter);
         roomsList.setEmptyView(findViewById(R.id.roomsActivityList_empty));
 
-
         // Handle click on adapter
         roomsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
@@ -409,6 +404,8 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 pager.setCurrentItem(0);
             }
         });
+
+        setPinnedDrawable();
         }
 
     /**
@@ -417,6 +414,9 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     @Override
     public void onResume()
     {
+        super.onResume();
+        loadPinnedItems();
+        setPinnedDrawable();
         // register the receivers as early as possible, otherwise we may loose a broadcast message
         channelReceiver = new ConversationReceiver(server.getId(), this);
         registerReceiver(channelReceiver, new IntentFilter(Broadcast.CONVERSATION_MESSAGE));
@@ -426,8 +426,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         serverReceiver = new ServerReceiver(this);
         registerReceiver(serverReceiver, new IntentFilter(Broadcast.SERVER_UPDATE));
-
-        super.onResume();
 
         // Start service
         Intent intent = new Intent(this, IRCService.class);
@@ -509,6 +507,13 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         server.setIsForeground(true);
     }
 
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        savePinnedItems();
+    }
+
     public void joinRoom(View v) {
         startActivityForResult(new Intent(this, JoinActivity.class), REQUEST_CODE_JOIN);
     }
@@ -520,6 +525,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     public void onPause()
     {
         super.onPause();
+        savePinnedItems();
 
         server.setIsForeground(false);
 
@@ -1158,6 +1164,38 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         return nick;
     }
 
+    // Set yellow stars for pinned rooms
+    private void setPinnedDrawable() {
+        // Check if rooms are created first
+        if (RoomsList.size() != 0) {
+            Integer i;
+            for (i = 0; i < pinnedRooms.size(); i++) {
+                String roomName = pinnedRooms.get(i);
+                int position = roomAdapter.getPosition(roomName);
+                View adapterView = roomAdapter.getViewByPosition(position, roomsList);
+                ImageView star = (ImageView) adapterView.findViewById(R.id.star);
+
+
+                    star.setImageResource(R.drawable.ic_ic_star_rate_yellow_24px);
+                    savePinnedItems();
+            }
+        }
+    }
+
+    private void savePinnedItems(){
+        tinydb.putListString("pinned", pinnedRooms);
+        if (pinnedRooms.size() != 0) {
+            Toast.makeText(getApplicationContext(), pinnedRooms.get(0), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void loadPinnedItems(){
+        pinnedRooms = tinydb.getListString("pinned");
+        if (pinnedRooms.size() != 0) {
+            Toast.makeText(getApplicationContext(), pinnedRooms.get(0), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     // Adapter for Room List
     class mentionsAdapter extends BaseAdapter {
         ArrayList<String> Room;
@@ -1180,13 +1218,13 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             // Find room's position in pager
             pagerPosition = pagerAdapter.getPositionByName(Room.get(position));
 
-
             Conversation conversationToClose = pagerAdapter.getItem(pagerPosition);
             binder.getService().getConnection(serverId).partChannel(conversationToClose.getName());
 
+            pinnedRooms.remove(Room.get(position));
             Room.remove(position);
             Mentions.remove(position);
-
+            savePinnedItems();
         }
 
         public int getCount() {
@@ -1204,10 +1242,22 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             return position;
         }
 
-        public int getPosition(String roomName ){
+        public int getPosition(String roomName){
             int position = pagerAdapter.getPositionByName(roomName);
             // Because first page is Server log
             return position-1;
+        }
+
+        public View getViewByPosition(int pos, ListView listView) {
+            final int firstListItemPosition = listView.getFirstVisiblePosition();
+            final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+
+            if (pos < firstListItemPosition || pos > lastListItemPosition ) {
+                return listView.getAdapter().getView(pos, null, listView);
+            } else {
+                final int childIndex = pos - firstListItemPosition;
+                return listView.getChildAt(childIndex);
+            }
         }
 
         public View getView(final int position, View convertView, ViewGroup parent) {
@@ -1218,21 +1268,32 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             room = (TextView) row.findViewById(R.id.room_name);
             mentions = (TextView) row.findViewById(R.id.mentions_number);
             room.setText(Room.get(position));
+
             try {
                 mentions.setText("" + Mentions.get(position));
             } catch (Exception E) {
                 // Do nothing
             }
 
+            // ---- Pinned rooms section ----
             try {
-                ImageView star = (ImageView) row.findViewById(R.id.star);
-                star.setOnClickListener(new View.OnClickListener() {
+                final ImageView star = (ImageView) row.findViewById(R.id.star);
 
-                    // Pin items
+                // Handle clicks on star.
+                star.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), Room.get(position),
-                                Toast.LENGTH_LONG).show();
+                        String pinnedRoomName = Room.get(position);
+                        // Check if room is already pinned
+                        if (pinnedRooms.contains(pinnedRoomName)) {
+                            pinnedRooms.remove(pinnedRoomName);
+                            star.setImageResource(R.drawable.ic_ic_star_rate_24px);
+                            savePinnedItems();
+                        } else {
+                            pinnedRooms.add(pinnedRoomName);
+                            star.setImageResource(R.drawable.ic_ic_star_rate_yellow_24px);
+                            savePinnedItems();
+                        }
                     }
                 });
             } catch (Exception e) {

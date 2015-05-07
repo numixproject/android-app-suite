@@ -17,7 +17,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="multipaneSupport">true</item>
         <item name="drawerType">@integer/DRAWERTYPE_IMAGE</item>
-        <item name="android:windowContentOverlay">@drawable/above_shadow</item>
         <item name="rippleBackport">true</item>
         <item name="learningPattern">false</item>
         <item name="toolbarElevation">true</item>
