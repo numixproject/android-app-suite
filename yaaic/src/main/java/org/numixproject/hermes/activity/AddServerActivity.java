@@ -159,7 +159,7 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         }
 
         ArrayAdapter<String> hostAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, HOSTS);
+                R.layout.dropdown_item, HOSTS);
         AutoCompleteTextView hostTextView = (AutoCompleteTextView) findViewById(R.id.host);
         hostTextView.setAdapter(hostAdapter);
         hostTextView.setThreshold(0);
@@ -209,14 +209,14 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
 
         adapter3 = new ArrayAdapter<String>(this, R.layout.channelitem);
 
-        ExpandableHeightListView list3 = (ExpandableHeightListView) findViewById(R.id.channels);
-        list3.setAdapter(adapter3);
-        list3.setOnItemClickListener(this);
+        // ExpandableHeightListView list3 = (ExpandableHeightListView) findViewById(R.id.channels);
+        // list3.setAdapter(adapter3);
+        // list3.setOnItemClickListener(this);
 
         // Workaround for ListView height
-        list3.setExpanded(true);
+        // list3.setExpanded(true);
 
-        ((Button) findViewById(R.id.add_room)).setOnClickListener(this);
+        // ((Button) findViewById(R.id.add_room)).setOnClickListener(this);
 
         for (String channel : channels) {
             adapter3.add(channel);
@@ -273,13 +273,13 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
     public void onClick(View v)
     {
         switch (v.getId()) {
-            case R.id.add_room:
-                String channel = channelInput.getText().toString().trim();
-                channels.add(channel);
-                adapter3.add(channel);
-                channelInput.setText("#");
-                channelInput.setSelection(1);
-                break;
+            //  case R.id.add_room:
+            //    String channel = channelInput.getText().toString().trim();
+            //    channels.add(channel);
+            //    adapter3.add(channel);
+            //    channelInput.setText("#");
+            //    channelInput.setSelection(1);
+            //    break;
 
             case R.id.add_command:
                 String command = commandInput.getText().toString().trim();

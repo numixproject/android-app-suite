@@ -33,4 +33,9 @@
             android:textColor="#ffffff"
             />
     </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:id="@+id/star"
+        android:layout_height="fill_parent"
+        android:src="@drawable/ic_ic_star_rate_24px"/>
 </LinearLayout>

@@ -23,6 +23,7 @@ package org.numixproject.hermes.activity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.numixproject.hermes.MainActivity;
 import org.numixproject.hermes.R;
@@ -60,12 +61,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
@@ -89,6 +94,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -96,7 +102,10 @@ import android.widget.Toast;
 
 import org.numixproject.hermes.utils.SwipeDismissListViewTouchListener;
 import org.numixproject.hermes.utils.SwipeDismissTouchListener;
+import org.numixproject.hermes.utils.TinyDB;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.melnykov.fab.FloatingActionButton;
 
 /**
@@ -139,6 +148,8 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     private int historySize;
 
     private boolean reconnectDialogActive = false;
+
+    private ArrayList<String> pinnedRooms = null;
 
     private final OnKeyListener inputKeyListener = new OnKeyListener() {
         /**
@@ -1193,11 +1204,17 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             return position;
         }
 
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public int getPosition(String roomName ){
+            int position = pagerAdapter.getPositionByName(roomName);
+            // Because first page is Server log
+            return position-1;
+        }
+
+        public View getView(final int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View row;
             row = inflater.inflate(R.layout.rooms_activity_item, parent, false);
-            TextView room, mentions;
+            final TextView room, mentions;
             room = (TextView) row.findViewById(R.id.room_name);
             mentions = (TextView) row.findViewById(R.id.mentions_number);
             room.setText(Room.get(position));
@@ -1206,6 +1223,22 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             } catch (Exception E) {
                 // Do nothing
             }
+
+            try {
+                ImageView star = (ImageView) row.findViewById(R.id.star);
+                star.setOnClickListener(new View.OnClickListener() {
+
+                    // Pin items
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), Room.get(position),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+            } catch (Exception e) {
+                // Do nothing
+            }
+
             return (row);
         }
     }
