@@ -141,7 +141,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     private int historySize;
     private boolean reconnectDialogActive = false;
     private ArrayList<String> pinnedRooms = new ArrayList<>();
-    TinyDB tinydb;
+    private TinyDB tinydb;
 
     private final OnKeyListener inputKeyListener = new OnKeyListener() {
         /**
@@ -512,6 +512,15 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     {
         super.onDestroy();
         savePinnedItems();
+    }
+
+    @Override
+    public void onBackPressed() {
+            if (conversationLayout.getVisibility() == LinearLayout.GONE) {
+                finish();
+            } else {
+                conversationLayout.setVisibility(LinearLayout.GONE);
+            }
     }
 
     public void joinRoom(View v) {
