@@ -1,2 +1,2 @@
 include ':viewPagerIndicator'
-include ':yaaic'
+include ':hermes'
