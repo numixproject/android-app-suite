@@ -204,9 +204,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         super.onCreate(savedInstanceState);
         tinydb = new TinyDB(getApplicationContext());
         loadPinnedItems();
-        if (pinnedRooms.size() != 0) {
-            Toast.makeText(getApplicationContext(), pinnedRooms.get(0), Toast.LENGTH_SHORT).show();
-        }
         serverId = getIntent().getExtras().getInt("serverId");
         server = Hermes.getInstance().getServerById(serverId);
         Settings settings = new Settings(this);
@@ -404,9 +401,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 pager.setCurrentItem(0);
             }
         });
-
-        setPinnedDrawable();
-        }
+     }
 
     /**
      * On resume
@@ -416,7 +411,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     {
         super.onResume();
         loadPinnedItems();
-        setPinnedDrawable();
         // register the receivers as early as possible, otherwise we may loose a broadcast message
         channelReceiver = new ConversationReceiver(server.getId(), this);
         registerReceiver(channelReceiver, new IntentFilter(Broadcast.CONVERSATION_MESSAGE));
@@ -1173,36 +1167,12 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         return nick;
     }
 
-    // Set yellow stars for pinned rooms
-    private void setPinnedDrawable() {
-        // Check if rooms are created first
-        if (RoomsList.size() != 0) {
-            Integer i;
-            for (i = 0; i < pinnedRooms.size(); i++) {
-                String roomName = pinnedRooms.get(i);
-                int position = roomAdapter.getPosition(roomName);
-                View adapterView = roomAdapter.getViewByPosition(position, roomsList);
-                ImageView star = (ImageView) adapterView.findViewById(R.id.star);
-
-
-                    star.setImageResource(R.drawable.ic_ic_star_rate_yellow_24px);
-                    savePinnedItems();
-            }
-        }
-    }
-
     private void savePinnedItems(){
         tinydb.putListString("pinned", pinnedRooms);
-        if (pinnedRooms.size() != 0) {
-            Toast.makeText(getApplicationContext(), pinnedRooms.get(0), Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void loadPinnedItems(){
         pinnedRooms = tinydb.getListString("pinned");
-        if (pinnedRooms.size() != 0) {
-            Toast.makeText(getApplicationContext(), pinnedRooms.get(0), Toast.LENGTH_SHORT).show();
-        }
     }
 
     // Adapter for Room List
@@ -1284,10 +1254,20 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 // Do nothing
             }
 
+            final ImageView star = (ImageView) row.findViewById(R.id.star);
+
+            if (RoomsList.size() != 0) {
+                int i;
+                for (i = 0; i < pinnedRooms.size(); i++) {
+                    loadPinnedItems();
+                    String roomName = pinnedRooms.get(i);
+                    if (roomName.equals(Room.get(position)))
+                        star.setImageResource(R.drawable.ic_ic_star_rate_yellow_24px);
+                }
+            }
+
             // ---- Pinned rooms section ----
             try {
-                final ImageView star = (ImageView) row.findViewById(R.id.star);
-
                 // Handle clicks on star.
                 star.setOnClickListener(new View.OnClickListener() {
                     @Override
