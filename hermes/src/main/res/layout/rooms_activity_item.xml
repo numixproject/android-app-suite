@@ -14,6 +14,7 @@
     android:textColor="#111111"
     android:text="#example"/>
     <LinearLayout
+        android:id="@+id/mentions_counter"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_gravity="center_vertical"

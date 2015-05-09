@@ -11,6 +11,7 @@
     android:text="#example"/>
     <LinearLayout
         android:orientation="vertical"
+        android:id="@+id/mentions_counter"
         android:layout_width="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_height="wrap_content"

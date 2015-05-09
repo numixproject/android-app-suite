@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentManager;
@@ -69,6 +70,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         MaterialSection pro = newSection("Unlock all features", R.drawable.ic_ic_vpn_key_24px,  new Intent(this, SettingsActivity.class));
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
         MaterialSection help = newSection("Help", R.drawable.ic_ic_help_24px , new Intent(this, SettingsActivity.class));
+
         getSupportActionBar().setElevation(3);
         addSection(home);
 
@@ -90,11 +92,30 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
                     }
                 }
                 // ugly
-                binder.getService().stopForegroundCompat(R.string.app_name);            }
+                binder.getService().stopForegroundCompat(R.string.app_name);
+            }
         }));
         addBottomSection(pro);
         addBottomSection(settings);
         addBottomSection(help);
+
+        this.addBottomSection(newSection("Contact us", R.drawable.ic_ic_mail_24px, new MaterialSectionListener() {
+            @Override
+            public void onClick(MaterialSection section) {
+                Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + "team@numixproject.org"));
+                startActivity(intent);
+            }
+        }));
+
+        this.addBottomSection(newSection("More apps...", R.drawable.ic_ic_shop_24px, new MaterialSectionListener() {
+            @Override
+            public void onClick(MaterialSection section) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("market://search?q=pub:Numix+Project+Ltd."));
+                startActivity(intent);
+            }
+        }));
+
         setDrawerHeaderImage(R.drawable.cover);
         allowArrowAnimation();
 

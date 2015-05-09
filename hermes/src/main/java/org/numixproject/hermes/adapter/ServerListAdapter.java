@@ -297,10 +297,16 @@ public class ServerListAdapter extends BaseAdapter
             row = inflater.inflate(R.layout.serverchannel_item, parent, false);
             TextView room, mentions;
             room = (TextView) row.findViewById(R.id.room_name);
+            LinearLayout mentionsCounter = (LinearLayout) row.findViewById(R.id.mentions_counter);
             mentions = (TextView) row.findViewById(R.id.mentions_number);
             room.setText(Room.get(position));
             try {
-                mentions.setText("" + Mentions.get(position));
+                if (Mentions.get(position) == 0) {
+                    mentionsCounter.setVisibility(LinearLayout.GONE);
+                } else {
+                    mentionsCounter.setVisibility(LinearLayout.VISIBLE);
+                    mentions.setText("" + Mentions.get(position));
+                }
             } catch (Exception E) {
                 // Do nothing
             }

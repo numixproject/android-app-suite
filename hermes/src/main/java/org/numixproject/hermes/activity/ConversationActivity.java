@@ -1243,11 +1243,17 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             row = inflater.inflate(R.layout.rooms_activity_item, parent, false);
             final TextView room, mentions;
             room = (TextView) row.findViewById(R.id.room_name);
+            LinearLayout mentions_counter = (LinearLayout) row.findViewById(R.id.mentions_counter);
             mentions = (TextView) row.findViewById(R.id.mentions_number);
             room.setText(Room.get(position));
 
             try {
-                mentions.setText("" + Mentions.get(position));
+                if (Mentions.get(position) == 0) {
+                    mentions_counter.setVisibility(LinearLayout.GONE);
+                } else {
+                    mentions_counter.setVisibility(LinearLayout.VISIBLE);
+                    mentions.setText("" + Mentions.get(position));
+                }
             } catch (Exception E) {
                 // Do nothing
             }
