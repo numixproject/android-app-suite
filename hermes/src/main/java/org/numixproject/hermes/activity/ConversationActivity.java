@@ -505,11 +505,13 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
     @Override
     public void onBackPressed() {
-            if (conversationLayout.getVisibility() == LinearLayout.GONE) {
-                finish();
-            } else {
-                conversationLayout.setVisibility(LinearLayout.GONE);
-            }
+        if (conversationLayout.getVisibility() == LinearLayout.GONE) {
+            finish();
+        } else {
+            conversationLayout.setVisibility(LinearLayout.GONE);
+            refreshActivity();
+            invalidateOptionsMenu();
+        }
     }
 
     public void joinRoom(View v) {
