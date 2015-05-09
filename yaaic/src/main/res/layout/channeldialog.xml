@@ -12,7 +12,6 @@ Copyright 2015 Numix Project Ltd.
         android:id="@+id/channel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="#"
         android:minEms="10"
         android:singleLine="true" />
     <Button

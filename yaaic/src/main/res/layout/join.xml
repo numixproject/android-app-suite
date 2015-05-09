@@ -8,17 +8,32 @@ Copyright 2015 Numix Project Ltd.
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:padding="5dp">
+    android:minWidth="350dp"
+    android:padding="8dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:padding="8dp"
+        android:textColor="#111111"
+        android:paddingBottom="16dp"
+        android:text="Join a room"/>
     <EditText
         android:id="@+id/channel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:singleLine="true"
         android:ems="10"
-        android:text="#" />
+        android:hint="e.g. #numix" />
     <Button
         android:id="@+id/join"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="8dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="@null"
+        android:textColor="@color/colorAccent"
+        android:layout_gravity="right"
         android:text="@string/join" />
 </LinearLayout>
