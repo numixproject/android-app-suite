@@ -82,7 +82,7 @@ import android.widget.Toast;
  * DO NOT EDIT!!! WE DON'T USE FRAGMENT HERE ANYMORE.
  */
 
-public class ConversationFragment extends Fragment implements ServiceConnection, ServerListener, ConversationListener {
+public class ConversationFragment extends Fragment implements ConversationListener {
     public static final int REQUEST_CODE_SPEECH = 99;
 
     private static final int REQUEST_CODE_JOIN = 1;
@@ -277,144 +277,6 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
     }
 
     /**
-     * On resume
-     */
-    @Override
-    public void onResume() {
-        // register the receivers as early as possible, otherwise we may loose a broadcast message
-        channelReceiver = new ConversationReceiver(server.getId(), this);
-        super.getActivity().registerReceiver(channelReceiver, new IntentFilter(Broadcast.CONVERSATION_MESSAGE));
-        super.getActivity().registerReceiver(channelReceiver, new IntentFilter(Broadcast.CONVERSATION_NEW));
-        super.getActivity().registerReceiver(channelReceiver, new IntentFilter(Broadcast.CONVERSATION_REMOVE));
-        super.getActivity().registerReceiver(channelReceiver, new IntentFilter(Broadcast.CONVERSATION_TOPIC));
-
-        serverReceiver = new ServerReceiver(this);
-        super.getActivity().registerReceiver(serverReceiver, new IntentFilter(Broadcast.SERVER_UPDATE));
-
-        super.onResume();
-
-        // Start service
-        Intent intent = new Intent(super.getActivity(), IRCService.class);
-        intent.setAction(IRCService.ACTION_FOREGROUND);
-        super.getActivity().startService(intent);
-        super.getActivity().bindService(intent, this, 0);
-
-        if (!server.isConnected()) {
-            ((EditText) getView().findViewById(R.id.input)).setEnabled(false);
-        } else {
-            ((EditText) getView().findViewById(R.id.input)).setEnabled(true);
-        }
-
-        // Optimization - cache field lookup
-        Collection<Conversation> mConversations = server.getConversations();
-        MessageListAdapter mAdapter;
-
-        // Fill view with messages that have been buffered while paused
-        for (Conversation conversation : mConversations) {
-            String name = conversation.getName();
-            mAdapter = pagerAdapter.getItemAdapter(name);
-
-            if (mAdapter != null) {
-                mAdapter.addBulkMessages(conversation.getBuffer());
-                conversation.clearBuffer();
-            } else {
-                // Was conversation created while we were paused?
-                if (pagerAdapter.getPositionByName(name) == -1) {
-                    onNewConversation(name);
-                }
-            }
-
-            // Clear new message notifications for the selected conversation
-            if (conversation.getStatus() == Conversation.STATUS_SELECTED && conversation.getNewMentions() > 0) {
-                Intent ackIntent = new Intent(super.getActivity(), IRCService.class);
-                ackIntent.setAction(IRCService.ACTION_ACK_NEW_MENTIONS);
-                ackIntent.putExtra(IRCService.EXTRA_ACK_SERVERID, serverId);
-                ackIntent.putExtra(IRCService.EXTRA_ACK_CONVTITLE, name);
-                super.getActivity().startService(ackIntent);
-            }
-        }
-
-        // Remove views for conversations that ended while we were paused
-        int numViews = pagerAdapter.getCount();
-        if (numViews > mConversations.size()) {
-            for (int i = 0; i < numViews; ++i) {
-                if (!mConversations.contains(pagerAdapter.getItem(i))) {
-                    pagerAdapter.removeConversation(i--);
-                    --numViews;
-                }
-            }
-        }
-
-        // Join channel that has been selected in JoinActivity (onActivityResult())
-        if (joinChannelBuffer != null) {
-            super.getActivity().bindService(intent, this, 0);
-
-            new Thread() {
-                @Override
-                public void run() {
-                    binder.getService().getConnection(serverId).joinChannel(joinChannelBuffer);
-                    joinChannelBuffer = null;
-                }
-            }.start();
-        }
-        server.setIsForeground(true);
-    }
-
-    public void joinNewChannel(final String channel) {
-        final Intent intent = new Intent(super.getActivity(), IRCService.class);
-        intent.setAction(IRCService.ACTION_FOREGROUND);
-        super.getActivity().startService(intent);
-        super.getActivity().bindService(intent, this, 0);
-        binder.getService().getConnection(serverId).joinChannel(channel);
-        joinChannelBuffer = null;
-    }
-
-    /**
-     * On Pause
-     */
-    @Override
-    public void onPause()
-    {
-        super.onPause();
-
-        server.setIsForeground(false);
-
-        if (binder != null && binder.getService() != null) {
-            binder.getService().checkServiceStatus();
-        }
-
-        super.getActivity().unbindService(this);
-        super.getActivity().unregisterReceiver(channelReceiver);
-        super.getActivity().unregisterReceiver(serverReceiver);
-    }
-
-    /**
-     * On service connected
-     */
-    @Override
-    public void onServiceConnected(ComponentName name, IBinder service)
-    {
-        this.binder = (IRCBinder) service;
-
-        // connect to irc server if connect has been requested
-        if (server.getStatus() == Status.PRE_CONNECTING && super.getActivity().getIntent().hasExtra("connect")) {
-            server.setStatus(Status.CONNECTING);
-            binder.connect(server);
-        } else {
-            onStatusUpdate();
-        }
-    }
-
-    /**
-     * On service disconnected
-     */
-    @Override
-    public void onServiceDisconnected(ComponentName name)
-    {
-        this.binder = null;
-    }
-
-    /**
      * On options menu requested
      */
     @Override
@@ -573,62 +435,6 @@ public class ConversationFragment extends Fragment implements ServiceConnection,
     public void onTopicChanged(String target)
     {
         // No implementation
-    }
-
-    /**
-     * On server status update
-     */
-    @Override
-    public void onStatusUpdate()
-    {
-        EditText input = (EditText) getView().findViewById(R.id.input);
-
-        if (server.isConnected()) {
-            input.setEnabled(true);
-        } else {
-            input.setEnabled(false);
-
-            if (server.getStatus() == Status.CONNECTING) {
-                return;
-            }
-
-            // Service is not connected or initialized yet - See #54
-            if (binder == null || binder.getService() == null || binder.getService().getSettings() == null) {
-                return;
-            }
-
-            if (!binder.getService().getSettings().isReconnectEnabled() && !reconnectDialogActive) {
-                reconnectDialogActive = true;
-                AlertDialog.Builder builder = new AlertDialog.Builder(super.getActivity());
-                builder.setMessage(getResources().getString(R.string.reconnect_after_disconnect, server.getTitle()))
-                        .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                if (!server.isDisconnected()) {
-                                    reconnectDialogActive = false;
-                                    return;
-                                }
-                                binder.getService().getConnection(server.getId()).setAutojoinChannels(
-                                        server.getCurrentChannelNames()
-                                );
-                                server.setStatus(Status.CONNECTING);
-                                binder.connect(server);
-                                reconnectDialogActive = false;
-                            }
-                        })
-                        .setNegativeButton(getString(R.string.negative_button), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                server.setMayReconnect(false);
-                                reconnectDialogActive = false;
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-        }
     }
 
     /**

@@ -23,7 +23,6 @@ package org.numixproject.hermes.activity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 import org.numixproject.hermes.MainActivity;
 import org.numixproject.hermes.R;
@@ -31,7 +30,6 @@ import org.numixproject.hermes.Hermes;
 import org.numixproject.hermes.adapter.ConversationPagerAdapter;
 import org.numixproject.hermes.adapter.MessageListAdapter;
 import org.numixproject.hermes.command.CommandParser;
-import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.indicator.ConversationIndicator;
 import org.numixproject.hermes.indicator.ConversationTitlePageIndicator.IndicatorStyle;
 import org.numixproject.hermes.irc.IRCBinder;
@@ -61,16 +59,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
@@ -101,7 +95,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.numixproject.hermes.utils.SwipeDismissListViewTouchListener;
-import org.numixproject.hermes.utils.SwipeDismissTouchListener;
 import org.numixproject.hermes.utils.TinyDB;
 
 import com.melnykov.fab.FloatingActionButton;
@@ -206,6 +199,8 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         loadPinnedItems();
         serverId = getIntent().getExtras().getInt("serverId");
         server = Hermes.getInstance().getServerById(serverId);
+        server.setAutoJoinChannels(pinnedRooms);
+
         Settings settings = new Settings(this);
 
         // Finish activity if server does not exist anymore - See #55
@@ -837,6 +832,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                                     reconnectDialogActive = false;
                                     return;
                                 }
+
                                 binder.getService().getConnection(server.getId()).setAutojoinChannels(
                                         server.getCurrentChannelNames()
                                 );
