@@ -1,26 +1,56 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:background="#E5E5E5"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:tag="serverFragment"
     android:id="@+id/home_mainFragment"
     android:layout_height="fill_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:background="#E5E5E5"
+        android:layout_height="wrap_content">
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
             android:background="#E5E5E5"
-            android:padding="8dp"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <ListView
-                android:id="@android:id/list"
+            <org.numixproject.hermes.utils.ExpandableHeightListView
+                android:id="@+id/list"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:divider="#00000000"
+                android:padding="8dp"
                 android:dividerHeight="8dp"
+                android:layout_marginBottom="8dp"
                 />
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/ads_card"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="0dp"
+                android:paddingTop="4dp">
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/adView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentBottom="true"
+                    ads:adSize="SMART_BANNER"
+                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+                </com.google.android.gms.ads.AdView>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
+    </ScrollView>
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:fab="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"

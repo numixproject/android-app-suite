@@ -97,6 +97,8 @@ import android.widget.Toast;
 import org.numixproject.hermes.utils.SwipeDismissListViewTouchListener;
 import org.numixproject.hermes.utils.TinyDB;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.melnykov.fab.FloatingActionButton;
 
 /**
@@ -213,6 +215,10 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         catch (Exception e){}
 
         setContentView(R.layout.conversations);
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         boolean isLandscape = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
 

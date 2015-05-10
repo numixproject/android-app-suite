@@ -13,10 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.melnykov.fab.FloatingActionButton;
 
 import org.numixproject.hermes.activity.AddServerActivity;
@@ -31,6 +34,7 @@ import org.numixproject.hermes.model.Extra;
 import org.numixproject.hermes.model.Server;
 import org.numixproject.hermes.model.Status;
 import org.numixproject.hermes.receiver.ServerReceiver;
+import org.numixproject.hermes.utils.ExpandableHeightListView;
 
 
 public class HomeFragment extends Fragment implements ServiceConnection, ServerListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
@@ -38,7 +42,7 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
     private IRCBinder binder;
     private ServerReceiver receiver;
     private ServerListAdapter adapter;
-    private ListView list;
+    private ExpandableHeightListView list;
     private String channel;
     private int positionBuffer;
     private FloatingActionButton fab = null;
@@ -62,10 +66,14 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
             }
         });
 
-        list = (ListView) llLayout.findViewById(android.R.id.list);
+        list = (ExpandableHeightListView) llLayout.findViewById(R.id.list);
         list.setAdapter(adapter);
         list.setOnItemClickListener(this);
         list.setOnItemLongClickListener(this);
+        list.setExpanded(true);
+        AdView mAdView = (AdView) llLayout.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         fab.attachToListView(list);
 
