@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.melnykov.fab.FloatingActionButton;
 
 import org.numixproject.hermes.adapter.ServerListAdapter;
@@ -67,7 +69,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     public void init(Bundle savedInstanceState) {
         MaterialSection home = newSection("Connect to...", R.drawable.ic_ic_swap_horiz_24px, new HomeFragment());
         MaterialSection addserver = newSection("Add new server", R.drawable.ic_ic_add_24px, new Intent(this, AddServerActivity.class));
-        MaterialSection pro = newSection("Unlock all features", R.drawable.ic_ic_vpn_key_24px,  new Intent(this, SettingsActivity.class));
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
         MaterialSection help = newSection("Help", R.drawable.ic_ic_help_24px , new Intent(this, SettingsActivity.class));
 
@@ -79,6 +80,13 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         fragment = (HomeFragment) home.getTargetFragment();
 
         addSection(addserver);
+
+        this.addBottomSection(newSection("Remove Ads", R.drawable.ic_ic_dnd_on_24px, new MaterialSectionListener() {
+            @Override
+            public void onClick(MaterialSection section) {
+                fragment.iap();
+            }
+        }));
 
         this.addSection(newSection("Disconnect all", R.drawable.ic_ic_close_24px, new MaterialSectionListener() {
             @Override
@@ -95,7 +103,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
                 binder.getService().stopForegroundCompat(R.string.app_name);
             }
         }));
-        addBottomSection(pro);
         addBottomSection(settings);
         addBottomSection(help);
 
@@ -151,8 +158,14 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-    }
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
 
+        overridePendingTransition(0, 0);
+        startActivity(intent);
+    }
 
     @Override
     public void onResume()
@@ -280,9 +293,9 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
      * On activity result
      */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if (resultCode == RESULT_OK) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+            if (resultCode == RESULT_OK) {
             try {
                 // Refresh list from database
                 adapter.loadServers();
@@ -311,5 +324,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     @Override
     public void onStatusUpdate() {
     }
+
 
 }

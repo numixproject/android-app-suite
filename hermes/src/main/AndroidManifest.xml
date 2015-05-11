@@ -15,9 +15,9 @@ Copyright 2015 Numix Project Ltd.
 
     <!-- Include required permissions for Google Mobile Ads to run-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -31,7 +31,9 @@ Copyright 2015 Numix Project Ltd.
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:theme="@style/MyNavigationDrawerTheme">
+            android:theme="@style/MyNavigationDrawerTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

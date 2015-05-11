@@ -9,6 +9,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.melnykov.fab.FloatingActionButton;
@@ -25,6 +28,7 @@ import com.melnykov.fab.FloatingActionButton;
 import org.numixproject.hermes.activity.AddServerActivity;
 import org.numixproject.hermes.activity.ConversationActivity;
 import org.numixproject.hermes.adapter.ServerListAdapter;
+import org.numixproject.hermes.utils.iap;
 import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.irc.IRCBinder;
 import org.numixproject.hermes.irc.IRCService;
@@ -46,11 +50,16 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
     private String channel;
     private int positionBuffer;
     private FloatingActionButton fab = null;
+    String key;
+    BillingProcessor bp;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5B4Oomgmm2D8XVSxh1DIFGtU3p1N2w6Xi2ZO7MoeZRAhvVjk3B8MfrOatlO9HfozRGhEkCkq0MfstB4Cjci3dsnYZieNmHOVYIFBWERqdwfdtnUIfI554xFsAC3Ah7PTP3MwKE7qTT1VLTTHxxsE7GH4sLtvLwrAzsVrLK+dgQk+e9bDJMvhhEPBgabRFaTvKaTtSzB/BBwrCa5mv0pte6WfrNbugFjiAJC43b7NNY2PV9UA8mukiBNZ9mPrK5fZeSEfcVqenyqbvZZG+P+O/cohAHbIEzPMuAS1EBf0VBsZtm3fjQ45PgCvEB7Ye3ucfR9BQ9ADjDwdqivExvXndQIDAQAB";
 
+        iap inAppPayments = new iap();
+        bp = inAppPayments.getBilling(super.getActivity(), key);
 
         FrameLayout llLayout = (FrameLayout) inflater.inflate(R.layout.home_fragment, container, false);
 
@@ -71,11 +80,20 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
         list.setOnItemClickListener(this);
         list.setOnItemLongClickListener(this);
         list.setExpanded(true);
-        AdView mAdView = (AdView) llLayout.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
         fab.attachToListView(list);
+
+        CardView ads = (CardView) llLayout.findViewById(R.id.ads_card);
+
+        // Check if you purchased "Remove Ads"
+        if (bp.isPurchased("remove_ads")) {
+            ads.setVisibility(View.GONE);
+        } else {
+            AdView mAdView = (AdView) llLayout.findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+            ads.setVisibility(View.VISIBLE);
+        }
 
         return llLayout;
     }
@@ -83,6 +101,14 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
     private void newAddServerActivity(View v){
         Intent intent = new Intent(super.getActivity(), AddServerActivity.class);
         startActivity(intent);
+    }
+
+    public void iap() {
+        bp.purchase(super.getActivity(), "remove_ads");
+    }
+
+    public BillingProcessor getIAP() {
+        return bp;
     }
 
     /**
@@ -248,6 +274,9 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        if (!bp.handleActivityResult(requestCode, resultCode, data))
+            super.onActivityResult(requestCode, resultCode, data);
+
         if (resultCode != super.getActivity().RESULT_OK) {
             // ignore other result codes
             return;
@@ -404,5 +433,4 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
             list.setBackgroundDrawable(null);
         }
     }
-
 }

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.numixproject.hermes.HomeFragment;
 import org.numixproject.hermes.MainActivity;
 import org.numixproject.hermes.R;
 import org.numixproject.hermes.Hermes;
@@ -96,7 +97,9 @@ import android.widget.Toast;
 
 import org.numixproject.hermes.utils.SwipeDismissListViewTouchListener;
 import org.numixproject.hermes.utils.TinyDB;
+import org.numixproject.hermes.utils.iap;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.melnykov.fab.FloatingActionButton;
@@ -137,6 +140,9 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     private boolean reconnectDialogActive = false;
     private ArrayList<String> pinnedRooms = new ArrayList<>();
     private TinyDB tinydb;
+
+    String key;
+    BillingProcessor bp;
 
     private final OnKeyListener inputKeyListener = new OnKeyListener() {
         /**
@@ -197,6 +203,10 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5B4Oomgmm2D8XVSxh1DIFGtU3p1N2w6Xi2ZO7MoeZRAhvVjk3B8MfrOatlO9HfozRGhEkCkq0MfstB4Cjci3dsnYZieNmHOVYIFBWERqdwfdtnUIfI554xFsAC3Ah7PTP3MwKE7qTT1VLTTHxxsE7GH4sLtvLwrAzsVrLK+dgQk+e9bDJMvhhEPBgabRFaTvKaTtSzB/BBwrCa5mv0pte6WfrNbugFjiAJC43b7NNY2PV9UA8mukiBNZ9mPrK5fZeSEfcVqenyqbvZZG+P+O/cohAHbIEzPMuAS1EBf0VBsZtm3fjQ45PgCvEB7Ye3ucfR9BQ9ADjDwdqivExvXndQIDAQAB";
+
+        iap inAppPayments = new iap();
+        bp = inAppPayments.getBilling(this, key);
         tinydb = new TinyDB(getApplicationContext());
         loadPinnedItems();
         serverId = getIntent().getExtras().getInt("serverId");
@@ -216,11 +226,19 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         setContentView(R.layout.conversations);
 
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
         boolean isLandscape = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
+
+        LinearLayout ads = (LinearLayout) findViewById(R.id.ads_card_conversation);
+
+        // Check if you purchased "Remove Ads"
+        if (bp.isPurchased("remove_ads")){
+            ads.setVisibility(LinearLayout.GONE);
+        } else {
+            AdView mAdView = (AdView) findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+            ads.setVisibility(LinearLayout.VISIBLE);
+        }
 
         EditText input = (EditText) findViewById(R.id.input);
         input.setOnKeyListener(inputKeyListener);
