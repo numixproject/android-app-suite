@@ -60,6 +60,7 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
 
         iap inAppPayments = new iap();
         bp = inAppPayments.getBilling(super.getActivity(), key);
+        bp.loadOwnedPurchasesFromGoogle();
 
         FrameLayout llLayout = (FrameLayout) inflater.inflate(R.layout.home_fragment, container, false);
 
@@ -117,6 +118,8 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
     @Override
     public void onDestroy()
     {
+        if (bp != null)
+            bp.release();
         super.onDestroy();
     }
 

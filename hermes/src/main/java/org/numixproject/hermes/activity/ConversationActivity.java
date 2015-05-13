@@ -207,6 +207,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         iap inAppPayments = new iap();
         bp = inAppPayments.getBilling(this, key);
+        bp.loadOwnedPurchasesFromGoogle();
         tinydb = new TinyDB(getApplicationContext());
         loadPinnedItems();
         serverId = getIntent().getExtras().getInt("serverId");
@@ -523,6 +524,8 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     @Override
     public void onDestroy()
     {
+        if (bp != null)
+            bp.release();
         super.onDestroy();
         savePinnedItems();
     }

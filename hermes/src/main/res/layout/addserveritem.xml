@@ -5,12 +5,29 @@ Hermes - Material IRC Client
 Copyright 2015 Numix Project Ltd.
 -->
 
-<TextView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_gravity="center"
-    android:padding="14dip"
-    android:gravity="center"
-    android:text="There are no servers added. \n Add some, may be?"
-    android:textSize="24sp" />
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingTop="32dp"
+        android:paddingBottom="1dp"
+        android:gravity="center"
+        android:text="There are no servers added."
+        android:textSize="22sp" />
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingBottom="32dp"
+        android:gravity="center"
+        android:paddingTop="2dp"
+        android:text="Add some, may be?"
+        android:textSize="20sp" />
+</LinearLayout>
