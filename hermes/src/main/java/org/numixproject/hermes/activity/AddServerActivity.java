@@ -483,6 +483,7 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         String charset = ((Spinner) findViewById(R.id.charset)).getSelectedItem().toString();
         Boolean useSSL = ((CheckBox) findViewById(R.id.useSSL)).isChecked();
 
+
         // not in use yet
         //boolean autoConnect = ((CheckBox) findViewById(R.id.autoconnect)).isChecked();
 

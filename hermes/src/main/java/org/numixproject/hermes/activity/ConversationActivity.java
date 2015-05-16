@@ -53,6 +53,7 @@ import org.numixproject.hermes.receiver.ConversationReceiver;
 import org.numixproject.hermes.receiver.ServerReceiver;
 import org.numixproject.hermes.utils.ExpandableHeightListView;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -69,6 +70,7 @@ import android.os.IBinder;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.CardView;
 import android.text.InputType;
 import android.text.method.TextKeyListener;
@@ -87,8 +89,10 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -128,6 +132,8 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     private ConversationIndicator indicator;
     private ConversationPagerAdapter pagerAdapter;
     private ArrayList<String> RoomsList;
+    private ArrayList<String> recentList = new ArrayList<>();
+    private ArrayAdapter<String> recentAdapter;
 
     LinearLayout conversationLayout;
     ExpandableHeightListView roomsList;
@@ -200,8 +206,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
      * On create
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5B4Oomgmm2D8XVSxh1DIFGtU3p1N2w6Xi2ZO7MoeZRAhvVjk3B8MfrOatlO9HfozRGhEkCkq0MfstB4Cjci3dsnYZieNmHOVYIFBWERqdwfdtnUIfI554xFsAC3Ah7PTP3MwKE7qTT1VLTTHxxsE7GH4sLtvLwrAzsVrLK+dgQk+e9bDJMvhhEPBgabRFaTvKaTtSzB/BBwrCa5mv0pte6WfrNbugFjiAJC43b7NNY2PV9UA8mukiBNZ9mPrK5fZeSEfcVqenyqbvZZG+P+O/cohAHbIEzPMuAS1EBf0VBsZtm3fjQ45PgCvEB7Ye3ucfR9BQ9ADjDwdqivExvXndQIDAQAB";
 
@@ -210,9 +215,12 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         bp.loadOwnedPurchasesFromGoogle();
         tinydb = new TinyDB(getApplicationContext());
         loadPinnedItems();
+        loadRecentItems();
         serverId = getIntent().getExtras().getInt("serverId");
         server = Hermes.getInstance().getServerById(serverId);
-        server.setAutoJoinChannels(pinnedRooms);
+        if (server.autoConnectStarred()) {
+            server.setAutoJoinChannels(pinnedRooms);
+        }
 
         Settings settings = new Settings(this);
 
@@ -222,8 +230,9 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         }
 
         try {
-        setTitle(server.getTitle());}
-        catch (Exception e){}
+            setTitle(server.getTitle());
+        } catch (Exception e) {
+        }
 
         setContentView(R.layout.conversations);
 
@@ -232,13 +241,14 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         LinearLayout ads = (LinearLayout) findViewById(R.id.ads_card_conversation);
 
         // Check if you purchased "Remove Ads"
-        if (bp.isPurchased("remove_ads")){
+        if (bp.isPurchased("remove_ads")) {
             ads.setVisibility(LinearLayout.GONE);
         } else {
             AdView mAdView = (AdView) findViewById(R.id.adView);
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
-            ads.setVisibility(LinearLayout.VISIBLE);
+            ads.setVisibility(LinearLayout.GONE);
+
         }
 
         EditText input = (EditText) findViewById(R.id.input);
@@ -372,13 +382,13 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             // FAB section
             fab = (FloatingActionButton) findViewById(R.id.room_fab);
             fab.setOnTouchListener(new View.OnTouchListener() {
-                public boolean onTouch(View v, MotionEvent event){
-                if(event.getAction() == MotionEvent.ACTION_UP){
-                    joinRoom(v);
-                    return true;
+                public boolean onTouch(View v, MotionEvent event) {
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        joinRoom(v);
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
             });
         }
 
@@ -386,6 +396,14 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         roomsList.setAdapter(roomAdapter);
         roomsList.setEmptyView(findViewById(R.id.roomsActivityList_empty));
 
+        int counter;
+        for (counter=0; counter < recentList.size(); counter++) {
+            String recent = recentList.get(counter);
+            if (RoomsList.contains(recent)) {
+                recentList.remove(counter);
+                saveRecentItems();
+            }
+        }
         // Handle click on adapter
         roomsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
@@ -412,7 +430,8 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         // Click on Others
         CardView otherCard = (CardView) findViewById(R.id.card_view_other);
         otherCard.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 // Set conversation VISIBLE
                 conversationLayout.setVisibility(LinearLayout.VISIBLE);
                 invalidateOptionsMenu();
@@ -421,7 +440,47 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 pager.setCurrentItem(0);
             }
         });
-     }
+
+        recentAdapter = new ArrayAdapter<String>(this, R.layout.recent_list_item, recentList);
+        ExpandableHeightListView recentView = (ExpandableHeightListView) findViewById(R.id.recentList);
+        recentView.setAdapter(recentAdapter);
+        recentView.setExpanded(true);
+        recentView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position,
+                                    long arg3) {
+                String room = (String) adapter.getItemAtPosition(position);
+                int pos = adapter.getPositionForView(v);
+                showRecentRoomDialog(ConversationActivity.this, "Join Recent room", "Do you want to join " + room + " or remove it from recent list?", room, pos);
+
+            }
+        });
+    }
+
+    public void showRecentRoomDialog(Activity activity, String title, CharSequence message, final String room, final int pos) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        if (title != null) builder.setTitle(title);
+
+        builder.setMessage(message);
+        builder.setPositiveButton("Join", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                binder.getService().getConnection(serverId).joinChannel(room);
+                recentList.remove(pos);
+                refreshActivity();
+                dialog.cancel();
+            }
+        });
+        builder.setNegativeButton("Remove", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                recentList.remove(pos);
+                saveRecentItems();
+                refreshActivity();
+                dialog.cancel();
+            }
+        });
+        builder.show();
+    }
 
     /**
      * On resume
@@ -679,6 +738,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 // Make sure we part a channel when closing the channel conversation
                 if (conversationToClose.getType() == Conversation.TYPE_CHANNEL) {
                     binder.getService().getConnection(serverId).partChannel(conversationToClose.getName());
+                    recentList.add(conversationToClose.getName());
                 }
                 else if (conversationToClose.getType() == Conversation.TYPE_QUERY) {
                     server.removeConversation(conversationToClose.getName());
@@ -862,9 +922,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                                     return;
                                 }
 
-                                binder.getService().getConnection(server.getId()).setAutojoinChannels(
-                                        server.getCurrentChannelNames()
-                                );
                                 server.setStatus(Status.CONNECTING);
                                 binder.connect(server);
                                 reconnectDialogActive = false;
@@ -882,6 +939,12 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 alert.show();
             }
         }
+    }
+
+    private void addRecentRoom(String room){
+        recentList.add(room);
+        recentAdapter.notifyDataSetChanged();
+        saveRecentItems();
     }
 
     /**
@@ -903,6 +966,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 }
                 break;
             case REQUEST_CODE_JOIN:
+                addRecentRoom(data.getExtras().getString("channel"));
                 joinChannelBuffer = data.getExtras().getString("channel");
                 break;
             case REQUEST_CODE_USERS:
@@ -1192,12 +1256,23 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         return nick;
     }
 
+    // Save/Load pinned rooms
+
     private void savePinnedItems(){
         tinydb.putListString("pinned", pinnedRooms);
     }
 
     private void loadPinnedItems(){
         pinnedRooms = tinydb.getListString("pinned");
+    }
+
+    // Save/Load recent rooms
+    private void saveRecentItems(){
+        tinydb.putListString("recent", recentList);
+    }
+
+    private void loadRecentItems(){
+        recentList = tinydb.getListString("recent");
     }
 
     // Adapter for Room List

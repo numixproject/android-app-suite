@@ -282,25 +282,38 @@ Copyright 2015 Numix Project Ltd.
             android:scrollbars="none"
             >
         </org.numixproject.hermes.utils.ExpandableHeightListView>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/command"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:singleLine="true"
-                android:text="/"
-                android:layout_weight="1"
-                android:inputType="textNoSuggestions" />
-            <Button
-                android:id="@+id/add_command"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/action_add"
-                android:minWidth="75dp" />
-        </LinearLayout>
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/command"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:singleLine="true"
+                    android:text="/"
+                    android:layout_weight="1"
+                    android:inputType="textNoSuggestions" />
+                <Button
+                    android:id="@+id/add_command"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_add"
+                    android:minWidth="75dp" />
+            </LinearLayout>
+        <!-- TODO: Automatically connect starred channel switch
+        <CheckBox
+            android:id="@+id/autoconnect_starred"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:checked="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="-4dp"
+            android:singleLine="true"
+            android:hint="Automatically connect starred channels"
+            android:contentDescription="Automatically connect starred channels" />
+            -->
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

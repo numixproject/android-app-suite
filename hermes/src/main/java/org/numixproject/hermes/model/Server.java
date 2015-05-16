@@ -40,6 +40,7 @@ public class Server
     private String password;
     private String charset;
     private boolean useSSL = false;
+    private boolean autoconnect_starred = true;
 
     private Identity identity;
     private Authentication authentication;
@@ -238,6 +239,14 @@ public class Server
     public boolean useSSL()
     {
         return useSSL;
+    }
+
+    public void setAutoConnectStarredChannels(boolean autoconnect_starred){
+        this.autoconnect_starred = autoconnect_starred;
+    }
+
+    public boolean autoConnectStarred() {
+        return autoconnect_starred;
     }
 
     /**
