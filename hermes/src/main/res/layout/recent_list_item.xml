@@ -1,10 +1,16 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/text1"
-    android:layout_width="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="horizontal" android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:layout_weight="1"
+android:padding="16dp">
+<TextView
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:textColor="#777777"
-    android:gravity="center_vertical"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:minHeight="?android:attr/listPreferredItemHeightSmall" />
+    android:layout_gravity="center_vertical"
+    android:id="@+id/recentTextView"
+    android:layout_weight="1"
+    android:textSize="16sp"
+    android:textColor="#888888"
+    android:text="#example"/>
+</LinearLayout>

@@ -25,7 +25,7 @@ Copyright 2015 Numix Project Ltd.
         android:padding="8dp"
         android:singleLine="true"
         android:ems="10"
-        android:hint="e.g. #numix" />
+        android:text="#" />
     <Button
         android:id="@+id/join"
         android:layout_width="wrap_content"
