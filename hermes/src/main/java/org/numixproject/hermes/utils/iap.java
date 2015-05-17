@@ -1,6 +1,8 @@
 package org.numixproject.hermes.utils;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
@@ -28,9 +30,8 @@ public class iap implements BillingProcessor.IBillingHandler {
 
     @Override
     public void onProductPurchased(String productId, TransactionDetails details) {
-        /*
-         * Called when requested PRODUCT ID was successfully purchased
-         */
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
     }
 
     @Override

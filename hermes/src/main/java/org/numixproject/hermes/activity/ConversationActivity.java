@@ -106,6 +106,7 @@ import org.numixproject.hermes.utils.iap;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -205,6 +206,12 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         }
     };
 
+    public static boolean isTablet(Context context) {
+        return (context.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
+
     /**
      * On create
      */
@@ -256,6 +263,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             ads.setVisibility(LinearLayout.GONE);
         } else {
             AdView mAdView = (AdView) findViewById(R.id.adView);
+
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
             ads.setVisibility(LinearLayout.VISIBLE);
@@ -455,6 +463,13 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 recentList.remove(counter);
                 saveRecentItems();
             }
+        }
+
+        TextView recentLabel = (TextView) findViewById(R.id.recentName);
+        if (recentList.size()!=0){
+            recentLabel.setVisibility(View.VISIBLE);
+        } else {
+            recentLabel.setVisibility(View.GONE);
         }
 
         recentView = (ExpandableHeightListView) findViewById(R.id.recentList);

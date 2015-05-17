@@ -38,6 +38,7 @@ Copyright 2015 Numix Project Ltd.
             android:id="@+id/card_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="#ffffff"
             android:paddingTop="8dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground">
@@ -48,6 +49,7 @@ Copyright 2015 Numix Project Ltd.
                 android:id="@+id/roomsActivityList"/>
             <LinearLayout
                 android:layout_width="wrap_content"
+                android:background="#ffffff"
                 android:layout_height="wrap_content"
                 android:id="@+id/roomsActivityList_empty"
                 android:orientation="vertical">
@@ -76,6 +78,7 @@ Copyright 2015 Numix Project Ltd.
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/recentName"
             android:text="Recent channels"
             android:textColor="#777777"
             android:paddingLeft="16dp"
@@ -96,6 +99,7 @@ Copyright 2015 Numix Project Ltd.
             <org.numixproject.hermes.utils.ExpandableHeightListView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:background="#ffffff"
                 android:focusable="false"
                 android:id="@+id/recentList"/>
         </android.support.v7.widget.CardView>
@@ -159,7 +163,7 @@ Copyright 2015 Numix Project Ltd.
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/ads_card"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             card_view:cardBackgroundColor="@android:color/white"
             card_view:cardCornerRadius="0dp"
@@ -172,9 +176,10 @@ Copyright 2015 Numix Project Ltd.
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_alignParentBottom="true"
-                ads:adSize="SMART_BANNER"
                 card_view:cardElevation="2sp"
-                ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                >
             </com.google.android.gms.ads.AdView>
         </android.support.v7.widget.CardView>
         </LinearLayout>
