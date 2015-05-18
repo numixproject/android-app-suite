@@ -228,6 +228,13 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         bp = inAppPayments.getBilling(this, key);
         bp.loadOwnedPurchasesFromGoogle();
         tinydb = new TinyDB(getApplicationContext());
+
+        serverId = getIntent().getExtras().getInt("serverId");
+        server = Hermes.getInstance().getServerById(serverId);
+        if (server.autoConnectStarred()) {
+            server.setAutoJoinChannels(pinnedRooms);
+        }
+
         loadPinnedItems();
         loadRecentItems();
 
@@ -237,12 +244,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         recentList.clear();
         recentList.addAll(hs);
         saveRecentItems();
-
-        serverId = getIntent().getExtras().getInt("serverId");
-        server = Hermes.getInstance().getServerById(serverId);
-        if (server.autoConnectStarred()) {
-            server.setAutoJoinChannels(pinnedRooms);
-        }
 
         Settings settings = new Settings(this);
 
@@ -792,6 +793,10 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             case R.id.delete: // Delete
                 Intent deleteServer = new Intent(this, MainActivity.class);
                 deleteServer.putExtra("serverId", serverId);
+                recentList.clear();
+                pinnedRooms.clear();
+                saveRecentItems();
+                savePinnedItems();
                 startActivity(deleteServer);
                 break;
 
@@ -1340,30 +1345,30 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     // Save/Load pinned rooms
 
     private void savePinnedItems(){
-        tinydb.putListString("pinned", pinnedRooms);
+        tinydb.putListString(server.getTitle()+"pinned", pinnedRooms);
     }
 
     private void loadPinnedItems(){
-        pinnedRooms = tinydb.getListString("pinned");
+        pinnedRooms = tinydb.getListString(server.getTitle()+"pinned");
     }
 
     // Save/Load recent rooms
     private void saveRecentItems(){
-        tinydb.putListString("recent", recentList);
+        tinydb.putListString(server.getTitle()+"recent", recentList);
     }
 
     private void loadRecentItems(){
-        recentList = tinydb.getListString("recent");
+        recentList = tinydb.getListString(server.getTitle()+"recent");
     }
 
 
     // Save/Load last rooms
     private void saveLastItems(){
-        tinydb.putListString("last", lastRooms);
+        tinydb.putListString(server.getTitle()+"last", lastRooms);
     }
 
     private void loadLastItems(){
-        lastRooms = tinydb.getListString("last");
+        lastRooms = tinydb.getListString(server.getTitle()+"last");
     }
 
     // Adapter for Room List
@@ -1529,6 +1534,12 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         public void remove(int position) {
             recentList.remove(Room.get(position));
             Room.remove(position);
+            TextView recentLabel = (TextView) findViewById(R.id.recentName);
+            if (recentList.size()!=0){
+                recentLabel.setVisibility(View.VISIBLE);
+            } else {
+                recentLabel.setVisibility(View.GONE);
+            }
             saveRecentItems();
         }
 
