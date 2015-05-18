@@ -236,12 +236,11 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         serverId = getIntent().getExtras().getInt("serverId");
         server = Hermes.getInstance().getServerById(serverId);
-        if (server.autoConnectStarred()) {
-            server.setAutoJoinChannels(pinnedRooms);
-        }
 
         loadPinnedItems();
         loadRecentItems();
+
+        server.setAutoJoinChannels(pinnedRooms);
 
         // Remove duplicates from Recent items
         HashSet hs = new HashSet();
