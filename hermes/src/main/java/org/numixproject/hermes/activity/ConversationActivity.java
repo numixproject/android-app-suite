@@ -25,7 +25,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-import org.numixproject.hermes.HomeFragment;
 import org.numixproject.hermes.MainActivity;
 import org.numixproject.hermes.R;
 import org.numixproject.hermes.Hermes;
@@ -54,6 +53,8 @@ import org.numixproject.hermes.receiver.ConversationReceiver;
 import org.numixproject.hermes.receiver.ServerReceiver;
 import org.numixproject.hermes.utils.ExpandableHeightListView;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -66,6 +67,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -86,8 +88,10 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -95,6 +99,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -139,7 +144,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     private ArrayList<String> lastRooms = new ArrayList<>();
     recentAdapter recentAdapter;
 
-    LinearLayout conversationLayout;
+    FrameLayout conversationLayout;
     ExpandableHeightListView roomsList;
     ExpandableHeightListView recentView;
 
@@ -356,8 +361,8 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         // Adapter section
 
-        conversationLayout = (LinearLayout) findViewById(R.id.conversationFragment);
-        conversationLayout.setVisibility(LinearLayout.GONE);
+        conversationLayout = (FrameLayout) findViewById(R.id.conversationFragment);
+        conversationLayout.setVisibility(LinearLayout.INVISIBLE);
 
         roomsList = (ExpandableHeightListView) findViewById(R.id.roomsActivityList);
         roomsList.setExpanded(true);
@@ -427,7 +432,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // Set conversation VISIBLE
-                conversationLayout.setVisibility(LinearLayout.VISIBLE);
+                showConversationLayout();
                 invalidateOptionsMenu();
 
                 int pagerPosition;
@@ -451,7 +456,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             @Override
             public void onClick(View v) {
                 // Set conversation VISIBLE
-                conversationLayout.setVisibility(LinearLayout.VISIBLE);
+                showConversationLayout();
                 invalidateOptionsMenu();
 
                 // Set position in pager
@@ -467,7 +472,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             }
         }
 
-        TextView recentLabel = (TextView) findViewById(R.id.recentName);
+        LinearLayout recentLabel = (LinearLayout) findViewById(R.id.recentName);
         if (recentList.size()!=0){
             recentLabel.setVisibility(View.VISIBLE);
         } else {
@@ -662,12 +667,73 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
     @Override
     public void onBackPressed() {
-        if (conversationLayout.getVisibility() == LinearLayout.GONE) {
+        if (conversationLayout.getVisibility() == LinearLayout.INVISIBLE) {
             finish();
         } else {
-            conversationLayout.setVisibility(LinearLayout.GONE);
+            hideConversationLayout();
             refreshActivity();
             invalidateOptionsMenu();
+        }
+    }
+
+    private void showConversationLayout() {
+        // previously invisible view
+// get the center for the clipping circle
+        int cx = (conversationLayout.getLeft() + conversationLayout.getRight()) / 2;
+        int cy = (conversationLayout.getTop() + conversationLayout.getBottom()) / 2;
+
+// get the final radius for the clipping circle
+        int finalRadius = Math.max(conversationLayout.getWidth(), conversationLayout.getHeight());
+
+        // Check if we're running on Android 5.0 or higher
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // create the animator for this view (the start radius is zero)
+            Animator anim =
+                    ViewAnimationUtils.createCircularReveal(conversationLayout, cx, cy, 0, finalRadius);
+
+            // make the view visible and start the animation
+            conversationLayout.setVisibility(View.VISIBLE);
+            anim.start();
+        } else {
+            TranslateAnimation animate = new TranslateAnimation(-conversationLayout.getWidth(),0,0,0);
+            animate.setDuration(500);
+            conversationLayout.startAnimation(animate);
+            conversationLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void hideConversationLayout() {
+        // previously visible view
+
+    // get the center for the clipping circle
+        int cx = (conversationLayout.getLeft() + conversationLayout.getRight()) / 2;
+        int cy = (conversationLayout.getTop() + conversationLayout.getBottom()) / 2;
+
+    // get the initial radius for the clipping circle
+        int initialRadius = conversationLayout.getWidth();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+            // create the animation (the final radius is zero)
+            Animator anim =
+                    ViewAnimationUtils.createCircularReveal(conversationLayout, cx, cy, initialRadius, 0);
+
+            // make the view invisible when the animation is done
+            anim.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    conversationLayout.setVisibility(View.INVISIBLE);
+                }
+            });
+
+// start the animation
+            anim.start();
+        } else {
+            TranslateAnimation animate = new TranslateAnimation(0,-conversationLayout.getWidth(),0,0);
+            animate.setDuration(500);
+            conversationLayout.startAnimation(animate);
+            conversationLayout.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -731,7 +797,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         menu.clear();
 
         // Check the menu to display (Server or Conversation)
-        if (conversationLayout.getVisibility() == LinearLayout.GONE) {
+        if (conversationLayout.getVisibility() == LinearLayout.INVISIBLE) {
             // inflate Server options from xml
             MenuInflater inflater = new MenuInflater(this);
             inflater.inflate(R.menu.room_activity, menu);
@@ -777,7 +843,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         switch (item.getItemId()) {
             case  android.R.id.home:
                 if (conversationLayout.getVisibility() == LinearLayout.VISIBLE) {
-                    conversationLayout.setVisibility(LinearLayout.GONE);
+                    hideConversationLayout();
                     invalidateOptionsMenu();
                     refreshActivity();
                 } else {
@@ -1534,7 +1600,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         public void remove(int position) {
             recentList.remove(Room.get(position));
             Room.remove(position);
-            TextView recentLabel = (TextView) findViewById(R.id.recentName);
+            LinearLayout recentLabel = (LinearLayout) findViewById(R.id.recentName);
             if (recentList.size()!=0){
                 recentLabel.setVisibility(View.VISIBLE);
             } else {
