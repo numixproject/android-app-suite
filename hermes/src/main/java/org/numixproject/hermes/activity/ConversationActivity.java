@@ -62,6 +62,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -150,6 +151,8 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     private boolean reconnectDialogActive = false;
     private ArrayList<String> pinnedRooms = new ArrayList<>();
     private TinyDB tinydb;
+    private boolean isFirstTimeStarred = true;
+
 
     String key;
     BillingProcessor bp;
@@ -220,6 +223,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         super.onCreate(savedInstanceState);
         key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5B4Oomgmm2D8XVSxh1DIFGtU3p1N2w6Xi2ZO7MoeZRAhvVjk3B8MfrOatlO9HfozRGhEkCkq0MfstB4Cjci3dsnYZieNmHOVYIFBWERqdwfdtnUIfI554xFsAC3Ah7PTP3MwKE7qTT1VLTTHxxsE7GH4sLtvLwrAzsVrLK+dgQk+e9bDJMvhhEPBgabRFaTvKaTtSzB/BBwrCa5mv0pte6WfrNbugFjiAJC43b7NNY2PV9UA8mukiBNZ9mPrK5fZeSEfcVqenyqbvZZG+P+O/cohAHbIEzPMuAS1EBf0VBsZtm3fjQ45PgCvEB7Ye3ucfR9BQ9ADjDwdqivExvXndQIDAQAB";
 
+
         iap inAppPayments = new iap();
         bp = inAppPayments.getBilling(this, key);
         bp.loadOwnedPurchasesFromGoogle();
@@ -251,6 +255,9 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             setTitle(server.getTitle());
         } catch (Exception e) {
         }
+
+
+        isFirstTimeStarred = tinydb.getBoolean("isFirstTimeStarred", true);
 
         setContentView(R.layout.conversations);
 
@@ -402,16 +409,10 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             fab = (FloatingActionButton) findViewById(R.id.room_fab);
             fab.setOnTouchListener(new View.OnTouchListener() {
                 public boolean onTouch(View v, MotionEvent event) {
-                    if (RoomsList.size() != 0) {
                         if (event.getAction() == MotionEvent.ACTION_UP) {
                             joinRoom(v);
                         }
                         return true;
-                    } else {
-                        Toast toast = Toast.makeText(getApplicationContext(), "Still connecting to server. Please wait...", Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-                    return true;
                 }
             });
 
@@ -1473,15 +1474,35 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                     @Override
                     public void onClick(View v) {
                         String pinnedRoomName = Room.get(position);
-                        // Check if room is already pinned
-                        if (pinnedRooms.contains(pinnedRoomName)) {
-                            pinnedRooms.remove(pinnedRoomName);
-                            star.setImageResource(R.drawable.ic_ic_star_rate_24px);
-                            savePinnedItems();
+                        // Check if first time you press on star
+                        if (isFirstTimeStarred) {
+                            // Check if room is already pinned
+                            if (pinnedRooms.contains(pinnedRoomName)) {
+                                pinnedRooms.remove(pinnedRoomName);
+                                star.setImageResource(R.drawable.ic_ic_star_rate_24px);
+                                Toast.makeText(getApplicationContext(), "Hermes will automatically join starred rooms on start.", Toast.LENGTH_SHORT).show();
+                                isFirstTimeStarred = false;
+                                tinydb.putBoolean("isFirstTimeStarred", isFirstTimeStarred);
+                                savePinnedItems();
+                            } else {
+                                pinnedRooms.add(pinnedRoomName);
+                                star.setImageResource(R.drawable.ic_ic_star_rate_yellow_24px);
+                                Toast.makeText(getApplicationContext(), "Hermes will automatically join starred rooms on start.", Toast.LENGTH_SHORT).show();
+                                isFirstTimeStarred = false;
+                                tinydb.putBoolean("isFirstTimeStarred", isFirstTimeStarred);
+                                savePinnedItems();
+                            }
                         } else {
-                            pinnedRooms.add(pinnedRoomName);
-                            star.setImageResource(R.drawable.ic_ic_star_rate_yellow_24px);
-                            savePinnedItems();
+                            // Check if room is already pinned
+                            if (pinnedRooms.contains(pinnedRoomName)) {
+                                pinnedRooms.remove(pinnedRoomName);
+                                star.setImageResource(R.drawable.ic_ic_star_rate_24px);
+                                savePinnedItems();
+                            } else {
+                                pinnedRooms.add(pinnedRoomName);
+                                star.setImageResource(R.drawable.ic_ic_star_rate_yellow_24px);
+                                savePinnedItems();
+                            }
                         }
                     }
                 });
