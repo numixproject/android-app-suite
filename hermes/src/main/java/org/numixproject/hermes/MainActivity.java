@@ -50,21 +50,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
     private HomeFragment fragment = null;
 
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        ArrayList<Server> mServers = Hermes.getInstance().getServersAsArrayList();
-        for (Server server : mServers) {
-            if (binder.getService().hasConnection(server.getId())) {
-                server.setStatus(Status.DISCONNECTED);
-                server.setMayReconnect(false);
-                binder.getService().getConnection(server.getId()).quitServer();
-            }
-        }
-        // ugly
-        binder.getService().stopForegroundCompat(R.string.app_name);
-    }
-
     @Override
     public void init(Bundle savedInstanceState) {
         MaterialSection home = newSection("Connect to...", R.drawable.ic_ic_swap_horiz_24px, new HomeFragment());
