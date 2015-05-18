@@ -516,8 +516,17 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                     saveRecentItems();
                     refreshActivity();
                 } else {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Still connecting to server. Please wait...", Toast.LENGTH_SHORT);
-                    toast.show();
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                binder.getService().getConnection(serverId).joinChannel(room);
+                            } catch (Exception E) {
+                                // Do nothing
+                            }
+                        }
+                    }.start();
+                    saveRecentItems();
                     refreshActivity();
                 }
             }
