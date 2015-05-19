@@ -71,6 +71,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Parcelable;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
@@ -112,8 +113,8 @@ import org.numixproject.hermes.utils.iap;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.jensdriller.libs.undobar.UndoBar;
 import com.melnykov.fab.FloatingActionButton;
 
 /**
@@ -226,8 +227,8 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5B4Oomgmm2D8XVSxh1DIFGtU3p1N2w6Xi2ZO7MoeZRAhvVjk3B8MfrOatlO9HfozRGhEkCkq0MfstB4Cjci3dsnYZieNmHOVYIFBWERqdwfdtnUIfI554xFsAC3Ah7PTP3MwKE7qTT1VLTTHxxsE7GH4sLtvLwrAzsVrLK+dgQk+e9bDJMvhhEPBgabRFaTvKaTtSzB/BBwrCa5mv0pte6WfrNbugFjiAJC43b7NNY2PV9UA8mukiBNZ9mPrK5fZeSEfcVqenyqbvZZG+P+O/cohAHbIEzPMuAS1EBf0VBsZtm3fjQ45PgCvEB7Ye3ucfR9BQ9ADjDwdqivExvXndQIDAQAB";
 
+        key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5B4Oomgmm2D8XVSxh1DIFGtU3p1N2w6Xi2ZO7MoeZRAhvVjk3B8MfrOatlO9HfozRGhEkCkq0MfstB4Cjci3dsnYZieNmHOVYIFBWERqdwfdtnUIfI554xFsAC3Ah7PTP3MwKE7qTT1VLTTHxxsE7GH4sLtvLwrAzsVrLK+dgQk+e9bDJMvhhEPBgabRFaTvKaTtSzB/BBwrCa5mv0pte6WfrNbugFjiAJC43b7NNY2PV9UA8mukiBNZ9mPrK5fZeSEfcVqenyqbvZZG+P+O/cohAHbIEzPMuAS1EBf0VBsZtm3fjQ45PgCvEB7Ye3ucfR9BQ9ADjDwdqivExvXndQIDAQAB";
 
         iap inAppPayments = new iap();
         bp = inAppPayments.getBilling(this, key);
@@ -261,13 +262,9 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         } catch (Exception e) {
         }
 
-
         isFirstTimeStarred = tinydb.getBoolean("isFirstTimeStarred", true);
-
         setContentView(R.layout.conversations);
-
         boolean isLandscape = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
-
         LinearLayout ads = (LinearLayout) findViewById(R.id.ads_card_conversation);
 
         // Check if you purchased "Remove Ads"
@@ -285,7 +282,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         input.setOnKeyListener(inputKeyListener);
 
         pager = (ViewPager) findViewById(R.id.pager);
-
         pagerAdapter = new ConversationPagerAdapter(this, server);
         pager.setAdapter(pagerAdapter);
 
@@ -1445,6 +1441,70 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         lastRooms = tinydb.getListString(server.getTitle()+"last");
     }
 
+
+    private void showUndoBarRoom(final String room){
+        UndoBar.Listener roomUndo = new UndoBar.Listener(){
+            @Override
+            public void onUndo(Parcelable parcelable) {
+                new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            binder.getService().getConnection(serverId).joinChannel(room);
+                        } catch (Exception E) {
+                            // Do nothing
+                        }
+                    }
+                }.start();
+
+            refreshActivity();
+            }
+
+            @Override
+            public void onHide(){
+                // Do nothing
+            }
+        };
+
+        UndoBar undoBar = new UndoBar.Builder(this)
+                .setMessage("1 room removed")
+                .setStyle(UndoBar.Style.LOLLIPOP)
+                .setUndoColor(Color.parseColor("#E91E63"))
+                .setListener(roomUndo)
+                .create();
+        undoBar.show();
+    }
+
+    private void showUndoBarRecent(final String room) {
+        UndoBar.Listener recentUndo = new UndoBar.Listener() {
+            @Override
+            public void onUndo(Parcelable parcelable) {
+                addRecentRoom(room);
+                LinearLayout recentLabel = (LinearLayout) findViewById(R.id.recentName);
+                if (recentList.size()!=0){
+                    recentLabel.setVisibility(View.VISIBLE);
+                } else {
+                    recentLabel.setVisibility(View.GONE);
+                }
+                saveRecentItems();
+                refreshActivity();
+            }
+
+            @Override
+            public void onHide() {
+                // Do nothing
+            }
+        };
+
+        UndoBar undoBar = new UndoBar.Builder(this)
+                .setMessage("1 room removed")
+                .setStyle(UndoBar.Style.LOLLIPOP)
+                .setUndoColor(Color.parseColor("#E91E63"))
+                .setListener(recentUndo)
+                .create();
+        undoBar.show();
+    }
+
     // Adapter for Room List
     class mentionsAdapter extends BaseAdapter {
         ArrayList<String> Room;
@@ -1469,15 +1529,19 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
             addRecentRoom(Room.get(position));
             saveRecentItems();
-
             Conversation conversationToClose = pagerAdapter.getItem(pagerPosition);
             binder.getService().getConnection(serverId).partChannel(conversationToClose.getName());
             addRecentRoom(conversationToClose.getName());
+
+            // Show toast with UNDO button
+            showUndoBarRoom(Room.get(position));
 
             pinnedRooms.remove(Room.get(position));
             Room.remove(position);
             Mentions.remove(position);
             savePinnedItems();
+
+
         }
 
         public int getCount() {
@@ -1593,7 +1657,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         }
     }
 
-    // Adapter for Room List
+    // Adapter for Recent List
     class recentAdapter extends BaseAdapter {
         ArrayList<String> Room;
 
@@ -1606,6 +1670,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         }
 
         public void remove(int position) {
+            showUndoBarRecent(Room.get(position));
             recentList.remove(Room.get(position));
             Room.remove(position);
             LinearLayout recentLabel = (LinearLayout) findViewById(R.id.recentName);
