@@ -55,6 +55,7 @@ import org.numixproject.hermes.utils.ExpandableHeightListView;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -65,6 +66,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -92,6 +94,8 @@ import android.view.View.OnKeyListener;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -106,15 +110,14 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.numixproject.hermes.utils.SwipeDismissListViewTouchListener;
 import org.numixproject.hermes.utils.TinyDB;
 import org.numixproject.hermes.utils.iap;
-
 import com.anjlab.android.iab.v3.BillingProcessor;
+import com.cocosw.undobar.UndoBarController;
+import com.cocosw.undobar.UndoBarStyle;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.jensdriller.libs.undobar.UndoBar;
 import com.melnykov.fab.FloatingActionButton;
 
 /**
@@ -1443,7 +1446,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
 
     private void showUndoBarRoom(final String room){
-        UndoBar.Listener roomUndo = new UndoBar.Listener(){
+        UndoBarController.AdvancedUndoListener roomUndo = new UndoBarController.AdvancedUndoListener() {
             @Override
             public void onUndo(Parcelable parcelable) {
                 new Thread() {
@@ -1461,22 +1464,24 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             }
 
             @Override
-            public void onHide(){
-                // Do nothing
+            public void onClear(Parcelable[] tokens) {
+            }
+
+            @Override
+            public void onHide(Parcelable token) {
+                moveFABdown();
             }
         };
 
-        UndoBar undoBar = new UndoBar.Builder(this)
-                .setMessage("1 room removed")
-                .setStyle(UndoBar.Style.LOLLIPOP)
-                .setUndoColor(Color.parseColor("#E91E63"))
-                .setListener(roomUndo)
-                .create();
-        undoBar.show();
+        UndoBarController undoBarController = new UndoBarController.UndoBar(this).message(room + " removed").noicon(true).style(UndoBarController.UNDOSTYLE).listener(roomUndo).show();
+        undoBarController.measure(View.MeasureSpec.makeMeasureSpec(undoBarController.getWidth(), View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(undoBarController.getHeight(), View.MeasureSpec.AT_MOST));
+        int height = undoBarController.getMeasuredHeight();
+        moveFABup(64);
     }
 
     private void showUndoBarRecent(final String room) {
-        UndoBar.Listener recentUndo = new UndoBar.Listener() {
+
+        UndoBarController.AdvancedUndoListener recentUndo = new UndoBarController.AdvancedUndoListener() {
             @Override
             public void onUndo(Parcelable parcelable) {
                 addRecentRoom(room);
@@ -1491,18 +1496,50 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             }
 
             @Override
-            public void onHide() {
-                // Do nothing
+            public void onClear(Parcelable[] tokens) {
+            }
+
+            @Override
+            public void onHide(Parcelable token) {
+                moveFABdown();
             }
         };
 
-        UndoBar undoBar = new UndoBar.Builder(this)
-                .setMessage("1 room removed")
-                .setStyle(UndoBar.Style.LOLLIPOP)
-                .setUndoColor(Color.parseColor("#E91E63"))
-                .setListener(recentUndo)
-                .create();
-        undoBar.show();
+        UndoBarController undoBarController = new UndoBarController.UndoBar(this).message(room + " removed").noicon(true).style(UndoBarController.UNDOSTYLE).listener(recentUndo).show();
+        undoBarController.measure(View.MeasureSpec.makeMeasureSpec(undoBarController.getWidth(), View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(undoBarController.getHeight(), View.MeasureSpec.AT_MOST));
+        int height = undoBarController.getMeasuredHeight();
+        moveFABup(64);
+    }
+
+    private void moveFABup(int height){
+        Resources r = this.getResources();
+        final int px = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                height,
+                r.getDisplayMetrics()
+        );
+
+        final FrameLayout fabView = (FrameLayout) findViewById(R.id.fabView);
+        Animation a = new Animation() {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                fabView.setPadding(0,0,0,px);
+            }
+        };
+        a.setDuration(1500); // in ms
+        fab.startAnimation(a);
+    }
+
+    private void moveFABdown(){
+        final FrameLayout fabView = (FrameLayout) findViewById(R.id.fabView);
+        Animation a = new Animation() {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                fabView.setPadding(0,0,0,0);
+            }
+        };
+        a.setDuration(1500); // in ms
+        fab.startAnimation(a);
     }
 
     // Adapter for Room List
