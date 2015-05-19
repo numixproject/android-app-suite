@@ -278,7 +278,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
-            ads.setVisibility(LinearLayout.VISIBLE);
+            ads.setVisibility(LinearLayout.GONE);
         }
 
         EditText input = (EditText) findViewById(R.id.input);
