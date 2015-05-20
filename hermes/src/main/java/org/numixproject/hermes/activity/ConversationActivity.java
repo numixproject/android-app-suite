@@ -500,7 +500,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             public void onItemClick(AdapterView<?> adapter, View v, int position,
                                     long arg3) {
                 final String room = (String) recentAdapter.getRoomAtPosition(position);
-                if (RoomsList.size() != 0) {
+                if (server.getStatus() == Status.CONNECTED) {
                     new Thread() {
                         @Override
                         public void run() {

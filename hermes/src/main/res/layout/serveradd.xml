@@ -26,6 +26,7 @@ Copyright 2015 Numix Project Ltd.
             android:text="Name"
             android:layout_marginTop="8dp"
             android:layout_width="fill_parent"
+            android:textColor="#444444"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/title"
@@ -39,6 +40,7 @@ Copyright 2015 Numix Project Ltd.
             android:text="@string/server_host"
             android:layout_marginTop="8dp"
             android:paddingTop="8dp"
+            android:textColor="#444444"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <AutoCompleteTextView
@@ -53,6 +55,7 @@ Copyright 2015 Numix Project Ltd.
             android:inputType="textNoSuggestions" />
         <TextView
             android:layout_marginTop="8dp"
+            android:textColor="#444444"
             android:text="@string/server_port"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
@@ -71,6 +74,7 @@ Copyright 2015 Numix Project Ltd.
         <TextView
             android:text="@string/server_password"
             android:layout_marginTop="8dp"
+            android:textColor="#444444"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <EditText
@@ -110,6 +114,7 @@ Copyright 2015 Numix Project Ltd.
             style="?android:attr/listSeparatorTextViewStyle" />
         <TextView
             android:text="@string/realname"
+            android:textColor="#444444"
             android:layout_marginTop="16dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
@@ -128,7 +133,7 @@ Copyright 2015 Numix Project Ltd.
         <TextView
             android:text="Nick and aliases"
             android:layout_marginTop="8dp"
-
+            android:textColor="#444444"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <EditText
@@ -152,6 +157,7 @@ Copyright 2015 Numix Project Ltd.
         <TextView
             android:text="Username"
             android:layout_marginTop="8dp"
+            android:textColor="#444444"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <EditText
@@ -167,6 +173,7 @@ Copyright 2015 Numix Project Ltd.
             android:text="Password"
             android:layout_marginTop="8dp"
             android:layout_width="fill_parent"
+            android:textColor="#444444"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/sasl_password"

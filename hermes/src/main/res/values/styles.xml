@@ -4,6 +4,8 @@
         <item name="colorPrimary">#0097A7</item>
         <item name="colorPrimaryDark">#00838F</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
     <style name="Preferences" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#0097A7</item>
@@ -15,6 +17,9 @@
         <item name="colorPrimaryDark">#00838F</item>
         <item name="singleAccount">true</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
         <item name="multipaneSupport">true</item>
         <item name="drawerType">@integer/DRAWERTYPE_IMAGE</item>
         <item name="rippleBackport">true</item>
@@ -26,6 +31,9 @@
         <item name="colorPrimary">#4baeae</item>
         <item name="colorPrimaryDark">#4baeae</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
 
     <style name="UndoBarButtonMaterial" parent="UndoBarButtonClassic">

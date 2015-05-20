@@ -74,7 +74,7 @@ Copyright 2015 Numix Project Ltd.
         <activity
             android:name=".activity.JoinActivity"
             android:label="@string/join_label"
-            android:theme="@style/HermesDialog" >
+            android:theme="@style/Theme.AppCompat.Light.Dialog" >
         </activity>
         <activity
             android:name=".activity.UsersActivity"

@@ -19,6 +19,7 @@ Copyright 2015 Numix Project Ltd.
         android:paddingBottom="16dp"
         android:text="Join a room"/>
     <EditText
+        style="@style/Widget.AppCompat.EditText"
         android:id="@+id/channel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
