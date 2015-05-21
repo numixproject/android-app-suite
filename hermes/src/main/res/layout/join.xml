@@ -8,6 +8,7 @@ Copyright 2015 Numix Project Ltd.
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    style="@style/HermesDialog"
     android:minWidth="350dp"
     android:padding="8dp">
     <TextView
@@ -18,7 +19,7 @@ Copyright 2015 Numix Project Ltd.
         android:textColor="#111111"
         android:paddingBottom="16dp"
         android:text="Join a room"/>
-    <EditText
+    <android.support.v7.internal.widget.TintEditText
         style="@style/Widget.AppCompat.EditText"
         android:id="@+id/channel"
         android:layout_width="fill_parent"
