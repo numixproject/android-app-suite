@@ -38,26 +38,37 @@ import org.numixproject.hermes.model.Server;
 import org.numixproject.hermes.model.Status;
 import org.numixproject.hermes.utils.ExpandableHeightListView;
 import org.numixproject.hermes.utils.adapterHeight;
+import org.w3c.dom.Text;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.Selection;
+import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -79,6 +90,7 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
     private ArrayList<String> aliases;
     private ArrayList<String> channels;
     private ArrayList<String> commands;
+    private commandsAdapter commandsAdapter;
 
     private CheckBox nickservCheckbox;
     private CheckBox saslCheckbox;
@@ -88,7 +100,6 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
     private EditText saslPasswordEditText;
 
     private EditText commandInput;
-    private ArrayAdapter<String> adapter2;
 
     private EditText channelInput;
     private ArrayList<String> channels2;
@@ -116,6 +127,10 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, charsets);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        EditText password = (EditText) findViewById(R.id.password);
+        password.setTypeface(Typeface.DEFAULT);
+        password.setTransformationMethod(new PasswordTransformationMethod());
 
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey(Extra.SERVER)) {
@@ -188,11 +203,33 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
 
         // Commands
         commandInput = (EditText) findViewById(R.id.command);
+        commandsAdapter = new commandsAdapter(commands);
+        final Button addCommand = (Button) findViewById(R.id.add_command);
+        addCommand.setEnabled(false);
+        commandInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+            }
 
-        adapter2 = new ArrayAdapter<String>(this, R.layout.commanditem);
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (commandInput.getText().length() == 1){
+                    addCommand.setEnabled(false);
+                } else {
+                    addCommand.setEnabled(true);
+                }
+            }
+        });
 
         ExpandableHeightListView list2 = (ExpandableHeightListView) findViewById(R.id.commands_list);
-        list2.setAdapter(adapter2);
+        list2.setAdapter(commandsAdapter);
         list2.setOnItemClickListener(this);
 
         // Workaround for ListView height
@@ -200,9 +237,7 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
 
         ((Button) findViewById(R.id.add_command)).setOnClickListener(this);
 
-        for (String command : commands) {
-            adapter2.add(command);
-        }
+        commandsAdapter.notifyDataSetChanged();
 
         // Autojoin Rooms
         channelInput = (EditText) findViewById(R.id.channel);
@@ -289,7 +324,7 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
                 }
 
                 commands.add(command);
-                adapter2.add(command);
+                commandsAdapter.notifyDataSetChanged();
                 commandInput.setText("/");
                 break;
 
@@ -329,49 +364,25 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
      */
     @Override
     public void onItemClick(AdapterView<?> list, View item, int position, long id) {
-        // Check if the click comes from Commands or Room adapter
-        if (list.getId() == R.id.commands_list) {
+        final String channel = adapter3.getItem(position);
 
-            final String command = adapter2.getItem(position);
+        String[] items = { getResources().getString(R.string.action_remove) };
 
-            String[] items = {getResources().getString(R.string.action_remove)};
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(command);
-            builder.setItems(items, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int item) {
-                    switch (item) {
-                        case 0: // Remove
-                            adapter2.remove(command);
-                            commands.remove(command);
-                            break;
-                    }
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(channel);
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                switch (item) {
+                    case 0: // Remove
+                        adapter3.remove(channel);
+                        channels.remove(channel);
+                        break;
                 }
-            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        } else {
-            final String channel = adapter3.getItem(position);
-
-            String[] items = { getResources().getString(R.string.action_remove) };
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(channel);
-            builder.setItems(items, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int item) {
-                    switch (item) {
-                        case 0: // Remove
-                            adapter3.remove(channel);
-                            channels.remove(channel);
-                            break;
-                    }
-                }
-            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     /**
@@ -607,6 +618,53 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         Pattern identPattern = Pattern.compile("^[a-zA-Z0-9\\[\\]\\-_/]+$");
         if (!identPattern.matcher(ident).matches()) {
             throw new ValidationException(getResources().getString(R.string.validation_invalid_ident));
+        }
+    }
+
+    // Adapter for Recent List
+    class commandsAdapter extends BaseAdapter {
+        ArrayList<String> Command;
+
+        commandsAdapter() {
+            Command = null;
+        }
+
+        public commandsAdapter(ArrayList<String> text) {
+            Command = text;
+        }
+
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return Command.size();
+        }
+
+        public Object getItem(int arg0) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View row;
+            row = inflater.inflate(R.layout.commanditem, parent, false);
+            TextView commandText = (TextView) row.findViewById(R.id.host);
+            ImageView remove = (ImageView) row.findViewById(R.id.command_remove);
+
+            commandText.setText(Command.get(position));
+
+            remove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    commands.remove(Command.get(position));
+                    commandsAdapter.this.notifyDataSetChanged();
+                }
+            });
+            return (row);
         }
     }
 }

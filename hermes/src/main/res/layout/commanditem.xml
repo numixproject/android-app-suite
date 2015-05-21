@@ -3,10 +3,24 @@
 Hermes - Material IRC Client
 Copyright 2015 Numix Project Ltd.
 -->
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:layout_weight="1">
+<TextView
     android:id="@+id/host"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:layout_weight="1"
     android:padding="7dp"
     android:text="/command"
-    android:textSize="14dp" />
+    android:textSize="16dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/command_remove"
+        android:src="@drawable/ic_ic_remove_24px"
+        android:background="@null"/>
+    </LinearLayout>

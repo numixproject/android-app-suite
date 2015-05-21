@@ -23,7 +23,7 @@ Copyright 2015 Numix Project Ltd.
             android:layout_height="wrap_content"
             style="?android:attr/listSeparatorTextViewStyle" />
         <TextView
-            android:text="Name"
+            android:text="Name *"
             android:layout_marginTop="8dp"
             android:layout_width="fill_parent"
             android:textColor="#444444"
@@ -32,12 +32,13 @@ Copyright 2015 Numix Project Ltd.
             android:id="@+id/title"
             android:contentDescription="@string/server_title"
             android:layout_marginLeft="-4dp"
+            android:hint="Enter a name for the server"
             android:textSize="14sp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="true" />
         <TextView
-            android:text="@string/server_host"
+            android:text="Host * "
             android:layout_marginTop="8dp"
             android:paddingTop="8dp"
             android:textColor="#444444"
@@ -56,7 +57,7 @@ Copyright 2015 Numix Project Ltd.
         <TextView
             android:layout_marginTop="8dp"
             android:textColor="#444444"
-            android:text="@string/server_port"
+            android:text="Port *"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <EditText
@@ -82,10 +83,10 @@ Copyright 2015 Numix Project Ltd.
             android:contentDescription="@string/server_password"
             android:layout_width="fill_parent"
             android:textSize="14sp"
+            android:hint="Enter a password, if server is protected"
             android:layout_marginLeft="-4dp"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:password="true"
             android:minEms="10"
             android:maxEms="10" />
         <CheckBox
@@ -113,7 +114,7 @@ Copyright 2015 Numix Project Ltd.
             android:layout_marginLeft="-8dp"
             style="?android:attr/listSeparatorTextViewStyle" />
         <TextView
-            android:text="@string/realname"
+            android:text="Real Name *"
             android:textColor="#444444"
             android:layout_marginTop="16dp"
             android:layout_width="fill_parent"
@@ -131,7 +132,7 @@ Copyright 2015 Numix Project Ltd.
             android:singleLine="true" />
 
         <TextView
-            android:text="Nick and aliases"
+            android:text="Nick and aliases *"
             android:layout_marginTop="8dp"
             android:textColor="#444444"
             android:layout_width="fill_parent"
@@ -265,7 +266,7 @@ Copyright 2015 Numix Project Ltd.
 
         <TextView
             android:text="Character encoding"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <Spinner
@@ -278,7 +279,7 @@ Copyright 2015 Numix Project Ltd.
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Commands to run on connection"
-            android:padding="5dp" />
+            android:paddingTop="5dp" />
         <org.numixproject.hermes.utils.ExpandableHeightListView
             android:id="@+id/commands_list"
             android:layout_width="match_parent"
@@ -321,6 +322,12 @@ Copyright 2015 Numix Project Ltd.
             android:hint="Automatically connect starred channels"
             android:contentDescription="Automatically connect starred channels" />
             -->
+        <TextView
+            android:text="* is a required field"
+            android:layout_marginTop="8dp"
+            android:layout_width="fill_parent"
+            android:textColor="#444444"
+            android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

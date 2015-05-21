@@ -335,7 +335,7 @@ public class Message
         canvas.setLinkTextColor(COLOR_BLUE);
 
         canvas.setText(this.render(context));
-        canvas.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        canvas.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         canvas.setTypeface(Typeface.SANS_SERIF);
         canvas.setTextColor(COLOR_DEFAULT);
 

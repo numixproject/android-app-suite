@@ -102,6 +102,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
@@ -310,7 +311,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             server.getConversation(ServerInfo.DEFAULT_NAME).setHistorySize(historySize);
         }
 
-        float fontSize = settings.getFontSize();
         indicator.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
 
         input.setTypeface(Typeface.SANS_SERIF);
