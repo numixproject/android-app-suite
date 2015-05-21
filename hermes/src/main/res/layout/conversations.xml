@@ -59,7 +59,10 @@ Copyright 2015 Numix Project Ltd.
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:textSize="16sp"
-                android:padding="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp"
+                android:paddingLeft="16dp"
+                android:paddingBottom="8dp"
                 android:textColor="#111111"
                 android:text="No room available."/>
                 <TextView
@@ -70,6 +73,7 @@ Copyright 2015 Numix Project Ltd.
                     android:textSize="12sp"
                     android:paddingLeft="16dp"
                     android:paddingBottom="16dp"
+                    android:paddingRight="16dp"
                     android:textColor="#777777"
                     android:text="Maybe Hermes is still connecting to server or you didn't select any room."/>
             </LinearLayout>

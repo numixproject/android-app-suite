@@ -6,6 +6,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlActivated">@color/colorAccent</item>
         <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="undoBarStyle">@style/UndoBarMaterialStyle</item>
     </style>
     <style name="Preferences" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#0097A7</item>
@@ -44,7 +45,7 @@
         <item name="android:paddingRight">0dp</item>
         <item name="android:paddingLeft">0dp</item>
         <item name="android:layout_marginRight">8dp</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">#FF478C</item>
         <item name="android:capitalize">characters</item>
         <item name="android:selectable">true</item>
     </style>
