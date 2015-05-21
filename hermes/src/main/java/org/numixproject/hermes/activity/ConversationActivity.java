@@ -702,10 +702,15 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             conversationLayout.setVisibility(View.VISIBLE);
             anim.start();
         } else {
-            TranslateAnimation animate = new TranslateAnimation(-conversationLayout.getWidth(),0,0,0);
-            animate.setDuration(500);
-            conversationLayout.startAnimation(animate);
             conversationLayout.setVisibility(View.VISIBLE);
+            conversationLayout.setAlpha(0.f);
+            conversationLayout.setScaleX(0.f);
+            conversationLayout.setScaleY(0.f);
+            conversationLayout.animate()
+                    .alpha(1.f)
+                    .scaleX(1.f).scaleY(1.f)
+                    .setDuration(300)
+                    .start();
         }
     }
 
@@ -737,11 +742,16 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 // start the animation
             anim.start();
         } else {
-            TranslateAnimation animate = new TranslateAnimation(0,-conversationLayout.getWidth(),0,0);
-            animate.setDuration(500);
-            conversationLayout.startAnimation(animate);
-            conversationLayout.setVisibility(View.INVISIBLE);
+            conversationLayout.setAlpha(1.f);
+            conversationLayout.setScaleX(1.f);
+            conversationLayout.setScaleY(1.f);
+            conversationLayout.animate()
+                    .alpha(0.f)
+                    .scaleX(0.f).scaleY(0.f)
+                    .setDuration(300)
+                    .start();
         }
+        conversationLayout.setVisibility(View.INVISIBLE);
     }
 
     public void joinRoom(View v) {
