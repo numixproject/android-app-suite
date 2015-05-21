@@ -1056,7 +1056,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 return;
             }
 
-            if (!binder.getService().getSettings().isReconnectEnabled() && !reconnectDialogActive) {
+            if (!binder.getService().getSettings().isReconnectEnabled() && !reconnectDialogActive && server.mayReconnect() == true) {
                 reconnectDialogActive = true;
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage(getResources().getString(R.string.reconnect_after_disconnect, server.getTitle()))
