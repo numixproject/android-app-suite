@@ -12,8 +12,8 @@ Copyright 2015 Numix Project Ltd.
         app:showAsAction="always"
         android:showAsAction="always"/>
     <item
-        android:id="@+id/disconnect"
-        android:title="Disconnect"
+        android:id="@+id/connect"
+        android:title="Connect"
         app:showAsAction="never" />
     <item
         android:id="@+id/edit"

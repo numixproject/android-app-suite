@@ -180,6 +180,11 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 return false;
             }
 
+            if (keyCode == KeyEvent.KEYCODE_MENU){
+                openOptionsMenu();
+                return true;
+            }
+
             if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
                 String message = scrollback.goBack();
                 if (message != null) {
@@ -501,6 +506,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                                     long arg3) {
                 final String room = (String) recentAdapter.getRoomAtPosition(position);
                 if (server.getStatus() == Status.CONNECTED) {
+                    invalidateOptionsMenu();
                     new Thread() {
                         @Override
                         public void run() {
@@ -815,9 +821,15 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         // Check the menu to display (Server or Conversation)
         if (conversationLayout.getVisibility() == LinearLayout.INVISIBLE) {
-            // inflate Server options from xml
-            MenuInflater inflater = new MenuInflater(this);
-            inflater.inflate(R.menu.room_activity, menu);
+            if (server.getStatus() == Status.CONNECTED) {
+                // inflate Server options from xml
+                MenuInflater inflater = new MenuInflater(this);
+                inflater.inflate(R.menu.room_activity, menu);
+            } else {
+                // inflate Server options from xml
+                MenuInflater inflater = new MenuInflater(this);
+                inflater.inflate(R.menu.room_activity_disconnected, menu);
+            }
         } else {
             // inflate Conversation options from xml
             MenuInflater inflater = new MenuInflater(this);
@@ -889,6 +901,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 binder.getService().getConnection(serverId).quitServer();
                 server.clearConversations();
                 setResult(RESULT_OK);
+                invalidateOptionsMenu();
                 break;
 
             case R.id.close:
