@@ -8,9 +8,7 @@ Copyright 2015 Numix Project Ltd.
     <item
         android:id="@+id/refresh"
         android:title="Refresh"
-        android:icon="@drawable/ic_action_ic_refresh_24px"
-        app:showAsAction="always"
-        android:showAsAction="always"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/connect"
         android:title="Connect"

@@ -76,6 +76,7 @@ import android.os.IBinder;
 import android.os.Parcelable;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.CardView;
@@ -362,8 +363,27 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         scrollback = new Scrollback();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Adapter section
+        SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        swipeRefresh.setColorSchemeResources(
+                R.color.refresh_progress_1,
+                R.color.refresh_progress_2,
+                R.color.refresh_progress_3);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                refreshActivity();
+                            }
+                        },
+                        1500
+                );
+            }
+        });
 
+        // Adapter section
         conversationLayout = (FrameLayout) findViewById(R.id.conversationFragment);
         conversationLayout.setVisibility(LinearLayout.INVISIBLE);
 

@@ -5,265 +5,271 @@ Hermes - Material IRC Client
 Copyright 2015 Numix Project Ltd.
 -->
 
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
-    <LinearLayout
-        android:orientation="vertical"
-        android:id="@+id/roomsActivity"
-        android:background="#EEEEEE"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Active channels"
-            android:textColor="#777777"
-            android:paddingLeft="16dp"
-            android:paddingTop="12dp"
-            android:textStyle="bold"
-            android:textSize="12sp"
-            android:paddingBottom="8dp" />
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/card_view"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:paddingTop="8dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground">
-            <org.numixproject.hermes.utils.ExpandableHeightListView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:focusable="false"
-                android:id="@+id/roomsActivityList"/>
+    android:layout_height="match_parent"
+    android:id="@+id/swipeRefresh"
+    >
+        <FrameLayout
+            xmlns:ads="http://schemas.android.com/tools"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ScrollView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
             <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/roomsActivity"
+                android:background="#EEEEEE"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Active channels"
+                    android:textColor="#777777"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:paddingBottom="8dp" />
+
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/card_view"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:paddingTop="8dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
+                    <org.numixproject.hermes.utils.ExpandableHeightListView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:focusable="false"
+                        android:id="@+id/roomsActivityList"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:background="#ffffff"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/roomsActivityList_empty"
+                        android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="16dp"
+                        android:paddingLeft="16dp"
+                        android:paddingBottom="8dp"
+                        android:textColor="#111111"
+                        android:text="No room available."/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:textSize="12sp"
+                            android:paddingLeft="16dp"
+                            android:paddingBottom="16dp"
+                            android:paddingRight="16dp"
+                            android:textColor="#777777"
+                            android:text="Maybe Hermes is still connecting to server or you didn't select any room."/>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/recentName"
+
+                    android:orientation="vertical">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Recent channels"
+                    android:textColor="#777777"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:paddingBottom="8dp" />
+
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/card_recent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
+                    <org.numixproject.hermes.utils.ExpandableHeightListView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="#ffffff"
+                        android:focusable="false"
+                        android:id="@+id/recentList"/>
+                </android.support.v7.widget.CardView>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Other"
+                    android:textColor="#777777"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="5dp"
+                    android:textStyle="bold"
+                    android:textSize="12sp"/>
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/card_view_other"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    card_view:cardBackgroundColor="@android:color/white"
+                    card_view:cardElevation="2sp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:cardCornerRadius="0dp"
+                    android:layout_marginLeft="-8dp"
+                    android:layout_marginRight="-8dp"
+                    android:foreground="?android:attr/selectableItemBackground">
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="horizontal" android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="16dp"
+                        android:layout_marginLeft="8dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/room_name"
+                            android:layout_weight="1"
+                            android:textSize="16sp"
+                            android:textColor="#111111"
+                            android:text="server logs"/>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ads_card_conversation"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sponsored"
+                    android:textColor="#777777"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="8dp"
+                    android:textStyle="bold"
+                    android:textSize="12sp"/>
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/ads_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    card_view:cardBackgroundColor="@android:color/white"
+                    card_view:cardCornerRadius="0dp"
+                    android:paddingTop="4dp">
+                    <com.google.android.gms.ads.AdView
+                        xmlns:ads="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/adView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_alignParentBottom="true"
+                        card_view:cardElevation="2sp"
+                        ads:adSize="SMART_BANNER"
+                        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                        >
+                    </com.google.android.gms.ads.AdView>
+                </android.support.v7.widget.CardView>
+                </LinearLayout>
+            </LinearLayout>
+            </ScrollView>
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:fab="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
-                android:background="#ffffff"
+                android:id="@+id/fabView"
+                android:focusable="true"
+                android:clickable="true"
                 android:layout_height="wrap_content"
-                android:id="@+id/roomsActivityList_empty"
+                android:layout_gravity="bottom|right"
+                >
+
+                <com.melnykov.fab.FloatingActionButton
+                    android:id="@+id/room_fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:focusable="true"
+                    fab:fab_type="normal"
+                    android:onClick="joinRoom"
+                    android:src="@drawable/fab"
+                    fab:fab_colorNormal="@color/colorAccent"
+                    fab:fab_colorPressed="@color/colorAccent"
+                    fab:fab_colorRipple="#88333333" />
+            </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="invisible"
+            android:id="@+id/conversationFragment">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#ffffff">
+
+            <org.numixproject.hermes.indicator.ConversationIndicator
+                android:id="@+id/titleIndicator"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+            <android.support.v4.view.ViewPager
+               android:id="@+id/pager"
+               android:layout_width="fill_parent"
+               android:layout_height="0px"
+               android:layout_weight="1"
+               android:layout_margin="0px"
+               android:unselectedAlpha="100"
+               android:padding="0dp" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:textSize="16sp"
-                android:paddingRight="16dp"
-                android:paddingTop="16dp"
-                android:paddingLeft="16dp"
-                android:paddingBottom="8dp"
-                android:textColor="#111111"
-                android:text="No room available."/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:textSize="12sp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="16dp"
-                    android:paddingRight="16dp"
-                    android:textColor="#777777"
-                    android:text="Maybe Hermes is still connecting to server or you didn't select any room."/>
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/recentName"
-
-            android:orientation="vertical">
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Recent channels"
-            android:textColor="#777777"
-            android:paddingLeft="16dp"
-            android:paddingTop="12dp"
-            android:textStyle="bold"
-            android:textSize="12sp"
-            android:paddingBottom="8dp" />
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/card_recent"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground">
-            <org.numixproject.hermes.utils.ExpandableHeightListView
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:focusable="false"
-                android:id="@+id/recentList"/>
-        </android.support.v7.widget.CardView>
-        </LinearLayout>
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Other"
-            android:textColor="#777777"
-            android:paddingLeft="16dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="5dp"
-            android:textStyle="bold"
-            android:textSize="12sp"/>
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/card_view_other"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            card_view:cardBackgroundColor="@android:color/white"
-            card_view:cardElevation="2sp"
-            card_view:cardUseCompatPadding="true"
-            card_view:cardCornerRadius="0dp"
-            android:layout_marginLeft="-8dp"
-            android:layout_marginRight="-8dp"
-            android:foreground="?android:attr/selectableItemBackground">
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="horizontal" android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:layout_marginLeft="8dp">
-                <TextView
-                    android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="#e0e0e0">
+                </TextView>
+                <EditText
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/room_name"
-                    android:layout_weight="1"
+                    android:focusableInTouchMode="true"
+                    android:id="@+id/input"
+                    android:hint="Write a message..."
+                    android:background="#fafafa"
                     android:textSize="16sp"
-                    android:textColor="#111111"
-                    android:text="server logs"/>
+                    android:padding="20dp"
+                    android:inputType="textImeMultiLine|textAutoCorrect|textCapSentences"
+                    android:textIsSelectable="true"
+                    android:imeOptions="actionSend" />
             </LinearLayout>
-        </android.support.v7.widget.CardView>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ads_card_conversation"
-            android:visibility="gone"
-            android:orientation="vertical">
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Sponsored"
-            android:textColor="#777777"
-            android:paddingLeft="16dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="8dp"
-            android:textStyle="bold"
-            android:textSize="12sp"/>
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/ads_card"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            card_view:cardBackgroundColor="@android:color/white"
-            card_view:cardCornerRadius="0dp"
-            android:paddingTop="4dp">
-            <com.google.android.gms.ads.AdView
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/adView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignParentBottom="true"
-                card_view:cardElevation="2sp"
-                ads:adSize="SMART_BANNER"
-                ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
-                >
-            </com.google.android.gms.ads.AdView>
-        </android.support.v7.widget.CardView>
         </LinearLayout>
-    </LinearLayout>
-    </ScrollView>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:fab="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
-        android:id="@+id/fabView"
-        android:focusable="true"
-        android:clickable="true"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        >
-
-        <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/room_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:focusable="true"
-            fab:fab_type="normal"
-            android:onClick="joinRoom"
-            android:src="@drawable/fab"
-            fab:fab_colorNormal="@color/colorAccent"
-            fab:fab_colorPressed="@color/colorAccent"
-            fab:fab_colorRipple="#88333333" />
-    </FrameLayout>
-
-<FrameLayout
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:visibility="invisible"
-    android:id="@+id/conversationFragment">
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#ffffff">
-
-    <org.numixproject.hermes.indicator.ConversationIndicator
-        android:id="@+id/titleIndicator"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
-    <android.support.v4.view.ViewPager
-       android:id="@+id/pager"
-       android:layout_width="fill_parent"
-       android:layout_height="0px"
-       android:layout_weight="1"
-       android:layout_margin="0px"
-       android:unselectedAlpha="100"
-       android:padding="0dp" />
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#e0e0e0">
-        </TextView>
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
-            android:id="@+id/input"
-            android:hint="Write a message..."
-            android:background="#fafafa"
-            android:textSize="16sp"
-            android:padding="20dp"
-            android:inputType="textImeMultiLine|textAutoCorrect|textCapSentences"
-            android:textIsSelectable="true"
-            android:imeOptions="actionSend" />
-    </LinearLayout>
-</LinearLayout>
-</FrameLayout>
-</FrameLayout>
+        </FrameLayout>
+        </FrameLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

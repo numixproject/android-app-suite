@@ -2,4 +2,7 @@
 <resources>
     <color name="background_dark">#212121</color>
     <color name="colorAccent">#E91E63</color>
+    <color name="refresh_progress_1">#00838F</color>
+    <color name="refresh_progress_2">#E91E63</color>
+    <color name="refresh_progress_3">#4baeae</color>
 </resources>
