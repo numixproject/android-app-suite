@@ -59,8 +59,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         getSupportActionBar().setElevation(3);
         addSection(home);
 
-        this.addSubheader("Servers");
-
         fragment = (HomeFragment) home.getTargetFragment();
 
         this.addBottomSection(newSection("Remove Ads", R.drawable.ic_ic_dnd_on_24px, new MaterialSectionListener() {
