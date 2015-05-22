@@ -163,6 +163,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     private ArrayList<String> pinnedRooms = new ArrayList<>();
     private TinyDB tinydb;
     private boolean isFirstTimeStarred = true;
+    private boolean isFirstTimeRefresh = true;
 
 
     String key;
@@ -273,6 +274,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         }
 
         isFirstTimeStarred = tinydb.getBoolean("isFirstTimeStarred", true);
+        isFirstTimeRefresh = tinydb.getBoolean("isFirstTimeRefresh", true);
         setContentView(R.layout.conversations);
         boolean isLandscape = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
         LinearLayout ads = (LinearLayout) findViewById(R.id.ads_card_conversation);
@@ -900,7 +902,14 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 }
                 break;
             case R.id.refresh:
-                refreshActivity();
+                if (isFirstTimeRefresh) {
+                    isFirstTimeRefresh = false;
+                    tinydb.putBoolean("isFirstTimeRefresh", isFirstTimeRefresh);
+                    Toast.makeText(getApplicationContext(), "You can also swipe down to refresh.", Toast.LENGTH_SHORT).show();
+                    refreshActivity();
+                } else {
+                    refreshActivity();
+                }
                 break;
             case R.id.edit: // Edit
                 editServer();
