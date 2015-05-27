@@ -712,7 +712,7 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_stat_torch_symbol_within_app)
-                        .setContentTitle("Numix Material Torch")
+                        .setContentTitle("Numix Torch")
                         .setContentText("Flashlight on. Tap to disable.")
                         .setContentIntent(pendingIntent)
                         .setOngoing(true);
