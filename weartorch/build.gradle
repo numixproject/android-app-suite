@@ -8,8 +8,8 @@ android {
         applicationId 'org.numixproject.torch'
         minSdkVersion 21
         targetSdkVersion 21
-        versionCode 9
-        versionName "1.0.1"
+        versionCode 10
+        versionName "1.2.0"
     }
     buildTypes {
         release {

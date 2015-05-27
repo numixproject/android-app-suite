@@ -34,7 +34,6 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:visibility="visible"
-
         android:layout_height="fill_parent">
 
 
@@ -43,8 +42,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:padding="15dp">
-
+        android:padding="16dp">
 
         <android.support.v7.widget.CardView
             android:id="@+id/card_view"
@@ -58,7 +56,7 @@
                 android:layout_height="fill_parent"
                 android:orientation="horizontal"
                 android:weightSum="1"
-                android:padding="15dp">
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -101,7 +99,7 @@
                 android:layout_height="fill_parent"
                 android:orientation="horizontal"
                 android:weightSum="1"
-                android:padding="15dp">
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -135,7 +133,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/card_view2"
             android:layout_width="fill_parent"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:elevation="1dp"
             android:layout_height="wrap_content">
 
@@ -158,7 +156,7 @@
                     android:text="Blinking"
                     android:gravity="center_horizontal|center_vertical"
                     android:textSize="@dimen/abc_text_size_body_1_material"
-                    android:layout_weight="0.0"
+                    android:layout_weight="0"
                     android:textColor="#222222"/>
 
                     <android.support.v7.widget.SwitchCompat
@@ -177,7 +175,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView2"
-                android:visibility="invisible"
+                android:visibility="gone"
 
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="#444444"
@@ -190,8 +188,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/seekBar"
                 android:layout_centerHorizontal="true"
-                android:visibility="invisible"
-
+                android:visibility="gone"
                 android:onClick="turnOn"
                 android:max="100"/>
             </LinearLayout>

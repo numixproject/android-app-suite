@@ -17,6 +17,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -53,6 +54,8 @@ import com.google.android.gms.ads.AdView;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -328,7 +331,8 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
                     homeView.setVisibility(View.INVISIBLE);
-                }        });
+                }
+            });
 
 // start the animation
             anim.start();
@@ -364,7 +368,8 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
                     homeView.setVisibility(View.INVISIBLE);
-                }        });
+                }
+            });
 
 // start the animation
             anim.start();
@@ -452,26 +457,30 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
             stroboSwitch.setEnabled(true);
             SOSSwitch.setEnabled(true);
             bar.setProgress(0);
-            bar.setVisibility(View.INVISIBLE);
-            stroboText.setVisibility(View.INVISIBLE);
+            bar.setVisibility(View.GONE);
+            stroboText.setVisibility(View.GONE);
         }
     }
 
 
     public void turnOn(View v) {
-        showNotification();
-        startAnimation();
-        if (freq != 0) {
-            sr = new StroboRunner();
-            sr.freq = freq;
-            t = new Thread(sr);
-            t.start();
+        try {
+            showNotification();
             startAnimation();
-            return;
-        } else
-            camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        cam.setParameters(camParams);
-        cam.startPreview();
+            if (freq != 0) {
+                sr = new StroboRunner();
+                sr.freq = freq;
+                t = new Thread(sr);
+                t.start();
+                startAnimation();
+                return;
+            } else
+                camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            cam.setParameters(camParams);
+            cam.startPreview();
+        } catch (Exception e){
+            // Do nothing;
+        }
     }
 
     public void turnOnTorchDemand() {
@@ -490,17 +499,21 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
     }
 
     public void turnOnSOS() {
-        if (freq != 0) {
-            sr = new StroboRunner();
-            sr.freq = freq;
-            t = new Thread(sr);
-            t.start();
-            startAnimation();
-            return;
-        } else
-        camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        cam.setParameters(camParams);
-        cam.startPreview();
+        try {
+            if (freq != 0) {
+                sr = new StroboRunner();
+                sr.freq = freq;
+                t = new Thread(sr);
+                t.start();
+                startAnimation();
+                return;
+            } else
+                camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            cam.setParameters(camParams);
+            cam.startPreview();
+        } catch (Exception E){
+            // Do nothing
+        }
     }
 
     public void turnOnDemand(View v) {
@@ -524,20 +537,21 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
     }
 
     public void turnOff(View v) {
-        stopNotification();
-        stopAnimation();
-        final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout);
-        activeLayout.setBackgroundColor(0xFFFFC107);
-        if (t != null) {
-            sr.stopRunning = true;
-            t = null;
-            return ;
-        }
-        else {
-            camParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-            cam.setParameters(camParams);
-            cam.stopPreview();
-        }
+        try {
+            stopNotification();
+            stopAnimation();
+            final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout);
+            activeLayout.setBackgroundColor(0xFFFFC107);
+            if (t != null) {
+                sr.stopRunning = true;
+                t = null;
+                return;
+            } else {
+                camParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                cam.setParameters(camParams);
+                cam.stopPreview();
+            }
+        } catch (Exception e){}
     }
 
     // SOS
@@ -584,7 +598,7 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
         try {
             Log.i("SurfaceHolder", "setting preview");
             cam.setPreviewDisplay(mHolder);
-        } catch (IOException e){
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
@@ -651,6 +665,7 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
     }
 
     public void turnOffSOS() {
+        try {
         if (t != null) {
             sr.stopRunning = true;
             t = null;
@@ -661,6 +676,9 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
             cam.setParameters(camParams);
             cam.stopPreview();
         }
+    } catch (Exception E){
+        // Do nothing
+    }
     }
 
     private static final ScheduledExecutorService worker =
@@ -682,37 +700,53 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
 
     private void backgroundYellowFast() {
         final LinearLayout activeLayout = (LinearLayout) findViewById(R.id.activeLayout2);
-        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFF333333,0xFFFFC107 );
+        ObjectAnimator animator = ObjectAnimator.ofInt(activeLayout, "backgroundColor", 0xFF333333, 0xFFFFC107);
         animator.setEvaluator(new ArgbEvaluator());
         animator.start();
     }
 
     private void showNotification() {
-        final int MY_NOTIFICATION_ID=1;
-        NotificationManager notificationManager;
-        Notification myNotification;
-
-        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        myNotification = new Notification(R.drawable.ic_stat_torch_symbol_within_app, "Notification!", System.currentTimeMillis());
-        Context context = getApplicationContext();
-        String notificationTitle = "Numix Material Torch";
-        String notificationText = "Flashlight on. Tap to disable.";
         Intent myIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, myIntent, Intent.FILL_IN_ACTION);
-        myNotification.flags |= Notification.FLAG_ONGOING_EVENT;
-        myNotification.setLatestEventInfo(context, notificationTitle, notificationText, pendingIntent);
-        notificationManager.notify(MY_NOTIFICATION_ID, myNotification);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_stat_torch_symbol_within_app)
+                        .setContentTitle("Numix Material Torch")
+                        .setContentText("Flashlight on. Tap to disable.")
+                        .setContentIntent(pendingIntent)
+                        .setOngoing(true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mBuilder.setColor(Color.parseColor("#FFC107"));
+        }
+
+
+        // Sets an ID for the notification
+        int mNotificationId = 1;
+        // Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        // Builds the notification and issues it.
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
     }
 
     private void stopNotification() {
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.cancel(1);
+        int mNotificationId = 1;
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mNotifyMgr.cancel(mNotificationId);
     }
 
     protected void onNewIntent(Intent intent) {
         turnOffSOS();
         stopNotification();
         stopAnimation();
+        cam.stopPreview();
+        cam.release();
+        Camera cam2 = Camera.open();
+        cam2.stopPreview();
+        cam2.release();
+        System.exit(1);
     }
 
     private class SOS implements Runnable {
@@ -869,11 +903,16 @@ public class MainActivity extends ActionBarActivity implements SurfaceHolder.Cal
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
+
         if (bp != null)
             bp.release();
 
-        super.onDestroy();
+        cam.stopPreview();
+        cam.release();
+        Camera cam2 = Camera.open();
+        cam2.stopPreview();
+        cam2.release();
     }
-
 }
 
