@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="com.numix.calculator" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":app" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="com.numix.calculator" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -12,8 +12,9 @@
         <option name="SELECTED_TEST_ARTIFACT" value="_android_test_" />
         <option name="ASSEMBLE_TASK_NAME" value="assembleDebug" />
         <option name="COMPILE_JAVA_TASK_NAME" value="compileDebugSources" />
-        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleDebugTest" />
         <option name="SOURCE_GEN_TASK_NAME" value="generateDebugSources" />
+        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleDebugTest" />
+        <option name="COMPILE_JAVA_TEST_TASK_NAME" value="compileDebugTestSources" />
         <option name="TEST_SOURCE_GEN_TASK_NAME" value="generateDebugTestSources" />
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
@@ -25,6 +26,7 @@
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/build/intermediates/classes/debug" />
+    <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/debug" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/debug" isTestSource="false" generated="true" />
@@ -84,18 +86,37 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="play-services-maps-7.3.0" level="project" />
     <orderEntry type="library" exported="" name="slider" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-21.0.0" level="project" />
-    <orderEntry type="library" exported="" name="arity-2.1.6" level="project" />
-    <orderEntry type="library" exported="" name="ejml-0.21" level="project" />
+    <orderEntry type="library" exported="" name="play-services-wallet-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-drive-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-analytics-7.3.0" level="project" />
     <orderEntry type="library" exported="" name="androidsvg-1.2.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-panorama-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-appindexing-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-cast-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-22.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-location-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-ads-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="svg-android" level="project" />
+    <orderEntry type="library" exported="" name="acra-4.5.0-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="play-services-base-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-safetynet-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-appinvite-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-gcm-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-nearby-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="arity-2.1.6" level="project" />
     <orderEntry type="library" exported="" name="achartengine" level="project" />
     <orderEntry type="library" exported="" name="acra-4.5.0-sources" level="project" />
-    <orderEntry type="library" exported="" name="svg-android" level="project" />
+    <orderEntry type="library" exported="" name="play-services-fitness-7.3.0" level="project" />
     <orderEntry type="library" exported="" name="annotations-12.0" level="project" />
-    <orderEntry type="library" exported="" name="acra-4.5.0-javadoc" level="project" />
-    <orderEntry type="library" exported="" name="play-services-6.5.87" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-21.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-22.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-plus-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-wearable-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="ejml-0.21" level="project" />
+    <orderEntry type="library" exported="" name="play-services-appstate-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-games-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-identity-7.3.0" level="project" />
   </component>
 </module>
-

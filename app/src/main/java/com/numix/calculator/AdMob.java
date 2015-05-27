@@ -24,7 +24,7 @@ public class AdMob extends Activity {
     private static final int WAIT_TIME = 5000;
 
     // Your interstitial ad unit ID.
-    private static final String AD_UNIT_ID = "ca-app-pub-4742625114157019/2363863885";
+    private static final String AD_UNIT_ID = "ca-app-pub-2834532364021285/5336279451";
 
     private InterstitialAd interstitial;
     private Timer waitTimer;
@@ -36,7 +36,7 @@ public class AdMob extends Activity {
         setContentView(R.layout.splash);
 
         interstitial = new InterstitialAd(this);
-        interstitial.setAdUnitId("ca-app-pub-4742625114157019/2363863885");
+        interstitial.setAdUnitId(AD_UNIT_ID);
         interstitial.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {

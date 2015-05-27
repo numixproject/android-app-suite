@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.numix.calculator"
-    android:versionName="2.6.1"
-    android:versionCode="8">
+    android:versionName="2.6.2"
+    android:versionCode="9">
 
     <!-- Include required permissions for Google Mobile Ads to run-->
     <uses-permission android:name="android.permission.INTERNET"/>
