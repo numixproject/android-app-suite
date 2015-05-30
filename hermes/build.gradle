@@ -29,7 +29,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:22.0.+'
     compile 'com.melnykov:floatingactionbutton:1.3.0'
     compile 'com.android.support:recyclerview-v7:22.0.+'
-    compile 'com.google.android.gms:play-services:7.3.0'
+    compile 'com.google.android.gms:play-services:7.5.+'
     compile 'com.anjlab.android.iab.v3:library:1.0.+@aar'
     compile 'com.cocosw:undobar:1.+@aar'
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:3.5.1'
