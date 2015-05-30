@@ -23,7 +23,6 @@ import android.widget.AdapterView;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
-import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.melnykov.fab.FloatingActionButton;
 
 import org.numixproject.hermes.adapter.ServerListAdapter;
@@ -45,7 +44,6 @@ import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 import it.neokree.materialnavigationdrawer.elements.listeners.MaterialSectionListener;
 
 public class MainActivity extends MaterialNavigationDrawer implements ServiceConnection, ServerListener {
-    private static final int REQUEST_INVITE = 1;
     private static int instanceCount = 0;
     public static IRCBinder binder;
     private ServerReceiver receiver;
@@ -83,22 +81,13 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
             }
         }));
 
-        if (isGooglePlayInstalled(getApplicationContext())){
-
-            this.addSection(newSection("Invite Friends", R.drawable.ic_ic_shop_24px, new MaterialSectionListener() {
-                @Override
-                public void onClick(MaterialSection section) {
-                    onInviteClicked();
-                }
-            }));
-        }
-
         this.addBottomSection(newSection("More apps...", R.drawable.ic_ic_shop_24px, new MaterialSectionListener() {
             @Override
             public void onClick(MaterialSection section) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("market://search?q=pub:Numix+Project+Ltd."));
-                startActivity(intent);
+                String url = "https://play.google.com/store/apps/dev?id=5600498874720965803";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
             }
         }));
 
@@ -132,29 +121,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
     private void newServerActivity() {
 
-    }
-
-    public static boolean isGooglePlayInstalled(Context context) {
-        PackageManager pm = context.getPackageManager();
-        boolean app_installed = false;
-        try
-        {
-            PackageInfo info = pm.getPackageInfo("com.android.vending", PackageManager.GET_ACTIVITIES);
-            String label = (String) info.applicationInfo.loadLabel(pm);
-            app_installed = (label != null && !label.equals("Market"));
-        }
-        catch (PackageManager.NameNotFoundException e)
-        {
-            app_installed = false;
-        }
-        return app_installed;
-    }
-
-    private void onInviteClicked() {
-        Intent intent = new AppInviteInvitation.IntentBuilder("Title here")
-                .setMessage("Message here... Bla bla bla...")
-                .build();
-        startActivityForResult(intent, REQUEST_INVITE);
     }
 
     @Override

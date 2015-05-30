@@ -29,6 +29,28 @@
                 android:layout_marginBottom="8dp"
                 />
 
+            <LinearLayout
+                android:id="@+id/inviteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_ic_face_black_48px"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="3dp"
+                    android:text="Enjoying Hermes? \n Invite more pals to use it!"/>
+            </LinearLayout>
+
+
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -39,7 +61,7 @@
                 android:layout_gravity="center_horizontal"
                 card_view:cardBackgroundColor="@android:color/white"
                 card_view:cardCornerRadius="0dp"
-                android:paddingTop="4dp">
+                android:paddingTop="8dp">
                 <com.google.android.gms.ads.AdView
                     android:id="@+id/adView"
                     android:layout_width="wrap_content"

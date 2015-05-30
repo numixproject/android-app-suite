@@ -2,10 +2,13 @@ package org.numixproject.hermes;
 
 import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
@@ -16,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,6 +27,7 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.melnykov.fab.FloatingActionButton;
 
 import org.numixproject.hermes.activity.AddServerActivity;
@@ -43,6 +48,7 @@ import org.numixproject.hermes.utils.ExpandableHeightListView;
 
 public class HomeFragment extends Fragment implements ServiceConnection, ServerListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
+    private static final int REQUEST_INVITE = 1;
     private IRCBinder binder;
     private ServerReceiver receiver;
     private ServerListAdapter adapter;
@@ -96,7 +102,44 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
             ads.setVisibility(View.VISIBLE);
         }
 
+        LinearLayout inviteLayout = (LinearLayout) llLayout.findViewById(R.id.inviteButton);
+
+        if (isGooglePlayInstalled(getActivity().getApplicationContext())) {
+            inviteLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onInviteClicked();
+                }
+            });
+        } else {
+            inviteLayout.setVisibility(LinearLayout.GONE);
+        }
+
         return llLayout;
+    }
+
+
+    public static boolean isGooglePlayInstalled(Context context) {
+        PackageManager pm = context.getPackageManager();
+        boolean app_installed = false;
+        try
+        {
+            PackageInfo info = pm.getPackageInfo("com.android.vending", PackageManager.GET_ACTIVITIES);
+            String label = (String) info.applicationInfo.loadLabel(pm);
+            app_installed = (label != null && !label.equals("Market"));
+        }
+        catch (PackageManager.NameNotFoundException e)
+        {
+            app_installed = false;
+        }
+        return app_installed;
+    }
+
+    private void onInviteClicked() {
+        Intent intent = new AppInviteInvitation.IntentBuilder("Title here")
+                .setMessage("Message here... Bla bla bla...")
+                .build();
+        startActivityForResult(intent, REQUEST_INVITE);
     }
 
     private void newAddServerActivity(View v){
