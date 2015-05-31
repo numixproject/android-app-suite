@@ -33,6 +33,8 @@ import com.melnykov.fab.FloatingActionButton;
 import org.numixproject.hermes.activity.AddServerActivity;
 import org.numixproject.hermes.activity.ConversationActivity;
 import org.numixproject.hermes.adapter.ServerListAdapter;
+import org.numixproject.hermes.slides.FirstSlide;
+import org.numixproject.hermes.utils.AndroidIntro;
 import org.numixproject.hermes.utils.iap;
 import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.irc.IRCBinder;
@@ -114,6 +116,11 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
         } else {
             inviteLayout.setVisibility(LinearLayout.GONE);
         }
+
+        FrameLayout introLayout = (FrameLayout) llLayout.findViewById(R.id.intro);
+
+        Intent intent = new Intent(super.getActivity(), IntroActivity.class);
+        startActivity(intent);
 
         return llLayout;
     }

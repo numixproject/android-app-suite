@@ -105,6 +105,8 @@ Copyright 2015 Numix Project Ltd.
             android:name=".activity.AuthenticationActivity"
             android:theme="@style/HermesDialog" >
         </activity>
+        <activity android:name=".IntroActivity"
+            android:theme="@style/Hermes"/>
 
         <!--Include the AdActivity configChanges and theme. -->
         <activity android:name="com.google.android.gms.ads.AdActivity"

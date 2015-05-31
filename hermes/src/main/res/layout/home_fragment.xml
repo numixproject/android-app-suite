@@ -8,6 +8,11 @@
     android:id="@+id/home_mainFragment"
     android:layout_height="fill_parent">
 
+    <FrameLayout
+        android:id="@+id/intro"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:background="#E5E5E5"
@@ -33,7 +38,7 @@
                 android:id="@+id/inviteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:padding="16dp"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_gravity="center_horizontal">

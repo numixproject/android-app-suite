@@ -1,5 +1,7 @@
 package org.numixproject.hermes;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -19,7 +21,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
@@ -36,6 +40,8 @@ import org.numixproject.hermes.model.Broadcast;
 import org.numixproject.hermes.model.Server;
 import org.numixproject.hermes.model.Status;
 import org.numixproject.hermes.receiver.ServerReceiver;
+import org.numixproject.hermes.slides.FirstSlide;
+import org.numixproject.hermes.utils.AndroidIntro;
 
 import java.util.ArrayList;
 
@@ -62,7 +68,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         addSection(home);
 
         fragment = (HomeFragment) home.getTargetFragment();
-
         this.addBottomSection(newSection("Remove Ads", R.drawable.ic_ic_dnd_on_24px, new MaterialSectionListener() {
             @Override
             public void onClick(MaterialSection section) {
@@ -140,9 +145,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     {
         super.onResume();
 
-
         try {
-
             // Find out if delete server
             Intent mIntent = getIntent();
             if (mIntent != null) {
