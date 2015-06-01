@@ -63,7 +63,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         MaterialSection home = newSection("Connect to...", R.drawable.ic_ic_swap_horiz_24px, new HomeFragment());
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
         MaterialSection help = newSection("Help", R.drawable.ic_ic_help_24px , new Intent(this, SettingsActivity.class));
-
         getSupportActionBar().setElevation(3);
         addSection(home);
 

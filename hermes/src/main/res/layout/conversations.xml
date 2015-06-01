@@ -53,7 +53,7 @@ Copyright 2015 Numix Project Ltd.
                         android:focusable="false"
                         android:id="@+id/roomsActivityList"/>
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:background="#ffffff"
                         android:layout_height="wrap_content"
                         android:id="@+id/roomsActivityList_empty"
