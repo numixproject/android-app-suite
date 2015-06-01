@@ -9,8 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:layout_weight="1"
-        android:gravity="center_vertical">
+        android:layout_weight="1">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +39,7 @@
             android:paddingTop="32dp"
             android:paddingLeft="64dp"
             android:paddingRight="64dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:text="Send a smiley or two for those moments when words are simply not enough"/>
     </LinearLayout>
     <TextView

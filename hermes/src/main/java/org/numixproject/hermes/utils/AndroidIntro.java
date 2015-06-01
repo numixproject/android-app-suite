@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -52,14 +53,13 @@ public abstract class AndroidIntro extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // remove title
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.fragment_screen_slide_page);
 
         final TextView skip = (TextView) findViewById(R.id.skip);
-        final TextView next = (TextView) findViewById(R.id.next);
+        final ImageView next = (ImageView) findViewById(R.id.next);
         final TextView done = (TextView) findViewById(R.id.done);
 
         skip.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +76,12 @@ public abstract class AndroidIntro extends FragmentActivity {
             }
         });
 
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDonePressed();
+            }
+        });
         mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
         pager = (ViewPager) findViewById(R.id.view_pager);
         pager.setAdapter(this.mPagerAdapter);
@@ -151,12 +157,9 @@ public abstract class AndroidIntro extends FragmentActivity {
         separator.setBackgroundColor(color);
     }
 
-    public void setSkipActivity(Activity activity){
-        skipActivity = activity;
-    }
-
     public abstract void init(Bundle savedInstanceState);
     public abstract void onSkipPressed();
+    public abstract void onDonePressed();
 
     public class PagerAdapter extends FragmentPagerAdapter {
 

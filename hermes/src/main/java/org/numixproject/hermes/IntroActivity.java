@@ -1,7 +1,5 @@
 package org.numixproject.hermes;
-
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import org.numixproject.hermes.slides.FirstSlide;
@@ -20,9 +18,18 @@ public class IntroActivity extends AndroidIntro {
         addSlide(new FourthSlide(), getApplicationContext());
     }
 
-    @Override
-    public void onSkipPressed() {
+    private void loadHermes(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onSkipPressed() {
+        loadHermes();
+    }
+
+    @Override
+    public void onDonePressed() {
+        loadHermes();
     }
 }

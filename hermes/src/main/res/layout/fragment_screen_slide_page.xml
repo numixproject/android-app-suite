@@ -19,7 +19,7 @@
                 android:layout_width="fill_parent"
                 android:id="@+id/bottom_separator"
                 android:layout_height="1px"
-                android:background="#000000">
+                android:background="#55000000">
             </TextView>
             <LinearLayout
                 android:background="#00000000"
@@ -47,17 +47,16 @@
                     android:layout_weight="0.8"
                     android:layout_gravity="center">
                 </LinearLayout>
-                <Button
+                <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:background="@null"
                     android:id="@+id/next"
-                    android:paddingRight="16dp"
                     style="?android:attr/borderlessButtonStyle"
-                    android:textColor="#ffffff"
                     android:layout_gravity="start"
                     android:layout_weight="0.2"
-                    android:text="Next"/>
+                    android:layout_marginRight="-16dp"
+                    android:src="@drawable/ic_navigate_next_white_24dp"/>
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"

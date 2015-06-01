@@ -2,20 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#009b82"
+    android:background="#4CAF50"
     android:layout_weight="1"
     android:id="@+id/main">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingTop="32dp"
+            android:paddingTop="64dp"
             android:fontFamily="sans-serif-thin"
             android:textColor="#ffffff"
             android:paddingLeft="32dp"
@@ -41,8 +40,9 @@
             android:paddingTop="64dp"
             android:paddingLeft="64dp"
             android:paddingRight="64dp"
-            android:textSize="18sp"
-            android:text=""/>
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="GET STARTED"/>
     </LinearLayout>
     <TextView
         android:layout_width="fill_parent"
