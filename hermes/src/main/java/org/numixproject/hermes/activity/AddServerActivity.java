@@ -36,10 +36,6 @@ import org.numixproject.hermes.model.Extra;
 import org.numixproject.hermes.model.Identity;
 import org.numixproject.hermes.model.Server;
 import org.numixproject.hermes.model.Status;
-import org.numixproject.hermes.utils.ExpandableHeightListView;
-import org.numixproject.hermes.utils.adapterHeight;
-import org.w3c.dom.Text;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -50,7 +46,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
-import android.text.Selection;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
@@ -66,13 +61,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 
 /**
  * Add a new server to the list

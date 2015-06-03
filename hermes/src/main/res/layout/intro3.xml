@@ -3,45 +3,48 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#5C6BC0"
-    android:layout_weight="1"
+    android:layout_weight="10"
     android:id="@+id/main">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingLeft="32dp"
+        android:layout_weight="3"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="#ffffff"
+        android:paddingRight="32dp"
+        android:textSize="28sp"
+        android:text="Express yourself with emojis."/>
+
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_weight="1">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingTop="64dp"
-            android:paddingLeft="32dp"
-            android:paddingRight="32dp"
-            android:textSize="28sp"
-            android:fontFamily="sans-serif-thin"
-            android:textColor="#ffffff"
-            android:gravity="center"
-            android:text="Express yourself with emojis"/>
+        android:gravity="center"
+        android:layout_weight="5">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingTop="32dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:src="@drawable/ic_smiley3x"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:paddingTop="32dp"
-            android:paddingLeft="64dp"
-            android:paddingRight="64dp"
-            android:textSize="16sp"
-            android:text="Send a smiley or two for those moments when words are simply not enough"/>
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:paddingLeft="64dp"
+        android:paddingRight="64dp"
+        android:textSize="16sp"
+        android:text="Send a smiley or two for those moments when words are simply not enough"/>
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="64dp" />

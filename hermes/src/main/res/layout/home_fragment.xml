@@ -24,7 +24,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <org.numixproject.hermes.utils.ExpandableHeightListView
+            <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
                 android:id="@+id/list"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_alignParentBottom="true"
                     ads:adSize="BANNER"
-                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+                    ads:adUnitId="ca-app-pub-2834532364021285/8371654256">
                 </com.google.android.gms.ads.AdView>
             </android.support.v7.widget.CardView>
 

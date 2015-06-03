@@ -280,7 +280,7 @@ Copyright 2015 Numix Project Ltd.
             android:layout_height="wrap_content"
             android:text="Commands to run on connection"
             android:paddingTop="5dp" />
-        <org.numixproject.hermes.utils.ExpandableHeightListView
+        <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
             android:id="@+id/commands_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -288,8 +288,7 @@ Copyright 2015 Numix Project Ltd.
             android:fadingEdge="none"
             android:focusable="false"
             android:scrollbars="none"
-            >
-        </org.numixproject.hermes.utils.ExpandableHeightListView>
+            />
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -17,24 +18,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Toast;
-
 import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.melnykov.fab.FloatingActionButton;
-
 import org.numixproject.hermes.activity.AddServerActivity;
 import org.numixproject.hermes.activity.ConversationActivity;
 import org.numixproject.hermes.adapter.ServerListAdapter;
-import org.numixproject.hermes.slides.FirstSlide;
-import org.numixproject.hermes.utils.AndroidIntro;
 import org.numixproject.hermes.utils.iap;
 import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.irc.IRCBinder;
@@ -45,7 +39,7 @@ import org.numixproject.hermes.model.Extra;
 import org.numixproject.hermes.model.Server;
 import org.numixproject.hermes.model.Status;
 import org.numixproject.hermes.receiver.ServerReceiver;
-import org.numixproject.hermes.utils.ExpandableHeightListView;
+import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 
 
 public class HomeFragment extends Fragment implements ServiceConnection, ServerListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
@@ -116,11 +110,6 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
         } else {
             inviteLayout.setVisibility(LinearLayout.GONE);
         }
-
-        FrameLayout introLayout = (FrameLayout) llLayout.findViewById(R.id.intro);
-
-        Intent intent = new Intent(super.getActivity(), IntroActivity.class);
-        startActivity(intent);
 
         return llLayout;
     }

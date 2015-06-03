@@ -52,9 +52,6 @@ import org.numixproject.hermes.model.User;
 import org.numixproject.hermes.receiver.ConversationReceiver;
 import org.numixproject.hermes.receiver.ServerReceiver;
 import org.numixproject.hermes.slides.FirstSlide;
-import org.numixproject.hermes.utils.AndroidIntro;
-import org.numixproject.hermes.utils.ExpandableHeightListView;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
@@ -123,6 +120,7 @@ import com.cocosw.undobar.UndoBarStyle;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.melnykov.fab.FloatingActionButton;
+import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 
 /**
  * The server view with a scrollable list of all channels
@@ -287,7 +285,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
-            ads.setVisibility(LinearLayout.GONE);
+            ads.setVisibility(LinearLayout.VISIBLE);
         }
 
         EditText input = (EditText) findViewById(R.id.input);
