@@ -1,6 +1,6 @@
 # Numix Hermes - Material IRC client
 
-** DOWNLOAD FROM GOOGLE PLAY:** https://play.google.com/store/apps/details?id=org.numixproject.hermes
+**DOWNLOAD FROM GOOGLE PLAY:** https://play.google.com/store/apps/details?id=org.numixproject.hermes
 
 **BETTER MOBILE IRC EXPERIENCE:**
 Hermes is a IRC app created to be feature rich, yet be very easy to use. Everything is just a tap or two away and the design makes your experience pleasant.
