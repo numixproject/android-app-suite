@@ -169,6 +169,8 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (bp != null)
+            bp.release();
         instanceCount--;
     }
 

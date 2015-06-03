@@ -164,6 +164,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     private TinyDB tinydb;
     private boolean isFirstTimeStarred = true;
     private boolean isFirstTimeRefresh = true;
+    SwipeRefreshLayout swipeRefresh;
 
 
     String key;
@@ -363,7 +364,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         scrollback = new Scrollback();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         swipeRefresh.setColorSchemeResources(
                 R.color.refresh_progress_1,
                 R.color.refresh_progress_2,
@@ -457,6 +458,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 // Set conversation VISIBLE
                 showConversationLayout();
                 invalidateOptionsMenu();
+                swipeRefresh.setEnabled(false);
 
                 int pagerPosition;
                 String name;
@@ -481,6 +483,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 // Set conversation VISIBLE
                 showConversationLayout();
                 invalidateOptionsMenu();
+                swipeRefresh.setEnabled(false);
 
                 // Set position in pager
                 pager.setCurrentItem(0);
@@ -706,6 +709,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             hideConversationLayout();
             refreshActivity();
             invalidateOptionsMenu();
+            swipeRefresh.setEnabled(true);
         }
     }
 
@@ -894,6 +898,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 if (conversationLayout.getVisibility() == LinearLayout.VISIBLE) {
                     hideConversationLayout();
                     invalidateOptionsMenu();
+                    swipeRefresh.setEnabled(true);
                     refreshActivity();
                 } else {
                     finish();

@@ -10,6 +10,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
@@ -132,8 +133,9 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
     }
 
     private void onInviteClicked() {
-        Intent intent = new AppInviteInvitation.IntentBuilder("Title here")
-                .setMessage("Message here... Bla bla bla...")
+        Intent intent = new AppInviteInvitation.IntentBuilder("Try Hermes app")
+                .setMessage("Hey, Numix Hermes IRC app for Android is really cool.\nWant to try it?")
+                .setDeepLink(Uri.parse("https://play.google.com/store/apps/details?id=org.numixproject.hermes"))
                 .build();
         startActivityForResult(intent, REQUEST_INVITE);
     }
