@@ -1501,7 +1501,11 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     }
 
     private void loadPinnedItems(){
-        pinnedRooms = tinydb.getListString(server.getTitle()+"pinned");
+        try {
+            pinnedRooms = tinydb.getListString(server.getTitle() + "pinned");
+        } catch (Exception E){
+            // Probably you didn't joined a server yet
+        }
     }
 
     // Save/Load recent rooms
