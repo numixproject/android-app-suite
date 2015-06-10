@@ -12,6 +12,7 @@ import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 
@@ -111,7 +112,11 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     }
 
     public void openServer(int position) {
-        fragment.openServer(position);
+        try {
+            fragment.openServer(position);
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "An unexpected error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void onCardMoreClicked(int position){
