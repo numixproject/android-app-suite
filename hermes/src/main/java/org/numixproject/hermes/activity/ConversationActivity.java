@@ -67,6 +67,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -93,12 +94,14 @@ import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -369,20 +372,41 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 R.color.refresh_progress_1,
                 R.color.refresh_progress_2,
                 R.color.refresh_progress_3);
+
+        swipeRefresh.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                Rect scrollBounds = new Rect();
+                swipeRefresh.getHitRect(scrollBounds);
+                TextView firstItem = (TextView) findViewById(R.id.firstItem);
+                if (firstItem.getLocalVisibleRect(scrollBounds)) {
+                    if (conversationLayout.getVisibility() != View.VISIBLE) {
+                        swipeRefresh.setEnabled(true);
+                    } else {
+                        swipeRefresh.setEnabled(false);
+                    }
+                } else {
+                    swipeRefresh.setEnabled(false);
+                }
+            }
+        });
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new java.util.Timer().schedule(
-                        new java.util.TimerTask() {
-                            @Override
-                            public void run() {
-                                refreshActivity();
-                            }
-                        },
-                        1500
-                );
+                if (swipeRefresh.getScrollY() == 0) {
+                    new java.util.Timer().schedule(
+                            new java.util.TimerTask() {
+                                @Override
+                                public void run() {
+                                    refreshActivity();
+                                }
+                            },
+                            1500
+                    );
+                }
             }
         });
+
 
         // Adapter section
         conversationLayout = (FrameLayout) findViewById(R.id.conversationFragment);

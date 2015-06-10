@@ -29,6 +29,7 @@ Copyright 2015 Numix Project Ltd.
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/firstItem"
                     android:text="Active channels"
                     android:textColor="#777777"
                     android:paddingLeft="16dp"
