@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 
 import org.numixproject.hermes.adapter.ServerListAdapter;
 import org.numixproject.hermes.db.Database;
@@ -39,6 +41,8 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     SharedPreferences prefs = null;
     String key;
     BillingProcessor bp;
+    public static GoogleAnalytics analytics;
+    public static Tracker tracker;
 
     @Override
     public void init(Bundle savedInstanceState) {
@@ -46,6 +50,14 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
         getSupportActionBar().setElevation(3);
         addSection(home);
+
+        analytics = GoogleAnalytics.getInstance(this);
+        analytics.setLocalDispatchPeriod(1800);
+
+        tracker = analytics.newTracker("UA-63953479-1");
+        tracker.enableExceptionReporting(true);
+        tracker.enableAdvertisingIdCollection(true);
+        tracker.enableAutoActivityTracking(true);
 
         key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5B4Oomgmm2D8XVSxh1DIFGtU3p1N2w6Xi2ZO7MoeZRAhvVjk3B8MfrOatlO9HfozRGhEkCkq0MfstB4Cjci3dsnYZieNmHOVYIFBWERqdwfdtnUIfI554xFsAC3Ah7PTP3MwKE7qTT1VLTTHxxsE7GH4sLtvLwrAzsVrLK+dgQk+e9bDJMvhhEPBgabRFaTvKaTtSzB/BBwrCa5mv0pte6WfrNbugFjiAJC43b7NNY2PV9UA8mukiBNZ9mPrK5fZeSEfcVqenyqbvZZG+P+O/cohAHbIEzPMuAS1EBf0VBsZtm3fjQ45PgCvEB7Ye3ucfR9BQ9ADjDwdqivExvXndQIDAQAB";
         iap inAppPayments = new iap();
