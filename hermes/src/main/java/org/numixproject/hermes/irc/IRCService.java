@@ -47,6 +47,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.SystemClock;
@@ -669,6 +670,12 @@ public class IRCService extends Service
     public void onDestroy()
     {
         unregisterReceiver(disconnectReceiver);
+
+        // Restore AdMob counter
+        SharedPreferences sp = getSharedPreferences("preference name", MODE_PRIVATE);
+        SharedPreferences.Editor ed = sp.edit();
+        ed.putInt("key", 0);
+        ed.commit();
 
         // Make sure our notification is gone.
         if (foreground) {

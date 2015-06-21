@@ -21,18 +21,17 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
 package org.numixproject.hermes.activity;
 
 import org.numixproject.hermes.R;
+import org.numixproject.hermes.utils.iap;
 
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 /**
  * Settings
@@ -41,9 +40,29 @@ import android.widget.LinearLayout;
  */
 public class SettingsActivity extends ActionBarActivity {
 
+    InterstitialAd mInterstitialAd;
+    BillingProcessor bp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5B4Oomgmm2D8XVSxh1DIFGtU3p1N2w6Xi2ZO7MoeZRAhvVjk3B8MfrOatlO9HfozRGhEkCkq0MfstB4Cjci3dsnYZieNmHOVYIFBWERqdwfdtnUIfI554xFsAC3Ah7PTP3MwKE7qTT1VLTTHxxsE7GH4sLtvLwrAzsVrLK+dgQk+e9bDJMvhhEPBgabRFaTvKaTtSzB/BBwrCa5mv0pte6WfrNbugFjiAJC43b7NNY2PV9UA8mukiBNZ9mPrK5fZeSEfcVqenyqbvZZG+P+O/cohAHbIEzPMuAS1EBf0VBsZtm3fjQ45PgCvEB7Ye3ucfR9BQ9ADjDwdqivExvXndQIDAQAB";
+
+        iap inAppPayments = new iap();
+        bp = inAppPayments.getBilling(this, key);
+        bp.loadOwnedPurchasesFromGoogle();
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-2834532364021285/4571969451");
+        requestNewInterstitial();
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
+                finish();
+            }
+        });
+
         setContentView(R.layout.preferences);
 
         getFragmentManager().beginTransaction()
@@ -61,6 +80,31 @@ public class SettingsActivity extends ActionBarActivity {
         }
     }
 
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("YOUR_DEVICE_HASH")
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
+    }
+
+    private void showAd() {
+        if (!bp.isPurchased("remove_ads")) {
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            } else {
+                finish();
+            }
+        } else {
+            finish();
+        }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        showAd();
+    }
 
     /**
      * On menu item selected.
@@ -68,10 +112,17 @@ public class SettingsActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() ==  android.R.id.home) {
-            finish();
+            showAd();
         }
-
         return true;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (bp != null) {
+            bp.release();
+        }
     }
 
 }

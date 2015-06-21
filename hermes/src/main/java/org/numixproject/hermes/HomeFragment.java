@@ -87,22 +87,6 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
 
         fab.attachToListView(list);
 
-        CardView ads = (CardView) llLayout.findViewById(R.id.ads_card);
-
-        // Check if you purchased "Remove Ads"
-        if (bp.isPurchased("remove_ads")) {
-            ads.setVisibility(View.GONE);
-        } else {
-            AdView mAdView = (AdView) llLayout.findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder()
-                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                    .addTestDevice("E9C24D5A0EFC9044146D4ECAFD56B53B")
-                    .build();
-
-            mAdView.loadAd(adRequest);
-            ads.setVisibility(View.VISIBLE);
-        }
-
         LinearLayout inviteLayout = (LinearLayout) llLayout.findViewById(R.id.inviteButton);
 
         if (isGooglePlayInstalled(getActivity().getApplicationContext())) {
@@ -161,11 +145,11 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
      * On Destroy
      */
     @Override
-    public void onDestroy()
-    {
-        if (bp != null)
-            bp.release();
+    public void onDestroy() {
         super.onDestroy();
+        if (bp != null) {
+            bp.release();
+        }
     }
 
     /**
