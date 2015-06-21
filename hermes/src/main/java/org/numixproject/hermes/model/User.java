@@ -35,4 +35,5 @@ public class User
     public static final int ACTION_DEVOICE = 6;
     public static final int ACTION_KICK    = 7;
     public static final int ACTION_BAN     = 8;
+    public static final int ACTION_WHOIS   = 9;
 }

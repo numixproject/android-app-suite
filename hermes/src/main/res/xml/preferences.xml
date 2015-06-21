@@ -51,6 +51,15 @@ along with Yaaic.  If not, see <http://www.gnu.org/licenses/>.
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_chat">
+        <ListPreference
+            android:title="Chat text size"
+            android:dialogTitle="Chat text size"
+            android:summary="Select text size for Chat pane"
+            android:entries="@array/textsize_labels"
+            android:entryValues="@array/textsize_values"
+            android:key="text_size"
+            android:defaultValue="medium"
+            />
         <CheckBoxPreference
             android:title="@string/settings_graphical_smilies_title"
             android:summary="@string/settings_graphical_smilies_desc"

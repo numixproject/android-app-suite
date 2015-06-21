@@ -51,11 +51,8 @@ import org.numixproject.hermes.model.Status;
 import org.numixproject.hermes.model.User;
 import org.numixproject.hermes.receiver.ConversationReceiver;
 import org.numixproject.hermes.receiver.ServerReceiver;
-import org.numixproject.hermes.slides.FirstSlide;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -63,7 +60,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -78,7 +74,6 @@ import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.CardView;
 import android.text.InputType;
 import android.text.method.TextKeyListener;
@@ -98,16 +93,11 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
-import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -116,12 +106,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import org.numixproject.hermes.utils.SwipeDismissListViewTouchListener;
 import org.numixproject.hermes.utils.TinyDB;
-import org.numixproject.hermes.utils.iap;
-import com.anjlab.android.iab.v3.BillingProcessor;
 import com.cocosw.undobar.UndoBarController;
-import com.cocosw.undobar.UndoBarStyle;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.melnykov.fab.FloatingActionButton;
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 
@@ -168,10 +153,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     private boolean isFirstTimeStarred = true;
     private boolean isFirstTimeRefresh = true;
     SwipeRefreshLayout swipeRefresh;
-
-
-    String key;
-    BillingProcessor bp;
 
     private final OnKeyListener inputKeyListener = new OnKeyListener() {
         /**
@@ -242,10 +223,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5B4Oomgmm2D8XVSxh1DIFGtU3p1N2w6Xi2ZO7MoeZRAhvVjk3B8MfrOatlO9HfozRGhEkCkq0MfstB4Cjci3dsnYZieNmHOVYIFBWERqdwfdtnUIfI554xFsAC3Ah7PTP3MwKE7qTT1VLTTHxxsE7GH4sLtvLwrAzsVrLK+dgQk+e9bDJMvhhEPBgabRFaTvKaTtSzB/BBwrCa5mv0pte6WfrNbugFjiAJC43b7NNY2PV9UA8mukiBNZ9mPrK5fZeSEfcVqenyqbvZZG+P+O/cohAHbIEzPMuAS1EBf0VBsZtm3fjQ45PgCvEB7Ye3ucfR9BQ9ADjDwdqivExvXndQIDAQAB";
-        iap inAppPayments = new iap();
-        bp = inAppPayments.getBilling(this, key);
-        bp.loadOwnedPurchasesFromGoogle();
         tinydb = new TinyDB(getApplicationContext());
 
         serverId = getIntent().getExtras().getInt("serverId");
@@ -279,18 +256,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         isFirstTimeRefresh = tinydb.getBoolean("isFirstTimeRefresh", true);
         setContentView(R.layout.conversations);
         boolean isLandscape = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
-        LinearLayout ads = (LinearLayout) findViewById(R.id.ads_card_conversation);
-
-        // Check if you purchased "Remove Ads"
-        if (bp.isPurchased("remove_ads")) {
-            ads.setVisibility(LinearLayout.GONE);
-        } else {
-            AdView mAdView = (AdView) findViewById(R.id.adView);
-
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-            ads.setVisibility(LinearLayout.VISIBLE);
-        }
 
         EditText input = (EditText) findViewById(R.id.input);
         input.setOnKeyListener(inputKeyListener);
@@ -712,9 +677,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     public void onDestroy()
     {
         super.onDestroy();
-
-        if (bp != null)
-            bp.release();
         int counter;
         for (counter=0; counter < RoomsList.size(); counter++) {
             lastRooms.add(RoomsList.get(counter));
@@ -1026,7 +988,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         while(conversation.hasBufferedMessages()) {
             Message message = conversation.pollBufferedMessage();
-
             if (adapter != null && message != null) {
                 if (message.hasSender()) {
                     Log.i("ConversationActivity", pagerAdapter.getPageTitle(pager.getCurrentItem()));
@@ -1274,6 +1235,9 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                                     );
                                     binder.getService().sendBroadcast(intent);
                                 }
+                                break;
+                            case User.ACTION_WHOIS:
+                                connection.whois(conversation, nicknameWithoutPrefix);
                                 break;
                             case User.ACTION_OP:
                                 connection.op(conversation, nicknameWithoutPrefix);

@@ -13,8 +13,9 @@ Copyright 2015 Numix Project Ltd.
     <item
         android:id="@+id/users"
         android:title="@string/users"
-        android:icon="@drawable/actionbar_users"
-        app:showAsAction="ifRoom" />
+        android:icon="@drawable/ic_people_white_24dp"
+        android:showAsAction="always"
+        app:showAsAction="always" />
     <item
         android:id="@+id/close"
         android:title="@string/close"

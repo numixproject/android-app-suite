@@ -179,6 +179,7 @@
     <string name="user_action_devoice">DeVoice</string>
     <string name="user_action_kick">Kick</string>
     <string name="user_action_ban">Ban</string>
+    <string name="user_action_whois">Whois</string>
 
     <string name="settings_connection">Connection</string>
     <string name="settings_reconnect_title">Reconnect</string>

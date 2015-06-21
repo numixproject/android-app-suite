@@ -46,4 +46,14 @@
         <item>20</item>
         <item>30</item>
     </string-array>
+    <string-array name="textsize_labels">
+        <item>small</item>
+        <item>medium</item>
+        <item>large</item>
+    </string-array>
+    <string-array name="textsize_values" translatable="false">
+        <item>small</item>
+        <item>medium</item>
+        <item>large</item>
+    </string-array>
 </resources>

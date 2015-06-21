@@ -42,6 +42,7 @@ public class UserActionListAdapter extends BaseAdapter
      * Action IDs
      */
     private final int[] actions = {
+        User.ACTION_WHOIS,
         User.ACTION_REPLY,
         User.ACTION_QUERY,
         User.ACTION_OP,
@@ -56,6 +57,7 @@ public class UserActionListAdapter extends BaseAdapter
      * Labels for actions
      */
     private final int[] labels = {
+        R.string.user_action_whois,
         R.string.user_action_reply,
         R.string.user_action_query,
         R.string.user_action_op,
@@ -63,21 +65,22 @@ public class UserActionListAdapter extends BaseAdapter
         R.string.user_action_voice,
         R.string.user_action_devoice,
         R.string.user_action_kick,
-        R.string.user_action_ban
+        R.string.user_action_ban,
     };
 
     /**
      * Icons for actions
      */
     private final int[] icons = {
-        R.drawable.action_reply,
-        R.drawable.action_query,
-        R.drawable.action_op,
-        R.drawable.action_deop,
-        R.drawable.action_voice,
-        R.drawable.action_devoice,
-        R.drawable.action_kick,
-        R.drawable.action_ban,
+        R.drawable.ic_info_black_24dp,
+        R.drawable.ic_reply_black_24dp,
+        R.drawable.ic_message_black_24dp,
+        R.drawable.ic_call_made_black_24dp,
+        R.drawable.ic_call_received_black_24dp,
+        R.drawable.ic_mic_black_24dp,
+        R.drawable.ic_mic_off_black_24dp,
+        R.drawable.ic_remove_circle_outline_black_24dp,
+        R.drawable.ic_remove_circle_black_24dp
     };
 
     /**

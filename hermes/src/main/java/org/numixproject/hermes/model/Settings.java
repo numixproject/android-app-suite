@@ -185,6 +185,10 @@ public class Settings
         );
     }
 
+    public String getTextSize(){
+        return preferences.getString("text_size", "medium");
+    }
+
     /**
      * Get the font size
      *

@@ -654,6 +654,10 @@ public abstract class PircBot implements ReplyConstants {
         this.setMode(channel, "-v " + nick);
     }
 
+    public final void whois(String channel, String nick) {
+        this.sendRawLine("WHOIS " + nick);
+    }
+
 
     /**
      * Set the topic for a channel.

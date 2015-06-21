@@ -63,10 +63,9 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         iap inAppPayments = new iap();
         bp = inAppPayments.getBilling(this, key);
         bp.loadOwnedPurchasesFromGoogle();
-
         fragment = (HomeFragment) home.getTargetFragment();
 
-        // Add only in DEBUG release
+        // Add only for DEBUG purposes
         //this.addSection(newSection("Help", R.drawable.ic_ic_help_24px, new MaterialSectionListener() {
         //    @Override
         //    public void onClick(MaterialSection section) {
@@ -133,10 +132,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
     public void onCardMoreClicked(int position){
         fragment.onMoreButtonClick(position);
-    }
-
-    private void newServerActivity() {
-
     }
 
     @Override
@@ -218,7 +213,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
             try {
                 // Refresh list from database
                 adapter.loadServers();
-            } catch (Exception e){};
+            } catch (Exception e){}
         }
     }
 

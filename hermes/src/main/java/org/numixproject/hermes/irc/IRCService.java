@@ -37,6 +37,7 @@ import org.numixproject.hermes.model.Settings;
 import org.numixproject.hermes.model.Status;
 import org.numixproject.hermes.receiver.ReconnectReceiver;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -123,7 +124,7 @@ public class IRCService extends Service
 
         IntentFilter filter = new IntentFilter();
         filter.addAction("disconnect_all");
-// Add other actions as needed
+        // Add other actions as needed
 
         disconnectReceiver = new BroadcastReceiver() {
             @Override

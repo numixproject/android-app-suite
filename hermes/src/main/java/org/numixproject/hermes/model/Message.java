@@ -28,10 +28,12 @@ import org.numixproject.hermes.utils.Smilies;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -327,6 +329,7 @@ public class Message
     {
         // XXX: We should not read settings here ALWAYS for EVERY textview
         Settings settings = new Settings(context);
+        String textSize = settings.getTextSize();
 
         TextView canvas = new TextView(context);
 
@@ -335,7 +338,13 @@ public class Message
         canvas.setLinkTextColor(COLOR_BLUE);
 
         canvas.setText(this.render(context));
-        canvas.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        if (textSize.equals("small")) {
+            canvas.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+        } else if (textSize.equals("large")){
+            canvas.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        } else {
+            canvas.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }
         canvas.setTypeface(Typeface.SANS_SERIF);
         canvas.setTextColor(COLOR_DEFAULT);
 
@@ -358,7 +367,7 @@ public class Message
         canvas.setLinkTextColor(COLOR_BLUE);
 
         canvas.setText(this.render(context));
-        canvas.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        canvas.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         canvas.setTypeface(Typeface.SANS_SERIF);
         canvas.setTextColor(COLOR_DEFAULT);
         canvas.setBackgroundResource(R.drawable.chatcard);

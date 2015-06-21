@@ -94,7 +94,11 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
             ads.setVisibility(View.GONE);
         } else {
             AdView mAdView = (AdView) llLayout.findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder().build();
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .addTestDevice("E9C24D5A0EFC9044146D4ECAFD56B53B")
+                    .build();
+
             mAdView.loadAd(adRequest);
             ads.setVisibility(View.VISIBLE);
         }
@@ -318,7 +322,6 @@ public class HomeFragment extends Fragment implements ServiceConnection, ServerL
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if (!bp.handleActivityResult(requestCode, resultCode, data))
             super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode != super.getActivity().RESULT_OK) {

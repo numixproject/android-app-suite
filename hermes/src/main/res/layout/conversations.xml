@@ -6,13 +6,11 @@ Copyright 2015 Numix Project Ltd.
 -->
 
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/swipeRefresh"
     >
         <FrameLayout
-            xmlns:ads="http://schemas.android.com/tools"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -159,46 +157,6 @@ Copyright 2015 Numix Project Ltd.
                             android:text="server logs"/>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ads_card_conversation"
-                    android:visibility="gone"
-                    android:orientation="vertical">
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Sponsored"
-                    android:textColor="#777777"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="8dp"
-                    android:textStyle="bold"
-                    android:textSize="12sp"/>
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/ads_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    card_view:cardBackgroundColor="@android:color/white"
-                    card_view:cardCornerRadius="0dp"
-                    android:paddingTop="4dp">
-                    <com.google.android.gms.ads.AdView
-                        xmlns:ads="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/adView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_alignParentBottom="true"
-                        card_view:cardElevation="2sp"
-                        ads:adSize="SMART_BANNER"
-                        ads:adUnitId="ca-app-pub-2834532364021285/2325120655"
-                        >
-                    </com.google.android.gms.ads.AdView>
-                </android.support.v7.widget.CardView>
-                </LinearLayout>
             </LinearLayout>
             </ScrollView>
             <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
