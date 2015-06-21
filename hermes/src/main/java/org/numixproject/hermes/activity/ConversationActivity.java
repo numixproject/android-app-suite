@@ -107,6 +107,9 @@ import android.widget.Toast;
 import org.numixproject.hermes.utils.SwipeDismissListViewTouchListener;
 import org.numixproject.hermes.utils.TinyDB;
 import com.cocosw.undobar.UndoBarController;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.melnykov.fab.FloatingActionButton;
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 
@@ -153,6 +156,8 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     private boolean isFirstTimeStarred = true;
     private boolean isFirstTimeRefresh = true;
     SwipeRefreshLayout swipeRefresh;
+    InterstitialAd mInterstitialAd;
+
 
     private final OnKeyListener inputKeyListener = new OnKeyListener() {
         /**
@@ -211,12 +216,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         }
     };
 
-    public static boolean isTablet(Context context) {
-        return (context.getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK)
-                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
-    }
-
     /**
      * On create
      */
@@ -246,6 +245,18 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         if (server == null) {
             this.finish();
         }
+
+        // Load AdMob Ads
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-2834532364021285/7438037454");
+        requestNewInterstitial();
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                finish();
+            }
+        });
 
         try {
             setTitle(server.getTitle());
@@ -1587,6 +1598,23 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         };
         a.setDuration(1500); // in ms
         fab.startAnimation(a);
+    }
+
+    private void showAd() {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            finish();
+        }
+    }
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("E9C24D5A0EFC9044146D4ECAFD56B53B")
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
     }
 
     // Adapter for Room List
