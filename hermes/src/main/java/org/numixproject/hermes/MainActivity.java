@@ -126,7 +126,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         try {
             fragment.openServer(position);
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "An unexpected error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "An unexpected error occurred. Please restart Hermes and try again.", Toast.LENGTH_SHORT).show();
         }
     }
 

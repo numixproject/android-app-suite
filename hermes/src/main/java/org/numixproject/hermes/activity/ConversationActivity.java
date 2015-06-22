@@ -92,6 +92,7 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.view.inputmethod.EditorInfo;
@@ -469,11 +470,17 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         roomsList.setEmptyView(findViewById(R.id.roomsActivityList_empty));
 
         // Handle click on adapter
+        roomsList.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent event) {
+                showConversationLayout(event);
+                return false;
+            }
+        });
+
         roomsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // Set conversation VISIBLE
-                showConversationLayout();
                 invalidateOptionsMenu();
                 swipeRefresh.setEnabled(false);
 
@@ -494,11 +501,17 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
         // Click on Others
         CardView otherCard = (CardView) findViewById(R.id.card_view_other);
+        otherCard.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent event) {
+                showConversationLayout(event);
+                return false;
+            }
+        });
+
         otherCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Set conversation VISIBLE
-                showConversationLayout();
                 invalidateOptionsMenu();
                 swipeRefresh.setEnabled(false);
 
@@ -734,34 +747,33 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         }
     }
 
-    private void showConversationLayout() {
-        // previously invisible view
-// get the center for the clipping circle
-        int cx = (conversationLayout.getLeft() + conversationLayout.getRight()) / 2;
-        int cy = (conversationLayout.getTop() + conversationLayout.getBottom()) / 2;
+    private void showConversationLayout(MotionEvent motionEvent) {
+        if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+            // get the final radius for the clipping circle
+            int finalRadius = Math.max(conversationLayout.getWidth(), conversationLayout.getHeight()) / 2;
 
-// get the final radius for the clipping circle
-        int finalRadius = Math.max(conversationLayout.getWidth(), conversationLayout.getHeight());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-        // Check if we're running on Android 5.0 or higher
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // create the animator for this view (the start radius is zero)
-            Animator anim =
-                    ViewAnimationUtils.createCircularReveal(conversationLayout, cx, cy, 0, finalRadius);
+                // create the animator for this view (the start radius is zero)
+                Animator anim =
+                        ViewAnimationUtils.createCircularReveal(conversationLayout, (int) motionEvent.getX(), (int) motionEvent.getY(), 0, finalRadius);
+                anim.setInterpolator(new AccelerateDecelerateInterpolator());
 
-            // make the view visible and start the animation
-            conversationLayout.setVisibility(View.VISIBLE);
-            anim.start();
-        } else {
-            conversationLayout.setVisibility(View.VISIBLE);
-            conversationLayout.setAlpha(0.f);
-            conversationLayout.setScaleX(0.f);
-            conversationLayout.setScaleY(0.f);
-            conversationLayout.animate()
-                    .alpha(1.f)
-                    .scaleX(1.f).scaleY(1.f)
-                    .setDuration(300)
-                    .start();
+                // make the view visible and start the animation
+                conversationLayout.setVisibility(View.VISIBLE);
+                anim.start();
+            } else {
+                conversationLayout.setVisibility(View.VISIBLE);
+                conversationLayout.setAlpha(0.f);
+                conversationLayout.setScaleX(0.f);
+                conversationLayout.setScaleY(0.f);
+                conversationLayout.animate()
+                        .alpha(1.f)
+                        .scaleX(1.f).scaleY(1.f)
+                        .setInterpolator(new AccelerateDecelerateInterpolator())
+                        .setDuration(300)
+                        .start();
+            }
         }
     }
 
@@ -780,6 +792,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             // create the animation (the final radius is zero)
             Animator anim =
                     ViewAnimationUtils.createCircularReveal(conversationLayout, cx, cy, initialRadius, 0);
+            anim.setInterpolator(new AccelerateDecelerateInterpolator());
 
             // make the view invisible when the animation is done
             anim.addListener(new AnimatorListenerAdapter() {
@@ -800,6 +813,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                     .alpha(0.f)
                     .scaleX(0.f).scaleY(0.f)
                     .setDuration(300)
+                    .setInterpolator(new AccelerateDecelerateInterpolator())
                     .start();
         }
         conversationLayout.setVisibility(View.INVISIBLE);
