@@ -382,21 +382,13 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             }
         });
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (swipeRefresh.getScrollY() == 0) {
-                    new java.util.Timer().schedule(
-                            new java.util.TimerTask() {
-                                @Override
-                                public void run() {
-                                    refreshActivity();
-                                }
-                            },
-                            1500
-                    );
-                }
-            }
-        });
+              @Override
+              public void onRefresh() {
+                  if (swipeRefresh.getScrollY() == 0) {
+                      refreshActivity();
+                  }
+              }
+          });
 
 
         // Adapter section
@@ -410,6 +402,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 new SwipeDismissListViewTouchListener(
                         roomsList,
                         new SwipeDismissListViewTouchListener.DismissCallbacks() {
+
                             @Override
                             public boolean canDismiss(int position) {
                                 return true;
@@ -469,18 +462,11 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         roomsList.setAdapter(roomAdapter);
         roomsList.setEmptyView(findViewById(R.id.roomsActivityList_empty));
 
-        // Handle click on adapter
-        roomsList.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View view, MotionEvent event) {
-                showConversationLayout(event);
-                return false;
-            }
-        });
-
         roomsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // Set conversation VISIBLE
+                showConversationLayout();
                 invalidateOptionsMenu();
                 swipeRefresh.setEnabled(false);
 
@@ -503,7 +489,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         CardView otherCard = (CardView) findViewById(R.id.card_view_other);
         otherCard.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent event) {
-                showConversationLayout(event);
+                showConversationLayout();
                 return false;
             }
         });
@@ -747,33 +733,29 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         }
     }
 
-    private void showConversationLayout(MotionEvent motionEvent) {
-        if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-            // get the final radius for the clipping circle
-            int finalRadius = Math.max(conversationLayout.getWidth(), conversationLayout.getHeight()) / 2;
+    private void showConversationLayout() {
+        // get the final radius for the clipping circle
+        int finalRadius = Math.max(conversationLayout.getWidth(), conversationLayout.getHeight()) / 2;
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-                // create the animator for this view (the start radius is zero)
-                Animator anim =
-                        ViewAnimationUtils.createCircularReveal(conversationLayout, (int) motionEvent.getX(), (int) motionEvent.getY(), 0, finalRadius);
-                anim.setInterpolator(new AccelerateDecelerateInterpolator());
+            // create the animator for this view (the start radius is zero)
+            Animator anim =
+                    ViewAnimationUtils.createCircularReveal(conversationLayout, (int) conversationLayout.getRight(), (int) conversationLayout.getTop(), 0, finalRadius);
 
-                // make the view visible and start the animation
-                conversationLayout.setVisibility(View.VISIBLE);
-                anim.start();
-            } else {
-                conversationLayout.setVisibility(View.VISIBLE);
-                conversationLayout.setAlpha(0.f);
-                conversationLayout.setScaleX(0.f);
-                conversationLayout.setScaleY(0.f);
-                conversationLayout.animate()
-                        .alpha(1.f)
-                        .scaleX(1.f).scaleY(1.f)
-                        .setInterpolator(new AccelerateDecelerateInterpolator())
-                        .setDuration(300)
-                        .start();
-            }
+            // make the view visible and start the animation
+            conversationLayout.setVisibility(View.VISIBLE);
+            anim.start();
+        } else {
+            conversationLayout.setVisibility(View.VISIBLE);
+            conversationLayout.setAlpha(0.f);
+            conversationLayout.setScaleX(0.f);
+            conversationLayout.setScaleY(0.f);
+            conversationLayout.animate()
+                    .alpha(1.f)
+                    .scaleX(1.f).scaleY(1.f)
+                    .setDuration(300)
+                    .start();
         }
     }
 
