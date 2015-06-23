@@ -53,6 +53,7 @@ import org.numixproject.hermes.receiver.ConversationReceiver;
 import org.numixproject.hermes.receiver.ServerReceiver;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -93,11 +94,16 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.Transformation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -147,8 +153,10 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     recentAdapter recentAdapter;
 
     FrameLayout conversationLayout;
+    FrameLayout roomsLayout;
     ExpandableHeightListView roomsList;
     ExpandableHeightListView recentView;
+    AutoCompleteTextView input;
 
     private Scrollback scrollback;
     private FloatingActionButton fab = null;
@@ -164,7 +172,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     SwipeRefreshLayout swipeRefresh;
     InterstitialAd mInterstitialAd;
     BillingProcessor bp;
-
 
     private final OnKeyListener inputKeyListener = new OnKeyListener() {
         /**
@@ -283,7 +290,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         setContentView(R.layout.conversations);
         boolean isLandscape = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
 
-        EditText input = (EditText) findViewById(R.id.input);
+        input = (AutoCompleteTextView) findViewById(R.id.input);
         input.setOnKeyListener(inputKeyListener);
 
         pager = (ViewPager) findViewById(R.id.pager);
@@ -332,27 +339,13 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             @Override
             public void onClick(View v) {
                 openSoftKeyboard(v);
+                updateAutoComplete();
             }
-
         });
 
-        int setInputTypeFlags = 0;
-
-        setInputTypeFlags |= InputType.TYPE_TEXT_FLAG_AUTO_CORRECT;
-
-        if (settings.autoCapSentences()) {
-            setInputTypeFlags |= InputType.TYPE_TEXT_FLAG_CAP_SENTENCES;
-        }
-
-        if (isLandscape && settings.imeExtract()) {
-            setInputTypeFlags |= InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE;
-        }
-
-        if (!settings.imeExtract()) {
-            input.setImeOptions(input.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
-        }
-
-        input.setInputType(input.getInputType() | setInputTypeFlags);
+        conversationLayout = (FrameLayout) findViewById(R.id.conversationFragment);
+        conversationLayout.setVisibility(LinearLayout.INVISIBLE);
+        roomsLayout = (FrameLayout) findViewById(R.id.roomsLayout);
 
         // Create a new scrollback history
         scrollback = new Scrollback();
@@ -392,9 +385,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
 
         // Adapter section
-        conversationLayout = (FrameLayout) findViewById(R.id.conversationFragment);
-        conversationLayout.setVisibility(LinearLayout.INVISIBLE);
-
         roomsList = (ExpandableHeightListView) findViewById(R.id.roomsActivityList);
         roomsList.setExpanded(true);
 
@@ -466,7 +456,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // Set conversation VISIBLE
-                showConversationLayout();
                 invalidateOptionsMenu();
                 swipeRefresh.setEnabled(false);
 
@@ -482,27 +471,21 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
                 // Set position in pager
                 pager.setCurrentItem(pagerPosition, true);
+                showConversationLayout();
+
             }
         });
 
         // Click on Others
         CardView otherCard = (CardView) findViewById(R.id.card_view_other);
-        otherCard.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View view, MotionEvent event) {
-                showConversationLayout();
-                return false;
-            }
-        });
-
         otherCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Set conversation VISIBLE
                 invalidateOptionsMenu();
                 swipeRefresh.setEnabled(false);
-
-                // Set position in pager
                 pager.setCurrentItem(0);
+
+                showConversationLayout();
             }
         });
 
@@ -630,9 +613,9 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         bindService(intent, this, 0);
 
         if (!server.isConnected()) {
-            ((EditText) findViewById(R.id.input)).setEnabled(false);
+            input.setEnabled(false);
         } else {
-            ((EditText) findViewById(R.id.input)).setEnabled(true);
+            input.setEnabled(true);
         }
 
         // Optimization - cache field lookup
@@ -735,17 +718,58 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
 
     private void showConversationLayout() {
         // get the final radius for the clipping circle
-        int finalRadius = Math.max(conversationLayout.getWidth(), conversationLayout.getHeight()) / 2;
+        int finalRadius = Math.max(roomsLayout.getWidth(), roomsLayout.getHeight());
+        final FrameLayout colorLayout = (FrameLayout) findViewById(R.id.colorLayout);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             // create the animator for this view (the start radius is zero)
-            Animator anim =
-                    ViewAnimationUtils.createCircularReveal(conversationLayout, (int) conversationLayout.getRight(), (int) conversationLayout.getTop(), 0, finalRadius);
+            Animator colorAnim;
+            colorAnim = ViewAnimationUtils.createCircularReveal(colorLayout, (int) roomsLayout.getLeft(), (int) roomsLayout.getTop(), 0, finalRadius);
+            final AlphaAnimation fadeAnim = new AlphaAnimation(1.0f, 0.0f);
+            fadeAnim.setDuration(250);
+            fadeAnim.setInterpolator(new AccelerateInterpolator());
+            fadeAnim.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    conversationLayout.setVisibility(View.VISIBLE);
+                }
 
-            // make the view visible and start the animation
-            conversationLayout.setVisibility(View.VISIBLE);
-            anim.start();
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    colorLayout.setVisibility(View.GONE);
+                    invalidateOptionsMenu();
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
+            colorAnim.setInterpolator(new AccelerateInterpolator());
+            colorAnim.addListener(new android.animation.Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(android.animation.Animator animation) {
+                }
+
+                @Override
+                public void onAnimationRepeat(android.animation.Animator animation) {
+                }
+
+                @Override
+                public void onAnimationEnd(android.animation.Animator animation) {
+                    colorLayout.startAnimation(fadeAnim);
+                }
+
+                @Override
+                public void onAnimationCancel(android.animation.Animator animation) {
+                }});
+
+            colorLayout.setVisibility(View.VISIBLE);
+            colorAnim.start();
+
+
         } else {
             conversationLayout.setVisibility(View.VISIBLE);
             conversationLayout.setAlpha(0.f);
@@ -1112,14 +1136,19 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         // No implementation
     }
 
+    private void updateAutoComplete(){
+        ArrayAdapter<String> autoCompleteAdapter = new ArrayAdapter<String>(this,
+                R.layout.dropdown_item, binder.getService().getConnection(server.getId()).getUsersAsStringArray(pagerAdapter.getItem(pager.getCurrentItem()).getName()));
+
+        autoCompleteAdapter.notifyDataSetChanged();
+        input.setAdapter(autoCompleteAdapter);
+    }
+
     /**
      * On server status update
      */
     @Override
-    public void onStatusUpdate()
-    {
-        EditText input = (EditText) findViewById(R.id.input);
-
+    public void onStatusUpdate() {
         if (server.isConnected()) {
             input.setEnabled(true);
         } else {
@@ -1192,7 +1221,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             case REQUEST_CODE_SPEECH:
                 ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 if (matches.size() > 0) {
-                    ((EditText) findViewById(R.id.input)).setText(matches.get(0));
+                    input.setText(matches.get(0));
                 }
                 break;
             case REQUEST_CODE_JOIN:
@@ -1212,7 +1241,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                 startActivityForResult(intent, REQUEST_CODE_USER);
                 break;
             case REQUEST_CODE_NICK_COMPLETION:
-                insertNickCompletion((EditText) findViewById(R.id.input), data.getExtras().getString(Extra.USER));
+                insertNickCompletion((AutoCompleteTextView) findViewById(R.id.input), data.getExtras().getString(Extra.USER));
                 break;
             case REQUEST_CODE_USER:
                 final int actionId = data.getExtras().getInt(Extra.ACTION);
@@ -1252,7 +1281,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        EditText input = (EditText) findViewById(R.id.input);
                                         input.setText(replyText);
                                         input.setSelection(replyText.length());
                                     }
@@ -1465,7 +1493,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             @Override
             public void run() {
                 // make the softkeyboard come up again (only if no hw keyboard is attached)
-                EditText input = (EditText) findViewById(R.id.input);
+                AutoCompleteTextView input = (AutoCompleteTextView) findViewById(R.id.input);
                 openSoftKeyboard(input);
             }
         });

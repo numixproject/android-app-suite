@@ -11,6 +11,7 @@ Copyright 2015 Numix Project Ltd.
     android:id="@+id/swipeRefresh"
     >
         <FrameLayout
+            android:id="@+id/roomsLayout"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -215,7 +216,7 @@ Copyright 2015 Numix Project Ltd.
                 android:layout_height="1dp"
                 android:background="#e0e0e0">
                 </TextView>
-                <EditText
+                <AutoCompleteTextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:focusableInTouchMode="true"
@@ -230,5 +231,11 @@ Copyright 2015 Numix Project Ltd.
             </LinearLayout>
         </LinearLayout>
         </FrameLayout>
+            <FrameLayout
+                android:id="@+id/colorLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:visibility="gone"
+                android:background="#0097A7"/>
         </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>
