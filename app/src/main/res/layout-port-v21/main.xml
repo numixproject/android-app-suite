@@ -16,6 +16,13 @@
             android:background="#e84e40"
             android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/deleteColor"
+                android:visibility="gone"
+                android:background="#4CAF50"/>
+
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

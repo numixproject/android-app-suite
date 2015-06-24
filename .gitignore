@@ -4,6 +4,11 @@
 # Built application files
 *.apk
 *.ap_
+.idea
+app/app.iml
+local.properties
+com.numix.calculator.iml
+
 
 # Files for the Dalvik VM
 *.dex
