@@ -18,17 +18,25 @@ package com.numix.calculator;
 
 import java.util.List;
 
+import android.animation.Animator;
 import android.content.Context;
+import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.numix.calculator.BaseModule.Mode;
 import com.numix.calculator.Calculator.Panel;
+import com.numix.calculator.view.CalculatorDisplay;
 import com.numix.calculator.view.MatrixEditText;
 import com.numix.calculator.view.MatrixInverseView;
 import com.numix.calculator.view.MatrixTransposeView;
@@ -71,6 +79,79 @@ public class EventListener implements View.OnKeyListener, View.OnClickListener, 
         mDY = mContext.getString(R.string.dy);
     }
 
+    private void deleteAnimation(View view){
+        final TextView colorLayout = (TextView) view.getRootView().findViewById(R.id.deleteColor);
+        final LinearLayout displayView = (LinearLayout) view.getRootView().findViewById(R.id.displayLayout);
+        final CalculatorDisplay calculatorDisplay = (CalculatorDisplay) view.getRootView().findViewById(R.id.display);
+
+        int finalRadius = Math.max(displayView.getWidth(), displayView.getHeight());
+
+        // create the animator for this view (the start radius is zero)
+        Animator colorAnim;
+        colorAnim = ViewAnimationUtils.createCircularReveal(colorLayout, (int) displayView.getRight(), (int) displayView.getBottom(), 0, finalRadius);
+        final AlphaAnimation fadeAnim = new AlphaAnimation(1.0f, 0.0f);
+        final AlphaAnimation fadeDisplay = new AlphaAnimation(1.0f, 0.0f);
+        fadeAnim.setDuration(250);
+        fadeAnim.setInterpolator(new AccelerateInterpolator());
+        fadeAnim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                colorLayout.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        fadeDisplay.setDuration(250);
+        fadeDisplay.setInterpolator(new AccelerateInterpolator());
+        fadeDisplay.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mHandler.onClear();
+                displayView.setAlpha(1.0f);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        colorAnim.setInterpolator(new AccelerateInterpolator());
+        colorAnim.addListener(new android.animation.Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(android.animation.Animator animation) {
+                calculatorDisplay.startAnimation(fadeDisplay);
+            }
+
+            @Override
+            public void onAnimationRepeat(android.animation.Animator animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(android.animation.Animator animation) {
+                colorLayout.startAnimation(fadeAnim);
+            }
+
+            @Override
+            public void onAnimationCancel(android.animation.Animator animation) {
+            }});
+
+        colorLayout.setVisibility(View.VISIBLE);
+        colorAnim.start();
+    }
+
     @Override
     public void onClick(View view) {
         View v;
@@ -82,7 +163,9 @@ public class EventListener implements View.OnKeyListener, View.OnClickListener, 
             break;
 
         case R.id.clear:
-            mHandler.onClear();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                deleteAnimation(view);
+            }
             break;
 
         case R.id.equal:
@@ -159,7 +242,7 @@ public class EventListener implements View.OnKeyListener, View.OnClickListener, 
             if(mHandler.getText().equals(mErrorString)) mHandler.setText("");
             active = mHandler.mDisplay.getActiveEditText();
             if(active.getSelectionStart() == active.getText().length()) {
-                v = mHandler.mDisplay.getActiveEditText().focusSearch(View.FOCUS_FORWARD);
+                v = mHandler.mDisplay.getActiveEditText().focusSearch(View.FOCUS_RIGHT);
                 if(v != null) v.requestFocus();
                 active = mHandler.mDisplay.getActiveEditText();
                 active.setSelection(0);
@@ -300,7 +383,7 @@ public class EventListener implements View.OnKeyListener, View.OnClickListener, 
             // Handle back
             EditText active = mHandler.mDisplay.getActiveEditText();
             if(active.getSelectionStart() == 0) {
-                View v = mHandler.mDisplay.getActiveEditText().focusSearch(View.FOCUS_BACKWARD);
+                View v = mHandler.mDisplay.getActiveEditText().focusSearch(View.FOCUS_LEFT);
                 if(v != null) v.requestFocus();
                 active = mHandler.mDisplay.getActiveEditText();
                 active.setSelection(active.getText().length());

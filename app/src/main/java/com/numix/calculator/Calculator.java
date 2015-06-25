@@ -49,6 +49,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.numix.calculator.view.AdvancedDisplay;
@@ -241,6 +242,10 @@ public class Calculator extends Activity implements Logic.Listener, OnClickListe
             }
             break;
         }
+    }
+
+    public void deleteAnimation(){
+        TextView colorView = (TextView) findViewById(R.id.deleteColor);
     }
 
     private PopupMenu constructPopupMenu() {
