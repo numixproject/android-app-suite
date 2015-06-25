@@ -52,6 +52,8 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 import com.numix.calculator.view.AdvancedDisplay;
 import com.numix.calculator.view.CalculatorDisplay;
 import com.numix.calculator.view.CalculatorViewPager;
@@ -76,6 +78,8 @@ public class Calculator extends Activity implements Logic.Listener, OnClickListe
     private Slider mPulldown;
     private Graph mGraph;
     EventListener  cls2= new EventListener();
+    public static GoogleAnalytics analytics;
+    public static Tracker tracker;
 
     int currentapiVersion = android.os.Build.VERSION.SDK_INT;
 
@@ -131,6 +135,14 @@ public class Calculator extends Activity implements Logic.Listener, OnClickListe
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
+
+        analytics = GoogleAnalytics.getInstance(this);
+        analytics.setLocalDispatchPeriod(1800);
+
+        tracker = analytics.newTracker("UA-63953479-3");
+        tracker.enableExceptionReporting(true);
+        tracker.enableAdvertisingIdCollection(true);
+        tracker.enableAutoActivityTracking(true);
 
         // Disable IME for this application
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM, WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);

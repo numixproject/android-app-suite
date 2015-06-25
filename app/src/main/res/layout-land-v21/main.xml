@@ -17,7 +17,7 @@
             android:layout_height="fill_parent"
             android:visibility="gone"
             android:id="@+id/deleteColor"
-            android:background="#3fdae9"/>
+            android:background="#e9da3f"/>
 
         <LinearLayout
             android:layout_width="fill_parent"
