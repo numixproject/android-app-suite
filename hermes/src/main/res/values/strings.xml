@@ -249,4 +249,6 @@
     <string name="minutes_15">15 minutes</string>
     <string name="minutes_20">20 minutes</string>
     <string name="minutes_30">30 minutes</string>
+
+    <string name="facebook_app_id">1648827988693108</string>
 </resources>

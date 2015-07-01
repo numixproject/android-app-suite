@@ -118,6 +118,7 @@ import org.numixproject.hermes.utils.iap;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.cocosw.undobar.UndoBarController;
+import com.facebook.FacebookSdk;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -236,6 +237,10 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Initialize Facebook SDK
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
         tinydb = new TinyDB(getApplicationContext());
 
         serverId = getIntent().getExtras().getInt("serverId");
