@@ -8,6 +8,14 @@
     android:id="@+id/home_mainFragment"
     android:layout_height="fill_parent">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        style="@style/Widget.Hermes.Toolbar"
+        android:elevation="4dp" />
+
     <FrameLayout
         android:id="@+id/intro"
         android:layout_width="fill_parent"
@@ -16,6 +24,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:background="#E5E5E5"
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_height="wrap_content">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

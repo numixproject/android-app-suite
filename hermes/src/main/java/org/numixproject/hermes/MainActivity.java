@@ -1,23 +1,46 @@
 package org.numixproject.hermes;
 
+import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
+import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.melnykov.fab.FloatingActionButton;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
+import com.mikepenz.materialdrawer.accountswitcher.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
+import org.numixproject.hermes.activity.AddServerActivity;
+import org.numixproject.hermes.activity.ConversationActivity;
 import org.numixproject.hermes.adapter.ServerListAdapter;
 import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.irc.IRCBinder;
@@ -25,31 +48,35 @@ import org.numixproject.hermes.activity.SettingsActivity;
 import org.numixproject.hermes.irc.IRCService;
 import org.numixproject.hermes.listener.ServerListener;
 import org.numixproject.hermes.model.Broadcast;
+import org.numixproject.hermes.model.Extra;
+import org.numixproject.hermes.model.Server;
+import org.numixproject.hermes.model.Status;
 import org.numixproject.hermes.receiver.ServerReceiver;
 import org.numixproject.hermes.utils.iap;
 
-import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
-import it.neokree.materialnavigationdrawer.elements.MaterialSection;
-import it.neokree.materialnavigationdrawer.elements.listeners.MaterialSectionListener;
-
-public class MainActivity extends MaterialNavigationDrawer implements ServiceConnection, ServerListener {
+public class MainActivity extends AppCompatActivity implements ServiceConnection, ServerListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     private static int instanceCount = 0;
-    public static IRCBinder binder;
-    private ServerReceiver receiver;
-    private ServerListAdapter adapter;
-    private HomeFragment fragment = null;
     SharedPreferences prefs = null;
-    String key;
-    BillingProcessor bp;
     public static GoogleAnalytics analytics;
     public static Tracker tracker;
+    private static final int REQUEST_INVITE = 1;
+    private IRCBinder binder;
+    private ServerReceiver receiver;
+    private ServerListAdapter adapter;
+    private ExpandableHeightListView list;
+    private String channel;
+    private int positionBuffer;
+    private FloatingActionButton fab = null;
+    String key;
+    BillingProcessor bp;
+
+    private Drawer result = null;
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        MaterialSection home = newSection("Connect to...", R.drawable.ic_ic_swap_horiz_24px, new HomeFragment());
-        MaterialSection settings = newSection("Settings", R.drawable.ic_ic_settings_24px , new Intent(this, SettingsActivity.class));
-        getSupportActionBar().setElevation(3);
-        addSection(home);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.home_fragment);
 
         analytics = GoogleAnalytics.getInstance(this);
         analytics.setLocalDispatchPeriod(1800);
@@ -63,47 +90,96 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         iap inAppPayments = new iap();
         bp = inAppPayments.getBilling(this, key);
         bp.loadOwnedPurchasesFromGoogle();
-        fragment = (HomeFragment) home.getTargetFragment();
 
-        // Add only for DEBUG purposes
-        //this.addSection(newSection("Help", R.drawable.ic_ic_help_24px, new MaterialSectionListener() {
-        //    @Override
-        //    public void onClick(MaterialSection section) {
-        //    startIntro();
-        //    }
-        //}));
+        // Handle Toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        if (!bp.isPurchased("remove_ads")) {
-            this.addBottomSection(newSection("Remove Ads", R.drawable.ic_ic_dnd_on_24px, new MaterialSectionListener() {
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.cover)
+                .build();
+
+        result = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withTranslucentStatusBar(false)
+                .withActionBarDrawerToggle(true)
+                .withAccountHeader(headerResult)
+                .withSelectedItem(0)
+                .addDrawerItems(
+                        new PrimaryDrawerItem().withName("Connect to...").withIcon(R.drawable.ic_ic_swap_horiz_24px),
+                        new PrimaryDrawerItem().withName("Settings").withIcon(R.drawable.ic_ic_settings_24px),
+                        new PrimaryDrawerItem().withName("Contact us").withIcon(R.drawable.ic_ic_mail_24px),
+                        new SecondaryDrawerItem().withName("Remove ads").withIcon(R.drawable.ic_ic_dnd_on_24px),
+                        new SecondaryDrawerItem().withName("More Apps").withIcon(R.drawable.ic_ic_shop_24px)
+                )
+                                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                                    @Override
+                                    public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
+                                        if (drawerItem instanceof Nameable) {
+                                            switch (((Nameable) drawerItem).getName()) {
+                                                case "Settings": {
+                                                    Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                                                    startActivity(intent);
+                                                    break;
+                                                }
+                                                case "Contact us": {
+                                                    try {
+                                                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "team@numixproject.org"));
+                                                        startActivity(intent);
+                                                    } catch (Exception e){
+                                                        Toast.makeText(MainActivity.this, "A mail client is required.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    break;
+                                                }
+                                                case "Remove ads":
+                                                    removeAds();
+                                                    break;
+                                                case "More Apps":
+                                                    String url = "https://play.google.com/store/apps/dev?id=5600498874720965803";
+                                                    Intent i = new Intent(Intent.ACTION_VIEW);
+                                                    i.setData(Uri.parse(url));
+                                                    startActivity(i);
+                                                    break;
+                                            }
+                                        }
+
+                                        return false;
+                                    }
+                                }).build();
+
+
+        adapter = new ServerListAdapter();
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                newAddServerActivity(v);
+            }
+        });
+
+        list = (ExpandableHeightListView) findViewById(R.id.list);
+        list.setAdapter(adapter);
+        list.setOnItemClickListener(this);
+        list.setOnItemLongClickListener(this);
+        list.setExpanded(true);
+
+        fab.attachToListView(list);
+
+        LinearLayout inviteLayout = (LinearLayout) findViewById(R.id.inviteButton);
+
+        if (isGooglePlayInstalled(getApplicationContext())) {
+            inviteLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(MaterialSection section) {
-                    fragment.iap();
+                public void onClick(View v) {
+                    onInviteClicked();
                 }
-            }));
+            });
+        } else {
+            inviteLayout.setVisibility(LinearLayout.GONE);
         }
-
-        addSection(settings);
-
-        this.addSection(newSection("Contact us", R.drawable.ic_ic_mail_24px, new MaterialSectionListener() {
-            @Override
-            public void onClick(MaterialSection section) {
-                Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + "team@numixproject.org"));
-                startActivity(intent);
-            }
-        }));
-
-        this.addBottomSection(newSection("More apps...", R.drawable.ic_ic_shop_24px, new MaterialSectionListener() {
-            @Override
-            public void onClick(MaterialSection section) {
-                String url = "https://play.google.com/store/apps/dev?id=5600498874720965803";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        }));
-
-        setDrawerHeaderImage(R.drawable.cover);
-        allowArrowAnimation();
 
         if (instanceCount > 0) {
             finish();
@@ -117,21 +193,303 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
 
     }
 
+    public static boolean isGooglePlayInstalled(Context context) {
+        PackageManager pm = context.getPackageManager();
+        boolean app_installed = false;
+        try
+        {
+            PackageInfo info = pm.getPackageInfo("com.android.vending", PackageManager.GET_ACTIVITIES);
+            String label = (String) info.applicationInfo.loadLabel(pm);
+            app_installed = (label != null && !label.equals("Market"));
+        }
+        catch (PackageManager.NameNotFoundException e)
+        {
+            app_installed = false;
+        }
+        return app_installed;
+    }
+
+    private void onInviteClicked() {
+        Intent intent = new AppInviteInvitation.IntentBuilder("Try Hermes app")
+                .setMessage("Hey, Numix Hermes IRC app for Android is really cool.\nWant to try it?")
+                .setDeepLink(Uri.parse("https://play.google.com/store/apps/details?id=org.numixproject.hermes"))
+                .build();
+        startActivityForResult(intent, REQUEST_INVITE);
+    }
+
+    private void newAddServerActivity(View v){
+        Intent intent = new Intent(this, AddServerActivity.class);
+        startActivity(intent);
+    }
+
+    public void removeAds() {
+        bp.purchase(this, "remove_ads");
+    }
+
+    public BillingProcessor getIAP() {
+        return bp;
+    }
+
     private void startIntro() {
         Intent intent = new Intent(this, IntroActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Service connected to Activity
+     */
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service)
+    {
+        binder = (IRCBinder) service;
+    }
+
+    public boolean onMoreButtonClick(int position){
+        final Server server = adapter.getItem(position);
+
+        if (server == null) {
+            // "Add server" view selected
+            return true;
+        }
+
+        final CharSequence[] items = {
+                getString(R.string.connect),
+                getString(R.string.disconnect),
+                getString(R.string.edit),
+                getString(R.string.delete)
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(server.getTitle());
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                switch (item) {
+                    case 0: // Connect
+                        if (server.getStatus() == Status.DISCONNECTED) {
+                            binder.connect(server);
+                            server.setStatus(Status.CONNECTING);
+                            adapter.notifyDataSetChanged();
+                        }
+                        break;
+                    case 1: // Disconnect
+                        server.clearConversations();
+                        server.setStatus(Status.DISCONNECTED);
+                        server.setMayReconnect(false);
+                        binder.getService().getConnection(server.getId()).quitServer();
+                        break;
+                    case 2: // Edit
+                        editServer(server.getId());
+                        break;
+                    case 3: // Delete
+                        binder.getService().getConnection(server.getId()).quitServer();
+                        deleteServer(server.getId());
+                        break;
+                }
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+        return true;
+    };
+
+    /**
+     * On server selected
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Server server = adapter.getItem(position);
+
+        if (server == null) {
+            // "Add server" was selected
+            startActivityForResult(new Intent(this, AddServerActivity.class), 0);
+            return;
+        }
+
+        Intent intent = new Intent(this, ConversationActivity.class);
+
+        if (server.getStatus() == Status.DISCONNECTED && !server.mayReconnect()) {
+            server.setStatus(Status.PRE_CONNECTING);
+            intent.putExtra("connect", true);
+        }
+
+        intent.putExtra("serverId", server.getId());
+        startActivity(intent);
+    }
+
+    // same of OnItemClick. But opens new room too.
     public void openServer(int position) {
-        try {
-            fragment.openServer(position);
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "An unexpected error occurred. Please restart Hermes and try again.", Toast.LENGTH_SHORT).show();
+        Server server = adapter.getItem(position);
+
+        if (server == null) {
+            // "Add server" was selected
+            startActivityForResult(new Intent(this, AddServerActivity.class), 0);
+            return;
+        }
+
+        Intent intent = new Intent(this, ConversationActivity.class);
+
+        if (server.getStatus() == Status.DISCONNECTED && !server.mayReconnect()) {
+            server.setStatus(Status.PRE_CONNECTING);
+            intent.putExtra("connect", true);
+        }
+
+        intent.putExtra("serverId", server.getId());
+        startActivity(intent);
+    }
+
+    /**
+     * On activity result
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            try {
+                // Refresh list from database
+                adapter.loadServers();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        switch (requestCode) {
+            case 1:
+                channel = data.getExtras().getString("channel");
+                Intent intent = new Intent(this, ConversationActivity.class);
+                // send position in intent.putExtra
+                final Server server = adapter.getItem(positionBuffer);
+
+                intent.putExtra("serverId", server.getId());
+                // Intent wants to open another room
+                intent.putExtra("NewRoom", 1);
+                intent.putExtra("channel", channel);
+
+                // starts ConversationActivity
+                startActivity(intent);
+                break;
         }
     }
 
-    public void onCardMoreClicked(int position){
-        fragment.onMoreButtonClick(position);
+    /**
+     * On long click
+     */
+    @Override
+    public boolean onItemLongClick(AdapterView<?> l, View v, int position, long id)
+    {
+        final Server server = adapter.getItem(position);
+
+        if (server == null) {
+            // "Add server" view selected
+            return true;
+        }
+
+        final CharSequence[] items = {
+                getString(R.string.connect),
+                getString(R.string.disconnect),
+                getString(R.string.edit),
+                getString(R.string.delete)
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(server.getTitle());
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                switch (item) {
+                    case 0: // Connect
+                        if (server.getStatus() == Status.DISCONNECTED) {
+                            binder.connect(server);
+                            server.setStatus(Status.CONNECTING);
+                            adapter.notifyDataSetChanged();
+                        }
+                        break;
+                    case 1: // Disconnect
+                        server.clearConversations();
+                        server.setStatus(Status.DISCONNECTED);
+                        server.setMayReconnect(false);
+                        binder.getService().getConnection(server.getId()).quitServer();
+                        break;
+                    case 2: // Edit
+                        editServer(server.getId());
+                        break;
+                    case 3: // Delete
+                        binder.getService().getConnection(server.getId()).quitServer();
+                        deleteServer(server.getId());
+                        break;
+                }
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+        return true;
+    }
+
+    /**
+     * Start activity to edit server with given id
+     *
+     * @param serverId The id of the server
+     */
+    private void editServer(int serverId)
+    {
+        Server server = Hermes.getInstance().getServerById(serverId);
+
+        if (server.getStatus() != Status.DISCONNECTED) {
+            Toast.makeText(this, getResources().getString(R.string.disconnect_before_editing), Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent intent = new Intent(this, AddServerActivity.class);
+            intent.putExtra(Extra.SERVER, serverId);
+            startActivityForResult(intent, 0);
+        }
+    }
+
+    /**
+     * On menu item selected
+
+     @Override
+     public boolean onOptionsItemSelected(MenuItem item) {
+     switch (item.getItemId()) {
+     case R.id.add:
+     startActivityForResult(new Intent(super.getActivity(), AddServerActivity.class), 0);
+     break;
+     case R.id.about:
+     startActivity(new Intent(super.getActivity(), AboutActivity.class));
+     break;
+     case R.id.settings:
+     startActivity(new Intent(super.getActivity(), SettingsActivity.class));
+     break;
+     case R.id.disconnect_all:
+     ArrayList<Server> mServers = Hermes.getInstance().getServersAsArrayList();
+     for (Server server : mServers) {
+     if (binder.getService().hasConnection(server.getId())) {
+     server.setStatus(Status.DISCONNECTED);
+     server.setMayReconnect(false);
+     binder.getService().getConnection(server.getId()).quitServer();
+     }
+     }
+     // ugly
+     binder.getService().stopForegroundCompat(R.string.app_name);
+     }
+
+     return super.onOptionsItemSelected(item);
+     }
+     /*
+
+     /**
+      * Delete server
+      *
+      * @param serverId
+     */
+    public void deleteServer(int serverId)
+    {
+        Database db = new Database(this);
+        db.removeServerById(serverId);
+        db.close();
+
+        Hermes.getInstance().removeServerById(serverId);
+        adapter.loadServers();
     }
 
     @Override
@@ -148,6 +506,7 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     @Override
     public void onResume() {
         super.onResume();
+        result.setSelectionByIdentifier(0);
         try {
             // Find out if delete server
             Intent mIntent = getIntent();
@@ -156,8 +515,9 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
                 deleteServer(serverToDelete);
             }
         } catch (Exception e){
-            // Do nothing
+            e.printStackTrace();
         }
+
 
         // Start and connect to service
         Intent intent = new Intent(this, IRCService.class);
@@ -197,10 +557,6 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
         unregisterReceiver(receiver);
     }
 
-    @Override
-    public void onServiceConnected(ComponentName name, IBinder service) {
-        binder = (IRCBinder) service;
-    }
 
     @Override
     public void onServiceDisconnected(ComponentName name) {
@@ -208,26 +564,12 @@ public class MainActivity extends MaterialNavigationDrawer implements ServiceCon
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-            if (resultCode == RESULT_OK) {
-            try {
-                // Refresh list from database
-                adapter.loadServers();
-            } catch (Exception e){}
-        }
-    }
-
-    public void deleteServer(int serverId)
-    {
-        Database db = new Database(this);
-        db.removeServerById(serverId);
-        db.close();
-
-        Hermes.getInstance().removeServerById(serverId);
-        adapter.loadServers();
-    }
-
-    @Override
     public void onStatusUpdate() {
+        adapter.loadServers();
+
+        if (adapter.getCount() > 2) {
+            // Hide background if there are servers in the list
+            list.setBackgroundDrawable(null);
+        }
     }
 }

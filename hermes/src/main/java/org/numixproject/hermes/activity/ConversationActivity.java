@@ -76,6 +76,7 @@ import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.text.InputType;
 import android.text.method.TextKeyListener;
@@ -117,7 +118,6 @@ import org.numixproject.hermes.utils.TinyDB;
 import org.numixproject.hermes.utils.iap;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
-import com.cocosw.undobar.UndoBarController;
 import com.facebook.FacebookSdk;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -130,7 +130,7 @@ import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
  *
  * @author Sebastian Kaspari <sebastian@yaaic.org>
  */
-public class ConversationActivity extends ActionBarActivity implements ServiceConnection, ServerListener, ConversationListener
+public class ConversationActivity extends AppCompatActivity implements ServiceConnection, ServerListener, ConversationListener
 {
     public static final int REQUEST_CODE_SPEECH = 99;
 
@@ -1562,73 +1562,6 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         lastRooms = tinydb.getListString(server.getTitle()+"last");
     }
 
-
-    private void showUndoBarRoom(final String room){
-        UndoBarController.AdvancedUndoListener roomUndo = new UndoBarController.AdvancedUndoListener() {
-            @Override
-            public void onUndo(Parcelable parcelable) {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            binder.getService().getConnection(serverId).joinChannel(room);
-                        } catch (Exception E) {
-                            // Do nothing
-                        }
-                    }
-                }.start();
-
-            refreshActivity();
-            }
-
-            @Override
-            public void onClear(Parcelable[] tokens) {
-            }
-
-            @Override
-            public void onHide(Parcelable token) {
-                moveFABdown();
-            }
-        };
-
-        UndoBarController undoBarController = new UndoBarController.UndoBar(this).message(room + " removed").noicon(true).style(UndoBarController.UNDOSTYLE).listener(roomUndo).show();
-        undoBarController.measure(View.MeasureSpec.makeMeasureSpec(undoBarController.getWidth(), View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(undoBarController.getHeight(), View.MeasureSpec.AT_MOST));
-        int height = undoBarController.getMeasuredHeight();
-        moveFABup(64);
-    }
-
-    private void showUndoBarRecent(final String room) {
-
-        UndoBarController.AdvancedUndoListener recentUndo = new UndoBarController.AdvancedUndoListener() {
-            @Override
-            public void onUndo(Parcelable parcelable) {
-                addRecentRoom(room);
-                LinearLayout recentLabel = (LinearLayout) findViewById(R.id.recentName);
-                if (recentList.size()!=0){
-                    recentLabel.setVisibility(View.VISIBLE);
-                } else {
-                    recentLabel.setVisibility(View.GONE);
-                }
-                saveRecentItems();
-                refreshActivity();
-            }
-
-            @Override
-            public void onClear(Parcelable[] tokens) {
-            }
-
-            @Override
-            public void onHide(Parcelable token) {
-                moveFABdown();
-            }
-        };
-
-        UndoBarController undoBarController = new UndoBarController.UndoBar(this).message(room + " removed").noicon(true).style(UndoBarController.UNDOSTYLE).listener(recentUndo).show();
-        undoBarController.measure(View.MeasureSpec.makeMeasureSpec(undoBarController.getWidth(), View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(undoBarController.getHeight(), View.MeasureSpec.AT_MOST));
-        int height = undoBarController.getMeasuredHeight();
-        moveFABup(64);
-    }
-
     private void moveFABup(int height){
         Resources r = this.getResources();
         final int px = (int) TypedValue.applyDimension(
@@ -1713,7 +1646,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
             addRecentRoom(conversationToClose.getName());
 
             // Show toast with UNDO button
-            showUndoBarRoom(Room.get(position));
+            //showUndoBarRoom(Room.get(position));
 
             pinnedRooms.remove(Room.get(position));
             Room.remove(position);
@@ -1849,7 +1782,7 @@ public class ConversationActivity extends ActionBarActivity implements ServiceCo
         }
 
         public void remove(int position) {
-            showUndoBarRecent(Room.get(position));
+            // showUndoBarRecent(Room.get(position));
             recentList.remove(Room.get(position));
             Room.remove(position);
             LinearLayout recentLabel = (LinearLayout) findViewById(R.id.recentName);

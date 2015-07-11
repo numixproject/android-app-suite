@@ -4,41 +4,30 @@
         <item name="colorPrimary">#0097A7</item>
         <item name="colorPrimaryDark">#00838F</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="undoBarStyle">@style/UndoBarMaterialStyle</item>
+    </style>
+    <style name="HermesNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#0097A7</item>
+        <item name="colorPrimaryDark">#00838F</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="Preferences" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#0097A7</item>
         <item name="colorPrimaryDark">#00838F</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="MyNavigationDrawerTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar.TranslucentKitKatStatusBar">
-        <item name="colorPrimary">#0097A7</item>
-        <item name="colorPrimaryDark">#00838F</item>
-        <item name="singleAccount">true</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="multipaneSupport">true</item>
-        <item name="drawerType">@integer/DRAWERTYPE_IMAGE</item>
-        <item name="rippleBackport">true</item>
-        <item name="learningPattern">false</item>
-        <item name="toolbarElevation">true</item>
-        <item name="undoBarStyle">@style/UndoBarMaterialStyle</item>
+    <style name="Widget.Hermes.Toolbar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/primary</item>
+        <item name="theme">@style/ThemeOverlay.Hermes.Toolbar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <style name="ThemeOverlay.Hermes.Toolbar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@color/md_white_1000</item>
     </style>
     <style name="HermesDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorPrimary">#4baeae</item>
         <item name="colorPrimaryDark">#4baeae</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="UndoBarButtonMaterial" parent="UndoBarButtonClassic">
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:background">@null</item>
-        <item name="android:paddingRight">0dp</item>
-        <item name="android:paddingLeft">0dp</item>
-        <item name="android:layout_marginRight">8dp</item>
-        <item name="android:textColor">#FF478C</item>
-        <item name="android:capitalize">characters</item>
-        <item name="android:selectable">true</item>
     </style>
 </resources>

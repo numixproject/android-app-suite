@@ -10,7 +10,7 @@ Copyright 2015 Numix Project Ltd.
     android:installLocation="auto"
     android:versionCode="10"
     android:versionName="1.2.2"
-    android:theme="@style/MyNavigationDrawerTheme"
+    android:theme="@style/Hermes"
     >
 
     <!-- Include required permissions for Google Mobile Ads to run-->
@@ -24,7 +24,7 @@ Copyright 2015 Numix Project Ltd.
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="Hermes"
-        android:theme="@style/MyNavigationDrawerTheme"
+        android:theme="@style/Hermes"
         android:allowBackup="true">
 
         <!-- meta-data required for Facebook Audience Network -->
@@ -60,7 +60,7 @@ Copyright 2015 Numix Project Ltd.
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:theme="@style/MyNavigationDrawerTheme"
+            android:theme="@style/HermesNoActionBar"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
 
