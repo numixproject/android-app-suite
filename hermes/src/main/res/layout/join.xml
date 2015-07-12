@@ -19,15 +19,19 @@ Copyright 2015 Numix Project Ltd.
         android:textColor="#111111"
         android:paddingBottom="16dp"
         android:text="Join a room"/>
-    <android.support.v7.internal.widget.TintEditText
-        style="@style/Widget.AppCompat.EditText"
-        android:id="@+id/channel"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:singleLine="true"
-        android:ems="10"
-        android:text="#" />
+        android:paddingBottom="32dp">
+        <EditText
+            android:id="@+id/channel"
+            android:singleLine="true"
+            android:inputType="textCapSentences"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/abc_text_size_body_2_material"
+            android:text="#" />
+    </android.support.design.widget.TextInputLayout>
     <Button
         android:id="@+id/join"
         android:layout_width="wrap_content"

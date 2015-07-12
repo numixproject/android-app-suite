@@ -67,6 +67,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -339,6 +340,14 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
                 createNewConversation(conversation.getName());
             }
         }
+
+        ImageView autoCompleteButton = (ImageView) findViewById(R.id.autocomplete_button);
+        autoCompleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doNickCompletion(input);
+            }
+        });
 
         input.setOnClickListener(new View.OnClickListener() {
             @Override

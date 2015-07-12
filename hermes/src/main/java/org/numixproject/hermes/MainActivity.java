@@ -41,6 +41,7 @@ import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 import org.numixproject.hermes.activity.AddServerActivity;
 import org.numixproject.hermes.activity.ConversationActivity;
+import org.numixproject.hermes.activity.Gitty;
 import org.numixproject.hermes.adapter.ServerListAdapter;
 import org.numixproject.hermes.db.Database;
 import org.numixproject.hermes.irc.IRCBinder;
@@ -110,9 +111,10 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Connect to...").withIcon(R.drawable.ic_ic_swap_horiz_24px),
                         new PrimaryDrawerItem().withName("Settings").withIcon(R.drawable.ic_ic_settings_24px),
+                        new PrimaryDrawerItem().withName("Remove ads").withIcon(R.drawable.ic_ic_dnd_on_24px),
+                        new PrimaryDrawerItem().withName("Send feedback").withIcon(R.drawable.ic_edit_black_18dp),
                         new PrimaryDrawerItem().withName("Contact us").withIcon(R.drawable.ic_ic_mail_24px),
-                        new SecondaryDrawerItem().withName("Remove ads").withIcon(R.drawable.ic_ic_dnd_on_24px),
-                        new SecondaryDrawerItem().withName("More Apps").withIcon(R.drawable.ic_ic_shop_24px)
+                        new PrimaryDrawerItem().withName("More Apps").withIcon(R.drawable.ic_ic_shop_24px)
                 )
                                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                                     @Override
@@ -128,27 +130,34 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
                                                     try {
                                                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "team@numixproject.org"));
                                                         startActivity(intent);
-                                                    } catch (Exception e){
+                                                    } catch (Exception e) {
                                                         Toast.makeText(MainActivity.this, "A mail client is required.", Toast.LENGTH_SHORT).show();
                                                     }
                                                     break;
                                                 }
-                                                case "Remove ads":
+                                                case "Remove ads": {
                                                     removeAds();
                                                     break;
-                                                case "More Apps":
+                                                }
+
+                                                case "Send feedback": {
+                                                    Intent intent = new Intent(MainActivity.this, Gitty.class);
+                                                    startActivity(intent);
+                                                    break;
+                                                }
+
+                                                case "More Apps": {
                                                     String url = "https://play.google.com/store/apps/dev?id=5600498874720965803";
                                                     Intent i = new Intent(Intent.ACTION_VIEW);
                                                     i.setData(Uri.parse(url));
                                                     startActivity(i);
                                                     break;
+                                                }
                                             }
                                         }
-
                                         return false;
                                     }
                                 }).build();
-
 
         adapter = new ServerListAdapter();
 
@@ -445,43 +454,6 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         }
     }
 
-    /**
-     * On menu item selected
-
-     @Override
-     public boolean onOptionsItemSelected(MenuItem item) {
-     switch (item.getItemId()) {
-     case R.id.add:
-     startActivityForResult(new Intent(super.getActivity(), AddServerActivity.class), 0);
-     break;
-     case R.id.about:
-     startActivity(new Intent(super.getActivity(), AboutActivity.class));
-     break;
-     case R.id.settings:
-     startActivity(new Intent(super.getActivity(), SettingsActivity.class));
-     break;
-     case R.id.disconnect_all:
-     ArrayList<Server> mServers = Hermes.getInstance().getServersAsArrayList();
-     for (Server server : mServers) {
-     if (binder.getService().hasConnection(server.getId())) {
-     server.setStatus(Status.DISCONNECTED);
-     server.setMayReconnect(false);
-     binder.getService().getConnection(server.getId()).quitServer();
-     }
-     }
-     // ugly
-     binder.getService().stopForegroundCompat(R.string.app_name);
-     }
-
-     return super.onOptionsItemSelected(item);
-     }
-     /*
-
-     /**
-      * Delete server
-      *
-      * @param serverId
-     */
     public void deleteServer(int serverId)
     {
         Database db = new Database(this);
@@ -557,6 +529,16 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         unregisterReceiver(receiver);
     }
 
+
+    @Override
+    public void onBackPressed() {
+        //handle the back press :D close the drawer first and if the drawer is closed close the activity
+        if (result != null && result.isDrawerOpen()) {
+            result.closeDrawer();
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     public void onServiceDisconnected(ComponentName name) {
