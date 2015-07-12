@@ -149,6 +149,8 @@ Copyright 2015 Numix Project Ltd.
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
 
+        <activity android:name="com.facebook.FacebookActivity"/>
+
         <service android:name=".irc.IRCService" >
         </service>
     </application>

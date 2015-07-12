@@ -74,6 +74,8 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Parcelable;
 import android.speech.RecognizerIntent;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -101,6 +103,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.Transformation;
+import android.view.inputmethod.CorrectionInfo;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -149,9 +152,11 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
     private ViewPager pager;
     private ConversationIndicator indicator;
     private ConversationPagerAdapter pagerAdapter;
-    private ArrayList<String> RoomsList;
+    private ArrayList<String> RoomsList = new ArrayList<String>();
     private ArrayList<String> recentList = new ArrayList<>();
     private ArrayList<String> lastRooms = new ArrayList<>();
+    private ArrayList<Integer> MentionsList = new ArrayList<Integer>();
+
     recentAdapter recentAdapter;
 
     FrameLayout conversationLayout;
@@ -171,6 +176,8 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
     private boolean isFirstTimeStarred = true;
     private boolean isFirstTimeRefresh = true;
     private int AdCounter;
+    private String roomToDelete;
+    private String recentToDelete;
     SwipeRefreshLayout swipeRefresh;
     InterstitialAd mInterstitialAd;
     BillingProcessor bp;
@@ -427,9 +434,6 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
         // Setting this scroll listener is required to ensure that during ListView scrolling,
         // we don't look for swipes.
         roomsList.setOnScrollListener(touchListener.makeScrollListener());
-
-        RoomsList = new ArrayList<String>();
-        ArrayList<Integer> MentionsList = new ArrayList<Integer>();
 
         ArrayList<String> channels = new ArrayList<String>();
         ArrayList<String> query = new ArrayList<String>();
@@ -934,13 +938,53 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
     }
 
     private void refreshActivity() {
-        Intent intent = getIntent();
-        overridePendingTransition(0, 0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        finish();
 
-        overridePendingTransition(0, 0);
-        startActivity(intent);
+
+
+        ArrayList<String> channels = new ArrayList<String>();
+        ArrayList<String> query = new ArrayList<String>();
+
+        channels = server.getCurrentChannelNames();
+        query = server.getCurrentQueryNames();
+
+        // Remove active rooms from Recents
+        int counter;
+        for (counter=0; counter<recentList.size(); counter++){
+            if(RoomsList.contains(recentList.get(counter))){
+                recentList.remove(counter);
+                saveRecentItems();
+            }
+        }
+
+        // Remove duplicates from Recents
+        HashSet hs = new HashSet();
+        hs.addAll(recentList);
+        recentList.clear();
+        recentList.addAll(hs);
+        saveRecentItems();
+
+        RoomsList.clear();
+        for (int i = 0; i < channels.size(); i++) {
+            try {
+                Conversation conversation = server.getConversation(channels.get(i));
+                int Mentions = conversation.getNewMentions();
+
+                RoomsList.add(channels.get(i));
+                MentionsList.add(Mentions);
+
+            } catch (Exception E) {
+                // Do nothing
+            }
+        }
+
+        recentAdapter.notifyDataSetChanged();
+        roomsList.invalidate();
+        recentView.invalidate();
+
+        roomsList.setAdapter(new mentionsAdapter(RoomsList, MentionsList));
+        recentView.setAdapter(new recentAdapter(recentList));
+
+        swipeRefresh.setRefreshing(false);
     }
 
     /**
@@ -1564,42 +1608,11 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
 
     // Save/Load last rooms
     private void saveLastItems(){
-        tinydb.putListString(server.getTitle()+"last", lastRooms);
+        tinydb.putListString(server.getTitle() + "last", lastRooms);
     }
 
     private void loadLastItems(){
         lastRooms = tinydb.getListString(server.getTitle()+"last");
-    }
-
-    private void moveFABup(int height){
-        Resources r = this.getResources();
-        final int px = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                height,
-                r.getDisplayMetrics()
-        );
-
-        final FrameLayout fabView = (FrameLayout) findViewById(R.id.fabView);
-        Animation a = new Animation() {
-            @Override
-            protected void applyTransformation(float interpolatedTime, Transformation t) {
-                fabView.setPadding(0,0,0,px);
-            }
-        };
-        a.setDuration(1500); // in ms
-        fab.startAnimation(a);
-    }
-
-    private void moveFABdown(){
-        final FrameLayout fabView = (FrameLayout) findViewById(R.id.fabView);
-        Animation a = new Animation() {
-            @Override
-            protected void applyTransformation(float interpolatedTime, Transformation t) {
-                fabView.setPadding(0,0,0,0);
-            }
-        };
-        a.setDuration(1500); // in ms
-        fab.startAnimation(a);
     }
 
     private void showAd() {
@@ -1624,6 +1637,57 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
                 .build();
 
         mInterstitialAd.loadAd(adRequest);
+    }
+
+    // Show Snackbars
+    View.OnClickListener undoRoomListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        binder.getService().getConnection(serverId).joinChannel(roomToDelete);
+                    } catch (Exception E) {
+                        // Do nothing
+                    }
+                }
+            }.start();
+
+            refreshActivity();
+        }
+    };
+
+    View.OnClickListener undoRecentListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            addRecentRoom(recentToDelete);
+            LinearLayout recentLabel = (LinearLayout) findViewById(R.id.recentName);
+            if (recentList.size()!=0){
+                recentLabel.setVisibility(View.VISIBLE);
+            } else {
+                recentLabel.setVisibility(View.GONE);
+            }
+            saveRecentItems();
+            refreshActivity();
+        }
+    };
+
+    private void showUndoBarRoom(final String room){
+        this.roomToDelete = room;
+        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
+        Snackbar
+                .make(coordinatorLayout, room + " removed from rooms", Snackbar.LENGTH_LONG)
+                .setAction("Undo", undoRoomListener)
+                .show();
+    }
+
+    private void showUndoBarRecent(final String room) {
+        this.recentToDelete = room;
+        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
+
+        Snackbar
+                .make(coordinatorLayout, room + " removed from recent rooms", Snackbar.LENGTH_LONG)
+                .setAction("Undo", undoRecentListener)
+                .show();
     }
 
     // Adapter for Room List
@@ -1654,8 +1718,7 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
             binder.getService().getConnection(serverId).partChannel(conversationToClose.getName());
             addRecentRoom(conversationToClose.getName());
 
-            // Show toast with UNDO button
-            //showUndoBarRoom(Room.get(position));
+            showUndoBarRoom(Room.get(position));
 
             pinnedRooms.remove(Room.get(position));
             Room.remove(position);
@@ -1791,7 +1854,7 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
         }
 
         public void remove(int position) {
-            // showUndoBarRecent(Room.get(position));
+            showUndoBarRecent(Room.get(position));
             recentList.remove(Room.get(position));
             Room.remove(position);
             LinearLayout recentLabel = (LinearLayout) findViewById(R.id.recentName);
