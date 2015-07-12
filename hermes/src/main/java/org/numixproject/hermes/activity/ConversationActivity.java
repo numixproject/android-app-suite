@@ -81,7 +81,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.text.method.TextKeyListener;
 import android.util.Log;
 import android.util.TypedValue;
@@ -112,6 +114,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -303,8 +306,34 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
         setContentView(R.layout.conversations);
         boolean isLandscape = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
 
+        final ImageView sendButton = (ImageView) findViewById(R.id.send_button);
+        sendButton.setVisibility(View.INVISIBLE);
+
         input = (AutoCompleteTextView) findViewById(R.id.input);
         input.setOnKeyListener(inputKeyListener);
+        input.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Do nothing
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+                // Do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if (input.getText().toString().equals("")){
+                    sendButton.setVisibility(View.INVISIBLE);
+                } else {
+                    sendButton.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         pager = (ViewPager) findViewById(R.id.pager);
         pagerAdapter = new ConversationPagerAdapter(this, server);
@@ -347,14 +376,6 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
                 createNewConversation(conversation.getName());
             }
         }
-
-        ImageView autoCompleteButton = (ImageView) findViewById(R.id.autocomplete_button);
-        autoCompleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                doNickCompletion(input);
-            }
-        });
 
         input.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1154,8 +1175,7 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
      * On new conversation
      */
     @Override
-    public void onNewConversation(String target)
-    {
+    public void onNewConversation(String target) {
         createNewConversation(target);
 
         pager.setCurrentItem(pagerAdapter.getCount() - 1);
@@ -1387,6 +1407,12 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
 
                 break;
         }
+    }
+
+    public void onSendButtonClicked(View v){
+        String text = input.getText().toString();
+        sendMessage(text);
+        input.setText("");
     }
 
     /**

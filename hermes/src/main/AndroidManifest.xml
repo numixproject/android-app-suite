@@ -8,8 +8,8 @@ Copyright 2015 Numix Project Ltd.
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.numixproject.hermes"
     android:installLocation="auto"
-    android:versionCode="10"
-    android:versionName="1.2.2"
+    android:versionCode="11"
+    android:versionName="1.2.3"
     android:theme="@style/Hermes"
     >
 
@@ -150,7 +150,6 @@ Copyright 2015 Numix Project Ltd.
             android:theme="@android:style/Theme.Translucent" />
 
         <activity android:name="com.facebook.FacebookActivity"/>
-
         <service android:name=".irc.IRCService" >
         </service>
     </application>
