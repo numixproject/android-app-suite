@@ -1,6 +1,7 @@
 package org.numixproject.example.webview;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -19,6 +20,20 @@ public class MainActivity extends Activity {
     private final String INDEX = "file:///android_asset/www/index.html";
 
     private WebView webView;
+
+    // Provide method to execute JavaScript
+    public void evaluateJavascript(final String script) {
+        webView.post(new Runnable() {
+            @Override
+            public void run() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    webView.evaluateJavascript(script, null);
+                } else {
+                    webView.loadUrl("javascript:" + script);
+                }
+            }
+        });
+    }
 
     // Handle back button press
     @Override
