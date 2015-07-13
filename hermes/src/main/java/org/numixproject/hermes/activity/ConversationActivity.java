@@ -307,7 +307,7 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
         boolean isLandscape = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
 
         final ImageView sendButton = (ImageView) findViewById(R.id.send_button);
-        sendButton.setVisibility(View.INVISIBLE);
+        sendButton.setVisibility(View.GONE);
 
         input = (AutoCompleteTextView) findViewById(R.id.input);
         input.setOnKeyListener(inputKeyListener);
@@ -328,7 +328,7 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 if (input.getText().toString().equals("")){
-                    sendButton.setVisibility(View.INVISIBLE);
+                    sendButton.setVisibility(View.GONE);
                 } else {
                     sendButton.setVisibility(View.VISIBLE);
                 }
@@ -1657,12 +1657,15 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
     }
 
     private void requestNewInterstitial() {
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("E9C24D5A0EFC9044146D4ECAFD56B53B")
-                .build();
+        if (!bp.isPurchased("remove_ads")) {
 
-        mInterstitialAd.loadAd(adRequest);
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .addTestDevice("E9C24D5A0EFC9044146D4ECAFD56B53B")
+                    .build();
+
+            mInterstitialAd.loadAd(adRequest);
+        }
     }
 
     // Show Snackbars

@@ -110,13 +110,9 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
                 .withSelectedItem(0)
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Connect to...").withIcon(R.drawable.ic_ic_swap_horiz_24px),
-                        new PrimaryDrawerItem().withName("Settings").withIcon(R.drawable.ic_ic_settings_24px),
-                        new PrimaryDrawerItem().withName("Remove ads").withIcon(R.drawable.ic_ic_dnd_on_24px),
-                        new PrimaryDrawerItem().withName("Send feedback").withIcon(R.drawable.ic_edit_black_18dp),
-                        new PrimaryDrawerItem().withName("Contact us").withIcon(R.drawable.ic_ic_mail_24px),
-                        new PrimaryDrawerItem().withName("More Apps").withIcon(R.drawable.ic_ic_shop_24px)
+                        new PrimaryDrawerItem().withName("Settings").withIcon(R.drawable.ic_ic_settings_24px)
                 )
-                                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                                     @Override
                                     public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                                         if (drawerItem instanceof Nameable) {
@@ -158,6 +154,13 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
                                         return false;
                                     }
                                 }).build();
+        if (!bp.isPurchased("remove_ads")) {
+            result.addItem(new PrimaryDrawerItem().withName("Remove ads").withIcon(R.drawable.ic_ic_dnd_on_24px));
+        }
+        result.addItem(new PrimaryDrawerItem().withName("Send feedback").withIcon(R.drawable.ic_edit_black_18dp));
+        result.addItem(new PrimaryDrawerItem().withName("Contact us").withIcon(R.drawable.ic_ic_mail_24px));
+        result.addItem(new PrimaryDrawerItem().withName("More Apps").withIcon(R.drawable.ic_ic_shop_24px));
+
 
         adapter = new ServerListAdapter();
 

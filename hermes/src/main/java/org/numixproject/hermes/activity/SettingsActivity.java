@@ -57,7 +57,9 @@ public class SettingsActivity extends ActionBarActivity {
         bp.loadOwnedPurchasesFromGoogle();
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-2834532364021285/4571969451");
-        requestNewInterstitial();
+        if (!bp.isPurchased("remove_ads")) {
+            requestNewInterstitial();
+        }
 
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
