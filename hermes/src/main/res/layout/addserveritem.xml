@@ -28,6 +28,6 @@ Copyright 2015 Numix Project Ltd.
         android:paddingBottom="32dp"
         android:gravity="center"
         android:paddingTop="2dp"
-        android:text="Add some, may be?"
+        android:text="Add some, maybe?"
         android:textSize="20sp" />
 </LinearLayout>
