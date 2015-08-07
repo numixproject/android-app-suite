@@ -28,14 +28,12 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
-import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.melnykov.fab.FloatingActionButton;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
@@ -180,18 +178,16 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
 
         fab.attachToListView(list);
 
-        LinearLayout inviteLayout = (LinearLayout) findViewById(R.id.inviteButton);
+        LinearLayout reportBugLayout = (LinearLayout) findViewById(R.id.reportLayout);
 
-        if (isGooglePlayInstalled(getApplicationContext())) {
-            inviteLayout.setOnClickListener(new View.OnClickListener() {
+        reportBugLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onInviteClicked();
+                    // Start Gitty Reporter
+                    Intent intent = new Intent(MainActivity.this, Gitty.class);
+                    startActivity(intent);
                 }
             });
-        } else {
-            inviteLayout.setVisibility(LinearLayout.GONE);
-        }
 
         if (instanceCount > 0) {
             finish();
@@ -203,30 +199,9 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
             prefs.edit().putBoolean("firstrun", false).commit();
         }
 
-    }
-
-    public static boolean isGooglePlayInstalled(Context context) {
-        PackageManager pm = context.getPackageManager();
-        boolean app_installed = false;
-        try
-        {
-            PackageInfo info = pm.getPackageInfo("com.android.vending", PackageManager.GET_ACTIVITIES);
-            String label = (String) info.applicationInfo.loadLabel(pm);
-            app_installed = (label != null && !label.equals("Market"));
+        if (adapter.isServerNull()){
+            reportBugLayout.setVisibility(View.GONE);
         }
-        catch (PackageManager.NameNotFoundException e)
-        {
-            app_installed = false;
-        }
-        return app_installed;
-    }
-
-    private void onInviteClicked() {
-        Intent intent = new AppInviteInvitation.IntentBuilder("Try Hermes app")
-                .setMessage("Hey, Numix Hermes IRC app for Android is really cool.\nWant to try it?")
-                .setDeepLink(Uri.parse("https://play.google.com/store/apps/details?id=org.numixproject.hermes"))
-                .build();
-        startActivityForResult(intent, REQUEST_INVITE);
     }
 
     private void newAddServerActivity(View v){
@@ -256,55 +231,6 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         binder = (IRCBinder) service;
     }
 
-    public boolean onMoreButtonClick(int position){
-        final Server server = adapter.getItem(position);
-
-        if (server == null) {
-            // "Add server" view selected
-            return true;
-        }
-
-        final CharSequence[] items = {
-                getString(R.string.connect),
-                getString(R.string.disconnect),
-                getString(R.string.edit),
-                getString(R.string.delete)
-        };
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(server.getTitle());
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                switch (item) {
-                    case 0: // Connect
-                        if (server.getStatus() == Status.DISCONNECTED) {
-                            binder.connect(server);
-                            server.setStatus(Status.CONNECTING);
-                            adapter.notifyDataSetChanged();
-                        }
-                        break;
-                    case 1: // Disconnect
-                        server.clearConversations();
-                        server.setStatus(Status.DISCONNECTED);
-                        server.setMayReconnect(false);
-                        binder.getService().getConnection(server.getId()).quitServer();
-                        break;
-                    case 2: // Edit
-                        editServer(server.getId());
-                        break;
-                    case 3: // Delete
-                        binder.getService().getConnection(server.getId()).quitServer();
-                        deleteServer(server.getId());
-                        break;
-                }
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
-        return true;
-    };
-
     /**
      * On server selected
      */
@@ -319,6 +245,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         }
 
         Intent intent = new Intent(this, ConversationActivity.class);
+        finish();
 
         if (server.getStatus() == Status.DISCONNECTED && !server.mayReconnect()) {
             server.setStatus(Status.PRE_CONNECTING);
@@ -348,6 +275,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
 
         intent.putExtra("serverId", server.getId());
         startActivity(intent);
+        finish();
     }
 
     /**
@@ -370,6 +298,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
             case 1:
                 channel = data.getExtras().getString("channel");
                 Intent intent = new Intent(this, ConversationActivity.class);
+
                 // send position in intent.putExtra
                 final Server server = adapter.getItem(positionBuffer);
 
@@ -380,6 +309,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
 
                 // starts ConversationActivity
                 startActivity(intent);
+                finish();
                 break;
         }
     }

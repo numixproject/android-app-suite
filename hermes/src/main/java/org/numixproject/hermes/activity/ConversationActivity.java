@@ -746,7 +746,8 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
     @Override
     public void onBackPressed() {
         if (conversationLayout.getVisibility() == LinearLayout.INVISIBLE) {
-            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         } else {
             hideConversationLayout();
             refreshActivity();
@@ -1021,7 +1022,8 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
                     swipeRefresh.setEnabled(true);
                     refreshActivity();
                 } else {
-                    finish();
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
                 }
                 break;
             case R.id.refresh:

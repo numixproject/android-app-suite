@@ -125,6 +125,10 @@ public class ServerListAdapter extends BaseAdapter
         return getItem(position).getId();
     }
 
+    public boolean isServerNull() {
+        return servers.size() == 0;
+    }
+
     /**
      * Get view for item at given position
      * 
