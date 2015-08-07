@@ -1056,7 +1056,9 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
                 server.clearConversations();
                 setResult(RESULT_OK);
                 invalidateOptionsMenu();
-                showAd();
+                if (Math.random() * 100 < 80) {
+                    showAd();
+                }
                 break;
 
             case R.id.close:
