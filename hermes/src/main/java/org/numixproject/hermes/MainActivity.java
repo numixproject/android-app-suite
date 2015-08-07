@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         result = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
-                .withTranslucentStatusBar(false)
+                .withTranslucentStatusBar(true)
                 .withActionBarDrawerToggle(true)
                 .withAccountHeader(headerResult)
                 .withSelectedItem(0)
