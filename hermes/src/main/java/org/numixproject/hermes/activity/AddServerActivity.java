@@ -421,6 +421,14 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         );
 
         Server server = getServerFromView();
+
+        if (nickservCheckbox.isChecked()) {
+            authentication.setNickservPassword(saslPasswordEditText.toString());
+        } else if (saslCheckbox.isChecked()) {
+            authentication.setSaslUsername(saslUsernameEditText.toString());
+            authentication.setSaslPassword(saslPasswordEditText.toString());
+        }
+
         server.setAuthentication(authentication);
 
         long serverId = db.addServer(server, (int) identityId);
@@ -449,6 +457,14 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         int identityId = db.getIdentityIdByServerId(serverId);
 
         Server server = getServerFromView();
+
+        if (nickservCheckbox.isChecked()) {
+            authentication.setNickservPassword(saslPasswordEditText.toString());
+        } else if (saslCheckbox.isChecked()) {
+            authentication.setSaslUsername(saslUsernameEditText.toString());
+            authentication.setSaslPassword(saslPasswordEditText.toString());
+        }
+
         server.setAuthentication(authentication);
         db.updateServer(serverId, server, identityId);
 
