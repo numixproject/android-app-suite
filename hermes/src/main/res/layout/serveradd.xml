@@ -73,6 +73,20 @@ Copyright 2015 Numix Project Ltd.
             android:numeric="integer"
             android:maxLength="5" />
         <TextView
+            android:layout_marginTop="8dp"
+            android:textColor="#444444"
+            android:text="Server username"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="fill_parent"
+            android:textSize="14sp"
+            android:hint="Enter server username here"
+            android:layout_marginLeft="-4dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true" />
+        <TextView
             android:text="@string/server_password"
             android:layout_marginTop="8dp"
             android:textColor="#444444"

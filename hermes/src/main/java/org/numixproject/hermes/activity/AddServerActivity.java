@@ -195,6 +195,7 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
         saslUsernameEditText = (EditText) findViewById(R.id.sasl_username);
         saslPasswordEditText = (EditText) findViewById(R.id.sasl_password);
 
+
         // Commands
         commandInput = (EditText) findViewById(R.id.command);
         commandsAdapter = new commandsAdapter(commands);
@@ -528,7 +529,7 @@ public class AddServerActivity extends ActionBarActivity implements OnClickListe
     private Identity getIdentityFromView()
     {
         String nickname = ((EditText) findViewById(R.id.nickname)).getText().toString();
-        String ident = ((EditText) findViewById(R.id.ident)).getText().toString().trim();
+        String ident = ((EditText) findViewById(R.id.username)).getText().toString().trim();
         String realname = ((EditText) findViewById(R.id.realname)).getText().toString().trim();
 
         String[] floatStrings = nickname.split(",");
