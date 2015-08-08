@@ -9,7 +9,7 @@ Copyright 2015 Numix Project Ltd.
     package="org.numixproject.hermes"
     android:installLocation="auto"
     android:versionCode="13"
-    android:versionName="1.2.5"
+    android:versionName="1.2.6"
     android:theme="@style/Hermes"
     >
 
