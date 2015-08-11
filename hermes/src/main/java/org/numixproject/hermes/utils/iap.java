@@ -19,7 +19,11 @@ public class iap implements BillingProcessor.IBillingHandler {
     }
 
     public boolean isPurchased(){
-        return bp.isPurchased(produ)
+        return bp.isPurchased("remove_ads");
+    }
+
+    public BillingProcessor getBp() {
+        return bp;
     }
 
 

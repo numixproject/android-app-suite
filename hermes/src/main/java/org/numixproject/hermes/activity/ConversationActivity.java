@@ -183,6 +183,7 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
     private String recentToDelete;
     SwipeRefreshLayout swipeRefresh;
     InterstitialAd mInterstitialAd;
+    iap inAppPayments;
     BillingProcessor bp;
 
     private final OnKeyListener inputKeyListener = new OnKeyListener() {
@@ -278,12 +279,13 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
 
         String key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5B4Oomgmm2D8XVSxh1DIFGtU3p1N2w6Xi2ZO7MoeZRAhvVjk3B8MfrOatlO9HfozRGhEkCkq0MfstB4Cjci3dsnYZieNmHOVYIFBWERqdwfdtnUIfI554xFsAC3Ah7PTP3MwKE7qTT1VLTTHxxsE7GH4sLtvLwrAzsVrLK+dgQk+e9bDJMvhhEPBgabRFaTvKaTtSzB/BBwrCa5mv0pte6WfrNbugFjiAJC43b7NNY2PV9UA8mukiBNZ9mPrK5fZeSEfcVqenyqbvZZG+P+O/cohAHbIEzPMuAS1EBf0VBsZtm3fjQ45PgCvEB7Ye3ucfR9BQ9ADjDwdqivExvXndQIDAQAB";
 
-        iap inAppPayments = new iap();
+        inAppPayments = new iap();
+
         bp = inAppPayments.getBilling(this, key);
         bp.loadOwnedPurchasesFromGoogle();
 
         // Load AdMob Ads
-        if (!bp.isPurchased("remove_ads")) {
+        if (!inAppPayments.isPurchased()) {
             mInterstitialAd = new InterstitialAd(this);
             mInterstitialAd.setAdUnitId("ca-app-pub-2834532364021285/7438037454");
             requestNewInterstitial();
@@ -1648,7 +1650,7 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
     private void showAd() {
         SharedPreferences sp = getSharedPreferences("preference name", MODE_PRIVATE);
 
-        if (!bp.isPurchased("remove_ads")) {
+        if (!inAppPayments.isPurchased()) {
             if (mInterstitialAd.isLoaded()) {
                 if (sp.getInt("key", 0) < 2) {
                     SharedPreferences.Editor ed = sp.edit();
@@ -1661,7 +1663,7 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
     }
 
     private void requestNewInterstitial() {
-        if (!bp.isPurchased("remove_ads")) {
+        if (!inAppPayments.isPurchased()) {
 
             AdRequest adRequest = new AdRequest.Builder()
                     .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)

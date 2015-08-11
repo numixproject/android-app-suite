@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
                                         return false;
                                     }
                                 }).build();
-        if (!bp.isPurchased("remove_ads")) {
+        if (!inAppPayments.isPurchased()) {
             result.addItem(new PrimaryDrawerItem().withName("Remove ads").withIcon(R.drawable.ic_ic_dnd_on_24px));
         }
         result.addItem(new PrimaryDrawerItem().withName("Send feedback").withIcon(R.drawable.ic_edit_black_18dp));
