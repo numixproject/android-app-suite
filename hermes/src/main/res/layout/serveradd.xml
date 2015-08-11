@@ -75,16 +75,17 @@ Copyright 2015 Numix Project Ltd.
         <TextView
             android:layout_marginTop="8dp"
             android:textColor="#444444"
-            android:text="Server username"
+            android:text="Ident *"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <EditText
-            android:id="@+id/username"
-            android:layout_width="fill_parent"
+            android:id="@+id/ident"
             android:textSize="14sp"
-            android:hint="Enter server username here"
             android:layout_marginLeft="-4dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:text="hermes"
+            android:contentDescription="@string/ident"
             android:singleLine="true" />
         <TextView
             android:text="@string/server_password"
@@ -160,15 +161,6 @@ Copyright 2015 Numix Project Ltd.
             android:layout_marginLeft="-4dp"
             android:singleLine="true"
             android:contentDescription="@string/nickname" />
-        <EditText
-            android:id="@+id/ident"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="hermes"
-            android:contentDescription="@string/ident"
-            android:singleLine="true" />
-
         <TextView
             android:text="Username"
             android:layout_marginTop="8dp"
