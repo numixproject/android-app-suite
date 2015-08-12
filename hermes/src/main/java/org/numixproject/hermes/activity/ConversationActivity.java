@@ -806,7 +806,8 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
 
                 @Override
                 public void onAnimationCancel(android.animation.Animator animation) {
-                }});
+                }
+            });
 
             colorLayout.setVisibility(View.VISIBLE);
             colorAnim.start();
@@ -1417,7 +1418,13 @@ public class ConversationActivity extends AppCompatActivity implements ServiceCo
 
     public void onSendButtonClicked(View v){
         String text = input.getText().toString();
-        sendMessage(text);
+
+        // Hermes crashes with /list command for unknown reason :(
+        if (text.equals("/list")) {
+            Toast.makeText(getApplicationContext(), "Unknown command", Toast.LENGTH_SHORT).show();
+        } else {
+            sendMessage(text);
+        }
         input.setText("");
     }
 

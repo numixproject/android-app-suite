@@ -8,7 +8,7 @@ Copyright 2015 Numix Project Ltd.
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.numixproject.hermes"
     android:installLocation="auto"
-    android:versionCode="14"
+    android:versionCode="15"
     android:versionName="1.2.7"
     android:theme="@style/Hermes"
     >
