@@ -20,7 +20,7 @@ Just press the flashlight button on the bottom right. If you wish you may activa
 You can simply install Numix Torch from Google Play: https://play.google.com/store/apps/details?id=org.numixproject.torch
 
 ***MATERIAL DESIGN:***
-Numix Calculator is fully material designed and as such it is integrated in Android 5.0. If you're on Lollipop you will get all the material design animations and elements. If you are on KitKat and below you will still get the material design animations.
+Numix Torch is fully material designed and as such it is integrated in Android 5.0. If you're on Lollipop you will get all the material design animations and elements. If you are on KitKat and below you will still get the material design animations.
  
 ***Basic version:***
 The app has built in apps which you can remove from the "remove adds" item from the hamburger menu on the right on the app actionbar.
