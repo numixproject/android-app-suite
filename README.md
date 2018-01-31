@@ -23,4 +23,4 @@ You can simply install Numix Torch from Google Play: https://play.google.com/sto
 Numix Torch is fully material designed and as such it is integrated in Android 5.0. If you're on Lollipop you will get all the material design animations and elements. If you are on KitKat and below you will still get the material design animations.
  
 ***Basic version:***
-The app has built in apps which you can remove from the "remove adds" item from the hamburger menu on the right on the app actionbar.
+The app has built in ads which you can remove from the "remove ads" item from the hamburger menu on the right on the app actionbar.
