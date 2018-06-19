@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Hermes - Material IRC Client
+Copyright 2015 Numix Project Ltd.
+-->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/save"
+        android:title="@string/server_save"
+        android:icon="@drawable/ic_action_ic_check_24px"
+        app:showAsAction="always" />
+</menu>

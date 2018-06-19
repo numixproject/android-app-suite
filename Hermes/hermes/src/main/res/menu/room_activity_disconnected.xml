@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Hermes - Material IRC Client
+Copyright 2015 Numix Project Ltd.
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/refresh"
+        android:title="Refresh"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/connect"
+        android:title="Connect"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/edit"
+        android:title="Edit"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/delete"
+        android:title="Delete"
+        app:showAsAction="never" />
+</menu>

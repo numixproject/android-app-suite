@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Hermes - Material IRC Client
+Copyright 2015 Numix Project Ltd.
+-->
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbarStyle="outsideInset"
+    android:background="#ffffff"
+    android:padding="16dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/server"
+            android:textColor="#333333"
+            android:layout_marginLeft="-8dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/listSeparatorTextViewStyle" />
+        <TextView
+            android:text="Name *"
+            android:layout_marginTop="8dp"
+            android:layout_width="fill_parent"
+            android:textColor="#444444"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/title"
+            android:contentDescription="@string/server_title"
+            android:layout_marginLeft="-4dp"
+            android:hint="Enter a name for the server"
+            android:textSize="14sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true" />
+        <TextView
+            android:text="Host * "
+            android:layout_marginTop="8dp"
+            android:paddingTop="8dp"
+            android:textColor="#444444"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <AutoCompleteTextView
+            android:id="@+id/host"
+            android:contentDescription="@string/server_host"
+            android:textSize="14sp"
+            android:layout_marginLeft="-4dp"
+            android:hint="e.g.- irc.freenode.net"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:inputType="textNoSuggestions" />
+        <TextView
+            android:layout_marginTop="8dp"
+            android:textColor="#444444"
+            android:text="Port *"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/port"
+            android:textSize="14sp"
+            android:layout_marginLeft="-4dp"
+            android:contentDescription="@string/server_port"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:minEms="6"
+            android:text="6667"
+            android:numeric="integer"
+            android:maxLength="5" />
+        <TextView
+            android:layout_marginTop="8dp"
+            android:textColor="#444444"
+            android:text="Ident *"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/ident"
+            android:textSize="14sp"
+            android:layout_marginLeft="-4dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="hermes"
+            android:contentDescription="@string/ident"
+            android:singleLine="true" />
+        <TextView
+            android:text="@string/server_password"
+            android:layout_marginTop="8dp"
+            android:textColor="#444444"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/password"
+            android:contentDescription="@string/server_password"
+            android:layout_width="fill_parent"
+            android:textSize="14sp"
+            android:hint="Enter a password, if server is protected"
+            android:layout_marginLeft="-4dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:minEms="10"
+            android:maxEms="10" />
+        <CheckBox
+            android:id="@+id/autoconnect"
+            android:contentDescription="@string/server_port"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/server_port"
+            android:visibility="gone" />
+        <CheckBox
+            android:id="@+id/useSSL"
+            android:checked="false"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/server_useSSL"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/server_useSSL" />
+<!-- ############################################################################ -->
+        <TextView
+            android:text="@string/user"
+            android:paddingTop="24dp"
+            android:textColor="#333333"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-8dp"
+            style="?android:attr/listSeparatorTextViewStyle" />
+        <TextView
+            android:text="Real Name *"
+            android:textColor="#444444"
+            android:layout_marginTop="16dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/realname"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="-4dp"
+            android:textSize="14sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:hint="Enter your full name"
+            android:contentDescription="@string/realname"
+            android:singleLine="true" />
+
+        <TextView
+            android:text="Nick and aliases *"
+            android:layout_marginTop="8dp"
+            android:textColor="#444444"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/nickname"
+            android:hint="Enter nick and aliases separated by comma (,)"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginLeft="-4dp"
+            android:singleLine="true"
+            android:contentDescription="@string/nickname" />
+        <TextView
+            android:text="Username"
+            android:layout_marginTop="8dp"
+            android:textColor="#444444"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/sasl_username"
+            android:hint="Enter NickServ/SASL username"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginLeft="-4dp"
+            android:singleLine="true"
+            android:contentDescription="@string/nickname" />
+        <TextView
+            android:text="Password"
+            android:layout_marginTop="8dp"
+            android:layout_width="fill_parent"
+            android:textColor="#444444"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/sasl_password"
+            android:hint="Enter NickServ/SASL password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginLeft="-4dp"
+            android:singleLine="true"
+            android:contentDescription="@string/nickname" />
+        <CheckBox
+            android:id="@+id/sasl_checkbox"
+            android:checked="false"
+            android:layout_marginTop="8dp"
+            android:contentDescription="Login with SASL"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Login with SASL" />
+        <CheckBox
+            android:id="@+id/nickserv_checkbox"
+            android:checked="false"
+            android:layout_marginTop="8dp"
+            android:contentDescription="Login with NickServ"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Login with NickServ" />
+<!-- ############################################################################ -->
+
+<!-- ############################################################################ -->
+        <TextView
+            android:text="Advanced"
+            android:paddingTop="24dp"
+            android:textColor="#333333"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-8dp"
+            style="?android:attr/listSeparatorTextViewStyle" />
+
+        <!--
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Channels to join automatically on connection"
+                android:padding="5dp" />
+
+            <org.numixproject.hermes.utils.ExpandableHeightListView
+                android:id="@+id/channels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cacheColorHint="#00000000"
+                android:fadingEdge="none"
+                android:focusable="false"
+                android:scrollbars="none"
+                >
+            </org.numixproject.hermes.utils.ExpandableHeightListView>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/channel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text=""
+                    android:hint="e.g.- #numix"
+                    android:layout_weight="1"
+                    android:inputType="textNoSuggestions" />
+                <Button
+                    android:id="@+id/add_room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_add"
+                    android:minWidth="75dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+        -->
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:text="Character encoding"
+            android:layout_marginTop="16dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/charset"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/select_charset" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Commands to run on connection"
+            android:paddingTop="5dp" />
+        <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
+            android:id="@+id/commands_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="#00000000"
+            android:fadingEdge="none"
+            android:focusable="false"
+            android:scrollbars="none"
+            />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/command"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:singleLine="true"
+                    android:text="/"
+                    android:layout_weight="1"
+                    android:inputType="textNoSuggestions" />
+                <Button
+                    android:id="@+id/add_command"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_add"
+                    android:minWidth="75dp" />
+            </LinearLayout>
+        <!-- TODO: Automatically connect starred channel switch
+        <CheckBox
+            android:id="@+id/autoconnect_starred"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:checked="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="-4dp"
+            android:singleLine="true"
+            android:hint="Automatically connect starred channels"
+            android:contentDescription="Automatically connect starred channels" />
+            -->
+        <TextView
+            android:text="* is a required field"
+            android:layout_marginTop="8dp"
+            android:layout_width="fill_parent"
+            android:textColor="#444444"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

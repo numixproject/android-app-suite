@@ -1,0 +1,95 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:background="#E5E5E5"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:tag="serverFragment"
+    android:id="@+id/home_mainFragment"
+    android:layout_height="fill_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        style="@style/Widget.Hermes.Toolbar"
+        android:elevation="4dp" />
+
+    <FrameLayout
+        android:id="@+id/intro"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:background="#E5E5E5"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_height="wrap_content">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:background="#E5E5E5"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
+                android:id="@+id/list"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:divider="#00000000"
+                android:padding="8dp"
+                android:dividerHeight="8dp"
+                android:layout_marginBottom="8dp"
+                />
+
+            <LinearLayout
+                android:id="@+id/reportLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_ic_face_black_48px"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="3dp"
+                    android:text="Enjoying Hermes?\nLet us know if you have issues."/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textColor="#888888"
+                    android:paddingTop="3dp"
+                    android:lineSpacingExtra="3dp"
+                    android:text=" We would also love bug reports."/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        >
+
+        <com.melnykov.fab.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            fab:fab_type="normal"
+            android:src="@drawable/fab"
+            fab:fab_colorNormal="@color/colorAccent"
+            fab:fab_colorPressed="@color/colorAccent"
+            fab:fab_colorRipple="#88333333" />
+    </FrameLayout>
+</FrameLayout>

@@ -1,0 +1,2 @@
+include ':viewPagerIndicator'
+include ':hermes'

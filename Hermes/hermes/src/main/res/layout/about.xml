@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Hermes - Material IRC Client
+
+Copyright 2015 Numix Project Ltd.
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/app_name"
+        android:textColor="#FF6CB600"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/app_full_name"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/app_version"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/app_copyright"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="none"
+        android:gravity="center_horizontal"
+        android:linksClickable="false"
+        android:text="@string/app_homepage"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/about_irclink"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="none"
+        android:clickable="true"
+        android:gravity="center_horizontal"
+        android:linksClickable="false"
+        android:text="@string/app_irc"
+        android:textColor="#FF6CB600"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/licence_info"
+        android:textSize="14sp" />
+
+</LinearLayout>

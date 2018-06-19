@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Hermes - Material IRC Client
+
+Copyright 2015 Numix Project Ltd.
+-->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.numixproject.hermes"
+    android:installLocation="auto"
+    android:versionCode="15"
+    android:versionName="1.2.7"
+    android:theme="@style/Hermes"
+    >
+
+    <!-- Include required permissions for Google Mobile Ads to run-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <!-- Optional permission for reliable local dispatching on non-Google Play devices -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="Hermes"
+        android:theme="@style/Hermes"
+        android:allowBackup="true">
+
+        <!-- meta-data required for Facebook Audience Network -->
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+        <!--This meta-data tag is required to use Google Play Services.-->
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <!-- Optionally, register AnalyticsReceiver and AnalyticsService to support background
+         dispatching on non-Google Play devices -->
+        <receiver android:name="com.google.android.gms.analytics.AnalyticsReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.google.android.gms.analytics.AnalyticsService"
+            android:enabled="true"
+            android:exported="false"/>
+        <!-- Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
+          installation campaign reporting -->
+        <receiver android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
+        <meta-data
+            android:name="com.google.android.gms.analytics.globalConfigResource"
+            android:resource="@xml/global_traker" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:theme="@style/HermesNoActionBar"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.AddServerActivity"
+            android:theme="@style/Hermes"
+            android:label="@string/add_server_label" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="irc" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ConversationActivity"
+            android:theme="@style/Hermes"
+            android:windowSoftInputMode="adjustResize"
+            >
+
+            </activity>
+        <activity
+            android:name=".activity.AboutActivity"
+            android:label="@string/about_label"
+            android:theme="@style/HermesDialog" >
+        </activity>
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:theme="@style/Hermes"
+            android:label="@string/settings_label" >
+        </activity>
+        <activity
+            android:name=".activity.JoinActivity"
+            android:label="@string/join_label"
+            android:theme="@style/HermesDialog" >
+        </activity>
+        <activity
+            android:name=".activity.UsersActivity"
+            android:label="@string/users"
+            android:theme="@style/HermesDialog" >
+        </activity>
+        <activity
+            android:name=".activity.AddAliasActivity"
+            android:theme="@style/HermesDialog" >
+        </activity>
+        <activity
+            android:name=".activity.AddChannelActivity"
+            android:theme="@style/HermesDialog" >
+        </activity>
+        <activity
+            android:name=".activity.AddCommandsActivity"
+            android:theme="@style/HermesDialog" >
+        </activity>
+        <activity
+            android:name=".activity.MessageActivity"
+            android:theme="@style/HermesDialog" >
+        </activity>
+        <activity
+            android:name=".activity.UserActivity"
+            android:theme="@style/HermesDialog" >
+        </activity>
+        <activity
+            android:name=".activity.AuthenticationActivity"
+            android:theme="@style/HermesDialog" >
+        </activity>
+        <activity android:name=".IntroActivity"
+            android:theme="@style/Hermes"/>
+
+        <activity android:name=".activity.Gitty"
+            android:theme="@style/HermesNoActionBar"/>
+
+        <!-- Facebook -->
+        <activity android:name="com.facebook.ads.InterstitialAdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+
+        <!--Include the AdActivity configChanges and theme. -->
+        <activity android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <activity android:name="com.facebook.FacebookActivity"/>
+        <service android:name=".irc.IRCService" >
+        </service>
+    </application>
+
+</manifest>
