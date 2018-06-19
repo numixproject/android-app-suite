@@ -1,0 +1,8 @@
+/home/paolo/Development/com.numix.calculator.pro/app/build/intermediates/pre-dexed/debug/acra-4.5.0-javadoc-be48451c11ec3079e0443ca7a6ba9ffb01cb2d22.jar
+/home/paolo/Development/com.numix.calculator.pro/app/build/intermediates/pre-dexed/debug/ejml-0.21-892cde4e193611ae432b9e4d285353a8bff9c8a9.jar
+/home/paolo/Development/com.numix.calculator.pro/app/build/intermediates/pre-dexed/debug/achartengine-1aa560a26a951276bc0a8f735b4756b19b8d50bb.jar
+/home/paolo/Development/com.numix.calculator.pro/app/build/intermediates/pre-dexed/debug/arity-2.1.6-d424b294fabd1fa7ad6ee7ba8ee429cc6e7db6fb.jar
+/home/paolo/Development/com.numix.calculator.pro/app/build/intermediates/pre-dexed/debug/slider-45f90c955cbe002f5e2445701f1a66f521bb9448.jar
+/home/paolo/Development/com.numix.calculator.pro/app/build/intermediates/pre-dexed/debug/support-v4-18.0.0-3045f6b72db70f654b001f61a9ca7286b7fdcf33.jar
+/home/paolo/Development/com.numix.calculator.pro/app/build/intermediates/pre-dexed/debug/acra-4.5.0-sources-a585d98ec868e7a89b1d855ee3c6c9fe05050ff8.jar
+/home/paolo/Development/com.numix.calculator.pro/app/build/intermediates/classes/debug

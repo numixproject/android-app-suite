@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.numix.calculator_pro"
+    android:versionName="2.6"
+    android:versionCode="5">
+
+    <original-package android:name="com.numix.calculator_pro" />
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="21"/>
+
+
+    <application android:label="@string/app_name" android:icon="@mipmap/ic_launcher_calculator">
+        <receiver android:name="com.numix.calculator_pro.CalculatorWidget" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/calculator_widget_info" />
+        </receiver>
+        <activity android:name=".Calculator"
+                  android:theme="@style/Theme.Calculator"
+                  android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.APP_CALCULATOR" />
+            </intent-filter>
+        </activity>
+        <activity-alias
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher_calculator"
+            android:name=".Calculator-Dark"
+            android:enabled="true"
+            android:targetActivity=".Calculator">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher_calculator_light"
+            android:name=".Calculator-Light"
+            android:enabled="false"
+            android:targetActivity=".Calculator">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity android:name=".Preferences" android:theme="@style/Theme.Settings.Calculator" android:label="@string/settings" />
+    </application>
+</manifest>

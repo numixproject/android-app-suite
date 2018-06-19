@@ -1,0 +1,3 @@
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+    <changeImageTransform/>
+</transitionSet><!-- From: file:/home/paolo/Development/com.numix.calculator.pro/app/src/main/res/transition-v21/change_image_transform.xml -->
