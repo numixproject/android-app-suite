@@ -1,0 +1,21 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+    defaultConfig {
+        applicationId 'org.numixproject.example.webview'
+        minSdkVersion 14
+        targetSdkVersion 21
+        versionName '1.0'
+        versionCode 10
+    }
+    buildTypes {
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    aaptOptions {
+        ignoreAssetsPattern 'node_modules:bower_components:.*'
+    }
+}
